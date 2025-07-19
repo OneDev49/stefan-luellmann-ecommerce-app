@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Full-Stack E-Commerce Platform
 
-## Getting Started
+This is a complete, feature-rich E-Commerce Application built from the ground up with a modern, type-safe technology stack. The Project serves as a comprehensive demonstration of my Full-Stack Development capabilities, from Database design to a performant, server-rendered Frontend.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Core Features
+
+- **Full-Stack Architecture:** Built with Next.js App Router, leveraging Server Components for data fetching and API Routes for backend logic.
+- **User Authentication:** Secure user registration, login and session management implemented with NextAuth.js.
+- **Product Catalog:** A complete product system with categories, search and detailed product pages.
+- **Presistent Shopping Cart:** Client-side cart state managed with Zustand, synchronized with the database for authenticated users.
+- **Complex Business Logic:** Features a custom **PC Builder** interface with real-time component compatibility validation.
+- **Database & ORM:** Powered by a PostgreSQL database managed with the type-safe Prisma ORM.
+
+---
+
+## Tech Stack
+
+| Category       | Technology                      |
+| -------------- | ------------------------------- |
+| **Framework**  | Next.js 14 (App Router)         |
+| **Language**   | TypeScript                      |
+| **Styling**    | Tailwind CSS                    |
+| **Database**   | PostgreSQL (hosted on Supabase) |
+| **ORM**        | Prisma                          |
+| **Auth**       | NextAuth.js                     |
+| **State Mgt.** | Zustand                         |
+| **Deployment** | Vercel                          |
+
+---
+
+## Running Locally
+
+To get a local copy up and running, follow these steps.
+
+### Prerequisites
+
+- Node.js (v18 or later)
+- npm or yarn
+- A local PostgreSQL database or free Supabase project
+
+### Setup
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/OneDev49/stefan-luellmann-ecommerce-app
+    ```
+
+2.  **Navigate to the project directory:**
+
+    ```bash
+    cd stefan-luellmann-ecommerce-app
+    ```
+
+3.  **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+4.  **Set up environment variables:**
+
+    - Create a `.env` file in the project root.
+    - Populate the `.env` file with your database connection string (`DATABASE_URL`, `DIRECT_URL`) and NextAuth.js secret.
+
+5.  **Run database migrations:**
+
+    ```bash
+    npx prisma migrate dev
+    ```
+
+6.  **(Optional) Seed the database:**
+
+    ```bash
+    npx prisma db seed
+    ```
+
+7.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contact
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Stefan Lüllmann - [hallo@nordwebtec.com](mailto:hallo@nordwebtec.com)
 
-## Learn More
+Project Link: [https://github.com/OneDev49/stefan-luellmann-ecommerce-app](https://github.com/OneDev49/stefan-luellmann-ecommerce-app)
 
-To learn more about Next.js, take a look at the following resources:
+## Licensing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The source code for this project is licensed under the [MIT License](LICENSE).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+All other assets, including but not limited to images, logos, and written content (blog posts, case studies), are my personal property.
+They are **not** licensed for reuse without my explicit written permission.
 
-## Deploy on Vercel
+### Third-Party Assets
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Technology logos are trademarks of their respective owners.
+- Icons are used from [Font Awesome](https://fontawesome.com/license) and are subject to their respective licenses.
