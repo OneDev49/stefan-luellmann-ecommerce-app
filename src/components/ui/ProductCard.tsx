@@ -39,22 +39,22 @@ export default function ProductCard({
   const handleAddToCart = createActionHandler(handleAddToCartClick);
   const handleAddToWishlist = createActionHandler(handleAddToWishlistClick);
 
-  if (variant === 'standard') {
-    const wrapperClassNames = clsx(
-      'group',
-      'flex',
-      'flex-col',
-      'gap-3',
-      'p-4',
-      'bg-[linear-gradient(45deg,#051500,#0d3a00)]',
-      'items-start',
-      'w-[300px]',
-      'rounded-2xl',
-      'border-[#005103]',
-      'border',
-      'shadow-[0_4px_15px_3px_rgba(23,113,0,1)]'
-    );
+  const wrapperClassNames = clsx(
+    'group',
+    'flex',
+    'flex-col',
+    'gap-3',
+    'p-4',
+    'bg-[linear-gradient(45deg,#051500,#0d3a00)]',
+    'items-start',
+    'w-[300px]',
+    'rounded-2xl',
+    'border-[#005103]',
+    'border',
+    'shadow-[0_4px_15px_3px_rgba(23,113,0,1)]'
+  );
 
+  if (variant === 'standard') {
     return (
       <Link className={wrapperClassNames} href={product.slug}>
         <div className='border border-white rounded-2xl overflow-hidden'>
@@ -90,6 +90,24 @@ export default function ProductCard({
             </>
           </Button>
         </div>
+      </Link>
+    );
+  }
+
+  if (variant === 'compact') {
+    return (
+      <Link className={wrapperClassNames} href={product.slug}>
+        <div className='border border-white rounded-2xl overflow-hidden'>
+          <Image
+            className='group-hover:scale-105 transition-all'
+            src={product.imageUrl}
+            alt={product.name}
+            height={153}
+            width={277}
+          />
+        </div>
+        <h3 className='underline text-2xl font-normal'>{product.name}</h3>
+        <strong className='text-3xl font-headings'>{product.price}€</strong>
       </Link>
     );
   }
