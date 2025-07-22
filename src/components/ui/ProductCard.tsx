@@ -54,10 +54,17 @@ export default function ProductCard({
     'shadow-[0_4px_15px_3px_rgba(23,113,0,1)]'
   );
 
+  const imageWrapperClassNames = clsx(
+    'border',
+    'border-white',
+    'rounded-2xl',
+    'overflow-hidden'
+  );
+
   if (variant === 'standard') {
     return (
       <Link className={wrapperClassNames} href={product.slug}>
-        <div className='border border-white rounded-2xl overflow-hidden'>
+        <div className={imageWrapperClassNames}>
           <Image
             className='group-hover:scale-105 transition-all'
             src={product.imageUrl}
@@ -73,7 +80,13 @@ export default function ProductCard({
         </div>
         <strong className='text-3xl font-headings'>{product.price}€</strong>
         <div className='flex items-center gap-2'>
-          <Button onClick={handleAddToCart} as='button' position='card'>
+          <Button
+            onClick={handleAddToCart}
+            as='button'
+            position='card'
+            type='button'
+            title='Add to Cart'
+          >
             <>
               <CartIcon />
               Add to Cart
@@ -84,6 +97,8 @@ export default function ProductCard({
             as='button'
             variant='tertiary'
             position='card'
+            type='button'
+            title='Add to Wishlist'
           >
             <>
               <HeartIcon />
@@ -97,7 +112,7 @@ export default function ProductCard({
   if (variant === 'compact') {
     return (
       <Link className={wrapperClassNames} href={product.slug}>
-        <div className='border border-white rounded-2xl overflow-hidden'>
+        <div className={imageWrapperClassNames}>
           <Image
             className='group-hover:scale-105 transition-all'
             src={product.imageUrl}
@@ -108,6 +123,64 @@ export default function ProductCard({
         </div>
         <h3 className='underline text-2xl font-normal'>{product.name}</h3>
         <strong className='text-3xl font-headings'>{product.price}€</strong>
+      </Link>
+    );
+  }
+
+  if (variant === 'sale') {
+    return (
+      <Link className={wrapperClassNames} href={product.slug}>
+        <div className={`${imageWrapperClassNames} relative`}>
+          <div className='absolute bg-red-700 h-8 grid place-items-center w-32 top-[8px] right-[-40px] rotate-45 z-50 will-change-transform'>
+            On Sale
+          </div>
+          <Image
+            className='group-hover:scale-105 transition-all'
+            src={product.imageUrl}
+            alt={product.name}
+            height={153}
+            width={277}
+          />
+        </div>
+        <h3 className='underline text-2xl font-normal'>{product.name}</h3>
+        <div className='flex items-center gap-2'>
+          <Rating rating={product.rating} size='small' />
+          <span>({product.reviewCount})</span>
+        </div>
+        <div className='flex items-start gap-3'>
+          <span className='text-sm font-headings line-through font-normal'>
+            {product.price}€
+          </span>
+          <strong className='text-3xl font-headings text-[#ff4545]'>
+            {product.reducedPrice || product.price}€
+          </strong>
+        </div>
+        <div className='flex items-center gap-2'>
+          <Button
+            onClick={handleAddToCart}
+            as='button'
+            position='card'
+            type='button'
+            title='Add to Cart'
+          >
+            <>
+              <CartIcon />
+              Add to Cart
+            </>
+          </Button>
+          <Button
+            onClick={handleAddToWishlist}
+            as='button'
+            variant='tertiary'
+            position='card'
+            type='button'
+            title='Add to Wishlist'
+          >
+            <>
+              <HeartIcon />
+            </>
+          </Button>
+        </div>
       </Link>
     );
   }
