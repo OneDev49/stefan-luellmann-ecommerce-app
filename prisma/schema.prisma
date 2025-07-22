@@ -18,8 +18,23 @@ model User {
 }
 
 model Product {
-  id          String @id @default(cuid())
-  name        String
-  description String
-  price       Float
+  id            String    @id @default(cuid())
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  name          String    @unique
+  slug          String    @unique
+  description   String
+  imageUrl      String
+  category      String
+
+  price         Float
+  reducedPrice  Float?
+
+  isOnSale      Boolean   @default(false)
+  stockCount    Int       @default(0)
+  isFeatured    Boolean   @default(false)
+
+  rating        Float     @default(0)
+  reviewCount   Int       @default(0)
 }
