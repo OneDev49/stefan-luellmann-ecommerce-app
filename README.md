@@ -102,3 +102,9 @@ They are **not** licensed for reuse without my explicit written permission.
 - Technology logos are trademarks of their respective owners.
 - Brand logos are trademarks of their respective owners.
 - Icons are used from [Font Awesome](https://fontawesome.com/license) and are subject to their respective licenses.
+
+## Disclaimer
+
+This is a non-commercial portfolio project. It is not a real E-Commerce Store and no Products can be purchased.
+
+**All products, brand names (e.g. Zentheon, AetherFlux), descriptions, and prices listed on this website are entirely fictional** and created for demonstration purposes only. They are not affiliated with any real-world companies or products. Product images are AI-generated and used as placeholders. All trademarks are the property of their respective owners.
