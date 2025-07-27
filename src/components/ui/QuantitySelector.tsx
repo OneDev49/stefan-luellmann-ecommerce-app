@@ -1,0 +1,99 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import PlusIcon from '../icons/ui/PlusIcon';
+import MinusIcon from '../icons/ui/MinusIcon';
+import clsx from 'clsx';
+
+interface QuantitySelectorProps {
+  initialQuantity?: number;
+  maxQuantity?: number;
+  onQuantityChange: (quantity: number) => void;
+}
+
+export default function QuantitySelector({
+  initialQuantity = 1,
+  maxQuantity = 10,
+  onQuantityChange,
+}: QuantitySelectorProps) {
+  const [quantity, setQuantity] = useState(initialQuantity);
+  const [inputValue, setInputValue] = useState(String(initialQuantity));
+
+  useEffect(() => {
+    setQuantity(initialQuantity);
+    setInputValue(String(initialQuantity));
+  }, [initialQuantity]);
+
+  const updateQuantity = (newQuantity: number) => {
+    const validQuantity = Math.max(1, Math.min(newQuantity, maxQuantity));
+    setQuantity(validQuantity);
+    setInputValue(String(validQuantity));
+    onQuantityChange(validQuantity);
+  };
+
+  const handleDecrement = () => {
+    updateQuantity(quantity - 1);
+  };
+
+  const handleIncrement = () => {
+    updateQuantity(quantity + 1);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleInputBlur = () => {
+    const parsedValue = parseInt(inputValue, 10);
+
+    if (isNaN(parsedValue)) {
+      setInputValue(String(quantity));
+    } else {
+      updateQuantity(parsedValue);
+    }
+  };
+
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.currentTarget.blur();
+    }
+  };
+
+  const buttonClassNames = clsx(
+    'bg-green-700 py-2 px-3 cursor-pointer hover:bg-green-800 transition-all'
+  );
+
+  return (
+    <div className='flex justify-start'>
+      <button
+        type='button'
+        onClick={handleDecrement}
+        disabled={quantity <= 1}
+        aria-label='Decrease Quantity'
+        className={`${buttonClassNames} rounded-l-xl`}
+      >
+        <MinusIcon height={20} width={20} />
+      </button>
+      <input
+        name='current_quantity'
+        type='text'
+        inputMode='numeric'
+        className='text-center bg-green-900 text-xl max-w-16'
+        value={inputValue}
+        onChange={handleInputChange}
+        onBlur={handleInputBlur}
+        onKeyDown={handleInputKeyDown}
+        aria-label='Current Quantity'
+      />
+      <button
+        type='button'
+        onClick={handleIncrement}
+        disabled={quantity >= maxQuantity}
+        aria-label='Increase Quantity'
+        className={`${buttonClassNames} rounded-r-xl`}
+      >
+        <PlusIcon height={20} width={20} />
+      </button>
+    </div>
+  );
+}
