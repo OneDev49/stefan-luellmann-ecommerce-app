@@ -11,8 +11,9 @@ export const mockGPUs: Product[] = [
       'The AetherFlux 9000 is an enthusiast-grade graphics card engineered for maximum performance in 4K and 8K resolution gaming and complex computational tasks. It utilizes a quantum-entangled processing core for predictive frame rendering.',
     longDescription:
       'The AetherFlux 9000 represents the apex of consumer graphics technology. Its core architecture is built on a 3nm process, integrating 24,576 shader units and 192 dedicated ray-tracing accelerators for physically accurate lighting and reflections. The card is equipped with 32GB of GDDR7X memory on a 512-bit bus, providing an unprecedented memory bandwidth of 1.5 TB/s. A proprietary liquid-metal thermal interface and a triple-fan vapor chamber cooling system maintain optimal operating temperatures under extreme loads. Connectivity includes DisplayPort 2.1 and HDMI 2.1a, supporting the latest high-refresh-rate displays.',
-    imageUrl: '/images/products/aetherflux_9000.webp',
+    imageUrl: '/images/products/gpu/aetherflux_9000.webp',
     category: 'GPU',
+    brand: 'AetherFlux',
     price: 1299.99,
     reducedPrice: 1099.99,
     isOnSale: true,
@@ -31,8 +32,9 @@ export const mockGPUs: Product[] = [
       'The NovaCore N102C is a high-performance GPU designed for content creators and professionals. It offers a balance of raw gaming power and accelerated performance in creative applications.',
     longDescription:
       'The NovaCore N102C is built to accelerate professional workflows without compromising on gaming capability. It features 16,384 CUDA-equivalent cores and second-generation tensor cores specifically optimized for AI-driven tools in video editing, 3D modeling, and rendering suites. The card comes with 24GB of GDDR6 memory, which provides ample capacity for large datasets and complex 4K video timelines. Its dual-slot, blower-style cooler is designed for thermal efficiency in multi-GPU setups common in workstations. Studio-grade drivers ensure stability and performance in a wide range of certified professional applications.',
-    imageUrl: '/images/products/novacore_n102c.webp',
+    imageUrl: '/images/products/gpu/novacore_n102c.webp',
     category: 'GPU',
+    brand: 'NovaCore',
     price: 1599.99,
     reducedPrice: null,
     isOnSale: false,
@@ -51,8 +53,9 @@ export const mockGPUs: Product[] = [
       'The Pixelis Tritan AC1 is an efficient, entry-level graphics card ideal for 1080p gaming and general multimedia use. It delivers a consistent and stable experience in popular esports titles and less demanding AAA games.',
     longDescription:
       'The Pixelis Tritan AC1 provides a cost-effective entry point into PC gaming. Its architecture focuses on power efficiency, drawing a maximum of 150W via a single 8-pin power connector. The card is configured with 4,096 stream processors and 8GB of GDDR6 memory on a 128-bit bus, sufficient for high-setting 1080p gameplay. Its compact, dual-fan "Air-Cooled" (AC) design ensures compatibility with a wide range of small-form-factor and pre-built systems. The I/O consists of one HDMI 2.0 and three DisplayPort 1.4a outputs.',
-    imageUrl: '/images/products/pixelis_tritan_ac1.webp',
+    imageUrl: '/images/products/gpu/pixelis_tritan_ac1.webp',
     category: 'GPU',
+    brand: 'Pixelis',
     price: 1159.99,
     reducedPrice: null,
     isOnSale: false,
@@ -71,8 +74,9 @@ export const mockGPUs: Product[] = [
       'The Vexel Vectr N is a mid-range GPU that offers a significant performance uplift for 1440p gaming. It provides access to modern features like real-time ray tracing and AI upscaling at a competitive price point.',
     longDescription:
       'The Vexel Vectr N targets the mainstream gaming segment with a powerful and feature-rich specification. It is equipped with 7,680 unified cores, a boost clock of 2.5 GHz, and 12GB of GDDR6X memory. This configuration enables high-refresh-rate gaming at 1440p resolution across a majority of modern titles. The card includes first-generation hardware for ray tracing and AI-enhanced supersampling, providing visual fidelity previously reserved for high-end cards. A standard dual-axial fan cooler with a copper heat pipe array effectively dissipates thermal load during extended use.',
-    imageUrl: '/images/products/vexel_vectr_n.webp',
+    imageUrl: '/images/products/gpu/vexel_vectr_n.webp',
     category: 'GPU',
+    brand: 'Vexel',
     price: 999.99,
     reducedPrice: null,
     isOnSale: false,
@@ -91,8 +95,9 @@ export const mockGPUs: Product[] = [
       'The Vexel Vectr N Ti is the enhanced version of the Vectr N, offering increased core counts and memory bandwidth for uncompromising 1440p and entry-level 4K gaming. It is engineered for users who demand higher frame rates and graphical settings.',
     longDescription:
       'The Vexel Vectr N Ti improves upon the base model with a 20% increase in core count, totaling 9,216 unified cores. It features a higher factory-overclocked boost speed of 2.7 GHz and is equipped with 16GB of faster GDDR6X memory on a wider 256-bit bus. These enhancements translate to a tangible performance gain, enabling max-setting 1440p gameplay and a viable 4K experience in many titles, especially when paired with AI upscaling. The Ti model utilizes an upgraded triple-fan cooling solution and a more robust power delivery system to sustain its higher performance targets.',
-    imageUrl: '/images/products/vexel_vectr_n_ti.webp',
+    imageUrl: '/images/products/gpu/vexel_vectr_n_ti.webp',
     category: 'GPU',
+    brand: 'Vexel',
     price: 1399.99,
     reducedPrice: null,
     isOnSale: false,
@@ -111,8 +116,9 @@ export const mockGPUs: Product[] = [
       "A high-end GPU designed for elite 1440p and introductory 4K gaming. It offers a subset of the flagship's architecture at a more accessible price point.",
     longDescription:
       'The AetherFlux 7500 XT is engineered from the same 3nm process as its 9000-series counterpart, featuring 18,432 shader units and 144 ray-tracing accelerators. It is equipped with 20GB of GDDR7 memory on a 320-bit bus, delivering over 900 GB/s of memory bandwidth for texture-heavy applications. The cooling system consists of a dual-fan vapor chamber assembly designed for high thermal efficiency in standard ATX cases. The 7500 XT is optimized for ultra-high refresh rates at 1440p and provides a consistent 60 FPS experience in most 4K titles.',
-    imageUrl: '',
+    imageUrl: '/images/products/gpu/aetherflux_7500_xt.webp',
     category: 'GPU',
+    brand: 'AetherFlux',
     price: 899,
     reducedPrice: null,
     isOnSale: false,
@@ -131,8 +137,9 @@ export const mockGPUs: Product[] = [
       'A GPU positioned between the high-end and enthusiast tiers, targeting 4K gaming with high settings. It introduces second-generation quantum-entangled cores for improved predictive rendering.',
     longDescription:
       'The AetherFlux 8200 bridges the performance gap to the flagship model. It contains 20,480 shader units and 24GB of GDDR7X memory, identical in specification to the AetherFlux 9000 but with slightly lower clock speeds for improved manufacturing yields. The primary differentiator is the use of second-generation quantum cores, which refine the predictive rendering algorithms for lower latency in competitive scenarios. The card utilizes a robust 20-phase power delivery system and a triple-fan cooler with graphite thermal pads for sustained boost clock performance.',
-    imageUrl: '',
+    imageUrl: '/images/products/gpu/aetherflux_8200.webp',
     category: 'GPU',
+    brand: 'AetherFlux',
     price: 1199,
     reducedPrice: null,
     isOnSale: false,
@@ -151,8 +158,9 @@ export const mockGPUs: Product[] = [
       'An ultimate-tier workstation graphics card built for large-scale data science, real-time 8K video editing, and complex simulation workloads. It features expansive memory and certified drivers for mission-critical stability.',
     longDescription:
       'The NovaCore N205W is the definitive tool for creative and scientific professionals. It is equipped with 48GB of HBM3 memory with ECC support, ensuring data integrity during intensive computation. The core architecture comprises 20,480 specialized processing units optimized for double-precision floating-point math and matrix operations. A single-slot, high-pressure blower design efficiently expels heat, making it ideal for dense, multi-GPU server racks and workstations. The N205W is certified for over 100 professional applications, guaranteeing stability and optimized performance in industries from architectural visualization to medical imaging.',
-    imageUrl: '',
+    imageUrl: '/images/products/gpu/novacore_n205w.webp',
     category: 'GPU',
+    brand: 'NovaCore',
     price: 3499,
     reducedPrice: null,
     isOnSale: false,
@@ -171,8 +179,9 @@ export const mockGPUs: Product[] = [
       'An entry-level professional graphics card for designers and editors working with 1080p and 2K media. It provides hardware acceleration for creative applications at a budget suitable for small businesses and freelancers.',
     longDescription:
       'The NovaCore N50C makes professional-grade hardware acceleration accessible. It features 8GB of GDDR6 ECC memory and 6,144 processing cores, providing a significant performance uplift over integrated graphics in tasks like photo editing, graphic design, and 1080p video encoding. The card is a low-profile, single-slot design that draws power directly from the PCIe slot, ensuring compatibility with small-form-factor and OEM workstations. Like all NovaCore products, it is supported by dedicated studio drivers for reliable performance in applications like Adobe Creative Suite and Autodesk AutoCAD.',
-    imageUrl: '',
+    imageUrl: '/images/products/gpu/novacore_n50c.webp',
     category: 'GPU',
+    brand: 'NovaCore',
     price: 349,
     reducedPrice: null,
     isOnSale: false,
@@ -191,8 +200,9 @@ export const mockGPUs: Product[] = [
       'An ultra-budget, single-fan graphics card designed as a basic display adapter or for playing older and indie game titles. Its primary function is to enable multi-monitor setups on systems lacking integrated graphics.',
     longDescription:
       "The Pixelis Mono M1 is a minimalist GPU solution. It is built on a mature 12nm process and features 1,024 stream processors paired with 4GB of GDDR5 memory on a 64-bit bus. The card's power consumption is under 50W, requiring no external power connectors and making it a simple drop-in upgrade. Its single-fan cooler is quiet and effective for the low thermal output, and the half-height PCB allows for installation in slimline desktop cases. The I/O panel includes one HDMI 2.0 and one DVI-D port.",
-    imageUrl: '',
+    imageUrl: '/images/products/gpu/pixelis_mono_m1.webp',
     category: 'GPU',
+    brand: 'Pixelis',
     price: 89,
     reducedPrice: null,
     isOnSale: false,
@@ -211,8 +221,9 @@ export const mockGPUs: Product[] = [
       'A completely silent, passively cooled graphics card for home theater PCs and quiet office workstations. It provides flawless 4K video playback and can handle light photo editing without any fan noise.',
     longDescription:
       "The Pixelis Flow P2 is engineered for absolute silence. It achieves this with a large, finned aluminum heatsink that dissipates the GPU's thermal load without the need for a fan. The core has 2,048 stream processors and 6GB of GDDR6 memory, sufficient for hardware-accelerated decoding of modern video codecs like AV1 and HEVC. This ensures smooth 4K HDR playback on connected displays. Its low power draw and silent operation make it the definitive choice for media consumption and productivity environments where noise is a primary concern.",
-    imageUrl: '',
+    imageUrl: '/images/products/gpu/pixelis_flow_p2.webp',
     category: 'GPU',
+    brand: 'Pixelis',
     price: 179,
     reducedPrice: null,
     isOnSale: false,
@@ -231,8 +242,9 @@ export const mockGPUs: Product[] = [
       'A low-profile GPU that delivers competent 1080p gaming performance for small-form-factor (SFF) systems. It provides modern gaming features without compromising on case compatibility.',
     longDescription:
       'The Vexel Spark S1 packs significant power into a half-height form factor. It uses a highly binned GPU core with 5,120 shader units and is equipped with 8GB of GDDR6 memory. This combination is capable of running most AAA titles at 1080p with medium to high settings. To manage thermals within its compact design, it utilizes a custom dual-fan cooler with a dense copper heatsink. The card includes a swappable I/O bracket for both standard and low-profile cases, ensuring maximum compatibility for builders of compact gaming PCs.',
-    imageUrl: '',
+    imageUrl: '/images/products/gpu/vexel_spark_s1.webp',
     category: 'GPU',
+    brand: 'Vexel',
     price: 279,
     reducedPrice: null,
     isOnSale: false,
@@ -251,8 +263,9 @@ export const mockGPUs: Product[] = [
       'A mainstream graphics card that excels at high-refresh-rate 1080p gaming. The Rift R5 is a direct competitor in the budget-conscious gaming market, focusing on raw performance over secondary features.',
     longDescription:
       'The Vexel Rift R5 is designed for the competitive 1080p gamer. The architecture prioritizes rasterization performance, featuring 6,400 unified cores with a high boost clock of 2.6 GHz. Paired with 8GB of fast GDDR6 memory, it consistently delivers over 144 FPS in popular esports titles. Ray-tracing hardware is included but is considered an entry-level implementation. The cooling solution is a standard dual-axial fan design with an aluminum fin stack, providing reliable thermal management at a low production cost.',
-    imageUrl: '',
+    imageUrl: '/images/products/gpu/vexel_rift_r5.webp',
     category: 'GPU',
+    brand: 'Vexel',
     price: 229,
     reducedPrice: null,
     isOnSale: false,
@@ -271,8 +284,9 @@ export const mockGPUs: Product[] = [
       'A high-end offering from Vexel that pushes into the 4K gaming domain. The Vectr X is built for enthusiasts seeking maximum performance from the Vexel architecture.',
     longDescription:
       "The Vexel Vectr X represents the peak of the Vectr series, designed to compete with other brands' premium models. It features a fully unlocked die with 10,752 unified cores and 16GB of GDDR6X memory on a 256-bit bus. This configuration provides the necessary throughput for a smooth 60+ FPS experience at 4K resolution with high graphical settings. The card features an enhanced second-generation AI upscaler for superior image quality and performance. A robust triple-fan cooler and a 16-phase power delivery system are standard to handle the card's 350W thermal design power.",
-    imageUrl: '',
+    imageUrl: '/images/products/gpu/vexel_vectr_x.webp',
     category: 'GPU',
+    brand: 'Vexel',
     price: 749,
     reducedPrice: null,
     isOnSale: false,
@@ -291,8 +305,9 @@ export const mockGPUs: Product[] = [
       'A mid-range GPU focused on delivering the lowest possible system latency. The Temporal T1 uses predictive hardware schedulers to reduce input-to-display lag in competitive games.',
     longDescription:
       'The ChronoShift Temporal T1 is built around the "Zero-Lag" architecture. While its 7,680 shader cores and 12GB of GDDR6 memory provide strong 1440p gaming performance, its key feature is the on-die Latency Reduction Unit (LRU). The LRU analyzes game telemetry and frame-render queues to predict and reorder GPU tasks, minimizing the time between user input and on-screen action. This provides a measurable competitive advantage in fast-paced shooters and racing games. The card is cooled by a sleek, wind-tunnel-tested dual-fan shroud.',
-    imageUrl: '',
+    imageUrl: '/images/products/gpu/chronoshift_temporal_t1.webp',
     category: 'GPU',
+    brand: 'ChronoShift',
     price: 449,
     reducedPrice: null,
     isOnSale: false,
@@ -311,8 +326,9 @@ export const mockGPUs: Product[] = [
       'The enthusiast version of the Temporal series, combining high-end 4K performance with an advanced low-latency hardware suite. It is for competitive players who refuse to compromise on either frame rates or responsiveness.',
     longDescription:
       "The ChronoShift Temporal T2-X is a specialized tool for professional gaming. It boasts 10,240 shader cores and 16GB of ultra-low-latency GDDR6X memory. The core feature is the second-generation Latency Reduction Unit (LRU 2.0), which integrates directly with the system's USB bus to process mouse inputs ahead of the CPU, further reducing the input lag pipeline. This raw performance, combined with its latency-reducing hardware, enables an unparalleled level of responsiveness in 4K high-refresh-rate gaming. A hybrid air/liquid cooler is standard to maintain peak performance and low acoustics.",
-    imageUrl: '',
-    category: '',
+    imageUrl: '/images/products/gpu/chronoshift_temporal_t2_x.webp',
+    category: 'GPU',
+    brand: 'ChronoShift',
     price: 849,
     reducedPrice: null,
     isOnSale: false,
@@ -331,8 +347,9 @@ export const mockGPUs: Product[] = [
       'A basic, fanless graphics adapter designed purely for video output in servers or PCs with disabled integrated graphics. It is a low-power, low-cost utility component.',
     longDescription:
       'The Geode G-100 serves a singular purpose: to provide a video signal. With just 512 processing cores and 2GB of DDR4 memory, it is not intended for gaming or graphical acceleration. Its primary use case is in headless servers that require a GPU for initial setup or troubleshooting, or in office PCs where the CPU lacks an integrated GPU. The card is passively cooled, consumes less than 30W of power, and features a single HDMI 1.4 output. Its half-height, single-slot design ensures it can be installed in virtually any system.',
-    imageUrl: '',
+    imageUrl: '/images/products/gpu/geode_g_100.webp',
     category: 'GPU',
+    brand: 'Geode',
     price: 49,
     reducedPrice: null,
     isOnSale: false,
@@ -351,8 +368,9 @@ export const mockGPUs: Product[] = [
       'A compact and efficient GPU designed for Mini-ITX builds. The G-400X offers respectable 1080p performance with a focus on low power consumption and thermal output.',
     longDescription:
       'The Geode G-400X is the premier choice for power-conscious ITX gamers. Built on an extremely efficient 5nm process, it delivers a performance level comparable to previous-generation mid-range cards while consuming a maximum of 120W. It is configured with 6,144 shader cores and 8GB of GDDR6 memory. The "X" signifies its compact, single-fan cooling solution, which uses a dense copper radiator and a high-static-pressure fan to effectively cool the components within a length of just 170mm. This makes it compatible with even the most restrictive Mini-ITX chassis.',
-    imageUrl: '',
+    imageUrl: '/images/products/gpu/geode_g_400x.webp',
     category: 'GPU',
+    brand: 'Geode',
     price: 329,
     reducedPrice: null,
     isOnSale: false,
@@ -371,8 +389,9 @@ export const mockGPUs: Product[] = [
       'A specialized compute card designed for AI research and machine learning development, not for gaming. It features high-density tensor cores for accelerating neural network training.',
     longDescription:
       'The Singularity Matrix-S is a purpose-built accelerator for AI workloads. It eschews traditional graphics outputs and ray-tracing hardware in favor of 8,192 fourth-generation tensor cores optimized for FP16, bfloat16, and INT8 computations. The card includes 32GB of HBM3e memory, providing extreme bandwidth for training large language models and complex datasets. It connects via a PCIe 5.0 x16 interface and supports direct GPU-to-GPU communication over a high-speed bridge. Cooling is handled by a server-grade passive heatsink designed for high-airflow rack environments.',
-    imageUrl: '',
+    imageUrl: '/images/products/gpu/singularity_matrix_s.webp',
     category: 'GPU',
+    brand: 'Singularity',
     price: 2799,
     reducedPrice: null,
     isOnSale: false,
@@ -390,8 +409,9 @@ export const mockGPUs: Product[] = [
     shortDescription:
       'An upgraded version of the entry-level Tritan card, featuring more memory and a higher core count. It targets gamers looking for a solid 60 FPS experience in modern 1080p titles without a major investment.',
     longDescription: `The Pixelis Tritan AC2 enhances the successful AC1 formula. The stream processor count is increased to 5,120, and it is equipped with 8GB of faster GDDR6 memory on a 128-bit bus. These improvements allow the card to comfortably run demanding AAA games at 1080p resolution with high settings. The "Air-Cooled" dual-fan cooler is slightly larger than the AC1's, featuring an additional copper heat pipe for improved thermal dissipation to support the higher performance target. It remains an efficient card, drawing power from a single 8-pin connector.`,
-    imageUrl: '',
+    imageUrl: '/images/products/gpu/pixelis_tritan_ac2.webp',
     category: 'GPU',
+    brand: 'Pixelis',
     price: 199,
     reducedPrice: null,
     isOnSale: false,
@@ -411,11 +431,12 @@ export const mockCPUs: Product[] = [
     slug: 'zentheon-x9-9950k',
     shortDescription: `The flagship consumer processor for enthusiast gamers and content creators. It features 16 cores and 32 threads with an unlocked multiplier for extreme overclocking potential.`,
     longDescription: ` The Zentheon X9 9950K sits at the apex of the desktop CPU hierarchy. Built on a 4nm architecture, it combines 16 high-performance cores and 32 threads, reaching a maximum boost frequency of 6.2 GHz on preferred cores. It includes 64MB of L3 "HyperCache" and an integrated memory controller supporting DDR5 speeds up to 6400 MT/s. The 'K' designation signifies an unlocked multiplier, providing granular control for overclocking. This CPU is engineered for zero-compromise 4K gaming, complex video editing, and heavy multitasking workloads.`,
-    imageUrl: '',
+    imageUrl: '/images/products/cpu/zentheon_x9_9950k.webp',
     category: 'CPU',
+    brand: 'Zentheon',
     price: 699,
-    reducedPrice: null,
-    isOnSale: false,
+    reducedPrice: 599,
+    isOnSale: true,
     stockCount: 500,
     isFeatured: true,
     rating: 4.9,
@@ -429,8 +450,9 @@ export const mockCPUs: Product[] = [
     slug: 'zentheon-x7-9700k',
     shortDescription: `A high-end CPU designed for the sweet spot of performance gaming. It offers 12 cores and 24 threads, providing exceptional power for gaming and streaming simultaneously.`,
     longDescription: `The Zentheon X7 9700K is the core choice for high-refresh-rate gaming. It features a 12-core, 24-thread configuration with a boost clock of 5.8 GHz. The processor is built on the same 4nm architecture as the flagship, sharing its high-speed I/O and support for PCIe 5.0. With 32MB of L3 cache, it excels at latency-sensitive tasks like gaming. Its unlocked multiplier allows users to extract maximum performance, making it an ideal foundation for a high-end gaming PC that also handles demanding productivity tasks.`,
-    imageUrl: '',
+    imageUrl: '/images/products/cpu/zentheon_x7_9700k.webp',
     category: 'CPU',
+    brand: 'Zentheon',
     price: 449,
     reducedPrice: null,
     isOnSale: false,
@@ -447,8 +469,9 @@ export const mockCPUs: Product[] = [
     slug: 'zentheon-x5-9600',
     shortDescription: `The definitive mid-range gaming CPU, balancing multi-core performance and price. With 8 cores and 16 threads, it is optimized for 1440p gaming and general productivity.`,
     longDescription: `The Zentheon X5 9600 delivers exceptional value and performance for the majority of users. Its 8-core, 16-thread design and 5.4 GHz boost clock provide more than enough power for modern AAA titles and multitasking. It includes 24MB of L3 cache and supports DDR5 memory, ensuring it is not a bottleneck for current-generation graphics cards. The 9600 operates at a lower TDP than its X7 and X9 counterparts, allowing for more flexible and cost-effective cooling solutions. It represents the optimal price-to-performance ratio for mainstream systems.`,
-    imageUrl: '',
+    imageUrl: '/images/products/cpu/zentheon_x5_9600.webp',
     category: 'CPU',
+    brand: 'Zentheon',
     price: 299,
     reducedPrice: null,
     isOnSale: false,
@@ -465,8 +488,9 @@ export const mockCPUs: Product[] = [
     slug: 'axion-pro-w9-3990x',
     shortDescription: `An extreme-performance workstation processor for professionals in VFX, 3D rendering, and scientific computing. It features an unprecedented 64 cores and 128 threads.`,
     longDescription: `The Axion Pro W9-3990X is engineered for maximum parallel processing throughput. This HEDT (High-End Desktop) CPU contains 64 cores and 128 threads based on a server-grade architecture. It has access to 256MB of L3 cache and supports 8-channel DDR5 ECC memory for massive datasets and extreme stability. The processor also provides 128 PCIe 5.0 lanes for extensive multi-GPU and high-speed storage configurations. It is the definitive solution for render farms, complex simulations, and data analysis where computation time is a critical factor.`,
-    imageUrl: '',
+    imageUrl: '/images/products/cpu/axion_pro_w9_3990x.webp',
     category: 'CPU',
+    brand: 'Axion',
     price: 3999,
     reducedPrice: null,
     isOnSale: false,
@@ -483,8 +507,9 @@ export const mockCPUs: Product[] = [
     slug: 'axion-pro-w7-3770x',
     shortDescription: `A high-end desktop CPU for prosumers and content creators. It provides 32 cores and 64 threads for heavy multitasking and accelerated creative workflows.`,
     longDescription: `The Axion Pro W7-3770X bridges the gap between consumer and enterprise performance. Its 32-core, 64-thread design is ideal for video editors, 3D artists, and software developers who run multiple demanding applications simultaneously. The CPU supports quad-channel DDR5 memory and offers 64 PCIe 5.0 lanes, allowing for complex configurations of graphics cards, capture cards, and NVMe storage arrays. With 128MB of L3 cache, it accelerates workloads that benefit from large, fast on-die memory.`,
-    imageUrl: '',
+    imageUrl: '/images/products/cpu/axion_pro_w7_3770x.webp',
     category: 'CPU',
+    brand: 'Axion',
     price: 1899,
     reducedPrice: null,
     isOnSale: false,
@@ -501,8 +526,9 @@ export const mockCPUs: Product[] = [
     slug: 'axion-s1-64',
     shortDescription: `A dedicated server processor designed for datacenter and virtualization workloads. It features 64 cores, robust security features, and support for high-capacity registered memory.`,
     longDescription: `The Axion S1-64 is built for enterprise-level reliability and performance. It has a 64-core, 128-thread configuration optimized for energy efficiency and instructions-per-clock (IPC). The processor supports up to 4TB of 12-channel DDR5 RDIMM memory and includes hardware-level security enclaves for data protection. With 128 PCIe 5.0 lanes, it is designed for hyper-converged infrastructure, cloud computing, and large-scale database management. This CPU is intended for dual-socket motherboards to enable massive 128-core systems.`,
-    imageUrl: '',
+    imageUrl: '/images/products/cpu/axion_s1_64.webp',
     category: 'CPU',
+    brand: 'Axion',
     price: 4850,
     reducedPrice: null,
     isOnSale: false,
@@ -519,8 +545,9 @@ export const mockCPUs: Product[] = [
     slug: 'coreforge-c7-7700',
     shortDescription: `A mainstream 8-core, 16-thread processor offering strong performance in gaming and applications. It is a locked, power-efficient alternative to higher-end options.`,
     longDescription: `The CoreForge C7-7700 provides a reliable and powerful computing experience for most users. It features an 8-core, 16-thread layout with a boost clock up to 5.2 GHz. As a locked processor, it is not intended for overclocking, focusing instead on stable, out-of-the-box performance within a 65W TDP. It includes a capable stock cooler, making it a cost-effective choice. This CPU is fully capable of handling 1440p gaming, photo editing, and general office productivity without issue.`,
-    imageUrl: '',
+    imageUrl: '/images/products/cpu/coreforge_c7_7700.webp',
     category: 'CPU',
+    brand: 'CoreForge',
     price: 279,
     reducedPrice: null,
     isOnSale: false,
@@ -537,8 +564,9 @@ export const mockCPUs: Product[] = [
     slug: 'coreforge-c5-7500f',
     shortDescription: `A budget-oriented gaming CPU with 6 cores and 12 threads. The 'F' designation indicates the absence of an integrated GPU, requiring a discrete graphics card.`,
     longDescription: `The CoreForge C5-7500F is engineered to deliver the best gaming performance for its price class. By removing the integrated graphics, die space and power budget are dedicated to its 6 high-performance cores, which boost to 5.0 GHz. This makes it an ideal pairing for mid-range discrete GPUs for 1080p and 1440p gaming. It includes 16MB of L3 cache and supports both DDR4 and DDR5 memory for flexible motherboard choices. This is the go-to processor for system builders prioritizing gaming frame rates on a tight budget.`,
-    imageUrl: '',
+    imageUrl: '/images/products/cpu/coreforge_c5_7500f.webp',
     category: 'CPU',
+    brand: 'CoreForge',
     price: 179,
     reducedPrice: null,
     isOnSale: false,
@@ -555,8 +583,9 @@ export const mockCPUs: Product[] = [
     slug: 'coreforge-c3-7300g',
     shortDescription: `An entry-level quad-core processor with a powerful integrated GPU. The 'G' designation highlights its strong graphics capabilities, suitable for HTPCs and casual 720p/1080p gaming without a discrete card.`,
     longDescription: `The CoreForge C3-7300G combines a 4-core, 8-thread CPU with a surprisingly capable integrated graphics solution. The CPU cores boost to 4.5 GHz, handling all standard productivity and web tasks with ease. The integrated Vega-class GPU has 8 compute units, allowing it to run popular esports titles and older AAA games at respectable frame rates at 1080p low settings. This processor is a complete solution for building a compact, budget-friendly system for media consumption or light gaming.`,
-    imageUrl: '',
+    imageUrl: '/images/products/cpu/coreforge_c3_7300g.webp',
     category: 'CPU',
+    brand: 'CoreForge',
     price: 139,
     reducedPrice: null,
     isOnSale: false,
@@ -573,8 +602,9 @@ export const mockCPUs: Product[] = [
     slug: 'coreforge-c1-7100',
     shortDescription: `An ultra-budget dual-core CPU for basic computing tasks. It is designed for entry-level desktops for web browsing, document editing, and media playback.`,
     longDescription: `The CoreForge C1-7100 is the foundation for the most affordable computer systems. It features a 2-core, 4-thread design and includes a basic integrated GPU sufficient for driving a 4K display for non-gaming tasks. Its low power consumption and thermal output mean it can be cooled passively in some chassis or with a very simple, quiet fan. This CPU is intended for kiosk systems, thin clients, and home office PCs where cost is the primary consideration.`,
-    imageUrl: '',
+    imageUrl: '/images/products/cpu/coreforge_c1_7100.webp',
     category: 'CPU',
+    brand: 'CoreForge',
     price: 69,
     reducedPrice: null,
     isOnSale: false,
@@ -591,8 +621,9 @@ export const mockCPUs: Product[] = [
     slug: 'quantum-leap-effix-e2',
     shortDescription: `A highly efficient processor with a hybrid architecture of 4 performance cores and 8 efficiency cores. It is designed for silent, low-power desktops and small-form-factor builds.`,
     longDescription: `The Quantum Leap Effix E2 utilizes a groundbreaking hybrid design to balance performance and power consumption. It features 4 "Performance" cores that handle demanding foreground tasks, and 8 "Efficiency" cores that manage background processes. An onboard hardware scheduler directs tasks to the appropriate cores in real-time. This 12-core (4P+8E), 16-thread design operates at a very low TDP, making it ideal for compact ITX builds or home theater PCs where heat and noise are primary concerns, while still providing robust performance for mainstream tasks.`,
-    imageUrl: '',
+    imageUrl: '/images/products/cpu/quantum_leap_effix_e2.webp',
     category: 'CPU',
+    brand: 'QuantumLeap',
     price: 279,
     reducedPrice: null,
     isOnSale: false,
@@ -609,8 +640,9 @@ export const mockCPUs: Product[] = [
     slug: 'quantum-leap-vision-v7g',
     shortDescription: `A premier APU that combines an 8-core CPU with a console-class integrated GPU. It is designed to deliver a complete 1080p gaming experience in a single chip.`,
     longDescription: `The Quantum Leap Vision V7G is an Accelerated Processing Unit (APU) engineered for gaming without a discrete graphics card. It integrates an 8-core, 16-thread Zen-based CPU with a powerful RDNA-based GPU featuring 12 compute units and on-die graphics cache. This combination is capable of running modern AAA titles at 1080p with medium-to-high settings, rivaling the performance of previous-generation consoles. It is the ultimate single-chip solution for building a powerful and compact gaming system.`,
-    imageUrl: '',
+    imageUrl: '/images/products/cpu/quantum_leap_vision_v7g.webp',
     category: 'CPU',
+    brand: 'QuantumLeap',
     price: 349,
     reducedPrice: null,
     isOnSale: false,
@@ -629,6 +661,7 @@ export const mockCPUs: Product[] = [
     longDescription: `The Helion H9-8900X introduces a cutting-edge hybrid architecture to the enthusiast market. It combines 8 high-frequency Performance-cores with 16 power-efficient E-cores, for a total of 24 cores and 32 threads. This design provides extreme single-threaded speed for gaming while offering massive multi-threaded throughput for rendering and compilation. The CPU features 72MB of total cache and a sophisticated hardware thread director to optimize task allocation between the core types. It represents a new paradigm in desktop CPU performance.`,
     imageUrl: '',
     category: 'CPU',
+    brand: 'Helion',
     price: 749,
     reducedPrice: null,
     isOnSale: false,
@@ -647,6 +680,7 @@ export const mockCPUs: Product[] = [
     longDescription: `The Helion H7-8700 is a 16-core (8P+8E), 24-thread processor designed for the mainstream enthusiast. It delivers the same powerful Performance-core architecture as the H9 but with fewer Efficiency-cores, striking a balance between cutting-edge performance and value. It is more than capable of handling high-refresh-rate 1440p and 4K gaming while providing a significant boost to multi-threaded productivity tasks. This locked processor is optimized for stability and efficiency, making it a powerful yet practical choice.`,
     imageUrl: '',
     category: 'CPU',
+    brand: 'Helion',
     price: 419,
     reducedPrice: null,
     isOnSale: false,
@@ -665,6 +699,7 @@ export const mockCPUs: Product[] = [
     longDescription: `The Zentheon X3 9300F is a specialized 4-core, 8-thread CPU designed for maximum gaming value. It boasts a high boost clock of 5.1 GHz, making it exceptionally fast in applications that do not scale to many cores. The 'F' designation indicates it lacks an integrated GPU, reducing cost and targeting builds with a discrete graphics card. For gamers on a strict budget who primarily play titles like CS:GO, Valorant, or League of Legends, the 9300F delivers competitive frame rates without unnecessary expense.`,
     imageUrl: '',
     category: 'CPU',
+    brand: 'Zentheon',
     price: 149,
     reducedPrice: null,
     isOnSale: false,
@@ -683,6 +718,7 @@ export const mockCPUs: Product[] = [
     longDescription: `The Zentheon X9 9990X3D is a technological showcase designed for one purpose: to be the fastest gaming CPU on the planet. It takes the 16-core, 32-thread layout of the 9950K and bonds an additional 128MB of L3 cache directly on top of the core compute die. This brings the total L3 cache to 192MB, creating an enormous data reservoir that minimizes calls to system RAM. The result is a significant performance uplift in most games, particularly at 1080p and 1440p resolutions where the CPU is often the bottleneck.`,
     imageUrl: '',
     category: 'CPU',
+    brand: 'Zentheon',
     price: 849,
     reducedPrice: null,
     isOnSale: false,
@@ -701,6 +737,7 @@ export const mockCPUs: Product[] = [
     longDescription: `The Axion Pro W5-3550X makes professional-grade platform features more accessible. With 16 cores and 32 threads, it delivers robust multi-threaded performance for tasks like video encoding and software compilation. Crucially, it runs on the same platform as its more expensive counterparts, offering quad-channel memory support and 64 PCIe lanes. This allows for multi-GPU setups and extensive high-speed storage, capabilities not available on mainstream consumer platforms.`,
     imageUrl: '',
     category: 'CPU',
+    brand: 'Axion',
     price: 899,
     reducedPrice: null,
     isOnSale: false,
@@ -718,7 +755,8 @@ export const mockCPUs: Product[] = [
     shortDescription: `An unlocked 6-core, 12-thread CPU for mainstream builders who want to overclock. The 'X' signifies higher base and boost clocks and an unlocked multiplier.`,
     longDescription: `The CoreForge C5-7600X is the enthusiast's choice in the mid-range. It features the same 6-core, 12-thread design as the standard C5 but operates at a higher power limit, allowing for a sustained boost clock of 5.3 GHz. The unlocked multiplier provides headroom for manual overclocking to extract even more performance. This CPU is ideal for gamers who want to fine-tune their system for the highest possible frame rates in the most popular gaming resolutions.`,
     imageUrl: '',
-    category: '',
+    category: 'CPU',
+    brand: 'CoreForge',
     price: 229,
     reducedPrice: null,
     isOnSale: false,
@@ -737,6 +775,7 @@ export const mockCPUs: Product[] = [
     longDescription: `The Quantum Leap Atomos A1 is a specialized System-on-a-Chip (SoC) for IoT and edge AI applications. It combines two low-power ARM-based CPU cores with a dedicated Neural Processing Unit (NPU) capable of 5 TOPS. The entire chip is designed to operate within a 5W power envelope, allowing it to be passively cooled. It is not intended for general-purpose computing but for devices that require constant, low-latency AI inference, such as security cameras, network video recorders, or advanced smart home controllers.`,
     imageUrl: '',
     category: 'CPU',
+    brand: 'QuantumLeap',
     price: 99,
     reducedPrice: null,
     isOnSale: false,
@@ -755,6 +794,7 @@ export const mockCPUs: Product[] = [
     longDescription: `The Zentheon X12 9998W is a no-compromise solution for extreme multi-threaded workloads. It packs 96 cores and 192 threads into a single socket, supported by 12-channel DDR5 ECC memory and 128 PCIe 5.0 lanes. With a massive 384MB L3 cache, it can hold entire datasets on-chip for rapid processing. This processor is designed for Hollywood-level VFX studios, automotive design, and genomic sequencing, where reducing render or calculation times from days to hours provides a significant competitive advantage.`,
     imageUrl: '',
     category: 'CPU',
+    brand: 'Zentheon',
     price: 9999,
     reducedPrice: null,
     isOnSale: false,
@@ -765,10 +805,11 @@ export const mockCPUs: Product[] = [
   },
 ];
 
-export const allMockProducts: Product[] = [...mockGPUs];
+export const allMockProducts: Product[] = [...mockGPUs, ...mockCPUs];
 
 export async function findManyProducts(args: {
   where?: {
+    brand?: string;
     category?: string;
     isOnSale?: boolean;
     isFeatured?: boolean;
@@ -781,6 +822,10 @@ export async function findManyProducts(args: {
 
   if (args.where?.category) {
     products = products.filter((p) => p.category === args.where?.category);
+  }
+
+  if (args.where?.brand) {
+    products = products.filter((p) => p.brand === args.where?.brand);
   }
 
   if (args.where?.isOnSale) {
@@ -816,7 +861,6 @@ export async function findUniqueProduct(args: {
 }
 
 /*
-
   {
     id: '',
     createdAt: new Date(),
@@ -837,7 +881,4 @@ export async function findUniqueProduct(args: {
     rating: ,
     reviewCount: ,
   },
-
-
 */
-("This seems all incredibly inconvenient to change every single file just to use the mock-data. I still want to use Prisma, but I want to have multiple arrays in my mock-data, GPU array, CPU array, and they all get put into one array. And when I call a function I get the specific data I want, just like with Prisma. I don't want to change everything just to use mock data and completely replace Prisma.");
