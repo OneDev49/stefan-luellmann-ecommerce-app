@@ -6,6 +6,7 @@ import CartIcon from '../icons/ecommerce/CartIcon';
 import HeartIcon from '../icons/ecommerce/HeartIcon';
 import clsx from 'clsx';
 import { Product } from '@prisma/client';
+import { addToCart, addToWishlist } from '@/lib/cart-actions';
 
 interface ProductCardProps {
   variant?: 'standard' | 'compact' | 'sale';
@@ -17,27 +18,16 @@ export default function ProductCard({
   product,
 }: ProductCardProps) {
   // General Helper
-  const createActionHandler = (action: () => void) => (e: React.MouseEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-    action();
-  };
-
-  // Placeholder for now when clicking Add-To-Cart
-  const handleAddToCartClick = () => {
-    console.log(`Add to Cart clicked for: ${product.name}`);
-    // TODO: Implement Zustand store logic here later.
-  };
-
-  // Placeholder for now when clicking Wishlist
-  const handleAddToWishlistClick = () => {
-    console.log(`Add to Wishlist clicked for: ${product.name}`);
-    // TODO: Implement wishlist logic here later.
-  };
+  const createActionHandler =
+    (action: (product: any) => void) => (e: React.MouseEvent) => {
+      e.stopPropagation();
+      e.preventDefault();
+      action(product);
+    };
 
   // Handlers
-  const handleAddToCart = createActionHandler(handleAddToCartClick);
-  const handleAddToWishlist = createActionHandler(handleAddToWishlistClick);
+  const handleAddToCart = createActionHandler(addToCart);
+  const handleAddToWishlist = createActionHandler(addToWishlist);
 
   const wrapperClassNames = clsx(
     'group',
@@ -61,12 +51,19 @@ export default function ProductCard({
     'overflow-hidden'
   );
 
+  const imageClassNames = clsx(
+    'group-hover:scale-105',
+    'transition-all',
+    'max-h-64',
+    'object-cover'
+  );
+
   if (variant === 'standard') {
     return (
-      <Link className={wrapperClassNames} href={product.slug}>
+      <Link className={wrapperClassNames} href={`/product/${product.slug}`}>
         <div className={imageWrapperClassNames}>
           <Image
-            className='group-hover:scale-105 transition-all'
+            className={imageClassNames}
             src={product.imageUrl}
             alt={product.name}
             height={153}
@@ -85,7 +82,7 @@ export default function ProductCard({
             as='button'
             position='card'
             type='button'
-            title='Add to Cart'
+            title={`Add ${product.name} to Cart`}
           >
             <>
               <CartIcon />
@@ -98,7 +95,7 @@ export default function ProductCard({
             variant='tertiary'
             position='card'
             type='button'
-            title='Add to Wishlist'
+            title={`Add ${product.name} to Wishlist`}
           >
             <>
               <HeartIcon />
@@ -111,10 +108,10 @@ export default function ProductCard({
 
   if (variant === 'compact') {
     return (
-      <Link className={wrapperClassNames} href={product.slug}>
+      <Link className={wrapperClassNames} href={`/product/${product.slug}`}>
         <div className={imageWrapperClassNames}>
           <Image
-            className='group-hover:scale-105 transition-all'
+            className={imageClassNames}
             src={product.imageUrl}
             alt={product.name}
             height={153}
@@ -129,13 +126,13 @@ export default function ProductCard({
 
   if (variant === 'sale') {
     return (
-      <Link className={wrapperClassNames} href={product.slug}>
+      <Link className={wrapperClassNames} href={`/product/${product.slug}`}>
         <div className={`${imageWrapperClassNames} relative`}>
           <div className='absolute bg-red-700 h-8 grid place-items-center w-32 top-[8px] right-[-40px] rotate-45 z-50 will-change-transform'>
             On Sale
           </div>
           <Image
-            className='group-hover:scale-105 transition-all'
+            className={imageClassNames}
             src={product.imageUrl}
             alt={product.name}
             height={153}
@@ -161,7 +158,7 @@ export default function ProductCard({
             as='button'
             position='card'
             type='button'
-            title='Add to Cart'
+            title={`Add ${product.name} to Cart`}
           >
             <>
               <CartIcon />
@@ -174,7 +171,7 @@ export default function ProductCard({
             variant='tertiary'
             position='card'
             type='button'
-            title='Add to Wishlist'
+            title={`Add ${product.name} to Wishlist`}
           >
             <>
               <HeartIcon />
