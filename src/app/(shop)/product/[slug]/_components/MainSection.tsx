@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import clsx from 'clsx';
 import Rating from '@/components/ui/Rating';
+import PurchaseControls from './PurchaseControls';
 
 interface mainSectionProps {
   productItem: any;
@@ -80,6 +81,7 @@ export default function MainSection({ productItem }: mainSectionProps) {
         <div>
           <p>{productItem.shortDescription}</p>
         </div>
+        <PurchaseControls product={productItem} />
       </div>
     </section>
   );
