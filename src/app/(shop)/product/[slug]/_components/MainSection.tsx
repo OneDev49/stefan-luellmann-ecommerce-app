@@ -2,12 +2,15 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import Rating from '@/components/ui/Rating';
 import PurchaseControls from './PurchaseControls';
+import { calculateAverageRating } from '@/lib/calculateRating';
 
 interface mainSectionProps {
   productItem: any;
 }
 
 export default function MainSection({ productItem }: mainSectionProps) {
+  const { average, totalCount } = calculateAverageRating(productItem);
+
   const transparentCardClassName = clsx(
     'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl p-8 max-w-7xl m-auto'
   );
@@ -52,8 +55,8 @@ export default function MainSection({ productItem }: mainSectionProps) {
         <h1 className='text-5xl font-bold underline'>{productItem.name}</h1>
         <div className='flex flex-col gap-4'>
           <div className='flex items-center gap-2'>
-            <Rating rating={productItem.rating} size='medium' />
-            <span>({productItem.reviewCount})</span>
+            <Rating rating={average} size='medium' />
+            <span>({totalCount})</span>
           </div>
           {productItem.isOnSale ? (
             <div className='flex gap-2'>

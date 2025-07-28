@@ -7,6 +7,7 @@ import HeartIcon from '../icons/ecommerce/HeartIcon';
 import clsx from 'clsx';
 import { Product } from '@prisma/client';
 import { addToCart, addToWishlist } from '@/lib/cart-actions';
+import { calculateAverageRating } from '@/lib/calculateRating';
 
 interface ProductCardProps {
   variant?: 'standard' | 'compact' | 'sale';
@@ -17,6 +18,8 @@ export default function ProductCard({
   variant = 'standard',
   product,
 }: ProductCardProps) {
+  const { average, totalCount } = calculateAverageRating(product);
+
   // General Helper
   const createActionHandler =
     (action: (product: any) => void) => (e: React.MouseEvent) => {
@@ -37,7 +40,7 @@ export default function ProductCard({
     'p-4',
     'bg-[linear-gradient(45deg,#051500,#0d3a00)]',
     'items-start',
-    'w-[300px]',
+    'w-[275px]',
     'rounded-2xl',
     'border-[#005103]',
     'border',
@@ -66,14 +69,14 @@ export default function ProductCard({
             className={imageClassNames}
             src={product.imageUrl}
             alt={product.name}
-            height={153}
-            width={277}
+            height={239}
+            width={239}
           />
         </div>
         <h3 className='underline text-2xl font-normal'>{product.name}</h3>
         <div className='flex items-center gap-2'>
-          <Rating rating={product.rating} size='small' />
-          <span>({product.reviewCount})</span>
+          <Rating rating={average} size='small' />
+          <span>({totalCount})</span>
         </div>
         <strong className='text-3xl font-headings'>{product.price}€</strong>
         <div className='flex items-center gap-2'>
@@ -141,8 +144,8 @@ export default function ProductCard({
         </div>
         <h3 className='underline text-2xl font-normal'>{product.name}</h3>
         <div className='flex items-center gap-2'>
-          <Rating rating={product.rating} size='small' />
-          <span>({product.reviewCount})</span>
+          <Rating rating={average} size='small' />
+          <span>({totalCount})</span>
         </div>
         <div className='flex items-start gap-3'>
           <span className='text-sm font-headings line-through font-normal'>
