@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import MainSection from './_components/MainSection';
 import DescriptionSection from './_components/DescriptionSection';
 import ProductCarousel from '@/components/sections/ProductCarousel';
+import RatingSummary from './_components/RatingSummarySection';
+import CustomerReviewSection from './_components/CustomerReviewSection';
 
 export default async function ProductPage({
   params,
@@ -18,8 +20,14 @@ export default async function ProductPage({
 
   const mainWrapperClassNames = clsx('py-16 flex flex-col gap-16');
 
+  const brandProducts = await findManyProducts({
+    where: { brand: { name: product.brand }, id: { not: product.id } },
+    take: 7,
+  });
+
   const similarProducts = await findManyProducts({
-    where: { brand: product.brand },
+    where: { category: product.category, brand: { not: product.brand } },
+    take: 7,
   });
 
   return (
@@ -27,9 +35,22 @@ export default async function ProductPage({
       <div className={mainWrapperClassNames}>
         <MainSection productItem={product} />
         <DescriptionSection productItem={product} />
+        <div className='flex max-w-7xl w-[95%] m-auto gap-6 items-start'>
+          <RatingSummary product={product} />
+          <CustomerReviewSection />
+        </div>
         <div>
           <ProductCarousel
             heading={`More from ${product.brand}`}
+            productCardVariant='standard'
+            products={brandProducts}
+            position='productpage'
+            bgColor=''
+          />
+        </div>
+        <div>
+          <ProductCarousel
+            heading={`Similar Products`}
             productCardVariant='standard'
             products={similarProducts}
             position='productpage'
