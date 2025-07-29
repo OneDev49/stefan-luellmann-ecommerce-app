@@ -50,7 +50,7 @@ export default function ProductCarousel({
     return (
       <div className={transparentCardClassName}>
         <section className='flex flex-col' style={{ background: bgColor }}>
-          <h2 className='p-2 px-8 text-5xl font-bold'>{heading}</h2>
+          <h2 className='p-2 px-8 text-4xl font-bold'>{heading}</h2>
           <div className='overflow-hidden px-8 py-5' ref={emblaRef}>
             <div className='list-none p-0 m-0 flex gap-8'>
               {products.map((product) => (

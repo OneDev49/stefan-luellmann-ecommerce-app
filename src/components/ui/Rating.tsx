@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import StarIcon from '../icons/ecommerce/StarIcon';
-import styles from './Rating.module.scss';
 
 interface RatingProps {
   rating: number;
