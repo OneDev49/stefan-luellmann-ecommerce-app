@@ -16,13 +16,18 @@ export default function HeroSection() {
           with the Entro PC Builder.
         </p>
         <div className='flex flex-row justify-center gap-6'>
-          <Button as='a' href='/pc-builder'>
+          <Button
+            as='a'
+            href='/pc-builder'
+            className='p-[12px_18px] rounded-2xl'
+            position='section'
+          >
             <>
               <span>Start Your Build</span>
               <AnglesRightIcon />
             </>
           </Button>
-          <Button as='a' href='/search' variant='tertiary'>
+          <Button as='a' href='/search' variant='tertiary' position='section'>
             <>
               <span>Browse All Components</span>
               <SearchIcon />
