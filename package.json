@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate",
+    "seed": "ts-node --project tsconfig.seed.json -r tsconfig-paths/register prisma/seed.ts"
+  },
+  "prisma": {
+    "seed": "npm run seed"
   },
   "dependencies": {
     "@prisma/client": "^6.12.0",
@@ -26,6 +31,8 @@
     "postcss": "^8",
     "tailwind-scrollbar": "^3.1.0",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5"
   }
 }
