@@ -1,0 +1,2 @@
+-- CreateEnum
+CREATE TYPE "ProductType" AS ENUM ('CPU', 'MOTHERBOARD', 'RAM', 'STORAGE', 'GPU', 'CASE', 'PSU', 'CPU_COOLER', 'MONITOR', 'KEYBOARD', 'MOUSE');

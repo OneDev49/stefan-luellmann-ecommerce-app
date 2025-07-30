@@ -11,6 +11,20 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum ProductType {
+  CPU
+  MOTHERBOARD
+  RAM
+  STORAGE
+  GPU
+  CASE
+  PSU
+  CPU_COOLER
+  MONITOR
+  KEYBOARD
+  MOUSE
+}
+
 model User {
   id    String  @id @default(cuid())
   email String  @unique
@@ -18,24 +32,33 @@ model User {
 }
 
 model Product {
-  id               String   @id @default(cuid())
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  name             String   @unique
-  slug             String   @unique
-  shortDescription String
-  longDescription  String
+  id               String      @id @default(cuid())
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  name             String      @unique
+  slug             String      @unique
   imageUrl         String
-  category         String
   brand            String
   price            Float
+  stockCount       Int         @default(0)
+  productType      ProductType
+  specs            Json
+  shortDescription String
+  longDescription  String
+  isOnSale         Boolean     @default(false)
   reducedPrice     Float?
-  isOnSale         Boolean  @default(false)
-  stockCount       Int      @default(0)
-  isFeatured       Boolean  @default(false)
-  oneStarReviews   Int      @default(0)
-  twoStarReviews   Int      @default(0)
-  threeStarReviews Int      @default(0)
-  fourStarReviews  Int      @default(0)
-  fiveStarReviews  Int      @default(0)
+  isFeatured       Boolean     @default(false)
+  categories       Category[]  @relation("ProductCategories")
+  oneStarReviews   Int         @default(0)
+  twoStarReviews   Int         @default(0)
+  threeStarReviews Int         @default(0)
+  fourStarReviews  Int         @default(0)
+  fiveStarReviews  Int         @default(0)
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String    @unique
+  slug     String    @unique
+  products Product[] @relation("ProductCategories")
 }
