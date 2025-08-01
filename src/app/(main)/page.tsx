@@ -1,19 +1,19 @@
-import { findManyProducts } from '@/lib/mock-data';
+import { prisma } from '@/lib/prisma';
 import HeroSection from './_components/HeroSection';
 import ProductCarousel from '@/components/sections/ProductCarousel';
 
 export default async function Home() {
-  const onSaleProducts = await findManyProducts({
+  const onSaleProducts = await prisma.product.findMany({
     where: { isOnSale: true },
     take: 10,
   });
 
-  const featuredGPUs = await findManyProducts({
-    where: { category: 'GPU', isFeatured: true },
+  const featuredGPUs = await prisma.product.findMany({
+    where: { isFeatured: true, productType: 'GPU' },
     take: 10,
   });
 
-  const newArrivals = await findManyProducts({
+  const newArrivals = await prisma.product.findMany({
     orderBy: { createdAt: 'desc' },
     take: 10,
   });
