@@ -117,8 +117,8 @@ export default function ProductCard({
             className={imageClassNames}
             src={product.imageUrl}
             alt={product.name}
-            height={153}
-            width={277}
+            height={239}
+            width={239}
           />
         </div>
         <h3 className='underline text-2xl font-normal'>{product.name}</h3>
@@ -138,8 +138,8 @@ export default function ProductCard({
             className={imageClassNames}
             src={product.imageUrl}
             alt={product.name}
-            height={153}
-            width={277}
+            height={239}
+            width={239}
           />
         </div>
         <h3 className='underline text-2xl font-normal'>{product.name}</h3>
