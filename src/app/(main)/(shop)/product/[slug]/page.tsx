@@ -1,4 +1,4 @@
-import { findManyProducts, findUniqueProduct } from '@/lib/mock-data';
+import { prisma } from '@/lib/prisma';
 import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 import MainSection from './_components/MainSection';
@@ -12,7 +12,9 @@ export default async function ProductPage({
 }: {
   params: { slug: string };
 }) {
-  const product = await findUniqueProduct({ where: { slug: params.slug } });
+  const product = await prisma.product.findUnique({
+    where: { slug: params.slug },
+  });
 
   if (!product) {
     notFound();
@@ -20,13 +22,13 @@ export default async function ProductPage({
 
   const mainWrapperClassNames = clsx('py-16 flex flex-col gap-16');
 
-  const brandProducts = await findManyProducts({
-    where: { brand: { name: product.brand }, id: { not: product.id } },
+  const brandProducts = await prisma.product.findMany({
+    where: { brand: product.brand, id: { not: product.id } },
     take: 7,
   });
 
-  const similarProducts = await findManyProducts({
-    where: { category: product.category, brand: { not: product.brand } },
+  const similarProducts = await prisma.product.findMany({
+    where: { productType: product.productType, brand: { not: product.brand } },
     take: 7,
   });
 
