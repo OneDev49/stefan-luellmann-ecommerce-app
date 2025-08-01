@@ -6,6 +6,7 @@ import DescriptionSection from './_components/DescriptionSection';
 import ProductCarousel from '@/components/sections/ProductCarousel';
 import RatingSummary from './_components/RatingSummarySection';
 import CustomerReviewSection from './_components/CustomerReviewSection';
+import BreadcrumbsSection from './_components/BreadcrumbsSection';
 
 export default async function ProductPage({
   params,
@@ -20,7 +21,7 @@ export default async function ProductPage({
     notFound();
   }
 
-  const mainWrapperClassNames = clsx('py-16 flex flex-col gap-16');
+  const mainWrapperClassNames = clsx('pt-8 pb-16 flex flex-col gap-16');
 
   const brandProducts = await prisma.product.findMany({
     where: { brand: product.brand, id: { not: product.id } },
@@ -33,7 +34,11 @@ export default async function ProductPage({
   });
 
   return (
-    <main className='bg-[linear-gradient(180deg,#004505,#000)]'>
+    <main className='bg-[linear-gradient(180deg,#004505,#000)] pt-4'>
+      <BreadcrumbsSection
+        productName={product.name}
+        category={product.productType}
+      />
       <div className={mainWrapperClassNames}>
         <MainSection productItem={product} />
         <DescriptionSection productItem={product} />
