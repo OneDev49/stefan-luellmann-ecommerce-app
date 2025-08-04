@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { CategoryFilterItem } from './SearchPageClient';
+import clsx from 'clsx';
 
 interface SearchFiltersProps {
   brands: string[];
@@ -23,9 +24,9 @@ export default function SearchFilters({
   const searchParams = useSearchParams();
 
   const [activeFilters, setActiveFilters] = useState<FilterState>(() => {
-    const brands = new Set(searchParams.getAll('brand'));
-    const category = searchParams.get('category');
-    return { brands, category };
+    const urlBrands = new Set(searchParams.getAll('brand'));
+    const urlCategory = searchParams.get('category');
+    return { brands: urlBrands, category: urlCategory };
   });
 
   useEffect(() => {
@@ -37,8 +38,14 @@ export default function SearchFilters({
       params.set('category', activeFilters.category);
     }
 
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }, [activeFilters, pathname, router]);
+
+  useEffect(() => {
+    const urlBrands = new Set(searchParams.getAll('brand'));
+    const urlCategory = searchParams.get('category');
+    setActiveFilters({ brands: urlBrands, category: urlCategory });
+  }, [searchParams]);
 
   const handleBrandChange = useCallback((brand: string, isChecked: boolean) => {
     setActiveFilters((prevFilters) => {
@@ -60,20 +67,22 @@ export default function SearchFilters({
     }));
   }, []);
 
+  const headingsClassNames = clsx(
+    'block text-2xl font-bold text-white mb-3 font-headings px-4'
+  );
+
   return (
-    <form className='space-y-8'>
+    <form className='space-y-4'>
       {/* Filter for Categories */}
       <fieldset>
-        <legend className='block text-lg font-bold text-white mb-3'>
-          Category
-        </legend>
-        <div className='space-y-2'>
+        <legend className={headingsClassNames}>Category</legend>
+        <div className='space-y-1'>
           {categories.map((category) => (
             <button
               key={category.slug}
               type='button'
               onClick={() => handleCategoryChange(category.slug)}
-              className={`block w-full text-left p-2 rounded ${
+              className={`block w-full text-left px-4 py-1 rounded ${
                 activeFilters.category === category.slug
                   ? 'bg-green-500 text-black font-bold'
                   : 'hover:bg-gray-700'
@@ -85,24 +94,24 @@ export default function SearchFilters({
         </div>
       </fieldset>
 
+      <hr />
+
       {/* Filter for Brands */}
       <fieldset>
-        <legend className='block text-lg font-bold text-white mb-3'>
-          Brands
-        </legend>
+        <legend className={headingsClassNames}>Brands</legend>
         <div className='space-y-2'>
           {brands.map((brand) => (
-            <div key={brand} className='flex items-center'>
+            <div key={brand} className='flex items-center px-4'>
               <input
                 id={`brand-${brand}`}
                 type='checkbox'
                 checked={activeFilters.brands.has(brand)}
                 onChange={(e) => handleBrandChange(brand, e.target.checked)}
-                className='h-4 w-4 rounded border-gray-600 bg-gray-800 text-green-500 focus:ring-green-500'
+                className='h-4 w-4 rounded border-gray-600 bg-gray-800 text-green-500 focus:ring-green-500 cursor-pointer'
               />
               <label
                 htmlFor={`brand-${brand}`}
-                className='ml-3 text-sm text-gray-300'
+                className='ml-3 text-sm text-gray-300 cursor-pointer'
               >
                 {brand}
               </label>

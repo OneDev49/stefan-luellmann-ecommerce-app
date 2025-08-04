@@ -28,7 +28,10 @@ export default function BreadcrumbsSection({
           Homepage
         </Link>{' '}
         {' / '}
-        <Link href={`/search?category=${category}`} className={textClassNames}>
+        <Link
+          href={`/search?category=${category.toLowerCase()}`}
+          className={textClassNames}
+        >
           {ADJUSTED_NAME}
         </Link>{' '}
         {' / '}
