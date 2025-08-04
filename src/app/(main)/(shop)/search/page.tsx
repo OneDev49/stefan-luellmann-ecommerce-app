@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import { Prisma } from '@prisma/client';
 import SearchPageClient from './_components/SearchPageClient';
 
 export default async function SearchPage({
@@ -19,51 +20,55 @@ export default async function SearchPage({
   const searchTerm =
     typeof searchParams.q === 'string' ? searchParams.q : undefined;
 
-  const [allBrands, allCategories] = await Promise.all([
-    prisma.product.findMany({
-      select: { brand: true },
-      distinct: ['brand'],
-      orderBy: { brand: 'asc' },
-    }),
-    prisma.category.findMany({
-      select: { name: true, slug: true },
-      orderBy: { name: 'asc' },
-    }),
-  ]);
-
-  const initialProducts = await prisma.product.findMany({
-    where: {
-      name: {
-        contains: searchTerm,
-        mode: 'insensitive',
+  /* Construct the where object */
+  const where: Prisma.ProductWhereInput = {};
+  if (searchTerm) {
+    where.name = {
+      contains: searchTerm,
+      mode: 'insensitive',
+    };
+  }
+  if (categorySlug) {
+    where.categories = {
+      some: {
+        slug: {
+          equals: categorySlug,
+          mode: 'insensitive',
+        },
       },
+    };
+  }
+  if (selectedBrands.length > 0) {
+    where.brand = {
+      in: selectedBrands,
+      mode: 'insensitive',
+    };
+  }
 
-      categories: categorySlug
-        ? {
-            some: {
-              slug: {
-                equals: categorySlug,
-                mode: 'insensitive',
-              },
-            },
-          }
-        : undefined,
+  const baseWhereClause = { ...where };
+  delete baseWhereClause.brand;
 
-      brand:
-        selectedBrands.length > 0
-          ? {
-              in: selectedBrands,
-              mode: 'insensitive',
-            }
-          : undefined,
-    },
-    take: 50,
-  });
+  const [initialProducts, availableBrands, allCategories] = await Promise.all([
+    prisma.product.findMany({
+      where,
+      take: 50,
+    }),
+
+    prisma.product.findMany({
+      where: baseWhereClause,
+      select: {
+        brand: true,
+      },
+      distinct: ['brand'],
+    }),
+
+    prisma.category.findMany({ select: { name: true, slug: true } }),
+  ]);
 
   return (
     <SearchPageClient
       initialProducts={initialProducts}
-      brands={allBrands.map((b) => b.brand)}
+      brands={availableBrands.map((b) => b.brand).sort()}
       categories={allCategories}
     />
   );

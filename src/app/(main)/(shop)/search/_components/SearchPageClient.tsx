@@ -35,7 +35,6 @@ export default function SearchPageClient({
           <aside className='hidden lg:block'>
             <h2 className='sr-only'>Filters</h2>
             <SearchFilters brands={brands} categories={categories} />
-            <p>Filter Components go here.</p>
           </aside>
           <div className='lg:col-span-3'>
             <div className='flex items-center justify-between border-b border-gray-700 pb-4'>
