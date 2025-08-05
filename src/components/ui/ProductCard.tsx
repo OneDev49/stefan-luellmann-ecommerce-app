@@ -61,6 +61,10 @@ export default function ProductCard({
     'object-cover'
   );
 
+  const headingClassNames = clsx('underline text-2xl line-clamp-1 font-bold');
+
+  const priceClassNames = clsx('text-3xl font-headings font-normal');
+
   if (variant === 'standard') {
     return (
       <Link className={wrapperClassNames} href={`/product/${product.slug}`}>
@@ -73,12 +77,12 @@ export default function ProductCard({
             width={239}
           />
         </div>
-        <h3 className='underline text-2xl font-normal'>{product.name}</h3>
+        <h3 className={headingClassNames}>{product.name}</h3>
         <div className='flex items-center gap-2'>
           <Rating rating={average} size='small' />
           <span>({totalCount})</span>
         </div>
-        <strong className='text-3xl font-headings'>{product.price}€</strong>
+        <strong className={`${priceClassNames} mb-4`}>{product.price}€</strong>
         <div className='flex items-center gap-2'>
           <Button
             onClick={handleAddToCart}
@@ -121,8 +125,8 @@ export default function ProductCard({
             width={239}
           />
         </div>
-        <h3 className='underline text-2xl font-normal'>{product.name}</h3>
-        <strong className='text-3xl font-headings'>{product.price}€</strong>
+        <h3 className={headingClassNames}>{product.name}</h3>
+        <strong className={`${priceClassNames} mb-4`}>{product.price}€</strong>
       </Link>
     );
   }
@@ -142,16 +146,16 @@ export default function ProductCard({
             width={239}
           />
         </div>
-        <h3 className='underline text-2xl font-normal'>{product.name}</h3>
+        <h3 className={headingClassNames}>{product.name}</h3>
         <div className='flex items-center gap-2'>
           <Rating rating={average} size='small' />
           <span>({totalCount})</span>
         </div>
-        <div className='flex items-start gap-3'>
+        <div className='flex items-center gap-3 mb-4'>
           <span className='text-sm font-headings line-through font-normal'>
             {product.price}€
           </span>
-          <strong className='text-3xl font-headings text-[#ff4545]'>
+          <strong className={`${priceClassNames} text-[#ff4545]`}>
             {product.reducedPrice || product.price}€
           </strong>
         </div>

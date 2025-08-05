@@ -27,7 +27,7 @@ export default function MainSection({ productItem }: mainSectionProps) {
   const stockText =
     productItem.stockCount === 0
       ? `Out of Stock`
-      : productItem.stockCount < 100 && productItem.stockCount > 0
+      : productItem.stockCount < 10 && productItem.stockCount > 0
       ? `Limited Stock`
       : `In Stock`;
 
@@ -59,23 +59,32 @@ export default function MainSection({ productItem }: mainSectionProps) {
             <span>({totalCount})</span>
           </div>
           {productItem.isOnSale ? (
-            <div className='flex gap-2'>
-              <span className='text-base font-headings line-through font-normal'>
-                {productItem.price}€
-              </span>
-              <h2 className='text-4xl font-bold font-headings text-[#ff4545]'>
-                {productItem.reducedPrice}€
-              </h2>
+            <div className='flex items-center gap-2'>
+              <div className='flex items-start gap-2'>
+                <span className='text-base font-headings line-through font-normal'>
+                  {productItem.price}€
+                </span>
+                <h2 className='text-4xl font-bold font-headings text-[#ff4545]'>
+                  {productItem.reducedPrice}€
+                </h2>
+              </div>
+              <div className='flex items-center gap-2'>
+                <span className='text-sm'>(+19% VAT and Delivery Costs)</span>
+              </div>
             </div>
           ) : (
-            <h2 className='text-4xl font-bold'>{productItem.price}€</h2>
+            <div className='flex items-center gap-2'>
+              only
+              <h2 className='text-3xl font-bold'>{productItem.price}€</h2>
+              <span className='text-sm'>(+19% VAT and Delivery Costs)</span>
+            </div>
           )}
           <div className='font-bold flex items-center gap-2'>
             <p className={stockClassNames}>{stockText}</p>
             <p>
               |{' '}
-              {productItem.stockCount > 100
-                ? `>100`
+              {productItem.stockCount > 10
+                ? `>10`
                 : `${productItem.stockCount}`}{' '}
               in Storage
             </p>
