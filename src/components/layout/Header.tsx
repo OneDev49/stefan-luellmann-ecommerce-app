@@ -3,7 +3,6 @@ import Image from 'next/image';
 import UserIcon from '../icons/ecommerce/UserIcon';
 import HeartIcon from '../icons/ecommerce/HeartIcon';
 import CartIcon from '../icons/ecommerce/CartIcon';
-import SearchBar from '../ui/SearchBar';
 import MenuIcon from '../icons/ui/MenuIcon';
 
 export default function HeaderLayout() {
@@ -18,7 +17,6 @@ export default function HeaderLayout() {
             height={50}
           />
         </Link>
-        <SearchBar />
         <div className='flex gap-4'>
           <div className='cursor-pointer'>
             <CartIcon width={48} height='100%' />
@@ -68,17 +66,22 @@ export default function HeaderLayout() {
           </Link>
         </div>
         <div className='px-3 flex gap-3'>
-          <Link href='/search?=cpu'>CPU</Link>
-          <Link href='/search?=ram'>RAM</Link>
-          <Link href='/search?=motherboard'>Motherboard</Link>
-          <Link href='/search?=power'>Power Supply</Link>
-          <Link href='/search?=cooling'>Cooling Systems</Link>
-          <Link href='/search?=cases'>Cases</Link>
-          <Link href='/search?=sound'>Sound Cards</Link>
-          <Link href='/search?=storage'>Storage</Link>
-          <Link href='/search?=printer'>Printer</Link>
-          <Link href='/search?=optical_drives'>Optical Drive</Link>
-          <Link href='/search?=network_cards'>Network Cards</Link>
+          <Link href='/search?category=cpu'>CPU</Link>
+          <Link href='/search?category=motherboard'>Motherboard</Link>
+          <Link href='/search?category=ram'>RAM</Link>
+          <Link href='/search?category=storage'>Storage</Link>
+          <Link href='/search?category=gpu'>GPU</Link>
+          <Link href='/search?category=power'>Power Supplies</Link>
+          <Link href='/search?category=cases'>Cases</Link>
+          <Link href='/search?category=cooling'>Cooling</Link>
+          <Link href='/search?category=monitor'>Monitors</Link>
+          <Link href='/search?category=keyboard'>Keyboard</Link>
+          <Link href='/search?category=mouse'>Mice</Link>
+          <Link href='/search?category=headset'>Headsets</Link>
+          <Link href='/search?category=casefan'>Case Fans</Link>
+          <Link href='/search?category=laptop'>Laptops</Link>
+          <Link href='/search?category=microphone'>Microphones</Link>
+          <Link href='/search?category=webcam'>Webcams</Link>
         </div>
       </div>
     </header>
