@@ -122,32 +122,44 @@ export default function FooterLayout() {
               <strong className='underline'>Categories</strong>
               <ul className='list-none p-0 m-0 underline text-white pt-1 flex flex-col gap-1'>
                 <li>
-                  <Link className={hoverClassNames} href='/search?=cpu'>
+                  <Link className={hoverClassNames} href='/search?category=cpu'>
                     CPU
                   </Link>
                 </li>
                 <li>
-                  <Link className={hoverClassNames} href='/search?=ram'>
+                  <Link className={hoverClassNames} href='/search?category=ram'>
                     RAM
                   </Link>
                 </li>
                 <li>
-                  <Link className={hoverClassNames} href='/search?=motherboard'>
+                  <Link
+                    className={hoverClassNames}
+                    href='/search?category=motherboard'
+                  >
                     Motherboard
                   </Link>
                 </li>
                 <li>
-                  <Link className={hoverClassNames} href='/search?=power'>
+                  <Link
+                    className={hoverClassNames}
+                    href='/search?category=power'
+                  >
                     Power Supply
                   </Link>
                 </li>
                 <li>
-                  <Link className={hoverClassNames} href='/search?=cooling'>
+                  <Link
+                    className={hoverClassNames}
+                    href='/search?category=cooling'
+                  >
                     Cooling Systems
                   </Link>
                 </li>
                 <li>
-                  <Link className={hoverClassNames} href='/search?=cases'>
+                  <Link
+                    className={hoverClassNames}
+                    href='/search?category=cases'
+                  >
                     Cases
                   </Link>
                 </li>
