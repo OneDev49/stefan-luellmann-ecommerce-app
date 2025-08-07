@@ -48,7 +48,7 @@ export default function HeroSection() {
   );
 
   const contentClassNames = clsx(
-    'relative z-10 flex flex-col gap-6 items-center justify-center text-center p-3'
+    'relative z-10 flex flex-col gap-6 items-center justify-center text-center p-3 bg-[rgb(0,0,0,0.5)] w-full'
   );
 
   const imageContainerClassNames = clsx('absolute z-0 inset-0');
@@ -58,17 +58,22 @@ export default function HeroSection() {
   );
 
   const imageClassNames = clsx(
-    'w-full opacity-30 relative z-[-1] h-full object-cover'
+    'w-full brightness-50 relative z-[-1] h-full object-cover'
   );
 
   return (
-    <section className='w-full'>
+    <section className='w-full shadow-[0_20px_20px_20px_rgb(0,0,0,1)]'>
       <h1 className='sr-only'>Entro: Your Computer and PC Component Shop</h1>
       <div className='overflow-hidden' ref={emblaRef}>
         <div className='flex select-none'>
           <div className={emblaContainerClassNames}>
             <div className={contentClassNames}>
-              <h2 className={headingClassNames}>High-Performance Components</h2>
+              <h2
+                className={headingClassNames}
+                style={{ textShadow: '2px 1px 5px #0dff00' }}
+              >
+                High-Performance Components
+              </h2>
               <p className='text-lg'>
                 New, Fast and Affordable Components here in our Entro Store.
                 <br />
@@ -106,7 +111,12 @@ export default function HeroSection() {
           </div>
           <div className={emblaContainerClassNames}>
             <div className={contentClassNames}>
-              <h2 className={headingClassNames}>GPUs of the Next Generation</h2>
+              <h2
+                className={headingClassNames}
+                style={{ textShadow: '2px 1px 5px #0dff00' }}
+              >
+                GPUs of the Next Generation
+              </h2>
               <p className='text-lg'>
                 We have all Next-Generation Graphic Cards, available here in our
                 Entro Store.
@@ -145,7 +155,12 @@ export default function HeroSection() {
           </div>
           <div className={emblaContainerClassNames}>
             <div className={contentClassNames}>
-              <h2 className={headingClassNames}>Build Your New Computer</h2>
+              <h2
+                className={headingClassNames}
+                style={{ textShadow: '2px 1px 5px #0dff00' }}
+              >
+                Build Your New Computer
+              </h2>
               <p className='text-lg'>
                 Build your next Gaming Tower with our PC Builder with built in
                 Component Check.

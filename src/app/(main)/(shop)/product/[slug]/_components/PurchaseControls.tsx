@@ -36,6 +36,7 @@ export default function PurchaseControls({ product }: PurchaseControlsProps) {
           type='button'
           onClick={handleAddToCart}
           variant='primary'
+          className='text-lg'
           children={
             <>
               <CartIcon />
@@ -50,6 +51,7 @@ export default function PurchaseControls({ product }: PurchaseControlsProps) {
         type='button'
         onClick={handleAddToWishlist}
         variant='tertiary'
+        className='text-lg'
         children={
           <>
             <HeartIcon />

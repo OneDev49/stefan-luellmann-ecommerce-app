@@ -29,11 +29,15 @@ export default function ProductCarousel({
         style={{ background: bgColor }}
       >
         <h2 className='text-4xl capitalize font-bold px-9'>{heading}</h2>
-        <div className='overflow-hidden px-9 py-4' ref={emblaRef}>
+        <div className='overflow-hidden px-9 py-4 select-none' ref={emblaRef}>
           <div className='list-none p-0 m-0 flex gap-8'>
             {products.map((product) => (
               <div key={product.id}>
-                <ProductCard variant={productCardVariant} product={product} />
+                <ProductCard
+                  variant={productCardVariant}
+                  product={product}
+                  buttonClassName='text-lg'
+                />
               </div>
             ))}
           </div>
@@ -55,7 +59,11 @@ export default function ProductCarousel({
             <div className='list-none p-0 m-0 flex gap-8'>
               {products.map((product) => (
                 <div key={product.id}>
-                  <ProductCard variant={productCardVariant} product={product} />
+                  <ProductCard
+                    variant={productCardVariant}
+                    product={product}
+                    buttonClassName='text-lg'
+                  />
                 </div>
               ))}
             </div>

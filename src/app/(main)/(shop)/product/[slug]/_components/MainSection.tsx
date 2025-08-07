@@ -24,6 +24,8 @@ export default function MainSection({ productItem }: mainSectionProps) {
     'text-2xl'
   );
 
+  const imageGridClassName = clsx('h-[75px] w-[75px] bg-white rounded-2xl');
+
   const stockText =
     productItem.stockCount === 0
       ? `Out of Stock`
@@ -32,11 +34,13 @@ export default function MainSection({ productItem }: mainSectionProps) {
       : `In Stock`;
 
   return (
-    <section className={`${transparentCardClassName} flex justify-between`}>
-      <div className='flex-[50%]'>
-        <div className='h-[500px] w-[500px] bg-white grid place-items-center rounded-3xl overflow-hidden relative'>
+    <section
+      className={`${transparentCardClassName} flex justify-between w-full`}
+    >
+      <div className='flex-[50%] flex flex-col gap-5 max-w-[475px]'>
+        <div className='h-[475px] w-[475px] bg-white grid place-items-center rounded-3xl overflow-hidden relative'>
           {productItem.isOnSale && (
-            <div className='absolute bg-red-700 h-8 grid place-items-center w-40 top-[20px] right-[-40px] rotate-45 z-50 will-change-transform text-xl'>
+            <div className='absolute select-none bg-red-700 h-8 grid place-items-center w-40 top-[20px] right-[-40px] rotate-45 z-50 will-change-transform text-xl'>
               On Sale
             </div>
           )}
@@ -50,35 +54,22 @@ export default function MainSection({ productItem }: mainSectionProps) {
             loading='eager'
           />
         </div>
+        <div className='grid grid-cols-5 gap-2 place-items-center'>
+          <div className={imageGridClassName}></div>
+          <div className={imageGridClassName}></div>
+          <div className={imageGridClassName}></div>
+          <div className={imageGridClassName}></div>
+          <div className={imageGridClassName}></div>
+        </div>
       </div>
-      <div className='flex-[50%] flex flex-col gap-8'>
+      <div className='flex-[50%] flex flex-col gap-8 max-w-[650px]'>
         <h1 className='text-5xl font-bold underline'>{productItem.name}</h1>
         <div className='flex flex-col gap-4'>
+          {/* Rating */}
           <div className='flex items-center gap-2'>
-            <Rating rating={average} size='medium' />
+            <Rating rating={average} size='large' />
             <span>({totalCount})</span>
           </div>
-          {productItem.isOnSale ? (
-            <div className='flex items-center gap-2'>
-              <div className='flex items-start gap-2'>
-                <span className='text-base font-headings line-through font-normal'>
-                  {productItem.price}€
-                </span>
-                <h2 className='text-4xl font-bold font-headings text-[#ff4545]'>
-                  {productItem.reducedPrice}€
-                </h2>
-              </div>
-              <div className='flex items-center gap-2'>
-                <span className='text-sm'>(+19% VAT and Delivery Costs)</span>
-              </div>
-            </div>
-          ) : (
-            <div className='flex items-center gap-2'>
-              only
-              <h2 className='text-3xl font-bold'>{productItem.price}€</h2>
-              <span className='text-sm'>(+19% VAT and Delivery Costs)</span>
-            </div>
-          )}
           <div className='font-bold flex items-center gap-2'>
             <p className={stockClassNames}>{stockText}</p>
             <p>
@@ -90,6 +81,34 @@ export default function MainSection({ productItem }: mainSectionProps) {
             </p>
           </div>
         </div>
+        {productItem.isOnSale ? (
+          <div className='flex items-center gap-2'>
+            <div className='flex flex-col gap-1'>
+              <span className='text-2xl font-headings line-through font-normal'>
+                {productItem.price}€
+              </span>
+              <div className='flex items-start gap-4 text-[#ff4545] font-bold font-headings'>
+                <h2 className='text-4xl'>{productItem.reducedPrice}€*</h2>
+                <span className='text-xl'>
+                  (
+                  {(
+                    (productItem.reducedPrice / productItem.price - 1) *
+                    100
+                  ).toFixed(0)}
+                  % Off)
+                </span>
+              </div>
+              <div className='flex items-center gap-2'>
+                <span className='text-sm'>* +19% VAT and Delivery Costs</span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className='flex flex-col gap-2'>
+            <h2 className='text-4xl font-bold'>{productItem.price}€*</h2>
+            <span className='text-sm'>* +19% VAT and Delivery Costs</span>
+          </div>
+        )}
         <div>
           <p>{productItem.shortDescription}</p>
         </div>
