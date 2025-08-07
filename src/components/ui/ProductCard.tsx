@@ -12,11 +12,13 @@ import { calculateAverageRating } from '@/lib/calculateRating';
 interface ProductCardProps {
   variant?: 'standard' | 'compact' | 'sale';
   product: Product;
+  buttonClassName?: string;
 }
 
 export default function ProductCard({
   variant = 'standard',
   product,
+  buttonClassName,
 }: ProductCardProps) {
   const { average, totalCount } = calculateAverageRating(product);
 
@@ -90,6 +92,7 @@ export default function ProductCard({
             position='card'
             type='button'
             title={`Add ${product.name} to Cart`}
+            className={buttonClassName || undefined}
           >
             <>
               <CartIcon />
@@ -103,30 +106,13 @@ export default function ProductCard({
             position='card'
             type='button'
             title={`Add ${product.name} to Wishlist`}
+            className={buttonClassName || undefined}
           >
             <>
               <HeartIcon />
             </>
           </Button>
         </div>
-      </Link>
-    );
-  }
-
-  if (variant === 'compact') {
-    return (
-      <Link className={wrapperClassNames} href={`/product/${product.slug}`}>
-        <div className={imageWrapperClassNames}>
-          <Image
-            className={imageClassNames}
-            src={product.imageUrl}
-            alt={product.name}
-            height={239}
-            width={239}
-          />
-        </div>
-        <h3 className={headingClassNames}>{product.name}</h3>
-        <strong className={`${priceClassNames} mb-4`}>{product.price}€</strong>
       </Link>
     );
   }
@@ -166,6 +152,7 @@ export default function ProductCard({
             position='card'
             type='button'
             title={`Add ${product.name} to Cart`}
+            className={buttonClassName || undefined}
           >
             <>
               <CartIcon />
@@ -179,12 +166,31 @@ export default function ProductCard({
             position='card'
             type='button'
             title={`Add ${product.name} to Wishlist`}
+            className={buttonClassName || undefined}
           >
             <>
               <HeartIcon />
             </>
           </Button>
         </div>
+      </Link>
+    );
+  }
+
+  if (variant === 'compact') {
+    return (
+      <Link className={wrapperClassNames} href={`/product/${product.slug}`}>
+        <div className={imageWrapperClassNames}>
+          <Image
+            className={imageClassNames}
+            src={product.imageUrl}
+            alt={product.name}
+            height={239}
+            width={239}
+          />
+        </div>
+        <h3 className={headingClassNames}>{product.name}</h3>
+        <strong className={`${priceClassNames} mb-4`}>{product.price}€</strong>
       </Link>
     );
   }

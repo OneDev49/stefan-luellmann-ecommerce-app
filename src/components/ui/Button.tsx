@@ -24,7 +24,6 @@ export default function Button<C extends React.ElementType = typeof Link>({
   const Component = as || Link;
 
   const buttonClassNames = clsx(
-    'text-xl',
     'transition-all',
     'hover:scale-[1.02]',
     'flex',
