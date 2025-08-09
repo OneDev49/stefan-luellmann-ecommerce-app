@@ -12,7 +12,7 @@ export default function RootLayout({
         <Link href='/' className='block md:hidden'>
           <Image
             loading='eager'
-            src='/images/logo/entro_logo.webp'
+            src='/images/entro_logo.webp'
             height={99}
             width={281}
             alt='The Entro Logo'
@@ -24,7 +24,7 @@ export default function RootLayout({
         <div className='absolute inset-0'>
           <Image
             loading='eager'
-            src='/images/RAM_Stick.webp'
+            src='https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfaNAv4z4ZxnLotzESQ2y5AmUp34e1XGNvVbTj'
             height={996}
             width={1826}
             alt='A Entro RAM Stick'
@@ -35,7 +35,7 @@ export default function RootLayout({
           <Link href='/'>
             <Image
               loading='eager'
-              src='/images/logo/entro_logo.webp'
+              src='/images/entro_logo.webp'
               height={99}
               width={281}
               alt='The Entro Logo'

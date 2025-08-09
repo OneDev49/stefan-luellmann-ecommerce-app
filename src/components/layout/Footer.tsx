@@ -42,7 +42,7 @@ export default function FooterLayout() {
             <div>
               <Link href='/'>
                 <Image
-                  src='/images/logo/entro_logo.webp'
+                  src='/images/entro_logo.webp'
                   width={280}
                   height={100}
                   alt='Entro - Your Computer Store'
