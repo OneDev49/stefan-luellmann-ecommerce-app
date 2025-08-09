@@ -53,7 +53,8 @@ export default function ProductCard({
     'border',
     'border-white',
     'rounded-2xl',
-    'overflow-hidden'
+    'overflow-hidden',
+    'relative'
   );
 
   const imageClassNames = clsx(
@@ -65,12 +66,17 @@ export default function ProductCard({
 
   const headingClassNames = clsx('underline text-2xl line-clamp-1 font-bold');
 
-  const priceClassNames = clsx('text-3xl font-headings font-normal');
+  const priceClassNames = clsx('text-3xl font-headings font-bold');
 
   if (variant === 'standard') {
     return (
       <Link className={wrapperClassNames} href={`/product/${product.slug}`}>
         <div className={imageWrapperClassNames}>
+          {product.isOnSale && (
+            <div className='absolute bg-red-700 h-8 grid place-items-center w-32 top-[8px] right-[-40px] rotate-45 z-50 will-change-transform'>
+              On Sale
+            </div>
+          )}
           <Image
             className={imageClassNames}
             src={product.imageUrl}
@@ -84,67 +90,26 @@ export default function ProductCard({
           <Rating rating={average} size='small' />
           <span>({totalCount})</span>
         </div>
-        <strong className={`${priceClassNames} mb-4`}>{product.price}€</strong>
-        <div className='flex items-center gap-2'>
-          <Button
-            onClick={handleAddToCart}
-            as='button'
-            position='card'
-            type='button'
-            title={`Add ${product.name} to Cart`}
-            className={buttonClassName || undefined}
-          >
-            <>
-              <CartIcon />
-              Add to Cart
-            </>
-          </Button>
-          <Button
-            onClick={handleAddToWishlist}
-            as='button'
-            variant='tertiary'
-            position='card'
-            type='button'
-            title={`Add ${product.name} to Wishlist`}
-            className={buttonClassName || undefined}
-          >
-            <>
-              <HeartIcon />
-            </>
-          </Button>
-        </div>
-      </Link>
-    );
-  }
-
-  if (variant === 'sale') {
-    return (
-      <Link className={wrapperClassNames} href={`/product/${product.slug}`}>
-        <div className={`${imageWrapperClassNames} relative`}>
-          <div className='absolute bg-red-700 h-8 grid place-items-center w-32 top-[8px] right-[-40px] rotate-45 z-50 will-change-transform'>
-            On Sale
+        {product.isOnSale && product.reducedPrice ? (
+          <div className='flex flex-col'>
+            <span className='text-lg font-headings line-through font-normal'>
+              {product.price}€
+            </span>
+            <div className='flex gap-3 font-bold text-[#ff4545]'>
+              <strong className={priceClassNames}>
+                {(product.reducedPrice || product.price).toFixed(2)}€
+              </strong>
+              <span className='text-base'>
+                ({((product.reducedPrice / product.price - 1) * 100).toFixed(0)}
+                % Off)
+              </span>
+            </div>
           </div>
-          <Image
-            className={imageClassNames}
-            src={product.imageUrl}
-            alt={product.name}
-            height={239}
-            width={239}
-          />
-        </div>
-        <h3 className={headingClassNames}>{product.name}</h3>
-        <div className='flex items-center gap-2'>
-          <Rating rating={average} size='small' />
-          <span>({totalCount})</span>
-        </div>
-        <div className='flex items-center gap-3 mb-4'>
-          <span className='text-sm font-headings line-through font-normal'>
-            {product.price}€
-          </span>
-          <strong className={`${priceClassNames} text-[#ff4545]`}>
-            {product.reducedPrice || product.price}€
+        ) : (
+          <strong className={`${priceClassNames} mb-4`}>
+            {product.price.toFixed(2)}€
           </strong>
-        </div>
+        )}
         <div className='flex items-center gap-2'>
           <Button
             onClick={handleAddToCart}
@@ -181,6 +146,11 @@ export default function ProductCard({
     return (
       <Link className={wrapperClassNames} href={`/product/${product.slug}`}>
         <div className={imageWrapperClassNames}>
+          {product.isOnSale && (
+            <div className='absolute bg-red-700 h-8 grid place-items-center w-32 top-[8px] right-[-40px] rotate-45 z-50 will-change-transform'>
+              On Sale
+            </div>
+          )}
           <Image
             className={imageClassNames}
             src={product.imageUrl}
@@ -190,7 +160,26 @@ export default function ProductCard({
           />
         </div>
         <h3 className={headingClassNames}>{product.name}</h3>
-        <strong className={`${priceClassNames} mb-4`}>{product.price}€</strong>
+        {product.isOnSale && product.reducedPrice ? (
+          <div className='flex flex-col'>
+            <span className='text-lg font-headings line-through font-normal'>
+              {product.price}€
+            </span>
+            <div className='flex gap-3 font-bold text-[#ff4545]'>
+              <strong className={priceClassNames}>
+                {(product.reducedPrice || product.price).toFixed(2)}€
+              </strong>
+              <span className='text-base'>
+                ({((product.reducedPrice / product.price - 1) * 100).toFixed(0)}
+                % Off)
+              </span>
+            </div>
+          </div>
+        ) : (
+          <strong className={`${priceClassNames} mb-4`}>
+            {product.price.toFixed(2)}€
+          </strong>
+        )}
       </Link>
     );
   }
