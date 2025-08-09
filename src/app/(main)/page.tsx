@@ -23,7 +23,7 @@ export default async function Home() {
       <HeroSection />
       <ProductCarousel
         heading='Deals of the Week'
-        productCardVariant='sale'
+        productCardVariant='standard'
         products={onSaleProducts}
       />
       <ProductCarousel
