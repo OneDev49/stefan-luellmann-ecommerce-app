@@ -4,20 +4,20 @@ import ProductCarousel from '@/components/sections/ProductCarousel';
 import BrandCarousel from './_components/BrandSection';
 
 export default async function Home() {
-  const onSaleProducts = await prisma.product.findMany({
-    where: { isOnSale: true },
-    take: 10,
-  });
-
-  const featuredGPUs = await prisma.product.findMany({
-    where: { isFeatured: true, productType: 'GPU' },
-    take: 10,
-  });
-
-  const newArrivals = await prisma.product.findMany({
-    orderBy: { createdAt: 'desc' },
-    take: 10,
-  });
+  const [onSaleProducts, featuredGPUs, newArrivals] = await Promise.all([
+    prisma.product.findMany({
+      where: { isOnSale: true },
+      take: 10,
+    }),
+    prisma.product.findMany({
+      where: { isFeatured: true, productType: 'GPU' },
+      take: 10,
+    }),
+    prisma.product.findMany({
+      orderBy: { createdAt: 'desc' },
+      take: 10,
+    }),
+  ]);
 
   const brandData = [
     {
