@@ -11,7 +11,7 @@ export default function HeaderLayout() {
       <div className='flex justify-between px-4 py-1 items-center'>
         <Link href='/'>
           <Image
-            src='/images/logo/entro_logo.webp'
+            src='/images/entro_logo.webp'
             alt='Entro Logo'
             width={130}
             height={50}
