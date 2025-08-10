@@ -68,57 +68,63 @@ export default function SearchFilters({
   }, []);
 
   const headingsClassNames = clsx(
-    'block text-2xl font-bold text-white mb-3 font-headings px-4'
+    'block text-xl font-bold text-white font-headings'
   );
 
   return (
-    <form className='space-y-4'>
+    <form className='space-y-8 my-6'>
       {/* Filter for Categories */}
-      <fieldset>
-        <legend className={headingsClassNames}>Category</legend>
-        <div className='space-y-1'>
+      <fieldset className='space-y-2'>
+        <div>
+          <legend className={headingsClassNames}>Category</legend>
+          <hr className='w-[50%] border-gray-500' />
+        </div>
+        <div className='flex flex-wrap gap-2'>
           {categories.map((category) => (
             <button
               key={category.slug}
               type='button'
               onClick={() => handleCategoryChange(category.slug)}
-              className={`block w-full text-left px-4 py-1 rounded ${
+              className={clsx(
+                `py-1 px-2  border  text-left rounded-lg transition-colors hover:bg-[#085e00]`,
                 activeFilters.category === category.slug
-                  ? 'bg-green-500 text-black font-bold'
-                  : 'hover:bg-gray-700'
-              }`}
+                  ? 'bg-[#0c8b00] border-[#00ff11]'
+                  : 'bg-[#054000] border-[#007b08]'
+              )}
             >
               {category.name}
             </button>
           ))}
         </div>
       </fieldset>
-
-      <hr />
-
       {/* Filter for Brands */}
-      <fieldset>
-        <legend className={headingsClassNames}>Brands</legend>
-        <div className='space-y-2'>
-          {brands.map((brand) => (
-            <div key={brand} className='flex items-center px-4'>
-              <input
-                id={`brand-${brand}`}
-                type='checkbox'
-                checked={activeFilters.brands.has(brand)}
-                onChange={(e) => handleBrandChange(brand, e.target.checked)}
-                className='h-4 w-4 rounded border-gray-600 bg-gray-800 text-green-500 focus:ring-green-500 cursor-pointer'
-              />
-              <label
-                htmlFor={`brand-${brand}`}
-                className='ml-3 text-sm text-gray-300 cursor-pointer'
-              >
-                {brand}
-              </label>
-            </div>
-          ))}
-        </div>
-      </fieldset>
+      {brands && brands.length > 0 && (
+        <fieldset className='space-y-2'>
+          <div>
+            <legend className={headingsClassNames}>Brands</legend>
+            <hr className='w-[50%] border-gray-500' />
+          </div>
+          <div className='space-y-2 max-h-72 overflow-y-auto scrollbar scrollbar-track-transparent scrollbar-thumb-green-500'>
+            {brands.map((brand) => (
+              <div key={brand} className='flex items-center gap-1'>
+                <input
+                  id={`brand-${brand}`}
+                  type='checkbox'
+                  checked={activeFilters.brands.has(brand)}
+                  onChange={(e) => handleBrandChange(brand, e.target.checked)}
+                  className='h-4 w-4 text-green-500 focus:ring-green-500 cursor-pointer'
+                />
+                <label
+                  htmlFor={`brand-${brand}`}
+                  className=' text-sm cursor-pointer'
+                >
+                  {brand}
+                </label>
+              </div>
+            ))}
+          </div>
+        </fieldset>
+      )}
     </form>
   );
 }
