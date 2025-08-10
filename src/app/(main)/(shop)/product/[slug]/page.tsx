@@ -21,7 +21,7 @@ export default async function ProductPage({
     notFound();
   }
 
-  const mainWrapperClassNames = clsx('pt-8 pb-16 flex flex-col gap-16');
+  const mainWrapperClassNames = clsx('pt-8 pb-16 flex flex-col gap-16 px-4');
 
   const brandProducts = await prisma.product.findMany({
     where: { brand: product.brand, id: { not: product.id } },
@@ -42,7 +42,7 @@ export default async function ProductPage({
       <div className={mainWrapperClassNames}>
         <MainSection productItem={product} />
         <DescriptionSection productItem={product} />
-        <div className='flex max-w-7xl w-[95%] m-auto gap-6 items-start'>
+        <div className='flex flex-col max-w-2xl lg:flex-row lg:max-w-7xl w-full m-auto gap-16 lg:gap-6 lg:items-start'>
           <RatingSummary product={product} />
           <CustomerReviewSection />
         </div>

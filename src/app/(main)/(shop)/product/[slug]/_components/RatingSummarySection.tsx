@@ -48,18 +48,20 @@ export default function RatingSummary({ product }: RatingSummaryProps) {
           const starText = stars === 1 ? 'Star' : 'Stars';
 
           return (
-            <div className='flex gap-4'>
+            <div className='flex gap-4' key={stars}>
               <span className='min-w-14'>
                 {stars} {starText}
               </span>
-              <div className='flex items-center gap-3'>
-                <div className='min-w-48 bg-[#414141] h-4 relative overflow-hidden rounded-md'>
+              <div className='flex w-full items-center gap-3'>
+                <div className='w-full lg:w-auto lg:min-w-48 bg-[#414141] h-4 relative overflow-hidden rounded-md'>
                   <div
                     className='absolute bg-[#1eff00] top-0 bottom-0'
                     style={{ width: `${percentage}%` }}
                   />
                 </div>
-                ({percentage.toFixed(0)}%)
+                <span className='min-w-12 lg:min-w-0'>
+                  ({percentage.toFixed(0)}%)
+                </span>
               </div>
             </div>
           );
