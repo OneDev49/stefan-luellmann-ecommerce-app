@@ -8,7 +8,7 @@ export default function FooterLayout() {
   const hoverClassNames = clsx('hover:text-[#53ff5f] transition-all');
 
   return (
-    <footer className='bg-[linear-gradient(180deg,rgb(2,47,0,0)_0%,#022800_10%)] pt-32 pb-4'>
+    <footer className='bg-[linear-gradient(180deg,rgb(2,47,0,0)_0%,#022800_10%)] pt-32 pb-4 px-4'>
       <div className='max-w-7xl m-auto flex flex-col gap-12'>
         <div className='border-red-600 border-4 rounded-2xl p-4 bg-black'>
           <strong>Disclaimer:</strong>
@@ -37,8 +37,8 @@ export default function FooterLayout() {
           </p>
         </div>
 
-        <div className='flex justify-between'>
-          <div className='flex gap-10'>
+        <div className='flex flex-col gap-8 justify-between md:flex-row md:gap-6'>
+          <div className='flex flex-col items-center text-center gap-4 md:flex-row md:text-left md:gap-6 md:items-start'>
             <div>
               <Link href='/'>
                 <Image
@@ -49,7 +49,7 @@ export default function FooterLayout() {
                 ></Image>
               </Link>
               <div className='pt-4'>
-                <strong>General Information:</strong>
+                <strong className='text-lg'>General Information:</strong>
                 <p>
                   This Store is purely fictional. <br />
                   It has no affiliation with any real brand.
@@ -57,7 +57,7 @@ export default function FooterLayout() {
               </div>
             </div>
             <div>
-              <strong className='underline'>More of Entro</strong>
+              <strong className='underline text-lg'>More of Entro</strong>
               <ul className='list-none p-0 m-0 underline text-white pt-1 flex flex-col gap-1'>
                 <li>
                   <Link className={hoverClassNames} href='/legal-notice'>
@@ -87,9 +87,9 @@ export default function FooterLayout() {
               </ul>
             </div>
           </div>
-          <div className='grid grid-cols-2 gap-8'>
+          <div className='flex flex-col items-center gap-8 text-center md:text-left sm:grid sm:grid-cols-2 sm:items-start'>
             <div>
-              <strong className='underline'>Quick Navigation</strong>
+              <strong className='underline text-lg'>Quick Navigation</strong>
               <ul className='list-none p-0 m-0 underline text-white pt-1 flex flex-col gap-1'>
                 <li>
                   <Link className={hoverClassNames} href='/'>
@@ -112,14 +112,14 @@ export default function FooterLayout() {
                   </Link>
                 </li>
                 <li>
-                  <Link className={hoverClassNames} href='/search-page'>
+                  <Link className={hoverClassNames} href='/search'>
                     Search Page
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <strong className='underline'>Categories</strong>
+              <strong className='underline text-lg'>Categories</strong>
               <ul className='list-none p-0 m-0 underline text-white pt-1 flex flex-col gap-1'>
                 <li>
                   <Link className={hoverClassNames} href='/search?category=cpu'>
@@ -127,8 +127,21 @@ export default function FooterLayout() {
                   </Link>
                 </li>
                 <li>
+                  <Link className={hoverClassNames} href='/search?category=gpu'>
+                    GPU
+                  </Link>
+                </li>
+                <li>
                   <Link className={hoverClassNames} href='/search?category=ram'>
                     RAM
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={hoverClassNames}
+                    href='/search?category=storage'
+                  >
+                    Storage
                   </Link>
                 </li>
                 <li>
@@ -147,30 +160,14 @@ export default function FooterLayout() {
                     Power Supply
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    className={hoverClassNames}
-                    href='/search?category=cooling'
-                  >
-                    Cooling Systems
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className={hoverClassNames}
-                    href='/search?category=cases'
-                  >
-                    Cases
-                  </Link>
-                </li>
               </ul>
             </div>
           </div>
         </div>
 
         <div>
-          <div className='flex flex-col gap-1'>
-            <strong className='underline'>Get to Know us:</strong>
+          <div className='flex flex-col gap-1 items-center md:items-start'>
+            <strong className='underline text-lg'>Get to Know us:</strong>
             <div className='flex gap-2 items-center'>
               <Link
                 className={hoverClassNames}
