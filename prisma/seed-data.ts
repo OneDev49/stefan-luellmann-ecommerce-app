@@ -16,8 +16,7 @@ export const products = [
     name: 'AetherFlux 9000',
     slug: 'aetherflux-9000',
     brand: 'AetherFlux',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfXWPSjC7Lpu8ai3wxy2OjFvHnNsDGJoC6hUqc',
+    imageUrl: 'HdnlnX9Cx4ZfXWPSjC7Lpu8ai3wxy2OjFvHnNsDGJoC6hUqc',
     productType: ProductType.GPU,
     shortDescription:
       'The AetherFlux 9000 is an enthusiast-grade graphics card engineered for maximum performance in 4K and 8K resolution gaming and complex computational tasks. It utilizes a quantum-entangled processing core for predictive frame rendering.',
@@ -51,8 +50,7 @@ export const products = [
     name: 'NovaCore N102C',
     slug: 'novecore-n102c',
     brand: 'NovaCore',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zf56Htprb96GNl42mzbQsxLdqTZv7HptMaEokr',
+    imageUrl: 'HdnlnX9Cx4Zf56Htprb96GNl42mzbQsxLdqTZv7HptMaEokr',
     productType: ProductType.GPU,
     shortDescription:
       'The NovaCore N102C is a high-performance GPU designed for content creators and professionals. It offers a balance of raw gaming power and accelerated performance in creative applications.',
@@ -86,8 +84,7 @@ export const products = [
     name: 'Pixelis Tritan AC1',
     slug: 'pixelis-tritan-ac1',
     brand: 'Pixelis',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfFtCLhAHZj4YmSP6HMGvQDunI95tsqb1yRANB',
+    imageUrl: 'HdnlnX9Cx4ZfFtCLhAHZj4YmSP6HMGvQDunI95tsqb1yRANB',
     productType: ProductType.GPU,
     shortDescription:
       'The Pixelis Tritan AC1 is an efficient, entry-level graphics card ideal for 1080p gaming and general multimedia use. It delivers a consistent and stable experience in popular esports titles and less demanding AAA games.',
@@ -121,8 +118,7 @@ export const products = [
     name: 'Vexel Vectr N',
     slug: 'vexel-vectr-n',
     brand: 'Vexel',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfgqhDSD95aRiy0zlbfvUFoXStQsrkN1mKLP5x',
+    imageUrl: 'HdnlnX9Cx4ZfgqhDSD95aRiy0zlbfvUFoXStQsrkN1mKLP5x',
     productType: ProductType.GPU,
     shortDescription:
       'The Vexel Vectr N is a mid-range GPU that offers a significant performance uplift for 1440p gaming. It provides access to modern features like real-time ray tracing and AI upscaling at a competitive price point.',
@@ -156,8 +152,7 @@ export const products = [
     name: 'Vexel Vectr N Ti',
     slug: 'vexel-vectr-n-ti',
     brand: 'Vexel',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfL68K8C3AXdH9VoITC602DUPp5gBqlRmvQW4c',
+    imageUrl: 'HdnlnX9Cx4ZfL68K8C3AXdH9VoITC602DUPp5gBqlRmvQW4c',
     productType: ProductType.GPU,
     shortDescription:
       'The Vexel Vectr N Ti is the enhanced version of the Vectr N, offering increased core counts and memory bandwidth for uncompromising 1440p and entry-level 4K gaming. It is engineered for users who demand higher frame rates and graphical settings.',
@@ -191,8 +186,7 @@ export const products = [
     name: 'AetherFlux 7500 XT',
     slug: 'aetherflux-7500-xt',
     brand: 'AetherFlux',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zfxzg1bUN4kus0QUVlZXNMpnzwRofc5a9SOiGe',
+    imageUrl: 'HdnlnX9Cx4Zfxzg1bUN4kus0QUVlZXNMpnzwRofc5a9SOiGe',
     productType: ProductType.GPU,
     shortDescription:
       "A high-end GPU designed for elite 1440p and introductory 4K gaming. It offers a subset of the flagship's architecture at a more accessible price point.",
@@ -226,8 +220,7 @@ export const products = [
     name: 'AetherFlux 8200',
     slug: 'aetherflux-8200',
     brand: 'AetherFlux',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfHsQEq19Cx4ZfoOylsvtJQcrR5uKhAp7BXNmI',
+    imageUrl: 'HdnlnX9Cx4ZfHsQEq19Cx4ZfoOylsvtJQcrR5uKhAp7BXNmI',
     productType: ProductType.GPU,
     shortDescription:
       'A GPU positioned between the high-end and enthusiast tiers, targeting 4K gaming with high settings. It introduces second-generation quantum-entangled cores for improved predictive rendering.',
@@ -261,8 +254,7 @@ export const products = [
     name: 'NovaCore N205W',
     slug: 'novacore-n205w',
     brand: 'NovaCore',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfKWCT3Cz8jEzkGiYeJTts5VoSc31OpLXUdNfR',
+    imageUrl: 'HdnlnX9Cx4ZfKWCT3Cz8jEzkGiYeJTts5VoSc31OpLXUdNfR',
     productType: ProductType.GPU,
     shortDescription:
       'An ultimate-tier workstation graphics card built for large-scale data science, real-time 8K video editing, and complex simulation workloads. It features expansive memory and certified drivers for mission-critical stability.',
@@ -296,8 +288,7 @@ export const products = [
     name: 'NovaCore N50C',
     slug: 'novacore-n50c',
     brand: 'NovaCore',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfssPQZQSXFxMVHL0y7OKh2R4vS6QG1p5WZkuw',
+    imageUrl: 'HdnlnX9Cx4ZfssPQZQSXFxMVHL0y7OKh2R4vS6QG1p5WZkuw',
     productType: ProductType.GPU,
     shortDescription:
       'An entry-level professional graphics card for designers and editors working with 1080p and 2K media. It provides hardware acceleration for creative applications at a budget suitable for small businesses and freelancers.',
@@ -331,8 +322,7 @@ export const products = [
     name: 'Pixelis Mono M1',
     slug: 'pixelis-mono-m1',
     brand: 'Pixelis',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfeO8Ev9W7g4bHVNWT2ptOSAfCMqydG3UZBz8Y',
+    imageUrl: 'HdnlnX9Cx4ZfeO8Ev9W7g4bHVNWT2ptOSAfCMqydG3UZBz8Y',
     productType: ProductType.GPU,
     shortDescription:
       'An ultra-budget, single-fan graphics card designed as a basic display adapter or for playing older and indie game titles. Its primary function is to enable multi-monitor setups on systems lacking integrated graphics.',
@@ -366,8 +356,7 @@ export const products = [
     name: 'Pixelis Flow P2',
     slug: 'pixelis-flow-p2',
     brand: 'Pixelis',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfmZB88XCtZM0EdjDxOs8zC6ILBNRHgipa4TX5',
+    imageUrl: 'HdnlnX9Cx4ZfmZB88XCtZM0EdjDxOs8zC6ILBNRHgipa4TX5',
     productType: ProductType.GPU,
     shortDescription:
       'A completely silent, passively cooled graphics card for home theater PCs and quiet office workstations. It provides flawless 4K video playback and can handle light photo editing without any fan noise.',
@@ -401,8 +390,7 @@ export const products = [
     name: 'Vexel Spark S1',
     slug: 'vexel-spark-s1',
     brand: 'Vexel',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfsthfxcSXFxMVHL0y7OKh2R4vS6QG1p5WZkuw',
+    imageUrl: 'HdnlnX9Cx4ZfsthfxcSXFxMVHL0y7OKh2R4vS6QG1p5WZkuw',
     productType: ProductType.GPU,
     shortDescription:
       'A low-profile GPU that delivers competent 1080p gaming performance for small-form-factor (SFF) systems. It provides modern gaming features without compromising on case compatibility.',
@@ -436,8 +424,7 @@ export const products = [
     name: 'Vexel Rift R5',
     slug: 'vexel-rift-r5',
     brand: 'Vexel',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfnHkUXjfBomEhfsy6vGaXtHJCSbUxjVQd8NYA',
+    imageUrl: 'HdnlnX9Cx4ZfnHkUXjfBomEhfsy6vGaXtHJCSbUxjVQd8NYA',
     productType: ProductType.GPU,
     shortDescription:
       'A mainstream graphics card that excels at high-refresh-rate 1080p gaming. The Rift R5 is a direct competitor in the budget-conscious gaming market, focusing on raw performance over secondary features.',
@@ -471,8 +458,7 @@ export const products = [
     name: 'Vexel Vectr X',
     slug: 'vexel-vectr-x',
     brand: 'Vexel',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfgqzzByi5aRiy0zlbfvUFoXStQsrkN1mKLP5x',
+    imageUrl: 'HdnlnX9Cx4ZfgqzzByi5aRiy0zlbfvUFoXStQsrkN1mKLP5x',
     productType: ProductType.GPU,
     shortDescription:
       'A high-end offering from Vexel that pushes into the 4K gaming domain. The Vectr X is built for enthusiasts seeking maximum performance from the Vexel architecture.',
@@ -506,8 +492,7 @@ export const products = [
     name: 'ChronoShift Temporal T1',
     slug: 'chronoshift-temporal-t1',
     brand: 'ChronoShift',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zfe71AIyJW7g4bHVNWT2ptOSAfCMqydG3UZBz8',
+    imageUrl: 'HdnlnX9Cx4Zfe71AIyJW7g4bHVNWT2ptOSAfCMqydG3UZBz8',
     productType: ProductType.GPU,
     shortDescription:
       'A mid-range GPU focused on delivering the lowest possible system latency. The Temporal T1 uses predictive hardware schedulers to reduce input-to-display lag in competitive games.',
@@ -541,8 +526,7 @@ export const products = [
     name: 'ChronoShift Temporal T2-X',
     slug: 'chronoshift-temporal-t2-x',
     brand: 'ChronoShift',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfH6nTHh9Cx4ZfoOylsvtJQcrR5uKhAp7BXNmI',
+    imageUrl: 'HdnlnX9Cx4ZfH6nTHh9Cx4ZfoOylsvtJQcrR5uKhAp7BXNmI',
     productType: ProductType.GPU,
     shortDescription:
       'The enthusiast version of the Temporal series, combining high-end 4K performance with an advanced low-latency hardware suite. It is for competitive players who refuse to compromise on either frame rates or responsiveness.',
@@ -576,8 +560,7 @@ export const products = [
     name: 'Geode G-100',
     slug: 'geode-g-100',
     brand: 'Geode',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfyhhIiwoQclGFvWLeAKgXwJnSH3UN0tP8IRq5',
+    imageUrl: 'HdnlnX9Cx4ZfyhhIiwoQclGFvWLeAKgXwJnSH3UN0tP8IRq5',
     productType: ProductType.GPU,
     shortDescription:
       'A basic, fanless graphics adapter designed purely for video output in servers or PCs with disabled integrated graphics. It is a low-power, low-cost utility component.',
@@ -611,8 +594,7 @@ export const products = [
     name: 'Geode G-400X',
     slug: 'geode-g-400x',
     brand: 'Geode',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfHYAWE49Cx4ZfoOylsvtJQcrR5uKhAp7BXNmI',
+    imageUrl: 'HdnlnX9Cx4ZfHYAWE49Cx4ZfoOylsvtJQcrR5uKhAp7BXNmI',
     productType: ProductType.GPU,
     shortDescription:
       'A compact and efficient GPU designed for Mini-ITX builds. The G-400X offers respectable 1080p performance with a focus on low power consumption and thermal output.',
@@ -646,8 +628,7 @@ export const products = [
     name: 'Singularity Matrix-S',
     slug: 'singularity-matrix-s',
     brand: 'Singularity',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zf2zxpaGFt9DHTVqylovM0L5phWekSu2BwmsaE',
+    imageUrl: 'HdnlnX9Cx4Zf2zxpaGFt9DHTVqylovM0L5phWekSu2BwmsaE',
     productType: ProductType.GPU,
     shortDescription:
       'A specialized compute card designed for AI research and machine learning development, not for gaming. It features high-density tensor cores for accelerating neural network training.',
@@ -681,8 +662,7 @@ export const products = [
     name: 'Pixelis Tritan AC2',
     slug: 'pixelis-tritan-ac2',
     brand: 'Pixelis',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfW1w5xanXuh2XYTlIRs7BpDy4EeGcNC15JZkx',
+    imageUrl: 'HdnlnX9Cx4ZfW1w5xanXuh2XYTlIRs7BpDy4EeGcNC15JZkx',
     productType: ProductType.GPU,
     shortDescription:
       'An upgraded version of the entry-level Tritan card, featuring more memory and a higher core count. It targets gamers looking for a solid 60 FPS experience in modern 1080p titles without a major investment.',
@@ -715,8 +695,7 @@ export const products = [
     name: 'Zentheon X9 9950K',
     slug: 'zentheon-x9-9950k',
     brand: 'Zentheon',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfO0ZlyItZiWXf5Yhbw4GdTBSqatroQ7zCUDg8',
+    imageUrl: 'HdnlnX9Cx4ZfO0ZlyItZiWXf5Yhbw4GdTBSqatroQ7zCUDg8',
     productType: ProductType.CPU,
     shortDescription: `The flagship consumer processor for enthusiast gamers and content creators. It features 16 cores and 32 threads with an unlocked multiplier for extreme overclocking potential.`,
     longDescription: ` The Zentheon X9 9950K sits at the apex of the desktop CPU hierarchy. Built on a 4nm architecture, it combines 16 high-performance cores and 32 threads, reaching a maximum boost frequency of 6.2 GHz on preferred cores. It includes 64MB of L3 "HyperCache" and an integrated memory controller supporting DDR5 speeds up to 6400 MT/s. The 'K' designation signifies an unlocked multiplier, providing granular control for overclocking. This CPU is engineered for zero-compromise 4K gaming, complex video editing, and heavy multitasking workloads.`,
@@ -749,8 +728,7 @@ export const products = [
     name: 'Zentheon X7 9700K',
     slug: 'zentheon-x7-9700k',
     brand: 'Zentheon',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfWEpOjIXuh2XYTlIRs7BpDy4EeGcNC15JZkxv',
+    imageUrl: 'HdnlnX9Cx4ZfWEpOjIXuh2XYTlIRs7BpDy4EeGcNC15JZkxv',
     productType: ProductType.CPU,
     shortDescription: `A high-end CPU designed for the sweet spot of performance gaming. It offers 12 cores and 24 threads, providing exceptional power for gaming and streaming simultaneously.`,
     longDescription: `The Zentheon X7 9700K is the core choice for high-refresh-rate gaming. It features a 12-core, 24-thread configuration with a boost clock of 5.8 GHz. The processor is built on the same 4nm architecture as the flagship, sharing its high-speed I/O and support for PCIe 5.0. With 32MB of L3 cache, it excels at latency-sensitive tasks like gaming. Its unlocked multiplier allows users to extract maximum performance, making it an ideal foundation for a high-end gaming PC that also handles demanding productivity tasks.`,
@@ -783,8 +761,7 @@ export const products = [
     name: 'Zentheon X5 9600',
     slug: 'zentheon-x5-9600',
     brand: 'Zentheon',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfSUFRn5uoylXbatzA7p9qh2FOiNSBZjQwcg4v',
+    imageUrl: 'HdnlnX9Cx4ZfSUFRn5uoylXbatzA7p9qh2FOiNSBZjQwcg4v',
     productType: ProductType.CPU,
     shortDescription: `The definitive mid-range gaming CPU, balancing multi-core performance and price. With 8 cores and 16 threads, it is optimized for 1440p gaming and general productivity.`,
     longDescription: `The Zentheon X5 9600 delivers exceptional value and performance for the majority of users. Its 8-core, 16-thread design and 5.4 GHz boost clock provide more than enough power for modern AAA titles and multitasking. It includes 24MB of L3 cache and supports DDR5 memory, ensuring it is not a bottleneck for current-generation graphics cards. The 9600 operates at a lower TDP than its X7 and X9 counterparts, allowing for more flexible and cost-effective cooling solutions. It represents the optimal price-to-performance ratio for mainstream systems.`,
@@ -817,8 +794,7 @@ export const products = [
     name: 'Axion Pro W9-3990X',
     slug: 'axion-pro-w9-3990x',
     brand: 'Axion',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zfs0sVxvSXFxMVHL0y7OKh2R4vS6QG1p5WZkuw',
+    imageUrl: 'HdnlnX9Cx4Zfs0sVxvSXFxMVHL0y7OKh2R4vS6QG1p5WZkuw',
     productType: ProductType.CPU,
     shortDescription: `An extreme-performance workstation processor for professionals in VFX, 3D rendering, and scientific computing. It features an unprecedented 64 cores and 128 threads.`,
     longDescription: `The Axion Pro W9-3990X is engineered for maximum parallel processing throughput. This HEDT (High-End Desktop) CPU contains 64 cores and 128 threads based on a server-grade architecture. It has access to 256MB of L3 cache and supports 8-channel DDR5 ECC memory for massive datasets and extreme stability. The processor also provides 128 PCIe 5.0 lanes for extensive multi-GPU and high-speed storage configurations. It is the definitive solution for render farms, complex simulations, and data analysis where computation time is a critical factor.`,
@@ -851,8 +827,7 @@ export const products = [
     name: 'Axion Pro W7-3770X',
     slug: 'axion-pro-w7-3770x',
     brand: 'Axion',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfuzseS4W8FLYcp3g965xSK2rH4bolRdaVjkAU',
+    imageUrl: 'HdnlnX9Cx4ZfuzseS4W8FLYcp3g965xSK2rH4bolRdaVjkAU',
     productType: ProductType.CPU,
     shortDescription: `A high-end desktop CPU for prosumers and content creators. It provides 32 cores and 64 threads for heavy multitasking and accelerated creative workflows.`,
     longDescription: `The Axion Pro W7-3770X bridges the gap between consumer and enterprise performance. Its 32-core, 64-thread design is ideal for video editors, 3D artists, and software developers who run multiple demanding applications simultaneously. The CPU supports quad-channel DDR5 memory and offers 64 PCIe 5.0 lanes, allowing for complex configurations of graphics cards, capture cards, and NVMe storage arrays. With 128MB of L3 cache, it accelerates workloads that benefit from large, fast on-die memory.`,
@@ -885,8 +860,7 @@ export const products = [
     name: 'Axion S1-64',
     slug: 'axion-s1-64',
     brand: 'Axion',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZftTPEdlBSVejMQq2gTr0IYRlEzHvXC8On1cpL',
+    imageUrl: 'HdnlnX9Cx4ZftTPEdlBSVejMQq2gTr0IYRlEzHvXC8On1cpL',
     productType: ProductType.CPU,
     shortDescription: `A dedicated server processor designed for datacenter and virtualization workloads. It features 64 cores, robust security features, and support for high-capacity registered memory.`,
     longDescription: `The Axion S1-64 is built for enterprise-level reliability and performance. It has a 64-core, 128-thread configuration optimized for energy efficiency and instructions-per-clock (IPC). The processor supports up to 4TB of 12-channel DDR5 RDIMM memory and includes hardware-level security enclaves for data protection. With 128 PCIe 5.0 lanes, it is designed for hyper-converged infrastructure, cloud computing, and large-scale database management. This CPU is intended for dual-socket motherboards to enable massive 128-core systems.`,
@@ -919,8 +893,7 @@ export const products = [
     name: 'CoreForge C7-7700',
     slug: 'coreforge-c7-7700',
     brand: 'CoreForge',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zfs48DXHjSXFxMVHL0y7OKh2R4vS6QG1p5WZku',
+    imageUrl: 'HdnlnX9Cx4Zfs48DXHjSXFxMVHL0y7OKh2R4vS6QG1p5WZku',
     productType: ProductType.CPU,
     shortDescription: `A mainstream 8-core, 16-thread processor offering strong performance in gaming and applications. It is a locked, power-efficient alternative to higher-end options.`,
     longDescription: `The CoreForge C7-7700 provides a reliable and powerful computing experience for most users. It features an 8-core, 16-thread layout with a boost clock up to 5.2 GHz. As a locked processor, it is not intended for overclocking, focusing instead on stable, out-of-the-box performance within a 65W TDP. It includes a capable stock cooler, making it a cost-effective choice. This CPU is fully capable of handling 1440p gaming, photo editing, and general office productivity without issue.`,
@@ -953,8 +926,7 @@ export const products = [
     name: 'CoreForge C5-7500F',
     slug: 'coreforge-c5-7500f',
     brand: 'CoreForge',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfhBU68UIOzIZRH5v9FUaxABgXNueVni4QoDr0',
+    imageUrl: 'HdnlnX9Cx4ZfhBU68UIOzIZRH5v9FUaxABgXNueVni4QoDr0',
     productType: ProductType.CPU,
     shortDescription: `A budget-oriented gaming CPU with 6 cores and 12 threads. The 'F' designation indicates the absence of an integrated GPU, requiring a discrete graphics card.`,
     longDescription: `The CoreForge C5-7500F is engineered to deliver the best gaming performance for its price class. By removing the integrated graphics, die space and power budget are dedicated to its 6 high-performance cores, which boost to 5.0 GHz. This makes it an ideal pairing for mid-range discrete GPUs for 1080p and 1440p gaming. It includes 16MB of L3 cache and supports both DDR4 and DDR5 memory for flexible motherboard choices. This is the go-to processor for system builders prioritizing gaming frame rates on a tight budget.`,
@@ -987,8 +959,7 @@ export const products = [
     name: 'CoreForge C3-7300G',
     slug: 'coreforge-c3-7300g',
     brand: 'CoreForge',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfHKoTRh9Cx4ZfoOylsvtJQcrR5uKhAp7BXNmI',
+    imageUrl: 'HdnlnX9Cx4ZfHKoTRh9Cx4ZfoOylsvtJQcrR5uKhAp7BXNmI',
     productType: ProductType.CPU,
     shortDescription: `An entry-level quad-core processor with a powerful integrated GPU. The 'G' designation highlights its strong graphics capabilities, suitable for HTPCs and casual 720p/1080p gaming without a discrete card.`,
     longDescription: `The CoreForge C3-7300G combines a 4-core, 8-thread CPU with a surprisingly capable integrated graphics solution. The CPU cores boost to 4.5 GHz, handling all standard productivity and web tasks with ease. The integrated Vega-class GPU has 8 compute units, allowing it to run popular esports titles and older AAA games at respectable frame rates at 1080p low settings. This processor is a complete solution for building a compact, budget-friendly system for media consumption or light gaming.`,
@@ -1021,8 +992,7 @@ export const products = [
     name: 'CoreForge C1-7100',
     slug: 'coreforge-c1-7100',
     brand: 'CoreForge',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zfk3UIJ7EIUbi8QHpx43dPmlYrjSgu2XtFkyVN',
+    imageUrl: 'HdnlnX9Cx4Zfk3UIJ7EIUbi8QHpx43dPmlYrjSgu2XtFkyVN',
     productType: ProductType.CPU,
     shortDescription: `An ultra-budget dual-core CPU for basic computing tasks. It is designed for entry-level desktops for web browsing, document editing, and media playback.`,
     longDescription: `The CoreForge C1-7100 is the foundation for the most affordable computer systems. It features a 2-core, 4-thread design and includes a basic integrated GPU sufficient for driving a 4K display for non-gaming tasks. Its low power consumption and thermal output mean it can be cooled passively in some chassis or with a very simple, quiet fan. This CPU is intended for kiosk systems, thin clients, and home office PCs where cost is the primary consideration.`,
@@ -1055,8 +1025,7 @@ export const products = [
     name: 'Quantum Leap Effix E2',
     slug: 'quantum-leap-effix-e2',
     brand: 'QuantumLeap',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfFAFzhlHZj4YmSP6HMGvQDunI95tsqb1yRANB',
+    imageUrl: 'HdnlnX9Cx4ZfFAFzhlHZj4YmSP6HMGvQDunI95tsqb1yRANB',
     productType: ProductType.CPU,
     shortDescription: `A highly efficient processor with a hybrid architecture of 4 performance cores and 8 efficiency cores. It is designed for silent, low-power desktops and small-form-factor builds.`,
     longDescription: `The Quantum Leap Effix E2 utilizes a groundbreaking hybrid design to balance performance and power consumption. It features 4 "Performance" cores that handle demanding foreground tasks, and 8 "Efficiency" cores that manage background processes. An onboard hardware scheduler directs tasks to the appropriate cores in real-time. This 12-core (4P+8E), 16-thread design operates at a very low TDP, making it ideal for compact ITX builds or home theater PCs where heat and noise are primary concerns, while still providing robust performance for mainstream tasks.`,
@@ -1089,8 +1058,7 @@ export const products = [
     name: 'Quantum Leap Vision V7G',
     slug: 'quantum-leap-vision-v7g',
     brand: 'QuantumLeap',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfZs41Cex7jLd5sqi0f1blJzpugOUV9IWnXGeZ',
+    imageUrl: 'HdnlnX9Cx4ZfZs41Cex7jLd5sqi0f1blJzpugOUV9IWnXGeZ',
     productType: ProductType.CPU,
     shortDescription: `A premier APU that combines an 8-core CPU with a console-class integrated GPU. It is designed to deliver a complete 1080p gaming experience in a single chip.`,
     longDescription: `The Quantum Leap Vision V7G is an Accelerated Processing Unit (APU) engineered for gaming without a discrete graphics card. It integrates an 8-core, 16-thread Zen-based CPU with a powerful RDNA-based GPU featuring 12 compute units and on-die graphics cache. This combination is capable of running modern AAA titles at 1080p with medium-to-high settings, rivaling the performance of previous-generation consoles. It is the ultimate single-chip solution for building a powerful and compact gaming system.`,
@@ -1123,8 +1091,7 @@ export const products = [
     name: 'Helion H9-8900X',
     slug: 'helion-h9-8900x',
     brand: 'Helion',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfLnsDex3AXdH9VoITC602DUPp5gBqlRmvQW4c',
+    imageUrl: 'HdnlnX9Cx4ZfLnsDex3AXdH9VoITC602DUPp5gBqlRmvQW4c',
     productType: ProductType.CPU,
     shortDescription: `A new-architecture enthusiast CPU featuring a hybrid design with 8 Performance-cores and 16 Efficiency-cores. It targets top-tier gaming and high-end content creation.`,
     longDescription: `The Helion H9-8900X introduces a cutting-edge hybrid architecture to the enthusiast market. It combines 8 high-frequency Performance-cores with 16 power-efficient E-cores, for a total of 24 cores and 32 threads. This design provides extreme single-threaded speed for gaming while offering massive multi-threaded throughput for rendering and compilation. The CPU features 72MB of total cache and a sophisticated hardware thread director to optimize task allocation between the core types. It represents a new paradigm in desktop CPU performance.`,
@@ -1157,8 +1124,7 @@ export const products = [
     name: 'Helion H7-8700',
     slug: 'helion-h7-8700',
     brand: 'Helion',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfFKsQZtHZj4YmSP6HMGvQDunI95tsqb1yRANB',
+    imageUrl: 'HdnlnX9Cx4ZfFKsQZtHZj4YmSP6HMGvQDunI95tsqb1yRANB',
     productType: ProductType.CPU,
     shortDescription: `A high-performance hybrid CPU with 8 Performance-cores and 8 Efficiency-cores. It brings the new architecture to a more accessible price point for gamers and creators.`,
     longDescription: `The Helion H7-8700 is a 16-core (8P+8E), 24-thread processor designed for the mainstream enthusiast. It delivers the same powerful Performance-core architecture as the H9 but with fewer Efficiency-cores, striking a balance between cutting-edge performance and value. It is more than capable of handling high-refresh-rate 1440p and 4K gaming while providing a significant boost to multi-threaded productivity tasks. This locked processor is optimized for stability and efficiency, making it a powerful yet practical choice.`,
@@ -1191,8 +1157,7 @@ export const products = [
     name: 'Zentheon X3 9300F',
     slug: 'zentheon-x3-9300f',
     brand: 'Zentheon',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfXUmCtg7Lpu8ai3wxy2OjFvHnNsDGJoC6hUqc',
+    imageUrl: 'HdnlnX9Cx4ZfXUmCtg7Lpu8ai3wxy2OjFvHnNsDGJoC6hUqc',
     productType: ProductType.CPU,
     shortDescription: `A quad-core gaming processor with high clock speeds. It is aimed at budget-conscious gamers focusing on esports titles or games that rely heavily on single-threaded performance.`,
     longDescription: `The Zentheon X3 9300F is a specialized 4-core, 8-thread CPU designed for maximum gaming value. It boasts a high boost clock of 5.1 GHz, making it exceptionally fast in applications that do not scale to many cores. The 'F' designation indicates it lacks an integrated GPU, reducing cost and targeting builds with a discrete graphics card. For gamers on a strict budget who primarily play titles like CS:GO, Valorant, or League of Legends, the 9300F delivers competitive frame rates without unnecessary expense.`,
@@ -1225,8 +1190,7 @@ export const products = [
     name: 'Zentheon X9 9990X3D',
     slug: 'zentheon-x9-9990x3d',
     brand: 'Zentheon',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfxwL91HN4kus0QUVlZXNMpnzwRofc5a9SOiGe',
+    imageUrl: 'HdnlnX9Cx4ZfxwL91HN4kus0QUVlZXNMpnzwRofc5a9SOiGe',
     productType: ProductType.CPU,
     shortDescription: `An ultimate gaming CPU featuring 16 cores and a massive, vertically stacked L3 cache. This "3D HyperCache" technology provides unparalleled gaming performance by drastically reducing memory latency.`,
     longDescription: `The Zentheon X9 9990X3D is a technological showcase designed for one purpose: to be the fastest gaming CPU on the planet. It takes the 16-core, 32-thread layout of the 9950K and bonds an additional 128MB of L3 cache directly on top of the core compute die. This brings the total L3 cache to 192MB, creating an enormous data reservoir that minimizes calls to system RAM. The result is a significant performance uplift in most games, particularly at 1080p and 1440p resolutions where the CPU is often the bottleneck.`,
@@ -1259,8 +1223,7 @@ export const products = [
     name: 'Axion Pro W5-3550X',
     slug: 'axion-pro-w5-3550x',
     brand: 'Axion',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfBFTtt1Gvtv1jgrLQYRfN3oUxeTcyEWDb0iM2',
+    imageUrl: 'HdnlnX9Cx4ZfBFTtt1Gvtv1jgrLQYRfN3oUxeTcyEWDb0iM2',
     productType: ProductType.CPU,
     shortDescription: `An entry-point workstation CPU offering 16 cores and 32 threads. It provides access to the HEDT platform's expanded I/O and memory support for budget-conscious professionals.`,
     longDescription: `The Axion Pro W5-3550X makes professional-grade platform features more accessible. With 16 cores and 32 threads, it delivers robust multi-threaded performance for tasks like video encoding and software compilation. Crucially, it runs on the same platform as its more expensive counterparts, offering quad-channel memory support and 64 PCIe lanes. This allows for multi-GPU setups and extensive high-speed storage, capabilities not available on mainstream consumer platforms.`,
@@ -1293,8 +1256,7 @@ export const products = [
     name: 'CoreForge C5-7600X',
     slug: 'coreforge-c5-7600x',
     brand: 'CoreForge',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zf96fnGgJGDgRzYuQfqonVCHWMsrZbiXp3e0Iy',
+    imageUrl: 'HdnlnX9Cx4Zf96fnGgJGDgRzYuQfqonVCHWMsrZbiXp3e0Iy',
     productType: ProductType.CPU,
     shortDescription: `An unlocked 6-core, 12-thread CPU for mainstream builders who want to overclock. The 'X' signifies higher base and boost clocks and an unlocked multiplier.`,
     longDescription: `The CoreForge C5-7600X is the enthusiast's choice in the mid-range. It features the same 6-core, 12-thread design as the standard C5 but operates at a higher power limit, allowing for a sustained boost clock of 5.3 GHz. The unlocked multiplier provides headroom for manual overclocking to extract even more performance. This CPU is ideal for gamers who want to fine-tune their system for the highest possible frame rates in the most popular gaming resolutions.`,
@@ -1327,8 +1289,7 @@ export const products = [
     name: 'Quantum Leap Atomos A1',
     slug: 'quantum-leap-atomos-a1',
     brand: 'QuantumLeap',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfeTdBYZW7g4bHVNWT2ptOSAfCMqydG3UZBz8Y',
+    imageUrl: 'HdnlnX9Cx4ZfeTdBYZW7g4bHVNWT2ptOSAfCMqydG3UZBz8Y',
     productType: ProductType.CPU,
     shortDescription: `A passively cooled, dual-core CPU with an integrated AI accelerator. It is designed for always-on, low-power edge computing devices and smart home hubs.`,
     longDescription: `The Quantum Leap Atomos A1 is a specialized System-on-a-Chip (SoC) for IoT and edge AI applications. It combines two low-power ARM-based CPU cores with a dedicated Neural Processing Unit (NPU) capable of 5 TOPS. The entire chip is designed to operate within a 5W power envelope, allowing it to be passively cooled. It is not intended for general-purpose computing but for devices that require constant, low-latency AI inference, such as security cameras, network video recorders, or advanced smart home controllers.`,
@@ -1361,8 +1322,7 @@ export const products = [
     name: 'Zentheon X12 9998W',
     slug: 'zentheon-x12-9998w',
     brand: 'Zentheon',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfYQou3SOIXDU0ujGkW2t483pEyHSgNofbMzBF',
+    imageUrl: 'HdnlnX9Cx4ZfYQou3SOIXDU0ujGkW2t483pEyHSgNofbMzBF',
     productType: ProductType.CPU,
     shortDescription: `The pinnacle of the Zentheon workstation line, with 96 cores and 192 threads. It is built for the most demanding digital content creation and scientific analysis tasks.`,
     longDescription: `The Zentheon X12 9998W is a no-compromise solution for extreme multi-threaded workloads. It packs 96 cores and 192 threads into a single socket, supported by 12-channel DDR5 ECC memory and 128 PCIe 5.0 lanes. With a massive 384MB L3 cache, it can hold entire datasets on-chip for rapid processing. This processor is designed for Hollywood-level VFX studios, automotive design, and genomic sequencing, where reducing render or calculation times from days to hours provides a significant competitive advantage.`,
@@ -1395,8 +1355,7 @@ export const products = [
     name: 'Hypercore Apex RGB',
     slug: 'hypercore-apex-rgb',
     brand: 'Hypercore',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfHU5DH69Cx4ZfoOylsvtJQcrR5uKhAp7BXNmI',
+    imageUrl: 'HdnlnX9Cx4ZfHU5DH69Cx4ZfoOylsvtJQcrR5uKhAp7BXNmI',
     productType: ProductType.RAM,
     shortDescription: `An enthusiast-grade DDR5 memory kit designed for maximum overclocking headroom and performance. It features a vibrant, customizable RGB light bar and a high-efficiency aluminum heatspreader.`,
     longDescription: `The Hypercore Apex RGB represents the pinnacle of memory engineering for gamers and performance seekers. Each module is built on a 10-layer PCB with hand-sorted memory ICs, ensuring stability at extreme frequencies. The kit is optimized for the latest Zentheon and Helion platforms, with pre-configured XMP/EXPO profiles for one-click performance enhancement. A substantial, dual-tone anodized aluminum heatspreader provides superior thermal dissipation, while the diffused RGB light bar can be synchronized with major motherboard lighting ecosystems. This memory is for builders who demand both aesthetic excellence and uncompromising speed.`,
@@ -1427,8 +1386,7 @@ export const products = [
     name: 'Synapse Memory Flux',
     slug: 'synapse-memory-flux',
     brand: 'Synapse Memory',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zf96Ml4oJGDgRzYuQfqonVCHWMsrZbiXp3e0Iy',
+    imageUrl: 'HdnlnX9Cx4Zf96Ml4oJGDgRzYuQfqonVCHWMsrZbiXp3e0Iy',
     productType: ProductType.RAM,
     shortDescription: `A high-performance, minimalist DDR5 memory kit focused on pure speed and stability. It is the ideal choice for builds where performance is the only priority.`,
     longDescription: `The Synapse Memory Flux series is engineered for function over form. Stripping away non-essential elements like RGB lighting, this kit focuses on delivering raw, unadulterated performance. The modules feature a low-profile, solid black aluminum heatspreader for maximum compatibility with large CPU air coolers. Using premium memory chips screened for low latency, Flux memory provides a tangible boost in gaming and application performance. It is the perfect memory for stealth builds, small-form-factor systems, and users who prefer a clean, non-illuminated aesthetic.`,
@@ -1459,8 +1417,7 @@ export const products = [
     name: 'Veritas Digital Aegis Shield',
     slug: 'veritas-digital-aegis-shield',
     brand: 'Veritas Digital',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfKMiwhmz8jEzkGiYeJTts5VoSc31OpLXUdNfR',
+    imageUrl: 'HdnlnX9Cx4ZfKMiwhmz8jEzkGiYeJTts5VoSc31OpLXUdNfR',
     productType: ProductType.RAM,
     shortDescription: `A high-speed DDR4 memory kit designed to extract maximum performance from previous-generation platforms. Its aggressive styling is matched by its low-latency performance.`,
     longDescription: `The Veritas Digital Aegis Shield keeps mature platforms competitive. This DDR4 kit is tuned for high frequencies and tight timings, breathing new life into systems based on older CoreForge and Zentheon architectures. The stamped aluminum heatspreader features a distinctive shield-like design, providing excellent thermal conductivity to maintain stability during intense gaming sessions. Each kit undergoes rigorous testing to guarantee compatibility and performance, making it a reliable and powerful upgrade for a vast number of existing PCs.`,
@@ -1491,8 +1448,7 @@ export const products = [
     name: 'Momentum Storage Value Series',
     slug: 'momentum-storage-value-series',
     brand: 'Momentum Storage',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zf6hqMjPsDN8HFfX5wsgnV4bPjklCTxSpcRae3',
+    imageUrl: 'HdnlnX9Cx4Zf6hqMjPsDN8HFfX5wsgnV4bPjklCTxSpcRae3',
     productType: ProductType.RAM,
     shortDescription: `A no-frills, budget-friendly DDR4 memory module for basic system builds and repairs. It meets JEDEC standards for guaranteed compatibility and reliability.`,
     longDescription: `The Momentum Storage Value Series is the definition of utility. This memory is built for system integrators and DIYers who need dependable, cost-effective RAM. Lacking a cosmetic heatspreader, it adheres to standard height specifications for universal compatibility. Each module is tested to strict JEDEC specifications, ensuring it will work out-of-the-box with any DDR4-compatible motherboard. It is the ideal solution for office PCs, budget builds, or as a functional replacement part.`,
@@ -1523,8 +1479,7 @@ export const products = [
     name: 'Hypercore LPX-V',
     slug: 'hypercore-lpx-v',
     brand: 'Hypercore',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfVNsjoETXalGvFiE9W3xbHfKh8MpBuyqn6T1C',
+    imageUrl: 'HdnlnX9Cx4ZfVNsjoETXalGvFiE9W3xbHfKh8MpBuyqn6T1C',
     productType: ProductType.RAM,
     shortDescription: `A low-profile DDR5 memory kit designed for Small Form Factor (SFF) and compact builds. It delivers high performance without interfering with large CPU coolers.`,
     longDescription: `The Hypercore LPX-V (Low Profile eXtreme - Vented) provides full-sized performance in a compact package. Its heatspreader is designed to be just a few millimeters taller than the PCB itself, guaranteeing clearance under even the most oversized air coolers and in space-constrained Mini-ITX cases. Despite its small size, the vented aluminum heatspreader is highly effective at cooling the high-density memory chips. This kit offers the perfect blend of high-speed DDR5 performance and maximum system compatibility.`,
@@ -1555,8 +1510,7 @@ export const products = [
     name: 'Aethelred Glacial Pro RGB',
     slug: 'aethelred-glacial-pro-rgb',
     brand: 'Aethelred',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfAJZwaRGrCWh8NgQJTpciRABZMqz9jUSKdEmG',
+    imageUrl: 'HdnlnX9Cx4ZfAJZwaRGrCWh8NgQJTpciRABZMqz9jUSKdEmG',
     productType: ProductType.RAM,
     shortDescription: `A premium DDR5 memory kit featuring a striking all-white design and smooth RGB lighting. It is engineered for high-end gaming rigs with a white or silver aesthetic theme.`,
     longDescription: `The Aethelred Glacial Pro RGB is crafted for visually stunning PC builds. The modules feature a pristine white heatspreader, a white PCB, and a frosted light bar that produces a smooth, ethereal glow. Beyond its looks, the Glacial Pro is built for performance, using high-binned ICs to achieve fast speeds with tight timings. It is the premier choice for enthusiasts building a clean, powerful, and aesthetically coordinated system.`,
@@ -1587,8 +1541,7 @@ export const products = [
     name: 'Synapse Memory Server ECC RDIMM',
     slug: 'synapse-memory-server-ecc-rdimm',
     brand: 'Synapse Memory',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zfm53c9XCtZM0EdjDxOs8zC6ILBNRHgipa4TX5',
+    imageUrl: 'HdnlnX9Cx4Zfm53c9XCtZM0EdjDxOs8zC6ILBNRHgipa4TX5',
     productType: ProductType.RAM,
     shortDescription: `An enterprise-grade ECC Registered DIMM for servers and workstations. It prioritizes data integrity and stability for mission-critical applications.`,
     longDescription: `The Synapse Memory Server RDIMM is engineered for 24/7 reliability. Featuring on-die Error Correction Code (ECC), it can detect and correct single-bit memory errors, preventing data corruption and system crashes. As a Registered DIMM (RDIMM), it contains a register chip that reduces electrical load on the memory controller, allowing systems to be built with very large amounts of RAM. This memory is intended exclusively for server and workstation platforms like Axion Pro and Axion S1 that require the utmost stability.`,
@@ -1619,8 +1572,7 @@ export const products = [
     name: 'Momentum Storage Solid',
     slug: 'momentum-storage-solid',
     brand: 'Momentum Storage',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfIliXWFlnQ2wugj0TlbDA1VHoO3dRZv6Cr7J5',
+    imageUrl: 'HdnlnX9Cx4ZfIliXWFlnQ2wugj0TlbDA1VHoO3dRZv6Cr7J5',
     productType: ProductType.RAM,
     shortDescription: `A fundamental, cost-effective DDR5 kit that offers a gateway to the new memory standard. It provides reliable, JEDEC-spec performance for entry-level systems.`,
     longDescription: `The Momentum Storage Solid series brings DDR5 to budget-conscious builders. Operating at the base JEDEC standard speed, this kit guarantees compatibility and stability with no need for BIOS tuning. A simple, functional heatspreader provides basic thermal protection and a clean look. For users building a new PC for general productivity or light gaming, the Solid series offers the benefits of the DDR5 platform without the premium cost of overclocked modules.`,
@@ -1651,8 +1603,7 @@ export const products = [
     name: 'Veritas Digital SO-DIMM',
     slug: 'veritas-digital-so-dimm',
     brand: 'Veritas Digital',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZflziG7KZwgVKk5j7E0BcHChJ8y2DNWfIqAuwa',
+    imageUrl: 'HdnlnX9Cx4ZflziG7KZwgVKk5j7E0BcHChJ8y2DNWfIqAuwa',
     productType: ProductType.RAM,
     shortDescription: `A high-density DDR5 SO-DIMM module for upgrading compatible laptops and compact devices. It provides a significant boost in multitasking and application performance.`,
     longDescription: `The Veritas Digital SO-DIMM is the simplest way to enhance laptop performance. Designed for the latest generation of portable computers, this module provides a substantial increase in memory capacity and bandwidth. It adheres to strict JEDEC standards for plug-and-play compatibility. Upgrading with this module can lead to faster application loading, smoother multitasking between heavy programs, and an overall more responsive user experience for professionals and students on the go.`,
@@ -1683,8 +1634,7 @@ export const products = [
     name: 'Hypercore Titan-Class',
     slug: 'hypercore-titan-class',
     brand: 'Hypercore',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zf4wXwkvUga3joPFfyKAiEm6Rr8OxTkpD5c0Wb',
+    imageUrl: 'HdnlnX9Cx4Zf4wXwkvUga3joPFfyKAiEm6Rr8OxTkpD5c0Wb',
     productType: ProductType.RAM,
     shortDescription: `An extreme-capacity 96GB DDR5 kit for HEDT and workstation users. It is designed for memory-intensive tasks like 8K video editing, complex simulations, and running multiple virtual machines.`,
     longDescription: `The Hypercore Titan-Class is built for workloads that demand massive memory pools. This 96GB kit, comprised of two high-density 48GB modules, enables professionals to handle enormous datasets without relying on slow storage. It is validated for stability on workstation platforms from Axion and Zentheon, providing the rock-solid performance required for content creation and scientific computing. The modules are cooled by the signature Hypercore heatspreader to maintain performance even under sustained, heavy load.`,
@@ -1715,8 +1665,7 @@ export const products = [
     name: 'Momentum Storage PowerDrive',
     slug: 'momentum-storage-powerdrive',
     brand: 'Momentum Storage',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfnTJtJYfBomEhfsy6vGaXtHJCSbUxjVQd8NYA',
+    imageUrl: 'HdnlnX9Cx4ZfnTJtJYfBomEhfsy6vGaXtHJCSbUxjVQd8NYA',
     productType: ProductType.STORAGE,
     shortDescription: `A versatile 3.5-inch hard drive delivering 7200 RPM performance. It is an ideal choice for mainstream desktop PCs, offering a balance of speed and capacity for everyday computing and gaming.`,
     longDescription: `The Momentum Storage PowerDrive is the workhorse of modern desktop systems. With a spindle speed of 7200 RPM and a 256MB cache, it provides quick access to files and reduces game loading times compared to slower drives. It utilizes Conventional Magnetic Recording (CMR) technology for consistent write performance, making it a reliable primary or secondary drive for storing applications, games, and user data. It is engineered for reliability and is suitable for 24/7 power-on operation in a desktop environment.`,
@@ -1744,8 +1693,7 @@ export const products = [
     name: 'TerraVault Guardian NAS',
     slug: 'terravault-guardian-nas',
     brand: 'TerraVault',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zf7DmU9K1QOXfreEWK3dDplLozwT26mAtgaH8x',
+    imageUrl: 'HdnlnX9Cx4Zf7DmU9K1QOXfreEWK3dDplLozwT26mAtgaH8x',
     productType: ProductType.STORAGE,
     shortDescription: `A high-reliability hard drive specifically engineered for 24/7 operation in Network Attached Storage (NAS) systems. It features vibration mitigation technology for use in multi-drive enclosures.`,
     longDescription: `The TerraVault Guardian NAS drive is built for the demanding environment of a home or small office NAS. It is rated for a workload of 180 TB per year and includes rotational vibration sensors to maintain performance and reliability in RAID configurations. Firmware is optimized for file sharing, streaming, and backup operations. The drive uses CMR technology to ensure stable performance during sustained write tasks, which is critical for NAS applications.`,
@@ -1773,8 +1721,7 @@ export const products = [
     name: 'Veritas Digital V-Black',
     slug: 'veritas-digital-v-black',
     brand: 'Veritas Digital',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfAaFuIbGrCWh8NgQJTpciRABZMqz9jUSKdEmG',
+    imageUrl: 'HdnlnX9Cx4ZfAaFuIbGrCWh8NgQJTpciRABZMqz9jUSKdEmG',
     productType: ProductType.STORAGE,
     shortDescription: `A high-performance hard drive for gamers and creative professionals. It combines a 7200 RPM spindle speed with a massive 512MB cache for maximum performance.`,
     longDescription: `The Veritas Digital V-Black is engineered for speed. It is designed to reduce loading times and accelerate data access for the most demanding applications and games. The drive features a dual-core processor and a dynamic caching algorithm that optimizes performance by allocating cache between reads and writes. Its stable platter technology reduces system-induced vibrations, increasing accuracy and performance. This drive is the top choice for users who need the highest capacity and performance from a mechanical drive.`,
@@ -1802,8 +1749,7 @@ export const products = [
     name: 'Momentum Storage EcoVault',
     slug: 'momentum-storage-ecovault',
     brand: 'Momentum Storage',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zf33tcJgkOZDW7pu120ANi4RmC8jMhH6BztqQT',
+    imageUrl: 'HdnlnX9Cx4Zf33tcJgkOZDW7pu120ANi4RmC8jMhH6BztqQT',
     productType: ProductType.STORAGE,
     shortDescription: `A power-efficient, high-capacity hard drive for archiving and storing media. Its 5400 RPM spindle speed ensures low noise and minimal power consumption.`,
     longDescription: `The Momentum Storage EcoVault is the perfect solution for long-term data storage. It is optimized for low power draw and quiet operation, making it ideal for external enclosures or as a secondary media drive in a desktop PC. While the 5400 RPM speed is not intended for primary OS or application use, it is more than sufficient for streaming high-resolution video and storing large photo libraries. The drive uses Shingled Magnetic Recording (SMR) to achieve its high capacity at a low cost-per-gigabyte.`,
@@ -1831,8 +1777,7 @@ export const products = [
     name: 'TerraVault Archive Pro',
     slug: 'terravault-archive-pro',
     brand: 'TerraVault',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfsVYXxhSXFxMVHL0y7OKh2R4vS6QG1p5WZkuw',
+    imageUrl: 'HdnlnX9Cx4ZfsVYXxhSXFxMVHL0y7OKh2R4vS6QG1p5WZkuw',
     productType: ProductType.STORAGE,
     shortDescription: `An enterprise-class, helium-sealed hard drive offering massive capacity for data centers and cold storage. It is designed for maximum storage density and reliability under heavy workloads.`,
     longDescription: `The TerraVault Archive Pro is built for hyperscale data environments. The helium-sealed design reduces internal turbulence and power consumption, allowing for higher platter density and improved reliability. This drive is rated for a 550 TB/year workload and has a 2.5 million-hour MTBF (Mean Time Between Failures). It is engineered for 24/7 operation in high-density server racks where capacity and total cost of ownership are the most critical metrics.`,
@@ -1860,8 +1805,7 @@ export const products = [
     name: 'Veritas Digital Sentinel SV',
     slug: 'veritas-digital-sentinel-sv',
     brand: 'Veritas Digital',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfmQVzKPCtZM0EdjDxOs8zC6ILBNRHgipa4TX5',
+    imageUrl: 'HdnlnX9Cx4ZfmQVzKPCtZM0EdjDxOs8zC6ILBNRHgipa4TX5',
     productType: ProductType.STORAGE,
     shortDescription: `A specialized drive for video surveillance systems. It is optimized for continuous, 24/7 write-intensive workloads from multiple high-definition camera streams.`,
     longDescription: `The Veritas Digital Sentinel SV is engineered to never miss a frame. Its firmware is optimized for surveillance, prioritizing write operations to ensure smooth, uninterrupted video recording. It supports ATA streaming commands to handle up to 64 simultaneous HD camera feeds. The drive is designed for low power consumption and has a high workload rating, ensuring it can withstand the constant data recording required in a modern surveillance NVR or DVR system.`,
@@ -1889,8 +1833,7 @@ export const products = [
     name: 'Momentum Storage MobileDrive',
     slug: 'momentum-storage-mobiledrive',
     brand: 'Momentum Storage',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfBFH6j8bvtv1jgrLQYRfN3oUxeTcyEWDb0iM2',
+    imageUrl: 'HdnlnX9Cx4ZfBFH6j8bvtv1jgrLQYRfN3oUxeTcyEWDb0iM2',
     productType: ProductType.STORAGE,
     shortDescription: `A compact 2.5-inch hard drive for laptops and small-form-factor PCs. It offers a cost-effective way to add significant storage capacity to portable systems.`,
     longDescription: `The Momentum Storage MobileDrive provides a high-capacity storage solution in a 7mm-height 2.5-inch form factor. It is ideal for upgrading the storage in older laptops or for use in compact desktop builds and external enclosures. The 5400 RPM spindle speed keeps power consumption and heat output low, which is critical for battery life and thermal management in mobile devices. It serves as an excellent bulk storage companion to a faster SSD boot drive.`,
@@ -1918,8 +1861,7 @@ export const products = [
     name: 'TerraVault Glacis',
     slug: 'terravault-glacis',
     brand: 'TerraVault',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfJRWyunaxNksugRm8TpV1KELjUarMf5bXzhC6',
+    imageUrl: 'HdnlnX9Cx4ZfJRWyunaxNksugRm8TpV1KELjUarMf5bXzhC6',
     productType: ProductType.STORAGE,
     shortDescription: `An extreme-capacity hard drive designed for cold data archiving. It provides the lowest possible cost-per-terabyte for storing vast amounts of infrequently accessed data.`,
     longDescription: `The TerraVault Glacis is an archival-grade storage device. Using a specialized SMR implementation and a 5400 RPM helium-sealed platform, it achieves a massive 22 TB capacity. This drive is not intended for active use but for "write-once, read-rarely" scenarios such as enterprise backups, scientific data sets, and media archives. Its focus is on maximum data density and long-term storage integrity over access speed.`,
@@ -1947,8 +1889,7 @@ export const products = [
     name: 'Veritas Digital RaptorX',
     slug: 'veritas-digital-raptorx',
     brand: 'Veritas Digital',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfJq83eqaxNksugRm8TpV1KELjUarMf5bXzhC6',
+    imageUrl: 'HdnlnX9Cx4ZfJq83eqaxNksugRm8TpV1KELjUarMf5bXzhC6',
     productType: ProductType.STORAGE,
     shortDescription: `An ultra-performance enterprise hard drive with a 10,000 RPM spindle speed. It is for specialized applications where the lowest possible mechanical latency is required.`,
     longDescription: `The Veritas Digital RaptorX bridges the gap between traditional HDDs and SSDs. Its 10,000 RPM spindle speed dramatically reduces seek times and rotational latency, providing extremely fast access to data for a mechanical drive. It is designed for legacy enterprise applications, high-transaction databases, and workstations where I/O performance is critical but SSD capacity is too costly. The RaptorX is built on a 2.5-inch platter system within a 3.5-inch heatsink chassis for superior cooling and performance.`,
@@ -1976,8 +1917,7 @@ export const products = [
     name: 'Momentum Storage PowerDrive Pro',
     slug: 'momentum-storage-powerdrive-pro',
     brand: 'Momentum Storage',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfyFSRkOQclGFvWLeAKgXwJnSH3UN0tP8IRq52',
+    imageUrl: 'HdnlnX9Cx4ZfyFSRkOQclGFvWLeAKgXwJnSH3UN0tP8IRq52',
     productType: ProductType.STORAGE,
     shortDescription: `An enhanced version of the PowerDrive, featuring a larger cache and optimized firmware. It is targeted at prosumers and budget-conscious gamers looking for a performance edge.`,
     longDescription: `The Momentum Storage PowerDrive Pro takes the solid foundation of the standard model and improves upon it. The cache is doubled to 512 MB, and it employs a multi-tiered caching technology that uses a small portion of NAND flash to accelerate frequently accessed data. This results in faster boot times and application loading when compared to conventional hard drives. It is an excellent choice for a primary OS drive in a budget system or as a high-speed game library drive.`,
@@ -2005,8 +1945,7 @@ export const products = [
     name: 'Quicksilicon QS500',
     slug: 'quicksilicon-qs500',
     brand: 'Quicksilicon',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfPVTT83zAm08KXtcQgpNd1u6LyGj4bvCT2REz',
+    imageUrl: 'HdnlnX9Cx4ZfPVTT83zAm08KXtcQgpNd1u6LyGj4bvCT2REz',
     productType: ProductType.STORAGE,
     shortDescription: `An entry-level 2.5-inch SATA SSD. It offers a significant speed improvement over traditional hard drives, making it a perfect upgrade for older laptops and desktops.`,
     longDescription: `The Quicksilicon QS500 is a cost-effective way to revitalize any system. By leveraging the SATA III interface, it delivers speeds up to 550 MB/s, drastically reducing boot times, application loads, and file transfer waits. This drive uses 3D TLC NAND for a balance of performance and endurance. It is an ideal, easy-to-install upgrade that provides an immediate and noticeable improvement in overall system responsiveness.`,
@@ -2036,8 +1975,7 @@ export const products = [
     name: 'Synapse Memory Spark M3',
     slug: 'synapse-memory-spark-m3',
     brand: 'Synapse Memory',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfCSu0mTh6QkGgKqDtJpwBMINa5Al3ou1vE68d',
+    imageUrl: 'HdnlnX9Cx4ZfCSu0mTh6QkGgKqDtJpwBMINa5Al3ou1vE68d',
     productType: ProductType.STORAGE,
     shortDescription: `A budget-friendly M.2 NVMe SSD using the PCIe 3.0 interface. It delivers speeds multiple times faster than SATA SSDs, ideal for new builds on a budget.`,
     longDescription: `The Synapse Memory Spark M3 unlocks the power of NVMe without a high price tag. Utilizing the M.2 form factor and a PCIe 3.0 x4 connection, it achieves read speeds over 2,000 MB/s. This makes it a great choice for a primary OS and application drive, providing snappy performance. Its DRAM-less design uses Host Memory Buffer (HMB) technology to keep costs down while maintaining good performance for everyday tasks and gaming.`,
@@ -2067,8 +2005,7 @@ export const products = [
     name: 'Momentum Storage JetStream 4',
     slug: 'momentum-storage-jetstream-4',
     brand: 'Momentum Storage',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zf9ArAeAJGDgRzYuQfqonVCHWMsrZbiXp3e0Iy',
+    imageUrl: 'HdnlnX9Cx4Zf9ArAeAJGDgRzYuQfqonVCHWMsrZbiXp3e0Iy',
     productType: ProductType.STORAGE,
     shortDescription: `A mainstream PCIe 4.0 NVMe SSD that represents the sweet spot for modern gaming PCs and workstations. It offers excellent performance, a DRAM cache, and a competitive price.`,
     longDescription: `The Momentum Storage JetStream 4 is the new standard for high-speed storage. By harnessing the PCIe 4.0 interface, it delivers blazing-fast sequential read and write speeds, which is ideal for large game installations and content creation workloads. The onboard DRAM cache ensures consistent, low-latency performance during heavy use. A thin graphene heat spreader helps dissipate heat to prevent thermal throttling, maintaining peak performance in any system.`,
@@ -2098,8 +2035,7 @@ export const products = [
     name: 'Hypercore Apex 5',
     slug: 'hypercore-apex-5',
     brand: 'Hypercore',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfCcbZ436QkGgKqDtJpwBMINa5Al3ou1vE68dF',
+    imageUrl: 'HdnlnX9Cx4ZfCcbZ436QkGgKqDtJpwBMINa5Al3ou1vE68dF',
     productType: ProductType.STORAGE,
     shortDescription: `An enthusiast-grade PCIe 5.0 NVMe SSD for users who demand the absolute fastest storage available. It requires a compatible motherboard and includes a substantial heatsink.`,
     longDescription: `The Hypercore Apex 5 operates on the cutting edge of storage technology. It utilizes the full bandwidth of the PCIe 5.0 interface to achieve sequential read speeds in excess of 12,000 MB/s. This level of performance is targeted at enthusiasts and professionals working with extremely large files, such as 8K video editors. The drive comes with a pre-installed, finned aluminum heatsink, which is essential to manage the heat generated at these speeds and prevent performance throttling.`,
@@ -2129,8 +2065,7 @@ export const products = [
     name: 'Veritas Digital Forge Pro',
     slug: 'veritas-digital-forge-pro',
     brand: 'Veritas Digital',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfljhNPSwgVKk5j7E0BcHChJ8y2DNWfIqAuwaL',
+    imageUrl: 'HdnlnX9Cx4ZfljhNPSwgVKk5j7E0BcHChJ8y2DNWfIqAuwaL',
     productType: ProductType.STORAGE,
     shortDescription: `A professional-grade PCIe 4.0 NVMe SSD built for extreme endurance and sustained performance. It is the choice for workstations and write-intensive applications.`,
     longDescription: `The Veritas Digital Forge Pro is engineered for reliability under constant, heavy use. Its primary feature is an exceptionally high endurance rating, making it suitable for use as a scratch disk for video editing, a database drive, or for other write-heavy tasks. It uses high-quality TLC NAND and an advanced controller with a large DRAM cache to ensure that performance remains high even when the drive is full or under sustained load. The drive also includes power-loss protection circuitry to safeguard data.`,
@@ -2160,8 +2095,7 @@ export const products = [
     name: 'Quicksilicon Massif Q4',
     slug: 'quicksilicon-massif-q4',
     brand: 'Quicksilicon',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zf1lrcyO0Z9nSR85aGpIgomDfviNX2YqtjkPCh',
+    imageUrl: 'HdnlnX9Cx4Zf1lrcyO0Z9nSR85aGpIgomDfviNX2YqtjkPCh',
     productType: ProductType.STORAGE,
     shortDescription: `A high-capacity PCIe 4.0 NVMe SSD that uses QLC NAND to provide massive storage at an affordable price. It is ideal for use as a game library or media storage drive.`,
     longDescription: `The Quicksilicon Massif Q4 makes multi-terabyte solid-state storage accessible. By using Quad-Level Cell (QLC) NAND, it can offer capacities up to 8TB in a standard M.2 form factor. While its sustained write speeds and endurance are lower than TLC-based drives, its read performance is excellent, making it a perfect choice for storing and quickly loading large game libraries, movie collections, or project files that are read frequently but written to less often.`,
@@ -2191,8 +2125,7 @@ export const products = [
     name: 'Hypercore Apex 5 Pro',
     slug: 'hypercore-apex-5-pro',
     brand: 'Hypercore',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zf6DQ3iHsDN8HFfX5wsgnV4bPjklCTxSpcRae3',
+    imageUrl: 'HdnlnX9Cx4Zf6DQ3iHsDN8HFfX5wsgnV4bPjklCTxSpcRae3',
     productType: ProductType.STORAGE,
     shortDescription: `The ultimate PCIe 5.0 NVMe SSD, combining maximum speed with high-endurance NAND. It is a no-compromise solution for the most extreme performance requirements.`,
     longDescription: `The Hypercore Apex 5 Pro pushes every metric to its limit. It pairs the fastest available controller with high-endurance 3D TLC NAND to deliver both class-leading sequential speeds and outstanding longevity. This drive is designed for prosumers who need to read and write massive datasets daily without compromising on speed or reliability. A robust, actively cooled heatsink (with a small fan) is included to ensure that thermal throttling is never a concern, even under the most punishing workloads.`,
@@ -2222,8 +2155,7 @@ export const products = [
     name: 'Synapse Memory Ignite DL',
     slug: 'synapse-memory-ignite-dl',
     brand: 'Synapse Memory',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfSU5l9XMuoylXbatzA7p9qh2FOiNSBZjQwcg4',
+    imageUrl: 'HdnlnX9Cx4ZfSU5l9XMuoylXbatzA7p9qh2FOiNSBZjQwcg4',
     productType: ProductType.STORAGE,
     shortDescription: `An ultra-budget M.2 NVMe drive that leverages the PCIe 4.0 interface for a snappy user experience. It is a DRAM-less drive perfect for entry-level system builds.`,
     longDescription: `The Synapse Memory Ignite DL is built to offer the benefits of PCIe 4.0 at the lowest possible cost. It achieves read speeds that are a significant step up from any PCIe 3.0 or SATA drive, making the entire system feel more responsive. By forgoing an onboard DRAM cache and instead using the system's main memory (HMB), it provides a fast boot and application drive for users who prioritize speed on a very tight budget.`,
@@ -2253,8 +2185,7 @@ export const products = [
     name: 'Momentum Storage TerraSATA',
     slug: 'momentum-storage-terrasata',
     brand: 'Momentum Storage',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfT669b6tmm1PRxdC0DVWAytLKNHscZUwY8ebf',
+    imageUrl: 'HdnlnX9Cx4ZfT669b6tmm1PRxdC0DVWAytLKNHscZUwY8ebf',
     productType: ProductType.STORAGE,
     shortDescription: `A high-capacity 2.5-inch SATA SSD designed to replace large mechanical drives. It offers silent, reliable, and fast-access storage for massive data collections.`,
     longDescription: `The Momentum Storage TerraSATA is for users who want to eliminate mechanical drives from their system entirely. Offering a colossal 8TB of capacity, it can hold extensive game libraries, 4K media, and decades of photos in a single 2.5-inch drive. While limited by the SATA interface, it provides instant access times and silent operation that no HDD can match. It is the ultimate bulk storage solution for a quiet and responsive PC.`,
@@ -2284,8 +2215,7 @@ export const products = [
     name: 'Veritas Digital Catalyst',
     slug: 'veritas-digital-catalyst',
     brand: 'Veritas Digital',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfSoPGzVuoylXbatzA7p9qh2FOiNSBZjQwcg4v',
+    imageUrl: 'HdnlnX9Cx4ZfSoPGzVuoylXbatzA7p9qh2FOiNSBZjQwcg4v',
     productType: ProductType.STORAGE,
     shortDescription: `A smaller capacity, extremely high-endurance PCIe 4.0 NVMe drive. It is designed to be used as a dedicated OS drive or a caching drive in a professional workstation.`,
     longDescription: `The Veritas Digital Catalyst is a specialized tool for performance and longevity. Its smaller capacity is paired with an overprovisioned, industrial-grade SLC-mode NAND configuration, giving it an astronomical endurance rating. This makes it impervious to the constant small writes of an operating system or the punishing workload of a caching application. For users building tiered storage systems, the Catalyst provides a virtually indestructible, ultra-low-latency foundation.`,
@@ -2317,8 +2247,7 @@ export const products = [
     name: 'Apex Boards Godslayer ZT990E',
     slug: 'apex-boards-godslayer-zt990e',
     brand: 'Apex Boards',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zfkdjlo7REIUbi8QHpx43dPmlYrjSgu2XtFkyV',
+    imageUrl: 'HdnlnX9Cx4Zfkdjlo7REIUbi8QHpx43dPmlYrjSgu2XtFkyV',
     productType: ProductType.MOTHERBOARD,
     shortDescription: `A flagship E-ATX motherboard for the Zentheon X9 series. It is engineered for extreme overclocking and record-breaking performance with comprehensive connectivity and cooling.`,
     longDescription: `The Apex Boards Godslayer ZT990E is the ultimate foundation for a no-compromise gaming or creation rig. Its massive 24+2+1 phase power delivery system with 105A power stages provides stable, clean power for pushing Zentheon X9 CPUs to their thermal limits. The board features two PCIe 5.0 x16 slots for multi-GPU setups and five M.2 slots, all running at PCIe 5.0 speeds, cooled by a monolithic M.2 heatsink. With 10 GbE LAN, Wi-Fi 7, and dual Thunderbolt 4 ports, connectivity is unparalleled. This board is for the enthusiast who demands the absolute best of every component.`,
@@ -2353,8 +2282,7 @@ export const products = [
     name: 'Tectonic Systems Magna HL870',
     slug: 'tectonic-systems-magna-hl870',
     brand: 'Tectonic Systems',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfAz1MEMGrCWh8NgQJTpciRABZMqz9jUSKdEmG',
+    imageUrl: 'HdnlnX9Cx4ZfAz1MEMGrCWh8NgQJTpciRABZMqz9jUSKdEmG',
     productType: ProductType.MOTHERBOARD,
     shortDescription: `A high-performance ATX motherboard for Helion and Quantum Leap CPUs. It is optimized for hybrid-core architectures and high-speed gaming.`,
     longDescription: `The Tectonic Systems Magna HL870 is built to unleash the full potential of next-generation hybrid CPUs. It features a robust 18+1+1 phase VRM to handle the demanding power states of Helion processors. The board provides one PCIe 5.0 x16 slot for the latest graphics cards and four M.2 slots, including one at PCIe 5.0 speeds for an ultra-fast OS drive. Its advanced cooling solution includes extended VRM heatsinks and multiple M.2 shields. With 2.5 GbE LAN and Wi-Fi 6E, it offers fast, reliable networking for online gaming and streaming.`,
@@ -2390,8 +2318,7 @@ export const products = [
     name: 'Foundation Logic BZ950-Pro',
     slug: 'foundation-logic-bz950-pro',
     brand: 'Foundation Logic',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfqWMkPQRYVcWr9RK2sCZOD6hS40wUu5PJEl8I',
+    imageUrl: 'HdnlnX9Cx4ZfqWMkPQRYVcWr9RK2sCZOD6hS40wUu5PJEl8I',
     productType: ProductType.MOTHERBOARD,
     shortDescription: `A versatile and cost-effective ATX motherboard for the Zentheon platform. It offers a balanced feature set, including PCIe 5.0 and DDR5 support, for mainstream gaming and productivity builds.`,
     longDescription: `The Foundation Logic BZ950-Pro is the ideal choice for builders seeking performance and value. It supports the full range of Zentheon CPUs with a capable 14+2+1 phase VRM. The board includes a primary PCIe 5.0 x16 slot ready for next-gen GPUs and three PCIe 4.0 M.2 slots for a fast and expansive storage array. Practical features like comprehensive fan headers, a solid VRM heatsink, and an integrated I/O shield simplify the building process. The BZ950-Pro provides a stable, future-proof platform without the cost of enthusiast-tier boards.`,
@@ -2426,8 +2353,7 @@ export const products = [
     name: 'Aegis Prime Creator AX400-W',
     slug: 'aegis-prime-creator-ax400-w',
     brand: 'Aegis Prime',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zf3RSlfekOZDW7pu120ANi4RmC8jMhH6BztqQT',
+    imageUrl: 'HdnlnX9Cx4Zf3RSlfekOZDW7pu120ANi4RmC8jMhH6BztqQT',
     productType: ProductType.MOTHERBOARD,
     shortDescription: `A specialized E-ATX workstation motherboard for the Axion Pro platform. It is engineered for maximum connectivity, memory capacity, and stability for creative professionals.`,
     longDescription: `The Aegis Prime Creator AX400-W is built to power the most demanding content creation and data science workloads. It features a massive 20+2 phase VRM and 8 DDR5 slots supporting up to 1TB of ECC Registered memory for handling enormous datasets. Five full-length PCIe 5.0 slots provide unparalleled expansion for multi-GPU rendering, high-speed networking cards, and RAID controllers. Dual 10 GbE LAN and a plethora of high-speed USB ports ensure that data can be moved on and off the machine at maximum speed.`,
@@ -2461,8 +2387,7 @@ export const products = [
     name: 'Foundation Logic Mortar CF760M-D4',
     slug: 'foundation-logic-mortar-cf760m-d4',
     brand: 'Foundation Logic',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfJCfhAPaxNksugRm8TpV1KELjUarMf5bXzhC6',
+    imageUrl: 'HdnlnX9Cx4ZfJCfhAPaxNksugRm8TpV1KELjUarMf5bXzhC6',
     productType: ProductType.MOTHERBOARD,
     shortDescription: `A budget-friendly Micro-ATX motherboard for CoreForge CPUs. It utilizes DDR4 memory to deliver a high-performance gaming experience at an accessible price point.`,
     longDescription: `The Foundation Logic Mortar CF760M-D4 is designed for smart system builders who want modern CPU performance without the cost of new-generation memory. Its 12+1+1 phase VRM is more than capable of handling any CoreForge C5 or C7 processor. The board features a primary PCIe 5.0 x16 slot and two PCIe 4.0 M.2 slots, ensuring that storage and graphics are not bottlenecked. This board proves that a powerful and responsive gaming PC can be built on a sensible budget by leveraging the excellent value of the mature DDR4 memory ecosystem.`,
@@ -2497,8 +2422,7 @@ export const products = [
     name: 'Tectonic Systems Forge I-HL860',
     slug: 'tectonic-systems-forge-i-hl860',
     brand: 'Tectonic Systems',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfQIjhaN2paTJI5vlbhtmOd9pVRK41ZPfnFCzs',
+    imageUrl: 'HdnlnX9Cx4ZfQIjhaN2paTJI5vlbhtmOd9pVRK41ZPfnFCzs',
     productType: ProductType.MOTHERBOARD,
     shortDescription: `A compact and powerful Mini-ITX motherboard for Helion and Quantum Leap CPUs. It is designed for high-performance Small Form Factor (SFF) builds without compromise.`,
     longDescription: `The Tectonic Systems Forge I-HL860 packs immense power into a tiny 17x17cm frame. A direct 10+1+1 phase digital VRM with 90A stages provides stable power for even high-end CPUs. It features a steel-reinforced PCIe 5.0 x16 slot and two M.2 slots, one PCIe 5.0 and one PCIe 4.0, located on the front and back of the board. An active VRM and M.2 cooling solution ensures components stay cool within a restrictive SFF chassis. It is the perfect, no-compromise choice for a portable LAN rig or a compact media powerhouse.`,
@@ -2532,8 +2456,7 @@ export const products = [
     name: 'Apex Boards Element CF750',
     slug: 'apex-boards-element-cf750',
     brand: 'Apex Boards',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfPvY35FAm08KXtcQgpNd1u6LyGj4bvCT2REzF',
+    imageUrl: 'HdnlnX9Cx4ZfPvY35FAm08KXtcQgpNd1u6LyGj4bvCT2REzF',
     productType: ProductType.MOTHERBOARD,
     shortDescription: `An entry-level ATX motherboard for CoreForge CPUs. It provides all the essential features for a reliable first-time build or a straightforward office PC.`,
     longDescription: `The Apex Boards Element CF750 focuses on fundamentals and reliability. It offers a stable platform for any non-overclocking CoreForge CPU with its 8+1+1 phase power design. The board includes one PCIe 4.0 x16 slot, two M.2 slots for fast NVMe storage, and plenty of SATA ports for expansion. While it forgoes premium features like extensive RGB or Wi-Fi, it delivers on what matters most: stability, compatibility, and ease of use, making it an excellent starting point for any budget-conscious PC builder.`,
@@ -2567,8 +2490,7 @@ export const products = [
     name: 'Aegis Prime Ion ZT990I',
     slug: 'aegis-prime-ion-zt990i',
     brand: 'Aegis Prime',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4Zf9ZkMMDJGDgRzYuQfqonVCHWMsrZbiXp3e0Iy',
+    imageUrl: 'HdnlnX9Cx4Zf9ZkMMDJGDgRzYuQfqonVCHWMsrZbiXp3e0Iy',
     productType: ProductType.MOTHERBOARD,
     shortDescription: `A premium Mini-ITX motherboard for the Zentheon platform, designed to house top-tier CPUs in the smallest possible form factor.`,
     longDescription: `The Aegis Prime Ion ZT990I is a marvel of engineering, cramming the features of a full-sized enthusiast board into a Mini-ITX layout. It utilizes a 12-layer PCB and a direct 12+2+1 phase VRM to power even the Zentheon X9 9990X3D. Both the single PCIe x16 slot and the primary M.2 slot support the full PCIe 5.0 standard. To manage thermals, it includes a stacked heatsink design for the M.2 drives and chipset. With 5 GbE LAN, Wi-Fi 7, and USB4, this board makes zero compromises on performance or connectivity.`,
@@ -2602,8 +2524,7 @@ export const products = [
     name: 'Foundation Logic Node I-BZ930',
     slug: 'foundation-logic-node-i-bz930',
     brand: 'Foundation Logic',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfgEmxlV5aRiy0zlbfvUFoXStQsrkN1mKLP5xG',
+    imageUrl: 'HdnlnX9Cx4ZfgEmxlV5aRiy0zlbfvUFoXStQsrkN1mKLP5xG',
     productType: ProductType.MOTHERBOARD,
     shortDescription: `A compact and affordable Mini-ITX motherboard for Zentheon CPUs. It is perfect for building a small home theater PC or a budget-friendly SFF gaming rig.`,
     longDescription: `The Foundation Logic Node I-BZ930 brings the SFF form factor to the masses. It is designed to pair perfectly with APUs or efficient CPUs like the Zentheon X3. The board includes all the necessities: a PCIe 4.0 x16 slot for a discrete GPU, two M.2 slots for NVMe storage, and capable networking with 2.5 GbE LAN and included Wi-Fi 6E. Its simple but effective VRM and heatsink design ensure reliable operation for media playback and 1080p gaming in a tiny footprint.`,
@@ -2638,8 +2559,7 @@ export const products = [
     name: 'Tectonic Systems Quake ZT990-X',
     slug: 'tectonic-systems-quake-zt990-x',
     brand: 'Tectonic Systems',
-    imageUrl:
-      'https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZftVjjHRBSVejMQq2gTr0IYRlEzHvXC8On1cpL',
+    imageUrl: 'HdnlnX9Cx4ZftVjjHRBSVejMQq2gTr0IYRlEzHvXC8On1cpL',
     productType: ProductType.MOTHERBOARD,
     shortDescription: `A high-end ATX motherboard for Zentheon processors, focusing on extreme stability, robust cooling, and a clean, powerful aesthetic for performance enthusiasts.`,
     longDescription: `The Tectonic Systems Quake ZT990-X is built like a vault. Its primary focus is delivering unwavering power and thermal performance for sustained, high-end gaming and content creation. It features a formidable 20+2 phase VRM covered by massive, finned heatsinks that are interconnected via heatpipe. The entire M.2 and chipset area is covered by a single, heavy metal plate for thermal and structural integrity. With dual PCIe 5.0 M.2 slots, 5 GbE networking, and a minimalist, industrial design, it is the choice for builders who value substance and stability above all else.`,
