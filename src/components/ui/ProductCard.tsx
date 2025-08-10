@@ -79,7 +79,7 @@ export default function ProductCard({
           )}
           <Image
             className={imageClassNames}
-            src={product.imageUrl}
+            src={`https://utfs.io/a/5sfnefg5kv/${product.imageUrl}`}
             alt={product.name}
             height={239}
             width={239}
@@ -153,7 +153,7 @@ export default function ProductCard({
           )}
           <Image
             className={imageClassNames}
-            src={product.imageUrl}
+            src={`https://utfs.io/a/5sfnefg5kv/${product.imageUrl}`}
             alt={product.name}
             height={239}
             width={239}
