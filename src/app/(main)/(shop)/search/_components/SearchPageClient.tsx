@@ -22,23 +22,30 @@ export default function SearchPageClient({
 }: SearchPageClientProps) {
   return (
     <main className='mx-auto max-w-7-xl px-4 sm:px-6 lg:px-8'>
-      <div className='border-b border-gray-700 pt-12 pb-6'>
-        <h1 className='text-4xl font-bold tracking-tight text-white'>
+      <div className='border-b border-gray-500 pt-12 pb-3'>
+        <h1 className='text-4xl font-bold tracking-tight underline'>
           Products
         </h1>
-        <p className='mt-4 text-gray-400'>
+        <p className='mt-2 text-gray-400'>
           Browse our curated selection of high-performance components.
         </p>
       </div>
       <section className='pt-12 pb-24'>
-        <div className='grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4'>
-          <aside className='hidden lg:block'>
-            <h2 className='sr-only'>Filters</h2>
+        <div className='grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-6'>
+          <aside className='hidden lg:block border-r-2 border-gray-700 pr-4 lg:col-span-1'>
+            <div>
+              <h2 className='text-3xl font-bold'>Search Filters</h2>
+              <p className='text-gray-400'>
+                Find the Product you search using our Product Filters.
+              </p>
+            </div>
             <SearchFilters brands={brands} categories={categories} />
           </aside>
-          <div className='lg:col-span-3'>
-            <div className='flex items-center justify-between border-b border-gray-700 pb-4'>
-              <p className='text-gray-400'>{initialProducts.length} Results</p>
+          <div className='lg:col-span-5'>
+            <div className='flex items-center justify-between border-b-2 border-gray-700 pb-4'>
+              <p className='text-gray-400'>
+                {initialProducts.length} Results found matching the Search
+              </p>
               {/* TODO: Build SortDropdown component that uses 'sortBy' and 'setSortBy' */}
             </div>
             <div className='mt-6 flex flex-wrap gap-8'>
