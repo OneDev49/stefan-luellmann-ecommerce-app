@@ -22,23 +22,27 @@ export default function BreadcrumbsSection({
       : category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
 
   return (
-    <div className='flex justify-start max-w-7xl m-auto'>
-      <section className={`${transparentCardClassName} text-sm text-gray-300 `}>
-        <Link href='/' className={textClassNames}>
-          Homepage
-        </Link>{' '}
-        {' / '}
-        <Link
-          href={`/search?category=${category.toLowerCase()}`}
-          className={textClassNames}
+    <div className='px-4'>
+      <div className='flex justify-start max-w-2xl lg:max-w-7xl m-auto'>
+        <section
+          className={`${transparentCardClassName} text-sm text-gray-300 `}
         >
-          {ADJUSTED_NAME}
-        </Link>{' '}
-        {' / '}
-        <span className={`${textClassNames} cursor-pointer`}>
-          {productName}
-        </span>
-      </section>
+          <Link href='/' className={textClassNames}>
+            Homepage
+          </Link>{' '}
+          {' / '}
+          <Link
+            href={`/search?category=${category.toLowerCase()}`}
+            className={textClassNames}
+          >
+            {ADJUSTED_NAME}
+          </Link>{' '}
+          {' / '}
+          <span className={`${textClassNames} cursor-pointer`}>
+            {productName}
+          </span>
+        </section>
+      </div>
     </div>
   );
 }

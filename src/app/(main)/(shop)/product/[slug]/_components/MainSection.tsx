@@ -12,7 +12,7 @@ export default function MainSection({ productItem }: mainSectionProps) {
   const { average, totalCount } = calculateAverageRating(productItem);
 
   const transparentCardClassName = clsx(
-    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl p-8 max-w-7xl m-auto'
+    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl p-8 max-w-2xl lg:max-w-7xl m-auto items-center lg:items-start'
   );
 
   const stockClassNames = clsx(
@@ -35,18 +35,18 @@ export default function MainSection({ productItem }: mainSectionProps) {
 
   return (
     <section
-      className={`${transparentCardClassName} flex justify-between w-full`}
+      className={`${transparentCardClassName} flex flex-col lg:flex-row justify-between w-full gap-8`}
     >
-      <div className='flex-[50%] flex flex-col gap-5 max-w-[475px]'>
-        <div className='h-[475px] w-[475px] bg-white grid place-items-center rounded-3xl overflow-hidden relative'>
+      <div className='w-full lg:flex-[50%] flex flex-col gap-5 lg:max-w-[475px]'>
+        <div className='lg:max-h-[475px] lg:max-w-[475px] bg-white grid place-items-center rounded-3xl overflow-hidden relative'>
           {productItem.isOnSale && (
             <div className='absolute select-none bg-red-700 h-8 grid place-items-center w-40 top-[20px] right-[-40px] rotate-45 z-50 will-change-transform text-xl'>
               On Sale
             </div>
           )}
           <Image
-            className='object-contain w-full'
-            src={productItem.imageUrl}
+            className='object-contain lg:w-full'
+            src={`https://utfs.io/a/5sfnefg5kv/${productItem.imageUrl}`}
             height={280}
             width={480}
             alt={productItem.name}
@@ -54,7 +54,7 @@ export default function MainSection({ productItem }: mainSectionProps) {
             loading='eager'
           />
         </div>
-        <div className='grid grid-cols-5 gap-2 place-items-center'>
+        <div className='hidden grid-cols-5 gap-2 place-items-center lg:grid'>
           <div className={imageGridClassName}></div>
           <div className={imageGridClassName}></div>
           <div className={imageGridClassName}></div>
