@@ -9,6 +9,9 @@ import MenuIcon from '../icons/ui/MenuIcon';
 import { useSearchParams } from 'next/navigation';
 import clsx from 'clsx';
 import useEmblaCarousel from 'embla-carousel-react';
+import { useState } from 'react';
+import RightSidenav from './_components/RightSidenav';
+import LeftSidenav from './_components/LeftSidenav';
 
 export default function HeaderLayout() {
   const [emblaRef] = useEmblaCarousel({
@@ -36,8 +39,155 @@ export default function HeaderLayout() {
     { name: 'Webcam', slug: 'webcam' },
   ];
 
+  const leftSidenavSideMenus = [
+    {
+      heading: 'Computer Components',
+      categories: [
+        {
+          name: 'CPU',
+          slug: 'cpu',
+          brands: ['Axion', 'CoreForge', 'Helion', 'QuantumLeap', 'Zentheon'],
+        },
+        {
+          name: 'GPU',
+          slug: 'gpu',
+          brands: [
+            'AetherFlux',
+            'ChronoShift',
+            'Geode',
+            'NoveCore',
+            'Pixelis',
+            'Singularity',
+            'Vexel',
+          ],
+        },
+        {
+          name: 'RAM',
+          slug: 'ram',
+          brands: [
+            'Aethelred',
+            'Hypercore',
+            'Momentum Storage',
+            'Synapse Memory',
+            'Veritas Digital',
+          ],
+        },
+        {
+          name: 'SSD',
+          slug: 'ssd',
+          brands: [
+            'Hypercore',
+            'Momentum Storage',
+            'Quicksilicon',
+            'Synapse Memory',
+            'Veritas Digital',
+          ],
+        },
+        {
+          name: 'HDD',
+          slug: 'hdd',
+          brands: ['Momentum Storage', 'TerraVault', 'Veritas Digital'],
+        },
+        {
+          name: 'Motherboard',
+          slug: 'motherboard',
+          brands: [
+            'Aegis Prime',
+            'Apex Boards',
+            'Foundation Logic',
+            'Tectonic Systems',
+          ],
+        },
+        {
+          name: 'Power Supply',
+          slug: 'power',
+          brands: ['Example'],
+        },
+        {
+          name: 'Case',
+          slug: 'case',
+          brands: ['Example'],
+        },
+        {
+          name: 'Cooling',
+          slug: 'cooling',
+          brands: ['Example'],
+        },
+        {
+          name: 'Case Fan',
+          slug: 'casefan',
+          brands: ['Example'],
+        },
+      ],
+    },
+    {
+      heading: 'Computer Extras',
+      categories: [
+        {
+          name: 'Monitor',
+          slug: 'monitor',
+          brands: ['Example'],
+        },
+        {
+          name: 'Keyboard',
+          slug: 'keyboard',
+          brands: ['Example'],
+        },
+        {
+          name: 'Mouse',
+          slug: 'mouse',
+          brands: ['Example'],
+        },
+        {
+          name: 'Headset',
+          slug: 'headset',
+          brands: ['Example'],
+        },
+        {
+          name: 'Microphone',
+          slug: 'microphone',
+          brands: ['Example'],
+        },
+        {
+          name: 'Webcam',
+          slug: 'webcam',
+          brands: ['Example'],
+        },
+      ],
+    },
+    {
+      heading: 'Other Electronics',
+      categories: [
+        {
+          name: 'Laptop',
+          slug: 'laptop',
+          brands: ['Example'],
+        },
+      ],
+    },
+  ];
+
   const searchParams = useSearchParams();
   const activeCategory = searchParams.get('category');
+
+  type SidenavView = 'left' | 'right-wishlist' | 'right-cart';
+
+  const [openSidenav, setOpenSidenav] = useState<SidenavView | null>(null);
+
+  const [isClosing, setIsClosing] = useState(false);
+
+  const handleOpenSidenav = (view: SidenavView) => {
+    setIsClosing(false);
+    setOpenSidenav(view);
+  };
+
+  const handleCloseSidenav = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setOpenSidenav(null);
+      setIsClosing(false);
+    }, 300);
+  };
 
   const linkTransitionClassNames = clsx('hover:text-[#53ff5f] transition-all');
   const bottomLinksClassNames = clsx('py-1 px-2 rounded-md transition-colors');
@@ -54,14 +204,20 @@ export default function HeaderLayout() {
           />
         </Link>
         <div className='flex gap-4'>
-          <div className='cursor-pointer'>
+          <div
+            className='cursor-pointer'
+            onClick={() => handleOpenSidenav('right-cart')}
+          >
             <CartIcon
               className={linkTransitionClassNames}
               width={38}
               height='100%'
             />
           </div>
-          <div className='relative cursor-pointer'>
+          <div
+            className='relative cursor-pointer'
+            onClick={() => handleOpenSidenav('right-wishlist')}
+          >
             <div className='absolute bg-[#0c4800] h-5 w-5 text-sm grid place-items-center top-0 -right-2 rounded-full text-[#53ff5f]'>
               0
             </div>
@@ -91,7 +247,10 @@ export default function HeaderLayout() {
         </div>
       </div>
       <div className='border-white border-t border-b flex items-center whitespace-nowrap text-lg py-1'>
-        <div className='border-r sm:border-0'>
+        <div
+          className='border-r sm:border-0'
+          onClick={() => handleOpenSidenav('left')}
+        >
           <MenuIcon
             height='100%'
             width={40}
@@ -126,6 +285,27 @@ export default function HeaderLayout() {
           </div>
         </nav>
       </div>
+      {openSidenav === 'right-cart' && (
+        <RightSidenav
+          onClose={handleCloseSidenav}
+          isClosing={isClosing}
+          activeTab='cart'
+        />
+      )}
+      {openSidenav === 'right-wishlist' && (
+        <RightSidenav
+          onClose={handleCloseSidenav}
+          isClosing={isClosing}
+          activeTab='wishlist'
+        />
+      )}
+      {openSidenav === 'left' && (
+        <LeftSidenav
+          onClose={handleCloseSidenav}
+          isClosing={isClosing}
+          sideMenus={leftSidenavSideMenus}
+        />
+      )}
     </header>
   );
 }
