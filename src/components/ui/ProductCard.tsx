@@ -31,8 +31,7 @@ export default function ProductCard({
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    addToCart(product);
-    console.log('Added to Cart!');
+    addToCart(product, 1);
   };
 
   const wrapperClassNames = clsx(
