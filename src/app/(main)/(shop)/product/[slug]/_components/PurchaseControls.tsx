@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import { Product } from '@prisma/client';
-import { addToCart, addToWishlist } from '@/lib/cart-actions';
+import { addToWishlist } from '@/lib/cart-actions';
+import { useCartStore } from '@/store/cartStore';
+import { useWishlistStore } from '@/store/wishlistStore';
 import QuantitySelector from '@/components/ui/QuantitySelector';
 import Button from '@/components/ui/Button';
 import HeartIcon from '@/components/icons/ecommerce/HeartIcon';
@@ -15,9 +17,10 @@ interface PurchaseControlsProps {
 export default function PurchaseControls({ product }: PurchaseControlsProps) {
   const [quantity, setQuantity] = useState(1);
 
+  const addToCart = useCartStore((state) => state.addToCart);
+
   const handleAddToCart = () => {
-    console.log(`Adding ${quantity} of ${product.name} to Cart`);
-    // TODO: Add Zustand add to cart later
+    addToCart(product, quantity);
   };
 
   const handleAddToWishlist = () => {
