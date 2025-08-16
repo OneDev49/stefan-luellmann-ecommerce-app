@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import Rating from './Rating';
@@ -6,8 +8,8 @@ import CartIcon from '../icons/ecommerce/CartIcon';
 import HeartIcon from '../icons/ecommerce/HeartIcon';
 import clsx from 'clsx';
 import { Product } from '@prisma/client';
-import { addToCart, addToWishlist } from '@/lib/cart-actions';
 import { calculateAverageRating } from '@/lib/calculateRating';
+import { useCartStore } from '@/store/cartStore';
 
 interface ProductCardProps {
   variant?: 'standard' | 'compact' | 'sale';
@@ -22,17 +24,16 @@ export default function ProductCard({
 }: ProductCardProps) {
   const { average, totalCount } = calculateAverageRating(product);
 
-  // General Helper
-  const createActionHandler =
-    (action: (product: any) => void) => (e: React.MouseEvent) => {
-      e.stopPropagation();
-      e.preventDefault();
-      action(product);
-    };
+  /* Store AddToCart */
+  const addToCart = useCartStore((state) => state.addToCart);
 
-  // Handlers
-  const handleAddToCart = createActionHandler(addToCart);
-  const handleAddToWishlist = createActionHandler(addToWishlist);
+  /* Button Handler */
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    addToCart(product);
+    console.log('Added to Cart!');
+  };
 
   const wrapperClassNames = clsx(
     'group',
@@ -125,7 +126,6 @@ export default function ProductCard({
             </>
           </Button>
           <Button
-            onClick={handleAddToWishlist}
             as='button'
             variant='tertiary'
             position='card'
