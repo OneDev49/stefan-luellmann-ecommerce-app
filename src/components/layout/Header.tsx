@@ -12,14 +12,24 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { useState } from 'react';
 import RightSidenav from './_components/RightSidenav';
 import LeftSidenav from './_components/LeftSidenav';
+import { useCartStore } from '@/store/cartStore';
 
 export default function HeaderLayout() {
+  /* Zustand Store for Header */
+  const cartItems = useCartStore((state) => state.items);
+  const totalItems = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  /* Embla Carousel for Bottom Header Navigation */
   const [emblaRef] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
     dragFree: true,
   });
 
+  /* Categories of Bottom Header Navigation */
   const categories = [
     { name: 'CPU', slug: 'cpu' },
     { name: 'Motherboard', slug: 'motherboard' },
@@ -39,6 +49,7 @@ export default function HeaderLayout() {
     { name: 'Webcam', slug: 'webcam' },
   ];
 
+  /* Content of the LeftSidenav */
   const leftSidenavSideMenus = [
     {
       heading: 'Computer Components',
@@ -170,17 +181,14 @@ export default function HeaderLayout() {
   const searchParams = useSearchParams();
   const activeCategory = searchParams.get('category');
 
+  /* Necessary type and const declaration for Sidenavs */
   type SidenavView = 'left' | 'right-wishlist' | 'right-cart';
-
   const [openSidenav, setOpenSidenav] = useState<SidenavView | null>(null);
-
   const [isClosing, setIsClosing] = useState(false);
-
   const handleOpenSidenav = (view: SidenavView) => {
     setIsClosing(false);
     setOpenSidenav(view);
   };
-
   const handleCloseSidenav = () => {
     setIsClosing(true);
     setTimeout(() => {
@@ -205,9 +213,14 @@ export default function HeaderLayout() {
         </Link>
         <div className='flex gap-4'>
           <div
-            className='cursor-pointer'
+            className='relative cursor-pointer'
             onClick={() => handleOpenSidenav('right-cart')}
           >
+            {totalItems > 0 && (
+              <div className='absolute bg-[#0c4800] h-5 w-5 text-sm grid place-items-center top-0 -right-2 rounded-full text-[#53ff5f]'>
+                {totalItems}
+              </div>
+            )}
             <CartIcon
               className={linkTransitionClassNames}
               width={38}
@@ -218,9 +231,6 @@ export default function HeaderLayout() {
             className='relative cursor-pointer'
             onClick={() => handleOpenSidenav('right-wishlist')}
           >
-            <div className='absolute bg-[#0c4800] h-5 w-5 text-sm grid place-items-center top-0 -right-2 rounded-full text-[#53ff5f]'>
-              0
-            </div>
             <HeartIcon
               className={linkTransitionClassNames}
               width={35}
