@@ -8,7 +8,7 @@ export interface CartItem extends Product {
 
 interface CartState {
   items: CartItem[];
-  addToCart: (product: Product) => void;
+  addToCart: (product: Product, quantity: number) => void;
   removeFromCart: (productId: string) => void;
   clearCart: () => void;
 }
@@ -18,20 +18,20 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
 
-      addToCart: (product) => {
+      addToCart: (product, quantity) => {
         const cart = get();
         const existingItem = cart.items.find((item) => item.id === product.id);
 
         if (existingItem) {
           const updatedItems = cart.items.map((item) =>
             item.id === product.id
-              ? { ...item, quantity: item.quantity + 1 }
+              ? { ...item, quantity: item.quantity + quantity }
               : item
           );
           set({ items: updatedItems });
         } else {
           set((state) => ({
-            items: [...state.items, { ...product, quantity: 1 }],
+            items: [...state.items, { ...product, quantity }],
           }));
         }
       },
