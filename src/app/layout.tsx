@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { ImprovedToaster } from '@/components/ui/ImprovedToaster';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,7 +14,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className='font-texts text-white bg-[#031105]'>{children}</body>
+      <body className='font-texts text-white bg-[#001B03]'>{children}</body>
+      <ImprovedToaster
+        position='bottom-right'
+        reverseOrder={false}
+        toastOptions={{
+          className: 'bg-gray-800 text-white border border-gray-700',
+          duration: 2000,
+        }}
+        max={5}
+      />
     </html>
   );
 }

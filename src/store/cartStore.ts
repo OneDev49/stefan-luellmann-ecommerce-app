@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { Product } from '@prisma/client';
+import { toast } from 'react-hot-toast';
 
 export interface CartItem extends Product {
   quantity: number;
@@ -12,7 +13,7 @@ interface CartState {
   removeFromCart: (productId: string) => void;
   clearCart: () => void;
 }
-
+('');
 export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
@@ -29,17 +30,24 @@ export const useCartStore = create<CartState>()(
               : item
           );
           set({ items: updatedItems });
+          toast.success(`${quantity} x ${product.name} added to cart!`);
         } else {
           set((state) => ({
             items: [...state.items, { ...product, quantity }],
           }));
+          toast.success(`${quantity} x ${product.name} added to cart!`);
         }
       },
 
       removeFromCart: (productId) => {
+        const itemToRemove = get().items.find((item) => item.id === productId);
         set((state) => ({
           items: state.items.filter((item) => item.id !== productId),
         }));
+
+        if (itemToRemove) {
+          toast.error(`${itemToRemove.name} removed from cart.`);
+        }
       },
 
       clearCart: () => {
