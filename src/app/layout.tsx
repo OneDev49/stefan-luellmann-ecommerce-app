@@ -14,16 +14,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className='font-texts text-white bg-[#001B03]'>{children}</body>
-      <ImprovedToaster
-        position='bottom-right'
-        reverseOrder={false}
-        toastOptions={{
-          className: 'bg-gray-800 text-white border border-gray-700',
-          duration: 2000,
-        }}
-        max={5}
-      />
+      <body className='font-texts text-white bg-[#001B03]'>
+        {children}
+        <ImprovedToaster
+          position='bottom-right'
+          reverseOrder={false}
+          toastOptions={{
+            className: 'bg-gray-800 text-white border border-gray-700',
+            duration: 2000,
+          }}
+          max={5}
+        />
+      </body>
     </html>
   );
 }
