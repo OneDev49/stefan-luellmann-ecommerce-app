@@ -17,14 +17,29 @@ interface PurchaseControlsProps {
 export default function PurchaseControls({ product }: PurchaseControlsProps) {
   const [quantity, setQuantity] = useState(1);
 
+  /* Zustand Cart Store */
   const addToCart = useCartStore((state) => state.addToCart);
 
+  /* Zustand Wishlist Store */
+  const addToWishlist = useWishlistStore((state) => state.addToWishlist);
+  const removeFromWishlist = useWishlistStore(
+    (state) => state.removeFromWishlist
+  );
+  const isInWishlist = useWishlistStore((state) =>
+    state.isProductInWishlist(product.id)
+  );
+
+  /* Button Handlers */
   const handleAddToCart = () => {
     addToCart(product, quantity);
   };
 
   const handleAddToWishlist = () => {
-    addToWishlist(product);
+    if (isInWishlist) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(product);
+    }
   };
 
   return (
@@ -57,7 +72,11 @@ export default function PurchaseControls({ product }: PurchaseControlsProps) {
         className='text-lg'
         children={
           <>
-            <HeartIcon />
+            {isInWishlist ? (
+              <HeartIcon variant='solid' />
+            ) : (
+              <HeartIcon variant='regular' />
+            )}
             <span>Add to Wishlist</span>
           </>
         }
