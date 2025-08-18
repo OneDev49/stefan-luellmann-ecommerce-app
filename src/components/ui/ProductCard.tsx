@@ -10,6 +10,7 @@ import clsx from 'clsx';
 import { Product } from '@prisma/client';
 import { calculateAverageRating } from '@/lib/calculateRating';
 import { useCartStore } from '@/store/cartStore';
+import { useWishlistStore } from '@/store/wishlistStore';
 
 interface ProductCardProps {
   variant?: 'standard' | 'compact' | 'sale';
@@ -27,11 +28,30 @@ export default function ProductCard({
   /* Store AddToCart */
   const addToCart = useCartStore((state) => state.addToCart);
 
+  /* Wishlist AddToWishlist */
+  const addToWishlist = useWishlistStore((state) => state.addToWishlist);
+  const removeFromWishlist = useWishlistStore(
+    (state) => state.removeFromWishlist
+  );
+  const isInWishlist = useWishlistStore((state) =>
+    state.isProductInWishlist(product.id)
+  );
+
   /* Button Handler */
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
     addToCart(product, 1);
+  };
+
+  const handleAddToWishlist = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (isInWishlist) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(product);
+    }
   };
 
   const wrapperClassNames = clsx(
@@ -90,7 +110,7 @@ export default function ProductCard({
           <Rating rating={average} size='small' />
           <span>({totalCount})</span>
         </div>
-        {product.isOnSale && product.reducedPrice ? (
+        {product.isOnSale && product.reducedPrice !== null ? (
           <div className='flex flex-col'>
             <span className='text-lg font-headings line-through font-normal'>
               {product.price}€
@@ -125,6 +145,7 @@ export default function ProductCard({
             </>
           </Button>
           <Button
+            onClick={handleAddToWishlist}
             as='button'
             variant='tertiary'
             position='card'
@@ -133,7 +154,11 @@ export default function ProductCard({
             className={buttonClassName || undefined}
           >
             <>
-              <HeartIcon />
+              {isInWishlist ? (
+                <HeartIcon variant='solid' />
+              ) : (
+                <HeartIcon variant='regular' />
+              )}
             </>
           </Button>
         </div>
@@ -159,7 +184,7 @@ export default function ProductCard({
           />
         </div>
         <h3 className={headingClassNames}>{product.name}</h3>
-        {product.isOnSale && product.reducedPrice ? (
+        {product.isOnSale && product.reducedPrice !== null ? (
           <div className='flex flex-col'>
             <span className='text-lg font-headings line-through font-normal'>
               {product.price}€
