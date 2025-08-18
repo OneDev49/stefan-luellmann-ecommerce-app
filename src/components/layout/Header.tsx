@@ -12,15 +12,18 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { useState } from 'react';
 import RightSidenav from './_components/RightSidenav';
 import LeftSidenav from './_components/LeftSidenav';
-import { useCartStore } from '@/store/cartStore';
+import { selectTotalItems, useCartStore } from '@/store/cartStore';
+import {
+  selectWishlistTotalItems,
+  useWishlistStore,
+} from '@/store/wishlistStore';
 
 export default function HeaderLayout() {
-  /* Zustand Store for Header */
-  const cartItems = useCartStore((state) => state.items);
-  const totalItems = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
+  /* Zustand Cart Store for Header */
+  const totalCartItems = useCartStore(selectTotalItems);
+
+  /* Zustand Wishlist Store for Header */
+  const totalWishlistItems = useWishlistStore(selectWishlistTotalItems);
 
   /* Embla Carousel for Bottom Header Navigation */
   const [emblaRef] = useEmblaCarousel({
@@ -216,9 +219,9 @@ export default function HeaderLayout() {
             className='relative cursor-pointer'
             onClick={() => handleOpenSidenav('right-cart')}
           >
-            {totalItems > 0 && (
+            {totalCartItems > 0 && (
               <div className='absolute bg-[#0c4800] h-5 w-5 text-sm grid place-items-center top-0 -right-2 rounded-full text-[#53ff5f]'>
-                {totalItems}
+                {totalCartItems}
               </div>
             )}
             <CartIcon
@@ -231,6 +234,11 @@ export default function HeaderLayout() {
             className='relative cursor-pointer'
             onClick={() => handleOpenSidenav('right-wishlist')}
           >
+            {totalWishlistItems > 0 && (
+              <div className='absolute bg-[#0c4800] h-5 w-5 text-sm grid place-items-center top-0 -right-2 rounded-full text-[#53ff5f]'>
+                {totalWishlistItems}
+              </div>
+            )}
             <HeartIcon
               className={linkTransitionClassNames}
               width={35}
