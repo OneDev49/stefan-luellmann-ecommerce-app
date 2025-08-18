@@ -13,7 +13,7 @@ interface CartState {
   removeFromCart: (productId: string) => void;
   clearCart: () => void;
 }
-('');
+
 export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
