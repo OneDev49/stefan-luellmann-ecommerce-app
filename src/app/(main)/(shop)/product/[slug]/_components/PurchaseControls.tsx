@@ -1,26 +1,26 @@
 'use client';
 
 import { useState } from 'react';
-import { Product } from '@prisma/client';
-import { addToWishlist } from '@/lib/cart-actions';
 import { useCartStore } from '@/store/cartStore';
 import { useWishlistStore } from '@/store/wishlistStore';
+
+import { ProductCardType } from '@/types/product';
+
 import QuantitySelector from '@/components/ui/QuantitySelector';
 import Button from '@/components/ui/Button';
 import HeartIcon from '@/components/icons/ecommerce/HeartIcon';
 import CartIcon from '@/components/icons/ecommerce/CartIcon';
 
 interface PurchaseControlsProps {
-  product: Product;
+  product: ProductCardType;
 }
 
 export default function PurchaseControls({ product }: PurchaseControlsProps) {
+  /* Quantity State for Quantity Input field */
   const [quantity, setQuantity] = useState(1);
 
-  /* Zustand Cart Store */
+  /* Zustand Cart and Wishlist State Management */
   const addToCart = useCartStore((state) => state.addToCart);
-
-  /* Zustand Wishlist Store */
   const addToWishlist = useWishlistStore((state) => state.addToWishlist);
   const removeFromWishlist = useWishlistStore(
     (state) => state.removeFromWishlist
@@ -29,11 +29,13 @@ export default function PurchaseControls({ product }: PurchaseControlsProps) {
     state.isProductInWishlist(product.id)
   );
 
-  /* Button Handlers */
+  /* Maximum Amount for the Quantity Input field */
+  const DEFAULT_MAX_QUANTITY = 10;
+
+  /* Handlers for PurchaseButtons */
   const handleAddToCart = () => {
     addToCart(product, quantity);
   };
-
   const handleAddToWishlist = () => {
     if (isInWishlist) {
       removeFromWishlist(product.id);
@@ -46,7 +48,7 @@ export default function PurchaseControls({ product }: PurchaseControlsProps) {
     <div className='flex flex-col gap-4 items-center sm:items-start'>
       <div className='flex flex-col sm:flex-row gap-4'>
         <QuantitySelector
-          maxQuantity={10}
+          maxQuantity={DEFAULT_MAX_QUANTITY}
           onQuantityChange={(newQuantity) => setQuantity(newQuantity)}
         />
         <Button

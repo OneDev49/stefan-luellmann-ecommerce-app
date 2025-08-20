@@ -1,9 +1,20 @@
 'use client';
 
-import clsx from 'clsx';
-import Rating from '@/components/ui/Rating';
 import { useState, useEffect } from 'react';
 
+import clsx from 'clsx';
+
+import Rating from '@/components/ui/Rating';
+
+interface Review {
+  name: string;
+  rating: number;
+  reviewDate: string;
+  title: string;
+  review: string;
+}
+
+/* Fake Reviews for the Products */
 const fakeReviews = [
   {
     name: 'Alex T.',
@@ -87,6 +98,7 @@ const fakeReviews = [
   },
 ];
 
+/* Shuffle the Fake Review Array to make it more realistic */
 const shuffleArray = (array: any[]) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -94,14 +106,6 @@ const shuffleArray = (array: any[]) => {
   }
   return array;
 };
-
-interface Review {
-  name: string;
-  rating: number;
-  reviewDate: string;
-  title: string;
-  review: string;
-}
 
 export default function CustomerReviewSection() {
   const [selectedReviews, setSelectedReviews] = useState<Review[]>([]);
