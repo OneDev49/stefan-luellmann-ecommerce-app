@@ -6,7 +6,12 @@ export interface CalculateRatingProps {
   fiveStarReviews: number;
 }
 
-export function calculateAverageRating(product: CalculateRatingProps) {
+export function calculateAverageRating(
+  variant: 'totalRatingCount' | 'averageRating',
+  product: CalculateRatingProps
+): number {
+  if (product === undefined) return 0;
+
   const totalReviewCount =
     product.oneStarReviews +
     product.twoStarReviews +
@@ -15,12 +20,7 @@ export function calculateAverageRating(product: CalculateRatingProps) {
     product.fiveStarReviews;
 
   // Return 0 if there are no reviews
-  if (totalReviewCount === 0) {
-    return {
-      average: 0,
-      totalCount: 0,
-    };
-  }
+  if (totalReviewCount === 0) return 0;
 
   const weightedTotal =
     product.oneStarReviews * 1 +
@@ -29,11 +29,10 @@ export function calculateAverageRating(product: CalculateRatingProps) {
     product.fourStarReviews * 4 +
     product.fiveStarReviews * 5;
 
-  const average = weightedTotal / totalReviewCount;
+  if (variant === 'averageRating') {
+    const average = weightedTotal / totalReviewCount;
+    return Number(Math.round(average * 10) / 10);
+  }
 
-  // Return average and totalReviewCount rouded to one decimal point
-  return {
-    average: Math.round(average * 10) / 10,
-    totalCount: totalReviewCount,
-  };
+  return totalReviewCount;
 }
