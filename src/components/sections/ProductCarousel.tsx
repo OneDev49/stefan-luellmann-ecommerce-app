@@ -1,6 +1,6 @@
 'use client';
 
-import { Product } from '@prisma/client';
+import { ProductCardType } from '@/types/product';
 import ProductCard from '../ui/ProductCard';
 import useEmblaCarousel from 'embla-carousel-react';
 import clsx from 'clsx';
@@ -8,7 +8,7 @@ import clsx from 'clsx';
 interface ProductCarouselProps {
   bgColor?: string;
   heading: string;
-  products: Product[];
+  products: ProductCardType[];
   productCardVariant?: 'standard' | 'compact' | 'sale';
   position?: 'mainpage' | 'productpage';
 }

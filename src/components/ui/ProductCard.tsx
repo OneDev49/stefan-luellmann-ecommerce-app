@@ -1,20 +1,21 @@
 'use client';
 
+import { ProductCardType } from '@/types/product';
+import { useCartStore } from '@/store/cartStore';
+import { useWishlistStore } from '@/store/wishlistStore';
+
+import clsx from 'clsx';
 import Link from 'next/link';
 import Image from 'next/image';
+
 import Rating from './Rating';
 import Button from './Button';
 import CartIcon from '../icons/ecommerce/CartIcon';
 import HeartIcon from '../icons/ecommerce/HeartIcon';
-import clsx from 'clsx';
-import { Product } from '@prisma/client';
-import { calculateAverageRating } from '@/lib/calculateRating';
-import { useCartStore } from '@/store/cartStore';
-import { useWishlistStore } from '@/store/wishlistStore';
 
 interface ProductCardProps {
   variant?: 'standard' | 'compact' | 'sale';
-  product: Product;
+  product: ProductCardType;
   buttonClassName?: string;
 }
 
@@ -23,8 +24,6 @@ export default function ProductCard({
   product,
   buttonClassName,
 }: ProductCardProps) {
-  const { average, totalCount } = calculateAverageRating(product);
-
   /* Store AddToCart */
   const addToCart = useCartStore((state) => state.addToCart);
 
@@ -54,6 +53,7 @@ export default function ProductCard({
     }
   };
 
+  /* CSS Classnames */
   const wrapperClassNames = clsx(
     'group',
     'flex',
@@ -68,7 +68,6 @@ export default function ProductCard({
     'border',
     'shadow-[0_4px_15px_3px_rgba(23,113,0,1)]'
   );
-
   const imageWrapperClassNames = clsx(
     'border',
     'border-white',
@@ -76,16 +75,13 @@ export default function ProductCard({
     'overflow-hidden',
     'relative'
   );
-
   const imageClassNames = clsx(
     'group-hover:scale-105',
     'transition-all',
     'max-h-64',
     'object-cover'
   );
-
   const headingClassNames = clsx('underline text-2xl line-clamp-1 font-bold');
-
   const priceClassNames = clsx('text-3xl font-headings font-bold');
 
   if (variant === 'standard') {
@@ -107,8 +103,8 @@ export default function ProductCard({
         </div>
         <h3 className={headingClassNames}>{product.name}</h3>
         <div className='flex items-center gap-2'>
-          <Rating rating={average} size='small' />
-          <span>({totalCount})</span>
+          <Rating rating={product.averageRating} size='small' />
+          <span>({product.totalRatingCount})</span>
         </div>
         {product.isOnSale && product.reducedPrice !== null ? (
           <div className='flex flex-col'>
