@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { Product } from '@prisma/client';
-import { toast } from 'react-hot-toast';
+import { ProductCardType } from '@/types/product';
+import toast from 'react-hot-toast';
 
-export interface CartItem extends Product {
+export interface CartItem extends ProductCardType {
   quantity: number;
 }
 
 interface CartState {
   items: CartItem[];
-  addToCart: (product: Product, quantity: number) => void;
+  addToCart: (product: ProductCardType, quantity: number) => void;
   removeFromCart: (productId: string) => void;
   clearCart: () => void;
 }

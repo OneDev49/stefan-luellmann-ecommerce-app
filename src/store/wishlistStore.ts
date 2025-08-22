@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import { Product } from '@prisma/client';
+import { ProductCardType } from '@/types/product';
 import toast from 'react-hot-toast';
 
 interface WishlistState {
-  items: Product[];
-  addToWishlist: (product: Product) => void;
+  items: ProductCardType[];
+  addToWishlist: (product: ProductCardType) => void;
   removeFromWishlist: (productId: string) => void;
   isProductInWishlist: (productId: string) => boolean;
   clearWishlist: () => void;
