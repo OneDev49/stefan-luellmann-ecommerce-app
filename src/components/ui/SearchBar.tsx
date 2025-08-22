@@ -1,8 +1,7 @@
-'use client';
+/* 'use client';
 
 import { useState, useEffect } from 'react';
 import { Product } from '@prisma/client';
-import { mockProducts } from '@/lib/mock-data';
 import Link from 'next/link';
 
 function useDebounce(value: string, delay: number) {
@@ -23,7 +22,7 @@ export default function SearchBar() {
 
   useEffect(() => {
     if (debouncedQuery) {
-      const searchResults = mockProducts.filter((product) =>
+      const searchResults = allMockProducts.filter((product) =>
         product.name.toLowerCase().includes(debouncedQuery.toLowerCase())
       );
       setResults(searchResults);
@@ -66,3 +65,4 @@ export default function SearchBar() {
     </div>
   );
 }
+ */
