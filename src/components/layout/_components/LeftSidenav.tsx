@@ -125,7 +125,7 @@ export default function LeftSidenav({
               <hr className={hrClassNames} />
               {sideMenus.map((sideMenu) => (
                 <>
-                  <div className={linkBlockClassNames}>
+                  <div key={sideMenu.heading} className={linkBlockClassNames}>
                     <h2 className={headingTwoClassNames}>{sideMenu.heading}</h2>
                     <ul className='list-none p-0 m-0 space-y-1'>
                       {sideMenu.categories.map((category) => (
