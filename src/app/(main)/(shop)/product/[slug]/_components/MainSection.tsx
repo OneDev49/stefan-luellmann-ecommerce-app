@@ -1,55 +1,66 @@
+import { ProductPageType } from '@/types/product';
+
 import Image from 'next/image';
 import clsx from 'clsx';
+
 import Rating from '@/components/ui/Rating';
 import PurchaseControls from './PurchaseControls';
-import { calculateAverageRating } from '@/lib/calculateRating';
 
 interface mainSectionProps {
-  productItem: any;
+  product: Pick<
+    ProductPageType,
+    | 'id'
+    | 'slug'
+    | 'stockCount'
+    | 'isOnSale'
+    | 'imageUrl'
+    | 'name'
+    | 'averageRating'
+    | 'totalRatingCount'
+    | 'reducedPrice'
+    | 'price'
+    | 'shortDescription'
+  >;
 }
 
-export default function MainSection({ productItem }: mainSectionProps) {
-  const { average, totalCount } = calculateAverageRating(productItem);
-
-  const transparentCardClassName = clsx(
-    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl p-8 max-w-2xl lg:max-w-7xl m-auto items-center lg:items-start'
-  );
-
-  const stockClassNames = clsx(
-    {
-      ['text-[#00ff55]']: productItem.stockCount >= 100,
-      ['text-[#ffe100]']: productItem.stockCount < 100,
-      ['text-[#ff0000]']: productItem.stockCount === 0,
-    },
-    'text-2xl'
-  );
-
-  const imageGridClassName = clsx('h-[75px] w-[75px] bg-white rounded-2xl');
-
+export default function MainSection({ product }: mainSectionProps) {
+  /* Determine Stock Text */
   const stockText =
-    productItem.stockCount === 0
+    product.stockCount === 0
       ? `Out of Stock`
-      : productItem.stockCount < 10 && productItem.stockCount > 0
+      : product.stockCount < 10 && product.stockCount > 0
       ? `Limited Stock`
       : `In Stock`;
 
+  /* CSS Classes */
+  const transparentCardClassName = clsx(
+    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl p-8 max-w-2xl lg:max-w-7xl m-auto items-center lg:items-start flex flex-col lg:flex-row justify-between w-full gap-8'
+  );
+  const stockClassName = clsx(
+    {
+      ['text-[#00ff55]']: product.stockCount >= 100,
+      ['text-[#ffe100]']: product.stockCount < 100,
+      ['text-[#ff0000]']: product.stockCount === 0,
+    },
+    'text-2xl'
+  );
+  const imageGridClassName = clsx('h-[75px] w-[75px] bg-white rounded-2xl');
+
   return (
-    <section
-      className={`${transparentCardClassName} flex flex-col lg:flex-row justify-between w-full gap-8`}
-    >
+    <section className={transparentCardClassName}>
       <div className='w-full lg:flex-[50%] flex flex-col gap-5 lg:max-w-[475px]'>
         <div className='lg:max-h-[475px] lg:max-w-[475px] bg-white grid place-items-center rounded-3xl overflow-hidden relative'>
-          {productItem.isOnSale && (
+          {product.isOnSale && (
             <div className='absolute select-none bg-red-700 h-8 grid place-items-center w-40 top-[20px] right-[-40px] rotate-45 z-50 will-change-transform text-xl'>
               On Sale
             </div>
           )}
           <Image
             className='object-contain lg:w-full'
-            src={`https://utfs.io/a/5sfnefg5kv/${productItem.imageUrl}`}
+            src={`https://utfs.io/a/5sfnefg5kv/${product.imageUrl}`}
             height={280}
             width={480}
-            alt={productItem.name}
+            alt={product.name}
             draggable='false'
             loading='eager'
           />
@@ -63,38 +74,34 @@ export default function MainSection({ productItem }: mainSectionProps) {
         </div>
       </div>
       <div className='flex-[50%] flex flex-col gap-8 max-w-[650px]'>
-        <h1 className='text-5xl font-bold underline'>{productItem.name}</h1>
+        <h1 className='text-5xl font-bold underline'>{product.name}</h1>
         <div className='flex flex-col gap-4'>
           {/* Rating */}
           <div className='flex items-center gap-2'>
-            <Rating rating={average} size='large' />
-            <span>({totalCount})</span>
+            <Rating rating={product.averageRating} size='large' />
+            <span>({product.totalRatingCount})</span>
           </div>
           <div className='font-bold flex items-center gap-2'>
-            <p className={stockClassNames}>{stockText}</p>
+            <p className={stockClassName}>{stockText}</p>
             <p>
-              |{' '}
-              {productItem.stockCount > 10
-                ? `>10`
-                : `${productItem.stockCount}`}{' '}
-              in Storage
+              | {product.stockCount > 10 ? `>10` : `${product.stockCount}`} in
+              Storage
             </p>
           </div>
         </div>
-        {productItem.isOnSale ? (
+        {product.isOnSale && product.reducedPrice !== null ? (
           <div className='flex items-center gap-2'>
             <div className='flex flex-col gap-1'>
               <span className='text-2xl font-headings line-through font-normal'>
-                {productItem.price}€
+                {product.price}€
               </span>
               <div className='flex items-start gap-4 text-[#ff4545] font-bold font-headings'>
-                <h2 className='text-4xl'>{productItem.reducedPrice}€*</h2>
+                <h2 className='text-4xl'>{product.reducedPrice}€*</h2>
                 <span className='text-xl'>
                   (
-                  {(
-                    (productItem.reducedPrice / productItem.price - 1) *
-                    100
-                  ).toFixed(0)}
+                  {((product.reducedPrice / product.price - 1) * 100).toFixed(
+                    0
+                  )}
                   % Off)
                 </span>
               </div>
@@ -105,14 +112,14 @@ export default function MainSection({ productItem }: mainSectionProps) {
           </div>
         ) : (
           <div className='flex flex-col gap-2'>
-            <h2 className='text-4xl font-bold'>{productItem.price}€*</h2>
+            <h2 className='text-4xl font-bold'>{product.price}€*</h2>
             <span className='text-sm'>* +19% VAT and Delivery Costs</span>
           </div>
         )}
         <div>
-          <p>{productItem.shortDescription}</p>
+          <p>{product.shortDescription}</p>
         </div>
-        <PurchaseControls product={productItem} />
+        <PurchaseControls product={product} />
       </div>
     </section>
   );

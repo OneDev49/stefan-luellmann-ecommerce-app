@@ -1,6 +1,7 @@
 'use client';
 
-import { Product } from '@prisma/client';
+import { ProductCardType } from '@/types/product';
+
 import ProductCard from '@/components/ui/ProductCard';
 import SearchFilters from './SearchFilters';
 
@@ -10,7 +11,7 @@ export interface CategoryFilterItem {
 }
 
 interface SearchPageClientProps {
-  initialProducts: Product[];
+  initialProducts: ProductCardType[];
   brands: string[];
   categories: CategoryFilterItem[];
 }

@@ -1,25 +1,29 @@
+import { ProductPageType } from '@/types/product';
+
 import Link from 'next/link';
 import clsx from 'clsx';
 
 interface BreadcrumbsSectionProps {
-  productName: string;
-  category: string;
+  product: Pick<ProductPageType, 'name' | 'productType'>;
 }
 
 export default function BreadcrumbsSection({
-  productName,
-  category,
+  product,
 }: BreadcrumbsSectionProps) {
+  /* Adjust font of ProductType */
+  const ADJUSTED_NAME =
+    product.productType === 'GPU' ||
+    product.productType === 'CPU' ||
+    product.productType === 'RAM'
+      ? product.productType
+      : product.productType.charAt(0).toUpperCase() +
+        product.productType.slice(1).toLowerCase();
+
+  /* CSS Classnames */
   const transparentCardClassName = clsx(
     'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-lg px-4 py-2'
   );
-
   const textClassNames = clsx('hover:text-white');
-
-  const ADJUSTED_NAME =
-    category === 'GPU' || category === 'CPU' || category === 'RAM'
-      ? category
-      : category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
 
   return (
     <div className='px-4'>
@@ -32,14 +36,14 @@ export default function BreadcrumbsSection({
           </Link>{' '}
           {' / '}
           <Link
-            href={`/search?category=${category.toLowerCase()}`}
+            href={`/search?category=${product.productType.toLowerCase()}`}
             className={textClassNames}
           >
             {ADJUSTED_NAME}
           </Link>{' '}
           {' / '}
           <span className={`${textClassNames} cursor-pointer`}>
-            {productName}
+            {product.name}
           </span>
         </section>
       </div>

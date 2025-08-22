@@ -1,13 +1,15 @@
 'use client';
 
-import { calculateAverageRating } from '@/lib/calculateRating';
-import type { Product } from '@prisma/client';
+import { ProductPageType } from '@/types/product';
+
 import Rating from '@/components/ui/Rating';
 import clsx from 'clsx';
 
 interface RatingSummaryProps {
   product: Pick<
-    Product,
+    ProductPageType,
+    | 'averageRating'
+    | 'totalRatingCount'
     | 'oneStarReviews'
     | 'twoStarReviews'
     | 'threeStarReviews'
@@ -17,8 +19,7 @@ interface RatingSummaryProps {
 }
 
 export default function RatingSummary({ product }: RatingSummaryProps) {
-  const { average, totalCount } = calculateAverageRating(product);
-
+  /* Rating Distribution for different Rating Amounts */
   const ratingDistribution = [
     { stars: 5, count: product.fiveStarReviews },
     { stars: 4, count: product.fourStarReviews },
@@ -27,24 +28,34 @@ export default function RatingSummary({ product }: RatingSummaryProps) {
     { stars: 1, count: product.oneStarReviews },
   ];
 
+  /* CSS Classnames */
   const transparentCardClassName = clsx(
     'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl p-8 flex flex-col gap-6'
   );
 
+  const barClassName = clsx(
+    'w-full lg:w-auto lg:min-w-48 bg-[#414141] h-4 relative overflow-hidden rounded-md'
+  );
+
   return (
     <section className={transparentCardClassName}>
-      <h2 className='text-4xl font-bold'>Rating</h2>
+      <h2 className='text-4xl font-bold'>Product Rating</h2>
       <div className='flex flex-col gap-2'>
-        <p className='font-bold text-xl'>{totalCount} Total Customer Ratings</p>
+        <p className='font-bold text-xl'>
+          {product.totalRatingCount} Total Customer Ratings
+        </p>
         <div className='flex items-center gap-2'>
-          <Rating rating={average} size='medium' />
-          <span className='font-bold'>{average} out of 5</span>
+          <Rating rating={product.averageRating} size='medium' />
+          <span className='font-bold'>{product.averageRating} out of 5</span>
         </div>
       </div>
 
       <div className='flex flex-col gap-2 mt-2'>
         {ratingDistribution.map(({ stars, count }) => {
-          const percentage = totalCount > 0 ? (count / totalCount) * 100 : 0;
+          const percentage =
+            product.totalRatingCount > 0
+              ? (count / product.totalRatingCount) * 100
+              : 0;
           const starText = stars === 1 ? 'Star' : 'Stars';
 
           return (
@@ -53,7 +64,7 @@ export default function RatingSummary({ product }: RatingSummaryProps) {
                 {stars} {starText}
               </span>
               <div className='flex w-full items-center gap-3'>
-                <div className='w-full lg:w-auto lg:min-w-48 bg-[#414141] h-4 relative overflow-hidden rounded-md'>
+                <div className={barClassName}>
                   <div
                     className='absolute bg-[#1eff00] top-0 bottom-0'
                     style={{ width: `${percentage}%` }}

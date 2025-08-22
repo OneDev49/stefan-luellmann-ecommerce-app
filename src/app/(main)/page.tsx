@@ -1,10 +1,13 @@
 import { prisma } from '@/lib/prisma';
+import { mapToProductCard } from '@/lib/mappers/product';
+
 import HeroSection from './_components/HeroSection';
 import ProductCarousel from '@/components/sections/ProductCarousel';
 import BrandCarousel from './_components/BrandSection';
 
 export default async function Home() {
-  const [onSaleProducts, featuredGPUs, newArrivals] = await Promise.all([
+  /* Prisma Query to DB */
+  const [onSaleProductsDB, featuredGPUsDB, newArrivalsDB] = await Promise.all([
     prisma.product.findMany({
       where: { isOnSale: true },
       take: 10,
@@ -19,6 +22,12 @@ export default async function Home() {
     }),
   ]);
 
+  /* Mappers for fetched Data */
+  const onSaleProducts = onSaleProductsDB.map(mapToProductCard);
+  const featuredGPUs = featuredGPUsDB.map(mapToProductCard);
+  const newArrivals = newArrivalsDB.map(mapToProductCard);
+
+  /* Brand Date for Brand Carousel */
   const brandData = [
     {
       src: 'HdnlnX9Cx4ZfVXf7BBTXalGvFiE9W3xbHfKh8MpBuyqn6T1C',
