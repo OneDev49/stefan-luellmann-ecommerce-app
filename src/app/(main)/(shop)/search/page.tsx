@@ -1,5 +1,8 @@
 import { prisma } from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
+
+import { mapToProductCard } from '@/lib/mappers/product';
+
 import SearchPageClient from './_components/SearchPageClient';
 
 export default async function SearchPage({
@@ -48,22 +51,26 @@ export default async function SearchPage({
   const baseWhereClause = { ...where };
   delete baseWhereClause.brand;
 
-  const [initialProducts, availableBrands, allCategories] = await Promise.all([
-    prisma.product.findMany({
-      where,
-      take: 50,
-    }),
+  const [initialProductsDB, availableBrands, allCategories] = await Promise.all(
+    [
+      prisma.product.findMany({
+        where,
+        take: 50,
+      }),
 
-    prisma.product.findMany({
-      where: baseWhereClause,
-      select: {
-        brand: true,
-      },
-      distinct: ['brand'],
-    }),
+      prisma.product.findMany({
+        where: baseWhereClause,
+        select: {
+          brand: true,
+        },
+        distinct: ['brand'],
+      }),
 
-    prisma.category.findMany({ select: { name: true, slug: true } }),
-  ]);
+      prisma.category.findMany({ select: { name: true, slug: true } }),
+    ]
+  );
+
+  const initialProducts = initialProductsDB.map(mapToProductCard);
 
   return (
     <SearchPageClient

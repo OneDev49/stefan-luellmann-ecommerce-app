@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { CategoryFilterItem } from './SearchPageClient';
+
 import clsx from 'clsx';
 
 interface SearchFiltersProps {
@@ -67,6 +68,7 @@ export default function SearchFilters({
     }));
   }, []);
 
+  /* CSS Classnames */
   const headingsClassNames = clsx(
     'block text-xl font-bold text-white font-headings'
   );
