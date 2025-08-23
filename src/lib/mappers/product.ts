@@ -51,6 +51,7 @@ export function mapToProductCard(product: Product): ProductCardType {
     slug: product.slug,
     imageUrl: product.imageUrl,
     price: product.price,
+    stockCount: product.stockCount,
     isOnSale: product.isOnSale,
     reducedPrice: product.reducedPrice,
     averageRating,
