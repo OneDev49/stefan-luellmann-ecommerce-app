@@ -16,6 +16,8 @@ import {
   selectWishlistTotalItems,
   useWishlistStore,
 } from '@/store/wishlistStore';
+import Button from '@/components/ui/Button';
+import TrashIcon from '@/components/icons/ecommerce/TrashIcon';
 
 interface RightSidenavProps {
   onClose: () => void;
@@ -126,12 +128,49 @@ export default function RightSidenav({
             <>
               {cartItems.length > 0 ? (
                 <div className='space-y-5'>
+                  <div className='border-b border-white pb-4 space-y-4'>
+                    <div className='space-y-2'>
+                      <strong className='text-xl flex justify-between items-center'>
+                        <span>Quantity of your Cart: </span>
+                        <span className='underline text-2xl'>
+                          {totalCartAmount}
+                        </span>
+                      </strong>
+                      <strong className='text-xl flex justify-between items-center'>
+                        <span>Your Cart Value: </span>
+                        <span className='underline text-2xl'>
+                          {totalCartValue.toFixed(2)}€
+                        </span>
+                      </strong>
+                    </div>
+                    <div className='flex justify-between'>
+                      <Button
+                        href='/checkout'
+                        onClick={onClose}
+                        variant='primary'
+                        position='card'
+                      >
+                        <CartIcon height={20} width={20} />
+                        To Checkout
+                      </Button>
+                      <Button
+                        as='button'
+                        type='button'
+                        onClick={clearCart}
+                        variant='danger'
+                        position='card'
+                      >
+                        <TrashIcon height={20} width={20} />
+                        Clear Cart
+                      </Button>
+                    </div>
+                  </div>
                   <ul className='list-none m-0 p-0 space-y-3'>
                     {cartItems.map((item) => (
                       <li key={item.id}>
                         <Link
                           href={`/product/${item.slug}`}
-                          className='p-2 border border-[#1e9c29] rounded-lg flex gap-2 justify-between bg-[#103d22]'
+                          className='p-2 border border-[#1e9c29] rounded-lg flex gap-2 justify-between bg-[#103d22] hover:bg-[#134929] transition-colors'
                           onClick={onClose}
                         >
                           <div className='flex gap-2'>
@@ -181,41 +220,20 @@ export default function RightSidenav({
                             </div>
                           </div>
                           <div className='min-w-4'>
-                            <button
+                            <Button
+                              as='button'
+                              variant='danger'
+                              position='standalone'
                               onClick={(e) => handleRemoveFromCart(e, item.id)}
-                              className='bg-red-500 rounded-sm'
+                              className='rounded-sm'
                             >
                               <CloseIcon height={20} width={20} />
-                            </button>
+                            </Button>
                           </div>
                         </Link>
                       </li>
                     ))}
                   </ul>
-                  <div className='border-t border-white pt-4 space-y-4'>
-                    <div className='space-y-2'>
-                      <strong className='text-xl flex justify-between items-center'>
-                        <span>Quantity of your Cart: </span>
-                        <span className='underline text-2xl'>
-                          {totalCartAmount}
-                        </span>
-                      </strong>
-                      <strong className='text-xl flex justify-between items-center'>
-                        <span>Your Cart Value: </span>
-                        <span className='underline text-2xl'>
-                          {totalCartValue.toFixed(2)}€
-                        </span>
-                      </strong>
-                    </div>
-                    <div className='ml-auto max-w-fit'>
-                      <button
-                        onClick={clearCart}
-                        className='bg-red-500 font-bold rounded-sm text-black px-3 py-1'
-                      >
-                        Clear Cart
-                      </button>
-                    </div>
-                  </div>
                 </div>
               ) : (
                 <p className={tabAnnouncerClassNames}>
@@ -228,12 +246,26 @@ export default function RightSidenav({
             <>
               {wishlistItems.length > 0 ? (
                 <div className='space-y-5'>
+                  <div className='border-b border-white pb-4 space-y-4'>
+                    <div className='ml-auto max-w-fit'>
+                      <Button
+                        as='button'
+                        type='button'
+                        variant='danger'
+                        position='card'
+                        onClick={clearWishlist}
+                      >
+                        <TrashIcon height={20} width={20} />
+                        Clear Wishlist
+                      </Button>
+                    </div>
+                  </div>
                   <ul className='list-none m-0 p-0 space-y-3'>
                     {wishlistItems.map((item) => (
                       <li key={item.id}>
                         <Link
                           href={`/product/${item.slug}`}
-                          className='p-2 border border-[#1e9c29] rounded-lg flex gap-2 justify-between bg-[#103d22]'
+                          className='p-2 border border-[#1e9c29] rounded-lg flex gap-2 justify-between bg-[#103d22] hover:bg-[#134929] transition-colors'
                           onClick={onClose}
                         >
                           <div className='flex gap-2'>
@@ -302,30 +334,23 @@ export default function RightSidenav({
                             </div>
                           </div>
                           <div className='min-w-4'>
-                            <button
+                            <Button
+                              as='button'
+                              type='button'
+                              variant='danger'
+                              position='standalone'
                               onClick={(e) =>
                                 handleRemoveFromWishlist(e, item.id)
                               }
                               className='bg-red-500 rounded-sm'
                             >
                               <CloseIcon height={20} width={20} />
-                            </button>
+                            </Button>
                           </div>
                         </Link>
                       </li>
                     ))}
                   </ul>
-                  <div className='border-t border-white pt-4 space-y-4'>
-                    <div className='ml-auto max-w-fit'>
-                      <button
-                        type='button'
-                        onClick={clearWishlist}
-                        className='bg-red-500 font-bold rounded-sm text-black px-3 py-1'
-                      >
-                        Clear Wishlist
-                      </button>
-                    </div>
-                  </div>
                 </div>
               ) : (
                 <div>
