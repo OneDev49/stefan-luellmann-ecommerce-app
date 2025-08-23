@@ -3,8 +3,8 @@ import React from 'react';
 import clsx from 'clsx';
 
 interface ButtonBaseProps {
-  variant?: 'primary' | 'secondary' | 'tertiary';
-  position?: 'card' | 'section';
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'danger';
+  position?: 'card' | 'section' | 'standalone';
   children: React.ReactNode;
   className?: string;
 }
@@ -37,10 +37,13 @@ export default function Button<C extends React.ElementType = typeof Link>({
         variant === 'secondary',
       [`bg-[rgba(0,0,0,0.4)] border border-white shadow-[0_4px_4px_0_rgba(255,255,255,0.5)] hover:bg-[rgba(0,0,0,1)]`]:
         variant === 'tertiary',
+      ['bg-[#ba1616] shadow-[0_4px_4px_0_rgba(172,0,0,0.5)] hover:bg-[#e41818]']:
+        variant === 'danger',
     },
     {
       ['p-[12px_18px] rounded-2xl']: position === 'section',
       ['p-[8px_12px] rounded-lg']: position === 'card',
+      ['']: position === 'standalone',
     }
   );
 
