@@ -36,6 +36,7 @@ export interface ProductCartWishlistType {
   slug: string;
   imageUrl: string;
   price: number;
+  stockCount: number;
   isOnSale: boolean;
   reducedPrice: number | null;
   averageRating: number;
