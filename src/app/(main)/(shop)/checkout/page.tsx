@@ -21,12 +21,12 @@ export default function CheckoutPage() {
     'bg-[rgb(87,87,87,0.2)] shadow-[0_4px_15px_0_rgb(0,0,0,1)]'
   );
   const checkoutContentClassName = clsx({
-    ['basis-9/12']: totalCartAmount > 0,
+    ['w-full md:basis-9/12']: totalCartAmount > 0,
     ['grow']: totalCartAmount === 0,
   });
 
   return (
-    <section className='max-w-7xl min-h-screen mx-auto my-6 flex gap-12 items-start'>
+    <section className='max-w-7xl min-h-screen mx-auto my-6 flex flex-col-reverse md:flex-row gap-4 lg:gap-12 items-start w-[98%] lg:w-[95%]'>
       <h1 className='sr-only'>Checkout</h1>
       <div
         className={`${checkoutContentClassName} ${transparentCardClassName}`}
@@ -37,11 +37,14 @@ export default function CheckoutPage() {
             : `${totalCartAmount} Product`}{' '}
           in your Cart
         </h2>
-        <div className='px-8'>
+        <div className='px-2 lg:px-8'>
           {cartItems.length > 0 ? (
             <ul className='list-none m-0'>
               {cartItems.map((item) => (
-                <li className='border-b border-[#6c6c6c] last:border-0 pt-6 pb-6'>
+                <li
+                  key={item.id}
+                  className='border-b border-[#6c6c6c] last:border-0 py-3 lg:py-6'
+                >
                   <CheckoutCard product={item} quantity={item.quantity} />
                 </li>
               ))}
@@ -63,7 +66,7 @@ export default function CheckoutPage() {
       </div>
       {cartItems.length > 0 && (
         <div
-          className={`basis-3/12 sticky top-28 space-y-6 ${transparentCardClassName}`}
+          className={`w-full md:basis-[300px] lg:basis-[320px] md:sticky md:top-28 space-y-6 ${transparentCardClassName}`}
         >
           <CheckoutTotal />
         </div>

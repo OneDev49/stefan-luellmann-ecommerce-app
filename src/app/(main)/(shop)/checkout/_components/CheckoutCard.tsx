@@ -21,14 +21,14 @@ export default function CheckoutCard({ product, quantity }: CheckoutCardProps) {
 
   return (
     <Link href={`/product/${product.slug}`} className='flex gap-4 group'>
-      <div className='max-w-48 rounded-xl overflow-hidden relative'>
+      <div className='max-w-48 h-full rounded-xl overflow-hidden relative'>
         {product.isOnSale && (
           <div className='absolute select-none bg-red-700 h-6 grid place-items-center w-40 top-[20px] right-[-40px] rotate-45 z-50 will-change-transform text-sm'>
             On Sale
           </div>
         )}
         <Image
-          className='object-contain lg:w-full group-hover:scale-105 transition-all'
+          className='object-contain w-full group-hover:scale-105 transition-all'
           src={`https://utfs.io/a/5sfnefg5kv/${product.imageUrl}`}
           height={200}
           width={200}
@@ -38,13 +38,16 @@ export default function CheckoutCard({ product, quantity }: CheckoutCardProps) {
         />
       </div>
       <div className='w-full space-y-4'>
-        <div className='flex justify-between items-center'>
-          <h3 className='flex items-center gap-3'>
-            <span className='text-2xl font-bold'>{product.name}</span>
+        <div className='flex justify-between gap-4 items-start'>
+          <div>
             <span className='text-sm text-[#2aff00]'>
               ({quantity} in your Cart)
             </span>
-          </h3>
+            <h3 className='flex items-center gap-3'>
+              <span className='text-2xl font-bold'>{product.name}</span>
+            </h3>
+          </div>
+
           <button
             onClick={(e) => handleRemoveFromCart(e, product.id)}
             className='bg-red-500 rounded-sm'
