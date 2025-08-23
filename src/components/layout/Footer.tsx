@@ -60,12 +60,12 @@ export default function FooterLayout() {
               <strong className='underline text-lg'>More of Entro</strong>
               <ul className='list-none p-0 m-0 underline text-white pt-1 flex flex-col gap-1'>
                 <li>
-                  <Link className={hoverClassNames} href='/legal-notice'>
+                  <Link className={hoverClassNames} href='/impressum'>
                     Legal Notice
                   </Link>
                 </li>
                 <li>
-                  <Link className={hoverClassNames} href='/privacy-policy'>
+                  <Link className={hoverClassNames} href='/datenschutz'>
                     Privacy Policy
                   </Link>
                 </li>
