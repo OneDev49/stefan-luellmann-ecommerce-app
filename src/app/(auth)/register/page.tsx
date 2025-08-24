@@ -37,8 +37,12 @@ export default function LoginPage() {
     console.log('Success!');
   };
 
+  /* CSS ClassNames */
   const transparentCardClassName = clsx(
     'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl max-w-7xl m-auto flex flex-col justify-between overflow-hidden'
+  );
+  const linkHoverClassName = clsx(
+    'underline hover:text-[#00ff1e] transition-all'
   );
 
   return (
@@ -93,8 +97,14 @@ export default function LoginPage() {
             className='h-4 w-4 rounded border-gray-600 bg-gray-800 text-[#00ff1e] focus:ring-[#00ff1e]'
           />
           <label htmlFor='terms'>
-            I agree to the <Link href='/impressum'>Terms of Service</Link> and{' '}
-            <Link href='/datenschutz'>Privacy Policy</Link>
+            I agree to the{' '}
+            <Link className={linkHoverClassName} href='/impressum'>
+              Terms of Service
+            </Link>{' '}
+            and{' '}
+            <Link className={linkHoverClassName} href='/datenschutz'>
+              Privacy Policy
+            </Link>
           </label>
         </div>
         <div>
@@ -114,10 +124,7 @@ export default function LoginPage() {
       <div className='px-8 text-center py-4 space-y-2'>
         <p>
           Already have an Account?{' '}
-          <Link
-            href='/login'
-            className='underline hover:text-[#00ff1e] transition-all'
-          >
+          <Link href='/login' className={linkHoverClassName}>
             Log In
           </Link>
         </p>
