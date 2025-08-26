@@ -1,22 +1,25 @@
 'use client';
 
-import Link from 'next/link';
-import Image from 'next/image';
-import UserIcon from '../icons/ecommerce/UserIcon';
-import HeartIcon from '../icons/ecommerce/HeartIcon';
-import CartIcon from '../icons/ecommerce/CartIcon';
-import MenuIcon from '../icons/ui/MenuIcon';
 import { useSearchParams } from 'next/navigation';
-import clsx from 'clsx';
-import useEmblaCarousel from 'embla-carousel-react';
 import { useState } from 'react';
-import RightSidenav from './_components/RightSidenav';
-import LeftSidenav from './_components/LeftSidenav';
 import { selectTotalItems, useCartStore } from '@/store/cartStore';
 import {
   selectWishlistTotalItems,
   useWishlistStore,
 } from '@/store/wishlistStore';
+import { useSession, signOut } from 'next-auth/react';
+
+import Link from 'next/link';
+import Image from 'next/image';
+import clsx from 'clsx';
+import useEmblaCarousel from 'embla-carousel-react';
+
+import UserIcon from '../icons/ecommerce/UserIcon';
+import HeartIcon from '../icons/ecommerce/HeartIcon';
+import CartIcon from '../icons/ecommerce/CartIcon';
+import MenuIcon from '../icons/ui/MenuIcon';
+import RightSidenav from './_components/RightSidenav';
+import LeftSidenav from './_components/LeftSidenav';
 
 export default function HeaderLayout() {
   /* Zustand Cart Store for Header */
@@ -200,6 +203,10 @@ export default function HeaderLayout() {
     }, 300);
   };
 
+  /* NextAuth Session */
+  const { data: session, status } = useSession();
+
+  /* CSS ClassNames */
   const linkTransitionClassNames = clsx('hover:text-[#53ff5f] transition-all');
   const bottomLinksClassNames = clsx('py-1 px-2 rounded-md transition-colors');
 
@@ -245,23 +252,55 @@ export default function HeaderLayout() {
               height='100%'
             />
           </div>
-          <div className='flex gap-1'>
-            <Link href='/dashboard'>
-              <UserIcon
-                height='100%'
-                width={27}
-                className={linkTransitionClassNames}
-              />
-            </Link>
-            <div className='underline flex flex-col text-sm'>
-              <Link className={linkTransitionClassNames} href='/login'>
-                Login
-              </Link>
-              <Link className={linkTransitionClassNames} href='/register'>
-                Register
-              </Link>
+          {status === 'loading' ? (
+            <div className='h-8 w-24 animate-pulse bg-gray-700 rounded-md' />
+          ) : (
+            <div className='flex gap-1'>
+              {session && session.user ? (
+                <>
+                  <Link href='/dashboard'>
+                    <UserIcon
+                      height='100%'
+                      width={27}
+                      className={linkTransitionClassNames}
+                    />
+                  </Link>
+                  <div className='flex flex-col text-sm'>
+                    <Link
+                      className={`${linkTransitionClassNames} underline`}
+                      href='/dashboard'
+                    >
+                      Your Account
+                    </Link>
+                    <button
+                      className={`${linkTransitionClassNames} underline`}
+                      onClick={() => signOut()}
+                    >
+                      Log Out
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <Link href='/login'>
+                    <UserIcon
+                      height='100%'
+                      width={27}
+                      className={linkTransitionClassNames}
+                    />
+                  </Link>
+                  <div className='underline flex flex-col text-sm'>
+                    <Link className={linkTransitionClassNames} href='/login'>
+                      Login
+                    </Link>
+                    <Link className={linkTransitionClassNames} href='/register'>
+                      Register
+                    </Link>
+                  </div>
+                </>
+              )}
             </div>
-          </div>
+          )}
         </div>
       </div>
       <div className='border-white border-t border-b flex items-center whitespace-nowrap text-lg py-1'>
