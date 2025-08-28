@@ -6,35 +6,83 @@ import FloatingLabelInput from '@/components/ui/FloatingLabelInput';
 import Button from '@/components/ui/Button';
 import ArrowRightIcon from '@/components/icons/ui/ArrowRightIcon';
 import { useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
+  const router = useRouter();
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleConfirmPasswordChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const newConfirmPassword = e.target.value;
-    setConfirmPassword(newConfirmPassword);
-
-    if (password !== newConfirmPassword) {
+  /* Manage Password and ConfirmPassword Validation */
+  const validatePasswords = (pass: string, confirmPass: string) => {
+    if (confirmPass && pass !== confirmPass) {
       setError('Passwords do not match.');
     } else {
       setError(null);
     }
   };
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    validatePasswords(newPassword, confirmPassword);
+  };
+  const handleConfirmPasswordChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const newConfirmPassword = e.target.value;
+    setConfirmPassword(newConfirmPassword);
+    validatePasswords(password, newConfirmPassword);
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError(null);
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
-      return;
+    const formData = new FormData(e.currentTarget);
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || 'Something went wrong.');
+        setIsLoading(false);
+        return;
+      }
+
+      const loginResult = await signIn('credentials', {
+        redirect: false,
+        email,
+        password,
+      });
+
+      if (loginResult?.ok) {
+        router.replace('/dashboard');
+      } else {
+        setError(
+          'Account created, but automatic login failed. Please go to the login page.'
+        );
+        setIsLoading(false);
+      }
+    } catch (error) {
+      setError('An unexpected error occurred. Please try again.');
+      setIsLoading(false);
     }
-
-    // TODO: Add API Route
-    console.log('Success!');
   };
 
   /* CSS ClassNames */
@@ -76,7 +124,7 @@ export default function LoginPage() {
           label='Password'
           required
           minLength={8}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handlePasswordChange}
         />
         <FloatingLabelInput
           id='confirmPassword'
