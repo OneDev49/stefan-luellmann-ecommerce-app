@@ -8,7 +8,7 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <HeaderLayout />
+      <HeaderLayout variant='full' />
       {children}
       <FooterLayout />
     </>
