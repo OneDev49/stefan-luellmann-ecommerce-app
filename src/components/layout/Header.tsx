@@ -21,7 +21,11 @@ import MenuIcon from '../icons/ui/MenuIcon';
 import RightSidenav from './_components/RightSidenav';
 import LeftSidenav from './_components/LeftSidenav';
 
-export default function HeaderLayout() {
+interface HeaderLayoutProps {
+  variant: 'simple' | 'full';
+}
+
+export default function HeaderLayout({ variant = 'full' }: HeaderLayoutProps) {
   /* Zustand Cart Store for Header */
   const totalCartItems = useCartStore(selectTotalItems);
 
@@ -209,10 +213,16 @@ export default function HeaderLayout() {
   /* CSS ClassNames */
   const linkTransitionClassNames = clsx('hover:text-[#53ff5f] transition-all');
   const bottomLinksClassNames = clsx('py-1 px-2 rounded-md transition-colors');
+  const topHeaderClassNames = clsx(
+    'flex justify-between px-4 py-1 items-center',
+    {
+      'border-b border-[#6c6c6c]': variant === 'simple',
+    }
+  );
 
   return (
     <header className='sticky top-0 z-[999] left-0 right-0 bg-black'>
-      <div className='flex justify-between px-4 py-1 items-center'>
+      <div className={topHeaderClassNames}>
         <Link href='/'>
           <Image
             src='/images/entro_logo.webp'
@@ -265,7 +275,7 @@ export default function HeaderLayout() {
                       className={linkTransitionClassNames}
                     />
                   </Link>
-                  <div className='flex flex-col text-sm'>
+                  <div className='flex flex-col items-start text-sm'>
                     <Link
                       className={`${linkTransitionClassNames} underline`}
                       href='/dashboard'
@@ -303,45 +313,52 @@ export default function HeaderLayout() {
           )}
         </div>
       </div>
-      <div className='border-white border-t border-b flex items-center whitespace-nowrap text-lg py-1'>
-        <div
-          className='border-r sm:border-0'
-          onClick={() => handleOpenSidenav('left')}
-        >
-          <MenuIcon
-            height='100%'
-            width={40}
-            className={`mx-1 cursor-pointer hover:bg-gray-700 ${bottomLinksClassNames}`}
-          />
-        </div>
-        <div className='border-x'>
-          <Link
-            className={`hidden sm:block mx-1 hover:bg-gray-700 hover:text-white ${bottomLinksClassNames}`}
-            href='/pc-builder'
+      {variant === 'full' && (
+        <div className='border-white border-t border-b flex items-center whitespace-nowrap text-lg py-1'>
+          <div
+            className='border-r sm:border-0'
+            onClick={() => handleOpenSidenav('left')}
           >
-            PC Builder
-          </Link>
-        </div>
-        <nav className='overflow-hidden w-full select-none mx-1' ref={emblaRef}>
-          <div className='flex gap-2'>
-            {categories.map((category) => (
-              <Link
-                className={clsx(
-                  `block whitespace-nowrap ${bottomLinksClassNames}`,
-                  {
-                    'bg-[#1f7414] text-white': activeCategory === category.slug,
-                    'hover:bg-gray-700': activeCategory !== category.slug,
-                  }
-                )}
-                href={`/search?category=${category.slug}`}
-                key={category.slug}
-              >
-                {category.name}
-              </Link>
-            ))}
+            <MenuIcon
+              height='100%'
+              width={40}
+              className={`mx-1 cursor-pointer hover:bg-gray-700 ${bottomLinksClassNames}`}
+            />
           </div>
-        </nav>
-      </div>
+          <div className='border-x'>
+            <Link
+              className={`hidden sm:block mx-1 hover:bg-gray-700 hover:text-white ${bottomLinksClassNames}`}
+              href='/pc-builder'
+            >
+              PC Builder
+            </Link>
+          </div>
+          <nav
+            className='overflow-hidden w-full select-none mx-1'
+            ref={emblaRef}
+          >
+            <div className='flex gap-2'>
+              {categories.map((category) => (
+                <Link
+                  className={clsx(
+                    `block whitespace-nowrap ${bottomLinksClassNames}`,
+                    {
+                      'bg-[#1f7414] text-white':
+                        activeCategory === category.slug,
+                      'hover:bg-gray-700': activeCategory !== category.slug,
+                    }
+                  )}
+                  href={`/search?category=${category.slug}`}
+                  key={category.slug}
+                >
+                  {category.name}
+                </Link>
+              ))}
+            </div>
+          </nav>
+        </div>
+      )}
+
       {openSidenav === 'right-cart' && (
         <RightSidenav
           onClose={handleCloseSidenav}
@@ -356,7 +373,7 @@ export default function HeaderLayout() {
           activeTab='wishlist'
         />
       )}
-      {openSidenav === 'left' && (
+      {openSidenav === 'left' && variant === 'full' && (
         <LeftSidenav
           onClose={handleCloseSidenav}
           isClosing={isClosing}
