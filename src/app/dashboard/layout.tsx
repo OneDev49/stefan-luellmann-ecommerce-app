@@ -1,14 +1,14 @@
 import HeaderLayout from '@/components/layout/Header';
 import { getServerSession } from 'next-auth';
-import { prisma } from '@/lib/prisma';
 import { redirect } from 'next/navigation';
+import { authOptions } from '../api/auth/[...nextauth]/route';
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
   if (!session) {
     redirect('/login?callbackUrl=/dashboard');
