@@ -1,3 +1,3 @@
 export default function DashboardWishlist() {
-  return <div>Wishlist</div>;
+  return <div>Account Wishlist</div>;
 }

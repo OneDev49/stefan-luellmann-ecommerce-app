@@ -1,3 +1,3 @@
 export default function DashboardCart() {
-  return <div>Cart</div>;
+  return <div>Account Cart</div>;
 }
