@@ -3,6 +3,7 @@
 import ChevronLeftIcon from '@/components/icons/ui/ChevronLeftIcon';
 import clsx from 'clsx';
 import Link from 'next/link';
+import ChevronRightIcon from '@/components/icons/ui/ChevronRightIcon';
 
 type IconComponent = React.FC<React.SVGProps<SVGSVGElement>>;
 
@@ -16,47 +17,92 @@ interface DashboardSidebarProps {
   className?: string;
   activeMenuId: string;
   menuItems: MenuItem[];
+  isCollapsed: boolean;
+  toggleSidebar: () => void;
 }
 
 export default function DashboardSidebar({
   className,
   activeMenuId,
   menuItems,
+  isCollapsed,
+  toggleSidebar,
 }: DashboardSidebarProps) {
+  const mainContainerClassName = clsx(
+    'border-r border-[#6c6c6c] h-full transition-all duration-300 ease-in-out overflow-hidden',
+    isCollapsed ? 'min-w-20 w-20' : 'min-w-72 w-72'
+  );
+
   return (
-    <div className={className}>
+    <div className={mainContainerClassName}>
       <nav className='flex justify-between flex-col h-full'>
-        <ul className='list-none py-4 pl-4 m-0 space-y-4'>
-          {menuItems.map((item) => (
-            <li
-              key={item.id}
-              className={clsx(
-                'border-t border-l border-b  rounded-tl-xl rounded-bl-xl transition-colors',
-                {
-                  'border-[#007014] bg-[#003300]': item.id === activeMenuId,
-                  'border-gray-700 hover:bg-[#0b270b] hover:border-[#195c26]':
-                    item.id !== activeMenuId,
-                }
-              )}
-            >
-              <Link
-                href={`/dashboard?tab=${item.id}`}
-                className='p-3 w-full text-left flex gap-2 items-center'
-                type='button'
-                title={`Navigate to ${item.label}`}
+        <ul
+          className={clsx(
+            'list-none py-4 space-y-4 m-0',
+            isCollapsed ? 'px-4' : 'pl-4'
+          )}
+        >
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <li
+                key={item.id}
+                className={clsx(
+                  'transition-all ease-in-out duration-300',
+                  isCollapsed
+                    ? 'rounded-xl border'
+                    : 'rounded-tl-xl rounded-bl-xl border-t border-l border-b',
+                  {
+                    'border-[#007014] bg-[#003300]': item.id === activeMenuId,
+                    'border-gray-700 hover:bg-[#0b270b] hover:border-[#195c26]':
+                      item.id !== activeMenuId,
+                  }
+                )}
               >
-                {item.icon && <item.icon height={20} width={20} />}
-                {item.label}
-              </Link>
-            </li>
-          ))}
+                <Link
+                  href={`/dashboard?tab=${item.id}`}
+                  className='p-3 w-full text-left flex gap-2 items-center'
+                  scroll={false}
+                  title={`Navigate to ${item.label}`}
+                >
+                  {Icon && (
+                    <Icon height={20} width={20} className='flex-shrink-0' />
+                  )}
+                  <span
+                    className={clsx(
+                      'transition-opacity duration-300 ease-in-out whitespace-nowrap',
+                      isCollapsed ? 'opacity-0' : 'opacity-100'
+                    )}
+                  >
+                    {item.label}
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
         <button
-          className='flex gap-2 items-center p-3 cursor-pointer bg-gray-800/80 border-t border-gray-400'
+          className='flex gap-2 items-center justify-center p-3 cursor-pointer bg-gray-900/80 border-t border-gray-400 hover:bg-gray-800'
           type='button'
+          onClick={toggleSidebar}
         >
-          <ChevronLeftIcon height={20} width={20} />
-          Collapse Sidebar
+          {isCollapsed ? (
+            <ChevronRightIcon
+              height={20}
+              width={20}
+              className='flex-shrink-0'
+            />
+          ) : (
+            <ChevronLeftIcon height={20} width={20} className='flex-shrink-0' />
+          )}
+          <span
+            className={clsx(
+              'transition-opacity duration-300 ease-in-out whitespace-nowrap',
+              isCollapsed ? 'opacity-0 w-0' : 'opacity-100'
+            )}
+          >
+            Collapse Sidebar
+          </span>
         </button>
       </nav>
     </div>
