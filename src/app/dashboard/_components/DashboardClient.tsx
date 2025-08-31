@@ -1,14 +1,13 @@
 'use client';
-import clsx from 'clsx';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import DashboardAccountHome from './tabs/AccountHomeTab';
 import DashboardOrderHistory from './tabs/OrderHistoryTab';
 import DashboardAccountInformation from './tabs/AccountInformationTab';
 import DashboardWishlist from './tabs/WishlistTab';
 import DashboardCart from './tabs/CartTab';
+import DashboardSidebar from './layout/DashboardSidebar';
 
 interface DashboardClientProps {
-  activeTab: string;
   user: any;
   pageData?: {
     orders?: any[];
@@ -18,12 +17,11 @@ interface DashboardClientProps {
 }
 
 export default function DashboardPage({
-  activeTab,
   pageData,
   user,
 }: DashboardClientProps) {
-  const router = useRouter();
   const searchParams = useSearchParams();
+  const activeTab = searchParams.get('tab') || 'home';
 
   const menuItems = [
     {
@@ -52,42 +50,14 @@ export default function DashboardPage({
       Component: () => <DashboardCart />,
     },
   ];
-
-  const activeMenuId = searchParams.get('tab') || menuItems[0].id;
-  const activeMenuItem = menuItems.find((item) => item.id === activeMenuId);
-
-  const handleMenuClick = (menuId: string) => {
-    router.push(`/dashboard?tab=${menuId}`);
-  };
+  const activeMenuItem = menuItems.find((item) => item.id === activeTab);
 
   return (
     <div className='flex flex-1'>
-      <nav className='border-r border-[#6c6c6c] min-w-72 min-h-full'>
-        <ul className='list-none py-4 pl-4 m-0 space-y-4'>
-          {menuItems.map((item) => (
-            <li
-              key={item.id}
-              className={clsx(
-                'border-t border-l border-b  rounded-tl-xl rounded-bl-xl transition-colors',
-                {
-                  'border-[#007014] bg-[#003300]': item.id === activeMenuId,
-                  'border-gray-700 hover:bg-[#0b270b] hover:border-[#195c26]':
-                    item.id !== activeMenuId,
-                }
-              )}
-            >
-              <button
-                className='py-3 px-3 w-full text-left'
-                type='button'
-                title={`Navigate to ${item.label}`}
-                onClick={() => handleMenuClick(item.id)}
-              >
-                {item.label}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <div className='border-r border-[#6c6c6c] min-w-72 min-h-full'>
+        <DashboardSidebar activeMenuId={activeTab} menuItems={menuItems} />
+      </div>
+
       <section className='flex-1'>
         {activeMenuItem ? (
           <activeMenuItem.Component />
