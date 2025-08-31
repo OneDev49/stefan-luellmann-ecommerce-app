@@ -1,5 +1,6 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 import DashboardAccountHome from './tabs/AccountHomeTab';
 import DashboardOrderHistory from './tabs/OrderHistoryTab';
 import DashboardAccountInformation from './tabs/AccountInformationTab';
@@ -27,6 +28,12 @@ export default function DashboardPage({
 }: DashboardClientProps) {
   const searchParams = useSearchParams();
   const activeTab = searchParams.get('tab') || 'home';
+
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+  const handleToggleSidebar = () => {
+    setIsSidebarCollapsed((prevState) => !prevState);
+  };
 
   const menuItems = [
     {
@@ -65,9 +72,10 @@ export default function DashboardPage({
   return (
     <div className='flex flex-1'>
       <DashboardSidebar
-        className={'border-r border-[#6c6c6c] min-w-72 min-h-full'}
         activeMenuId={activeTab}
         menuItems={menuItems}
+        isCollapsed={isSidebarCollapsed}
+        toggleSidebar={handleToggleSidebar}
       />
 
       <section className='flex-1'>
