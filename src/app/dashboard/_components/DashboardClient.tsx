@@ -1,6 +1,6 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DashboardAccountHome from './tabs/AccountHomeTab';
 import DashboardOrderHistory from './tabs/OrderHistoryTab';
 import DashboardAccountInformation from './tabs/AccountInformationTab';
@@ -22,6 +22,8 @@ interface DashboardClientProps {
   };
 }
 
+const SIDEBAR_STATE_KEY = 'dashboard-sidebar-collapsed';
+
 export default function DashboardPage({
   pageData,
   user,
@@ -29,7 +31,17 @@ export default function DashboardPage({
   const searchParams = useSearchParams();
   const activeTab = searchParams.get('tab') || 'home';
 
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const savedState = window.localStorage.getItem(SIDEBAR_STATE_KEY);
+      return savedState === 'true';
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem(SIDEBAR_STATE_KEY, String(isSidebarCollapsed));
+  }, [isSidebarCollapsed]);
 
   const handleToggleSidebar = () => {
     setIsSidebarCollapsed((prevState) => !prevState);
@@ -40,7 +52,7 @@ export default function DashboardPage({
       id: 'home',
       label: 'Account Home',
       icon: HomeIcon,
-      Component: () => <DashboardAccountHome />,
+      Component: () => <DashboardAccountHome user={user} />,
     },
     {
       id: 'history',
