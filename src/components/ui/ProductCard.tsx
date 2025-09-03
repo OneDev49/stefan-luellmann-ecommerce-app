@@ -14,7 +14,7 @@ import CartIcon from '../icons/ecommerce/CartIcon';
 import HeartIcon from '../icons/ecommerce/HeartIcon';
 
 interface ProductCardProps {
-  variant?: 'standard' | 'compact' | 'sale';
+  variant?: 'standard' | 'compact' | 'sideways';
   product: ProductCardType;
   buttonClassName?: string;
 }
@@ -55,18 +55,10 @@ export default function ProductCard({
 
   /* CSS Classnames */
   const wrapperClassNames = clsx(
-    'group',
-    'flex',
-    'flex-col',
-    'gap-3',
-    'p-4',
-    'bg-[linear-gradient(45deg,#051500,#0d3a00)]',
-    'items-start',
-    'w-[275px]',
-    'rounded-2xl',
-    'border-[#005103]',
-    'border',
-    'shadow-[0_4px_15px_3px_rgba(23,113,0,1)]'
+    'group flex flex-col gap-3 p-4 bg-[linear-gradient(45deg,#051500,#0d3a00)] items-start rounded-2xl border-[#005103] border shadow-[0_4px_15px_3px_rgba(23,113,0,1)]',
+    {
+      'w-[275px]': variant === 'compact' || variant === 'standard',
+    }
   );
   const imageWrapperClassNames = clsx(
     'border',
@@ -200,6 +192,95 @@ export default function ProductCard({
             {product.price.toFixed(2)}€
           </strong>
         )}
+      </Link>
+    );
+  }
+
+  if (variant === 'sideways') {
+    return (
+      <Link className={wrapperClassNames} href={`/product/${product.slug}`}>
+        <div className='flex gap-4'>
+          <div className={imageWrapperClassNames}>
+            {product.isOnSale && (
+              <div className='absolute bg-red-700 h-8 grid place-items-center w-32 top-[8px] right-[-40px] rotate-45 z-50 will-change-transform'>
+                On Sale
+              </div>
+            )}
+            <Image
+              className={imageClassNames}
+              src={`https://utfs.io/a/5sfnefg5kv/${product.imageUrl}`}
+              alt={product.name}
+              height={150}
+              width={150}
+            />
+          </div>
+          <div className='space-y-2'>
+            <h3 className={headingClassNames}>{product.name}</h3>
+            <div className='flex items-center gap-2'>
+              <Rating rating={product.averageRating} size='small' />
+              <span>({product.totalRatingCount})</span>
+            </div>
+            {product.isOnSale && product.reducedPrice !== null ? (
+              <div className='flex flex-col'>
+                <span className='text-lg font-headings line-through font-normal'>
+                  {product.price}€
+                </span>
+                <div className='flex gap-3 font-bold text-[#ff4545]'>
+                  <strong className={priceClassNames}>
+                    {(product.reducedPrice || product.price).toFixed(2)}€
+                  </strong>
+                  <span className='text-base'>
+                    (
+                    {((product.reducedPrice / product.price - 1) * 100).toFixed(
+                      0
+                    )}
+                    % Off)
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <strong className={`${priceClassNames} mb-4`}>
+                {product.price.toFixed(2)}€
+              </strong>
+            )}
+          </div>
+        </div>
+
+        <div className='flex items-center gap-2'>
+          <Button
+            onClick={handleAddToCart}
+            as='button'
+            position='card'
+            type='button'
+            title={`Add ${product.name} to Cart`}
+            className={buttonClassName || undefined}
+          >
+            <>
+              <CartIcon />
+              Add to Cart
+            </>
+          </Button>
+          <Button
+            onClick={handleAddToWishlist}
+            as='button'
+            variant='tertiary'
+            position='card'
+            type='button'
+            title={`Add ${product.name} to Wishlist`}
+            className={buttonClassName || undefined}
+          >
+            <>
+              {isInWishlist ? (
+                <>
+                  <HeartIcon variant='solid' />
+                  <span>Remove from Wishlist</span>
+                </>
+              ) : (
+                <HeartIcon variant='regular' />
+              )}
+            </>
+          </Button>
+        </div>
       </Link>
     );
   }
