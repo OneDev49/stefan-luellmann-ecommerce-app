@@ -70,7 +70,7 @@ export default function DashboardPage({
       id: 'wishlist',
       label: 'My Wishlist',
       icon: HeartIcon,
-      Component: () => <DashboardWishlist />,
+      Component: () => <DashboardWishlist user={user} />,
     },
     {
       id: 'cart',
@@ -94,7 +94,11 @@ export default function DashboardPage({
         {activeMenuItem ? (
           <activeMenuItem.Component />
         ) : (
-          <div>Page not found</div>
+          <div className='pt-10 w-[95%] m-auto space-y-8'>
+            <h1 className='text-4xl font-bold'>
+              We are sorry, {user.name}, but we couldn't find that page.
+            </h1>
+          </div>
         )}
       </section>
     </div>
