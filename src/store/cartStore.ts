@@ -52,6 +52,7 @@ export const useCartStore = create<CartState>()(
 
       clearCart: () => {
         set({ items: [] });
+        toast.error(`Removed all Products from Cart.`);
       },
     }),
     {
