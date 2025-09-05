@@ -29,7 +29,7 @@ export default function DashboardSidebar({
   toggleSidebar,
 }: DashboardSidebarProps) {
   const mainContainerClassName = clsx(
-    'border-r border-[#6c6c6c] h-full transition-all duration-300 ease-in-out overflow-hidden',
+    'border-r border-[#6c6c6c] h-full transition-all duration-300 ease-in-out overflow-hidden flex-shrink-0',
     isCollapsed ? 'min-w-20 w-20' : 'min-w-72 w-72'
   );
 
@@ -71,7 +71,7 @@ export default function DashboardSidebar({
                   <span
                     className={clsx(
                       'transition-opacity duration-300 ease-in-out whitespace-nowrap',
-                      isCollapsed ? 'opacity-0' : 'opacity-100'
+                      isCollapsed ? 'sr-only' : 'opacity-100'
                     )}
                   >
                     {item.label}
@@ -98,7 +98,7 @@ export default function DashboardSidebar({
           <span
             className={clsx(
               'transition-opacity duration-300 ease-in-out whitespace-nowrap',
-              isCollapsed ? 'opacity-0 w-0' : 'opacity-100'
+              isCollapsed ? 'sr-only' : 'opacity-100'
             )}
           >
             Collapse Sidebar

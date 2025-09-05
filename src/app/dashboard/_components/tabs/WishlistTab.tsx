@@ -5,14 +5,10 @@ import {
   selectWishlistTotalItems,
   useWishlistStore,
 } from '@/store/wishlistStore';
+import { DashboardUser } from '../DashboardClient';
 
 interface DashboardWishlistProps {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    image: string | null;
-  };
+  user: DashboardUser;
 }
 
 export default function DashboardWishlist({ user }: DashboardWishlistProps) {

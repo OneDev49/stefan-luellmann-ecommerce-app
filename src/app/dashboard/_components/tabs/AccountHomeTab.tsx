@@ -4,14 +4,10 @@ import MapPinIcon from '@/components/icons/ecommerce/MapPinIcon';
 import ShippingIcon from '@/components/icons/ecommerce/ShippingIcon';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { DashboardUser } from '../DashboardClient';
 
 interface DashboardAccountHomeProps {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    image: string | null;
-  };
+  user: DashboardUser;
 }
 
 const listItems = [
