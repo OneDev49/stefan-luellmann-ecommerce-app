@@ -13,13 +13,29 @@ import HeartIcon from '@/components/icons/ecommerce/HeartIcon';
 import ShippingIcon from '@/components/icons/ecommerce/ShippingIcon';
 import AddressCardIcon from '@/components/icons/ecommerce/AddressCardIcon';
 
+export interface DashboardUser {
+  id: string;
+  name: string | null;
+  email: string | null;
+  image: string | null;
+}
+
+interface DashboardPageData {
+  orders?: any[];
+  user?: DashboardUser;
+  wishlistItems?: any[];
+}
+
 interface DashboardClientProps {
-  user: any;
-  pageData?: {
-    orders?: any[];
-    user?: any;
-    wishlistItems?: any[];
-  };
+  user: DashboardUser;
+  pageData?: DashboardPageData;
+}
+
+interface MenuItems {
+  id: string;
+  label: string;
+  icon?: React.FC<React.SVGProps<SVGSVGElement>>;
+  Component: React.FC<{ user: DashboardUser; pageData?: DashboardPageData }>;
 }
 
 const SIDEBAR_STATE_KEY = 'dashboard-sidebar-collapsed';
@@ -47,36 +63,36 @@ export default function DashboardPage({
     setIsSidebarCollapsed((prevState) => !prevState);
   };
 
-  const menuItems = [
+  const menuItems: MenuItems[] = [
     {
       id: 'home',
       label: 'Account Home',
       icon: HomeIcon,
-      Component: () => <DashboardAccountHome user={user} />,
+      Component: DashboardAccountHome,
     },
     {
       id: 'history',
       label: 'Order History',
       icon: ShippingIcon,
-      Component: () => <DashboardOrderHistory />,
+      Component: DashboardOrderHistory,
     },
     {
       id: 'information',
       label: 'Account Information',
       icon: AddressCardIcon,
-      Component: () => <DashboardAccountInformation user={user} />,
+      Component: DashboardAccountInformation,
     },
     {
       id: 'wishlist',
       label: 'My Wishlist',
       icon: HeartIcon,
-      Component: () => <DashboardWishlist user={user} />,
+      Component: DashboardWishlist,
     },
     {
       id: 'cart',
       label: 'My Cart',
       icon: CartIcon,
-      Component: () => <DashboardCart />,
+      Component: DashboardCart,
     },
   ];
   const activeMenuItem = menuItems.find((item) => item.id === activeTab);
@@ -90,9 +106,9 @@ export default function DashboardPage({
         toggleSidebar={handleToggleSidebar}
       />
 
-      <section className='flex-1'>
+      <section className='flex-1 overflow-y-auto'>
         {activeMenuItem ? (
-          <activeMenuItem.Component />
+          <activeMenuItem.Component user={user} />
         ) : (
           <div className='pt-10 w-[95%] m-auto space-y-8'>
             <h1 className='text-4xl font-bold'>

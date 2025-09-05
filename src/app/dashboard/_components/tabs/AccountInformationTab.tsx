@@ -1,10 +1,7 @@
+import { DashboardUser } from '../DashboardClient';
+
 interface DashboardAccountInformationProps {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    image: string | null;
-  };
+  user: DashboardUser;
 }
 
 export default function DashboardAccountInformation({
