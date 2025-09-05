@@ -41,6 +41,7 @@ export const useWishlistStore = create<WishlistState>()(
 
       clearWishlist: () => {
         set({ items: [] });
+        toast.error(`Removed all Products from Wishlist.`);
       },
     }),
     {
