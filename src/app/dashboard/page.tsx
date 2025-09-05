@@ -2,6 +2,8 @@ import { getServerSession } from 'next-auth';
 import { prisma } from '@/lib/prisma';
 import DashboardClient from './_components/DashboardClient';
 import { authOptions } from '../api/auth/[...nextauth]/route';
+import { redirect } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 export default async function DashboardPage({
   searchParams,
@@ -14,8 +16,13 @@ export default async function DashboardPage({
 
   const user = await prisma.user.findUnique({
     where: { id: userId },
-    select: { name: true, email: true, image: true },
+    select: { id: true, name: true, email: true, image: true },
   });
 
-  return <DashboardClient user={user} />;
+  if (!user) {
+    toast.error('Error: User Not Found');
+    redirect('/login');
+  }
+
+  return <DashboardClient user={user!} />;
 }
