@@ -4,6 +4,8 @@ import ChevronLeftIcon from '@/components/icons/ui/ChevronLeftIcon';
 import clsx from 'clsx';
 import Link from 'next/link';
 import ChevronRightIcon from '@/components/icons/ui/ChevronRightIcon';
+import { signOut } from 'next-auth/react';
+import LogoutIcon from '@/components/icons/ui/LogoutIcon';
 
 type IconComponent = React.FC<React.SVGProps<SVGSVGElement>>;
 
@@ -81,29 +83,58 @@ export default function DashboardSidebar({
             );
           })}
         </ul>
-        <button
-          className='flex gap-2 items-center justify-center p-3 cursor-pointer bg-gray-900/80 border-t border-gray-400 hover:bg-gray-800'
-          type='button'
-          onClick={toggleSidebar}
-        >
-          {isCollapsed ? (
-            <ChevronRightIcon
-              height={20}
-              width={20}
-              className='flex-shrink-0'
-            />
-          ) : (
-            <ChevronLeftIcon height={20} width={20} className='flex-shrink-0' />
-          )}
-          <span
-            className={clsx(
-              'transition-opacity duration-300 ease-in-out whitespace-nowrap',
-              isCollapsed ? 'sr-only' : 'opacity-100'
-            )}
+        <div>
+          <button
+            className='w-full flex gap-2 items-center justify-center p-3 cursor-pointer bg-gray-900/80 border-t border-gray-400 hover:bg-gray-800'
+            type='button'
+            onClick={toggleSidebar}
+            title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
-            Collapse Sidebar
-          </span>
-        </button>
+            {isCollapsed ? (
+              <ChevronRightIcon
+                height={20}
+                width={20}
+                className='flex-shrink-0'
+              />
+            ) : (
+              <ChevronLeftIcon
+                height={20}
+                width={20}
+                className='flex-shrink-0'
+              />
+            )}
+            <span
+              className={clsx(
+                'transition-opacity duration-300 ease-in-out whitespace-nowrap',
+                isCollapsed ? 'sr-only' : 'opacity-100'
+              )}
+            >
+              Collapse Sidebar
+            </span>
+          </button>
+          <button
+            className='w-full flex gap-2 items-center justify-center p-3 cursor-pointer bg-black border-t border-gray-400 hover:bg-[#1f5100]'
+            type='button'
+            onClick={() => signOut({ callbackUrl: '/' })}
+            title='Logout of your Entro Account'
+            aria-label='Logout of your Entro Account'
+          >
+            {isCollapsed ? (
+              <LogoutIcon height={20} width={20} className='flex-shrink-0' />
+            ) : (
+              <LogoutIcon height={20} width={20} className='flex-shrink-0' />
+            )}
+            <span
+              className={clsx(
+                'transition-opacity duration-300 ease-in-out whitespace-nowrap',
+                isCollapsed ? 'sr-only' : 'opacity-100'
+              )}
+            >
+              Logout
+            </span>
+          </button>
+        </div>
       </nav>
     </div>
   );
