@@ -40,6 +40,9 @@ const config: Config = {
         fadeIn: 'fadeIn 0.3s ease-out forwards',
         fadeOut: 'fadeOut 0.3s ease-out forwards',
       },
+      colors: {
+        brightGreen: '#2aff00',
+      },
     },
   },
   plugins: [require('tailwind-scrollbar')],
