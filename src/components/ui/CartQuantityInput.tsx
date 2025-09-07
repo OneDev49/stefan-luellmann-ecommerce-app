@@ -33,6 +33,7 @@ export default function CartQuantityInput({
         type='button'
         onClick={decreaseQuantity}
         className='px-2 py-1 border rounded'
+        aria-label='Decrease Quantity'
       >
         -
       </button>
@@ -47,6 +48,7 @@ export default function CartQuantityInput({
         type='button'
         onClick={increaseQuantity}
         className='px-2 py-1 border rounded'
+        aria-label='Increase Quantity'
       >
         +
       </button>
