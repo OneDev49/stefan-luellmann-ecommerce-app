@@ -9,7 +9,7 @@ interface ProductCarouselProps {
   bgColor?: string;
   heading: string;
   products: ProductCardType[];
-  productCardVariant?: 'standard' | 'compact' | 'sale';
+  productCardVariant?: 'standard' | 'compact' | 'sideways';
   position?: 'mainpage' | 'productpage';
 }
 
