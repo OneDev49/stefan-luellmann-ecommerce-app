@@ -6,7 +6,7 @@ import { useWishlistStore } from '@/store/wishlistStore';
 
 import { ProductCardType } from '@/types/product';
 
-import QuantitySelector from '@/components/ui/QuantitySelector';
+import QuantitySelector from '@/components/ui/ProductQuantitySelector';
 import Button from '@/components/ui/Button';
 import HeartIcon from '@/components/icons/ecommerce/HeartIcon';
 import CartIcon from '@/components/icons/ecommerce/CartIcon';
