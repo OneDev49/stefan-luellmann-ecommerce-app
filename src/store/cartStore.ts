@@ -12,6 +12,7 @@ interface CartState {
   addToCart: (product: ProductCardType, quantity: number) => void;
   removeFromCart: (productId: string) => void;
   clearCart: () => void;
+  updateQuantity: (productId: string, quantity: number) => void;
 }
 
 export const useCartStore = create<CartState>()(
@@ -19,7 +20,7 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
 
-      addToCart: (product, quantity) => {
+      addToCart: (product: ProductCardType, quantity: number) => {
         const cart = get();
         const existingItem = cart.items.find((item) => item.id === product.id);
 
@@ -39,7 +40,7 @@ export const useCartStore = create<CartState>()(
         }
       },
 
-      removeFromCart: (productId) => {
+      removeFromCart: (productId: string) => {
         const itemToRemove = get().items.find((item) => item.id === productId);
         set((state) => ({
           items: state.items.filter((item) => item.id !== productId),
@@ -53,6 +54,14 @@ export const useCartStore = create<CartState>()(
       clearCart: () => {
         set({ items: [] });
         toast.error(`Removed all Products from Cart.`);
+      },
+
+      updateQuantity: (productId: string, quantity: number) => {
+        set((state) => ({
+          items: state.items.map((item) =>
+            item.id === productId ? { ...item, quantity } : item
+          ),
+        }));
       },
     }),
     {
