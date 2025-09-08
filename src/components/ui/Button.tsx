@@ -3,7 +3,7 @@ import React from 'react';
 import clsx from 'clsx';
 
 interface ButtonBaseProps {
-  variant?: 'primary' | 'secondary' | 'tertiary' | 'danger';
+  variant?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'free';
   position?: 'card' | 'section' | 'standalone';
   children: React.ReactNode;
   className?: string;
@@ -49,7 +49,11 @@ export default function Button<C extends React.ElementType = typeof Link>({
 
   return (
     <Component
-      className={`${buttonClassNames} ${className || ''}`}
+      className={
+        variant === 'free'
+          ? `${className || ''}`
+          : `${buttonClassNames} ${className || ''}`
+      }
       {...(restProps as any)}
     >
       {children}
