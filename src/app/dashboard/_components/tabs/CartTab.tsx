@@ -61,7 +61,7 @@ export default function DashboardCart({ user }: DashboardCartProps) {
       {totalCartAmount > 0 && cartItems ? (
         <div className='grid grid-cols-[10fr_4fr] items-start gap-6'>
           <div>
-            <div className='grid grid-cols-[4fr_1fr_2fr_auto] gap-4'>
+            <div className='grid grid-cols-[4fr_1fr_2fr_auto] px-4 gap-4'>
               <strong>Product</strong>
               <strong>Qty</strong>
               <strong>Subtotal</strong>
@@ -129,13 +129,17 @@ export default function DashboardCart({ user }: DashboardCartProps) {
                         </div>
                       )}
                     </div>
-                    <button
+                    <Button
+                      as='button'
+                      type='button'
                       onClick={(e) => handleRemoveFromCart(e, item.id)}
                       className='bg-red-500 rounded-sm'
                       title={`Remove ${item.name} from your Cart`}
+                      variant='danger'
+                      position='standalone'
                     >
                       <CloseIcon height={25} width={25} />
-                    </button>
+                    </Button>
                   </li>
                 );
               })}
