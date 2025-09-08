@@ -1,33 +1,23 @@
-import CloseIcon from '@/components/icons/ui/CloseIcon';
+import Image from 'next/image';
+import Link from 'next/link';
+import clsx from 'clsx';
+
+import { DashboardUser } from '../DashboardClient';
 import {
   selectCartTotal,
   selectTotalItems,
   useCartStore,
 } from '@/store/cartStore';
-import Image from 'next/image';
-import Link from 'next/link';
-import { DashboardUser } from '../DashboardClient';
-import { calculateReducedPrice } from '@/lib/calculateReducedPrice';
+
+import CartIcon from '@/components/icons/ecommerce/CartIcon';
+import ChevronLeftIcon from '@/components/icons/ui/ChevronLeftIcon';
+import CloseIcon from '@/components/icons/ui/CloseIcon';
 import CartQuantityInput from '@/components/ui/CartQuantityInput';
 import Button from '@/components/ui/Button';
-import ChevronLeftIcon from '@/components/icons/ui/ChevronLeftIcon';
-import clsx from 'clsx';
-import CartIcon from '@/components/icons/ecommerce/CartIcon';
 
 interface DashboardCartProps {
   user: DashboardUser;
 }
-
-const breadCrumbs = [
-  {
-    text: 'Homepage',
-    link: '/',
-  },
-  {
-    text: 'Dashboard',
-    link: '/dashboard?tab=home',
-  },
-];
 
 export default function DashboardCart({ user }: DashboardCartProps) {
   /* Zustand Cart Store */
