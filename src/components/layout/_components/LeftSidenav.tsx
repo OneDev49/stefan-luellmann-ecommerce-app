@@ -1,10 +1,10 @@
 'use client';
 
 import UserIcon from '@/components/icons/ecommerce/UserIcon';
-import AnglesRightIcon from '@/components/icons/ui/AnglesRightIcon';
 import ArrowLeftIcon from '@/components/icons/ui/ArrowLeftIcon';
 import ChevronRightIcon from '@/components/icons/ui/ChevronRightIcon';
 import clsx from 'clsx';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -41,6 +41,9 @@ export default function LeftSidenav({
     null
   );
 
+  /* NextAuth Session */
+  const { data: session, status } = useSession();
+
   const openSubmenu = (category: Categories) => {
     setActiveSubmenu({
       titleName: `${category.name}`,
@@ -59,13 +62,10 @@ export default function LeftSidenav({
     setActiveSubmenu(null);
   };
 
-  const submenuLinksClassNames = clsx(
-    'px-3 py-2 text-white hover:bg-green-900 flex items-center justify-between'
-  );
   const headingTwoClassNames = clsx('font-bold text-2xl px-4 py-3');
   const linkBlockClassNames = clsx('py-4');
   const linksClassNames = clsx(
-    'flex justify-between items-center w-full px-4 py-3 text-lg text-left hover:bg-green-800 transition-colors'
+    'flex justify-between items-center w-full px-4 py-3 text-left hover:bg-green-800 transition-colors'
   );
   const hrClassNames = clsx('border-gray-500');
 
@@ -82,11 +82,22 @@ export default function LeftSidenav({
           isClosing ? 'animate-slideOutToLeft' : 'animate-slideInFromLeft'
         )}
       >
-        <div className='flex text-xl bg-green-900 p-4 gap-2 font-bold'>
+        <div className='flex items-center text-xl bg-green-900 p-4 gap-2 font-bold'>
           <UserIcon />
-          <span>
-            Hello, <Link href='/login'>Sign In</Link>
-          </span>
+          <div className='flex gap-2'>
+            Hello,
+            {status === 'loading' ? (
+              <div className='h-8 w-24 animate-pulse bg-green-700 rounded-md'></div>
+            ) : (
+              <>
+                {session && session.user ? (
+                  <Link href='/dashboard?tab=home'>{session.user.name}</Link>
+                ) : (
+                  <Link href='/login'>Sign In</Link>
+                )}
+              </>
+            )}
+          </div>
         </div>
         <div
           className={clsx(
@@ -153,24 +164,38 @@ export default function LeftSidenav({
               <div className={linkBlockClassNames}>
                 <h2 className={headingTwoClassNames}>Help & Support</h2>
                 <ul className='list-none p-0 m-0 space-y-1'>
-                  <li>
-                    <Link
-                      href='/dashboard'
-                      className={linksClassNames}
-                      onClick={onClose}
-                    >
-                      <span>Your Account</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href='/login'
-                      className={linksClassNames}
-                      onClick={onClose}
-                    >
-                      <span>Sign In</span>
-                    </Link>
-                  </li>
+                  {session ? (
+                    <li>
+                      <Link
+                        href='/dashboard?tab=home'
+                        className={linksClassNames}
+                        onClick={onClose}
+                      >
+                        <span>Your Account</span>
+                      </Link>
+                    </li>
+                  ) : (
+                    <>
+                      <li>
+                        <Link
+                          href='/login'
+                          className={linksClassNames}
+                          onClick={onClose}
+                        >
+                          <span>Sign In</span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href='/register'
+                          className={linksClassNames}
+                          onClick={onClose}
+                        >
+                          <span>Register</span>
+                        </Link>
+                      </li>
+                    </>
+                  )}
                   <li>
                     <Link
                       href='/impressum'
