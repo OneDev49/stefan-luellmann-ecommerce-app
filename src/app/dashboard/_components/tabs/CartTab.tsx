@@ -34,20 +34,25 @@ export default function DashboardCart({ user }: DashboardCartProps) {
 
   /* Summary Calculations */
   const TAX_AMOUNT: number = 0.19; // 19%
-  const DISCOUNT_AMOUNT: number = 0; // 0%
-  const SHIPPING_COSTS: number = 0; // 0€
+  const DISCOUNT_AMOUNT: number = 0.1; // 0%
+  const SHIPPING_COSTS: number = 7.99; // 0€
+
+  const totalTaxAmount: number =
+    (totalCartValue - totalCartValue * DISCOUNT_AMOUNT + SHIPPING_COSTS) *
+    TAX_AMOUNT;
 
   const totalAmount: number =
     totalCartValue -
     totalCartValue * DISCOUNT_AMOUNT +
-    totalCartValue * TAX_AMOUNT;
+    SHIPPING_COSTS +
+    totalTaxAmount;
 
   const transparentCardClassName = clsx(
     'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-2xl'
   );
   const headingClassNames = clsx('text-3xl font-bold p-4');
   const headingMobileClassNames = clsx(
-    'bg-[rgb(87,87,87,0.2)] shadow-[0_4px_15px_0_rgb(0,0,0,1)] border-t border-[#6c6c6c]'
+    'bg-[rgb(87,87,87,0.2)] shadow-[0_4px_15px_0_rgb(0,0,0,1)]'
   );
   const listClassName = clsx('flex justify-between');
 
@@ -149,10 +154,6 @@ export default function DashboardCart({ user }: DashboardCartProps) {
                     <span>Subtotal</span>
                     <strong>{totalCartValue.toFixed(2)}€</strong>
                   </li>
-                  <li className={listClassName}>
-                    <span>Shipping Cost</span>
-                    <strong>{SHIPPING_COSTS.toFixed(2)}€</strong>
-                  </li>
                   {DISCOUNT_AMOUNT > 0 && (
                     <li className={listClassName}>
                       <span>Discount ({DISCOUNT_AMOUNT * 100}%)</span>
@@ -161,6 +162,11 @@ export default function DashboardCart({ user }: DashboardCartProps) {
                       </strong>
                     </li>
                   )}
+                  <li className={listClassName}>
+                    <span>Shipping (Standard)</span>
+                    <strong>{SHIPPING_COSTS.toFixed(2)}€</strong>
+                  </li>
+
                   <li className={listClassName}>
                     <span>Tax</span>
                     <strong>{TAX_AMOUNT * 100}%</strong>
