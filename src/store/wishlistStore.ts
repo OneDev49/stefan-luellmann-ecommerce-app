@@ -51,5 +51,12 @@ export const useWishlistStore = create<WishlistState>()(
   )
 );
 
+export const selectWishlistValue = (state: WishlistState) =>
+  state.items.reduce(
+    (total, item) =>
+      total + (item.reducedPrice ? item.reducedPrice : item.price) * 1,
+    0
+  );
+
 export const selectWishlistTotalItems = (state: WishlistState) =>
   state.items.length;
