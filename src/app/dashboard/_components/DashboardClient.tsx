@@ -89,6 +89,7 @@ export default function DashboardPage({
   return (
     <div className='flex flex-1'>
       <DashboardSidebar
+        user={user}
         activeMenuId={activeTab}
         menuItems={sidebarItems}
         isCollapsed={isSidebarCollapsed}
