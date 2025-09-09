@@ -1,15 +1,16 @@
 import AddressCardIcon from '@/components/icons/ecommerce/AddressCardIcon';
 import HeartIcon from '@/components/icons/ecommerce/HeartIcon';
-import MapPinIcon from '@/components/icons/ecommerce/MapPinIcon';
 import ShippingIcon from '@/components/icons/ecommerce/ShippingIcon';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { DashboardUser } from '../DashboardClient';
+import MoneyCheckIcon from '@/components/icons/ecommerce/MoneyCheckIcon';
 
 interface DashboardAccountHomeProps {
   user: DashboardUser;
 }
 
+/* Grid Items */
 const listItems = [
   {
     heading: 'Latest Orders',
@@ -26,18 +27,18 @@ const listItems = [
     image: <HeartIcon height={30} width={30} />,
   },
   {
-    heading: 'Shipping Address',
-    text: 'Manage your saved addresses, edit them or update the existing ones.',
-    href: '/dashboard?tab=history',
-    link: 'Go to Shipping Addresses',
-    image: <MapPinIcon height={30} width={30} />,
-  },
-  {
-    heading: 'Profile Information',
-    text: 'Manage the profile information of your account. Edit your Name and E-Mail or your Password',
+    heading: 'Account Information',
+    text: 'Manage your Profile Information and your Shipping Addresses.',
     href: '/dashboard?tab=information',
     link: 'Go to Profile Information',
     image: <AddressCardIcon height={30} width={30} />,
+  },
+  {
+    heading: 'Payment Information',
+    text: 'Manage your Payment Methods, edit existing ones or add new ones to your Account.',
+    href: '/dashboard?tab=payment',
+    link: 'Go to Payment Information',
+    image: <MoneyCheckIcon height={30} width={30} />,
   },
 ];
 
@@ -59,27 +60,19 @@ export default function DashboardAccountHome({
   );
 
   return (
-    <div className='pt-10 w-[95%] m-auto space-y-8'>
-      <div className='border-b border-[#555555] w-[50%] pb-3 space-y-1'>
-        <h1 className='text-4xl font-bold'>Welcome {user.name}</h1>
-        <p>
-          This is your Account Dashboard. You can manage your Account from here.
-        </p>
-      </div>
-      <ul className='list-none px-0 py-4 m-0 grid-cols-2 grid max-w-4xl w-[95%] gap-12'>
-        {listItems.map((item) => (
-          <li key={item.heading} className={listItem}>
-            <div className={listItemClassName}>
-              <div className={listAbsoluteClassName}>{item.image}</div>
-              <h2 className={listHeadingClassName}>{item.heading}</h2>
-              <p>{item.text}</p>
-              <Link className={listLinkClassName} href={item.href}>
-                {item.link}
-              </Link>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className='list-none px-0 py-4 m-0 grid-cols-2 grid max-w-4xl w-[95%] gap-12'>
+      {listItems.map((item, index) => (
+        <li key={index} className={listItem}>
+          <div className={listItemClassName}>
+            <div className={listAbsoluteClassName}>{item.image}</div>
+            <h2 className={listHeadingClassName}>{item.heading}</h2>
+            <p>{item.text}</p>
+            <Link className={listLinkClassName} href={item.href}>
+              {item.link}
+            </Link>
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 }
