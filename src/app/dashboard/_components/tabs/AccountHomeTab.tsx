@@ -3,11 +3,11 @@ import HeartIcon from '@/components/icons/ecommerce/HeartIcon';
 import ShippingIcon from '@/components/icons/ecommerce/ShippingIcon';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { DashboardUser } from '../DashboardClient';
+import { TabUser } from '../config/tabConfig';
 import MoneyCheckIcon from '@/components/icons/ecommerce/MoneyCheckIcon';
 
 interface DashboardAccountHomeProps {
-  user: DashboardUser;
+  user: TabUser;
 }
 
 /* Grid Items */

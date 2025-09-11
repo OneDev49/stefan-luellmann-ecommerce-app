@@ -1,6 +1,6 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 
 import DashboardSidebar from './layout/DashboardSidebar';
 
@@ -11,25 +11,12 @@ import {
   useWishlistStore,
 } from '@/store/wishlistStore';
 import NotFound from '@/components/ui/NotFound';
-import { createTabItems } from './config/tabConfig';
+import { createTabItems, TabPageData, TabUser } from './config/tabConfig';
 import { sidebarItems } from './config/sidebarConfig';
 
-export interface DashboardUser {
-  id: string;
-  name: string | null;
-  email: string | null;
-  image: string | null;
-}
-
-export interface DashboardPageData {
-  orders?: any[];
-  user?: DashboardUser;
-  wishlistItems?: any[];
-}
-
 interface DashboardClientProps {
-  user: DashboardUser;
-  pageData?: DashboardPageData;
+  user: TabUser;
+  pageData?: TabPageData;
 }
 
 export type TabId =
@@ -42,36 +29,40 @@ export type TabId =
 
 const SIDEBAR_STATE_KEY = 'dashboard-sidebar-collapsed';
 
-export default function DashboardPage({
+export default function DashboardClient({
   pageData,
   user,
 }: DashboardClientProps) {
   /* SearchParams */
   const searchParams = useSearchParams();
-  const activeTab = searchParams.get('tab') || 'home';
+  const rawTab = searchParams.get('tab');
+  const validTabs: TabId[] = [
+    'home',
+    'history',
+    'information',
+    'wishlist',
+    'cart',
+    'payment',
+  ];
+  const activeTab: TabId = validTabs.includes(rawTab as TabId)
+    ? (rawTab as TabId)
+    : 'home';
 
   /* Zustand Cart */
   const totalCartAmount = useCartStore(selectTotalItems);
-  const cartSentence =
-    totalCartAmount === 1
-      ? `${totalCartAmount} Product`
-      : `${totalCartAmount} Products`;
 
   /* Zustand Wishlist */
   const totalWishlistAmount = useWishlistStore(selectWishlistTotalItems);
-  const wishlistSentence =
-    totalWishlistAmount === 1
-      ? `${totalWishlistAmount} Product`
-      : `${totalWishlistAmount} Products`;
 
   /* Sidebar Management */
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const savedState = window.localStorage.getItem(SIDEBAR_STATE_KEY);
-      return savedState === 'true';
-    }
-    return false;
-  });
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  useLayoutEffect(() => {
+    const savedState =
+      typeof window !== 'undefined'
+        ? localStorage.getItem(SIDEBAR_STATE_KEY)
+        : null;
+    setIsSidebarCollapsed(savedState === 'true');
+  }, []);
   useEffect(() => {
     window.localStorage.setItem(SIDEBAR_STATE_KEY, String(isSidebarCollapsed));
   }, [isSidebarCollapsed]);
@@ -79,10 +70,19 @@ export default function DashboardPage({
     setIsSidebarCollapsed((prevState) => !prevState);
   };
 
-  const tabItems = useMemo(
-    () => createTabItems(user, cartSentence, wishlistSentence),
-    [user, cartSentence, wishlistSentence]
-  );
+  const tabItems = useMemo(() => {
+    const cartSentence =
+      totalCartAmount === 1
+        ? `${totalCartAmount} Product`
+        : `${totalCartAmount} Products`;
+
+    const wishlistSentence =
+      totalWishlistAmount === 1
+        ? `${totalWishlistAmount} Product`
+        : `${totalWishlistAmount} Products`;
+
+    return createTabItems(cartSentence, wishlistSentence, user, pageData);
+  }, [user, totalCartAmount, totalWishlistAmount, pageData]);
 
   const currentTab = tabItems.find((item) => item.id === activeTab);
 
@@ -110,11 +110,12 @@ export default function DashboardPage({
                 <h1 className='text-4xl font-bold'>{currentTab.heading}</h1>
                 <p>{currentTab.text}</p>
               </div>
-
-              <currentTab.Component user={user} />
+              {<currentTab.Component {...(currentTab.props ?? {})} />}
             </>
           ) : (
-            <NotFound message='This dashboard tab does not exist.' />
+            <>
+              <NotFound message='This dashboard Tab does not exist.' />
+            </>
           )}
         </div>
       </section>

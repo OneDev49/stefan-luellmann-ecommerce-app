@@ -5,16 +5,35 @@ import DashboardWishlist from '../tabs/WishlistTab';
 import DashboardCart from '../tabs/CartTab';
 import DashboardPayment from '../tabs/PaymentTab';
 
-import { DashboardPageData, DashboardUser, TabId } from '../DashboardClient';
+import { TabId } from '../DashboardClient';
 
-interface TabItem {
+export interface TabUser {
+  id: string;
+  name: string | null;
+  email: string | null;
+  image: string | null;
+}
+
+export interface TabPageData {
+  orders?: TabOrder[] | null;
+  wishlistItems?: any[];
+}
+
+export interface TabOrder {
+  id: string;
+  products: { id: string; name: string; quantity: number; price: number }[];
+  deliveryDate: string;
+  totalPrice: number;
+  status: 'delivered' | 'to_process' | 'canceled';
+  address: { street: string; zip: string; city: string; country: string };
+}
+
+interface TabItem<P = {}> {
   id: TabId;
   heading: string;
   text?: string;
-  Component: React.ComponentType<{
-    user: DashboardUser;
-    pageData?: DashboardPageData;
-  }>;
+  Component: React.ComponentType<P>;
+  props: P;
   breadcrumbs: BreadcrumbData;
 }
 
@@ -32,16 +51,18 @@ const baseCrumbs = [
 ];
 
 export function createTabItems(
-  user: DashboardUser,
   cartSentence: string,
-  wishlistSentence: string
-): TabItem[] {
+  wishlistSentence: string,
+  user?: TabUser,
+  pageData?: TabPageData
+): TabItem<any>[] {
   return [
     {
       id: 'home',
-      heading: `Welcome ${user.name}`,
+      heading: user ? `Welcome ${user.name}` : `Welcome!`,
       text: 'This is your Entro Account Dashboard. You can manage your Account from here.',
       Component: DashboardAccountHome,
+      props: { user: user },
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Account',
@@ -52,6 +73,7 @@ export function createTabItems(
       heading: 'Orders',
       text: 'You are currently viewing all of your Orders.',
       Component: DashboardOrderHistory,
+      props: { orders: pageData?.orders },
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Order History',
@@ -62,6 +84,7 @@ export function createTabItems(
       heading: 'Account',
       text: 'You are viewing your Account Information.',
       Component: DashboardAccountInformation,
+      props: {},
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Account Information',
@@ -72,6 +95,7 @@ export function createTabItems(
       heading: 'Wishlist',
       text: `You currently have ${wishlistSentence} in your Wishlist.`,
       Component: DashboardWishlist,
+      props: {},
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Wishlist',
@@ -82,6 +106,7 @@ export function createTabItems(
       heading: 'Shopping Cart',
       text: `You currently have ${cartSentence} in your Shopping Cart.`,
       Component: DashboardCart,
+      props: {},
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Shopping Cart',
@@ -92,6 +117,7 @@ export function createTabItems(
       heading: 'Payment Information',
       text: 'Update, Edit or Remove your current Payment Information.',
       Component: DashboardPayment,
+      props: {},
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Payment',
