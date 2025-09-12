@@ -4,7 +4,7 @@ import {
   selectWishlistTotalItems,
   useWishlistStore,
 } from '@/store/wishlistStore';
-import { DashboardUser } from '../DashboardClient';
+import { TabUser } from '../config/tabConfig';
 import Image from 'next/image';
 import Link from 'next/link';
 import ChevronLeftIcon from '@/components/icons/ui/ChevronLeftIcon';
@@ -14,7 +14,7 @@ import { useCartStore } from '@/store/cartStore';
 import CartIcon from '@/components/icons/ecommerce/CartIcon';
 
 interface DashboardWishlistProps {
-  user: DashboardUser;
+  user: TabUser;
 }
 
 export default function DashboardWishlist({ user }: DashboardWishlistProps) {

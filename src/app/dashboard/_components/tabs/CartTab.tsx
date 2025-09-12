@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import clsx from 'clsx';
 
-import { DashboardUser } from '../DashboardClient';
+import { TabUser } from '../config/tabConfig';
 import {
   selectCartTotal,
   selectTotalItems,
@@ -16,7 +16,7 @@ import CartQuantityInput from '@/components/ui/CartQuantityInput';
 import Button from '@/components/ui/Button';
 
 interface DashboardCartProps {
-  user: DashboardUser;
+  user: TabUser;
 }
 
 export default function DashboardCart({ user }: DashboardCartProps) {
