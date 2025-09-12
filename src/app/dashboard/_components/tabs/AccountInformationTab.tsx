@@ -1,10 +1,10 @@
 import clsx from 'clsx';
-import { DashboardUser } from '../DashboardClient';
+import { TabUser } from '../config/tabConfig';
 import Button from '@/components/ui/Button';
 import FloppyDiskIcon from '@/components/icons/ecommerce/FloppyDiskIcon';
 
 interface DashboardAccountInformationProps {
-  user: DashboardUser;
+  user: TabUser;
 }
 
 export default function DashboardAccountInformation({
