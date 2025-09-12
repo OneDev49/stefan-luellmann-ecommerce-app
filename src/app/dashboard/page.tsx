@@ -8,13 +8,22 @@ import { TabOrder } from './_components/config/tabConfig';
 function getDemoOrders(): TabOrder[] {
   return [
     {
-      id: 'order1',
+      id: '#100299',
       products: [
-        { id: 'p1', name: 'Product A', quantity: 2, price: 20 },
-        { id: 'p2', name: 'Product B', quantity: 1, price: 15 },
+        {
+          id: 'aetherflux-9000',
+          name: 'AetherFlux 9000',
+          quantity: 2,
+          price: 1299,
+        },
+        {
+          id: 'zentheon-x9-9950k',
+          name: 'Zentheon X9 9950K',
+          quantity: 1,
+          price: 699,
+        },
       ],
       deliveryDate: '2025-09-01',
-      totalPrice: 55,
       status: 'delivered',
       address: {
         street: 'Main Street 1',
@@ -24,11 +33,17 @@ function getDemoOrders(): TabOrder[] {
       },
     },
     {
-      id: 'order2',
-      products: [{ id: 'p3', name: 'Product C', quantity: 1, price: 100 }],
+      id: '#100321',
+      products: [
+        {
+          id: 'aegis-prime-ion-zt990i',
+          name: 'Aegis Prime Ion ZT990I',
+          quantity: 1,
+          price: 549,
+        },
+      ],
       deliveryDate: '2025-09-05',
-      totalPrice: 100,
-      status: 'to_process',
+      status: 'processing',
       address: {
         street: 'Second Street 2',
         zip: '54321',
