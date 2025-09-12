@@ -23,8 +23,7 @@ export interface TabOrder {
   id: string;
   products: { id: string; name: string; quantity: number; price: number }[];
   deliveryDate: string;
-  totalPrice: number;
-  status: 'delivered' | 'to_process' | 'canceled';
+  status: 'delivered' | 'processing' | 'canceled';
   address: { street: string; zip: string; city: string; country: string };
 }
 
