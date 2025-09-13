@@ -16,6 +16,7 @@ export interface TabUser {
 
 export interface TabPageData {
   orders?: TabOrder[] | null;
+  paymentMethods?: TabPaymentMethod[] | null;
   wishlistItems?: any[];
 }
 
@@ -25,6 +26,14 @@ export interface TabOrder {
   deliveryDate: string;
   status: 'delivered' | 'processing' | 'canceled';
   address: { street: string; zip: string; city: string; country: string };
+}
+
+export interface TabPaymentMethod {
+  method: 'paypal' | 'mastercard';
+  cardNumber: string;
+  cardHolder: string;
+  expiryDate: string;
+  cvc: number;
 }
 
 interface TabItem<P = {}> {
@@ -116,7 +125,7 @@ export function createTabItems(
       heading: 'Payment Information',
       text: 'Update, Edit or Remove your current Payment Information.',
       Component: DashboardPayment,
-      props: {},
+      props: { paymentMethods: pageData?.paymentMethods },
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Payment',

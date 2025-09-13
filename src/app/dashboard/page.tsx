@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma';
 import DashboardClient from './_components/DashboardClient';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
-import { TabOrder } from './_components/config/tabConfig';
+import { TabOrder, TabPaymentMethod } from './_components/config/tabConfig';
 
 function getDemoOrders(): TabOrder[] {
   return [
@@ -54,6 +54,25 @@ function getDemoOrders(): TabOrder[] {
   ];
 }
 
+function getDemoPaymentMethods(): TabPaymentMethod[] {
+  return [
+    {
+      method: 'paypal',
+      cardNumber: '2444 2901 3141 3241',
+      cardHolder: 'Stefan Lüllmann',
+      expiryDate: '06-2025',
+      cvc: 3415,
+    },
+    {
+      method: 'mastercard',
+      cardNumber: '1342 3314 3215 3123',
+      cardHolder: 'Stefan Lüllmann',
+      expiryDate: '12-2026',
+      cvc: 5122,
+    },
+  ];
+}
+
 export default async function DashboardPage({
   searchParams,
 }: {
@@ -81,6 +100,12 @@ export default async function DashboardPage({
   }
 
   const demoOrders: TabOrder[] = getDemoOrders();
+  const demoPaymentMethods: TabPaymentMethod[] = getDemoPaymentMethods();
 
-  return <DashboardClient user={user!} pageData={{ orders: demoOrders }} />;
+  return (
+    <DashboardClient
+      user={user!}
+      pageData={{ orders: demoOrders, paymentMethods: demoPaymentMethods }}
+    />
+  );
 }
