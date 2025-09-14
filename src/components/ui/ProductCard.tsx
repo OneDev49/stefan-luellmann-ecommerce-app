@@ -81,7 +81,7 @@ export default function ProductCard({
       <Link className={wrapperClassNames} href={`/product/${product.slug}`}>
         <div className={imageWrapperClassNames}>
           {product.isOnSale && (
-            <div className='absolute bg-red-700 h-8 grid place-items-center w-32 top-[8px] right-[-40px] rotate-45 z-50 will-change-transform'>
+            <div className='absolute bg-red-700 h-8 grid place-items-center w-32 top-[8px] right-[-40px] rotate-45 z-10 will-change-transform'>
               On Sale
             </div>
           )}

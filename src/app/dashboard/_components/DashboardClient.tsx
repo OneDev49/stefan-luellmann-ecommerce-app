@@ -13,6 +13,9 @@ import {
 import NotFound from '@/components/ui/NotFound';
 import { createTabItems, TabPageData, TabUser } from './config/tabConfig';
 import { sidebarItems } from './config/sidebarConfig';
+import MenuIcon from '@/components/icons/ui/MenuIcon';
+import clsx from 'clsx';
+import ChevronLeftIcon from '@/components/icons/ui/ChevronLeftIcon';
 
 interface DashboardClientProps {
   user: TabUser;
@@ -86,21 +89,59 @@ export default function DashboardClient({
 
   const currentTab = tabItems.find((item) => item.id === activeTab);
 
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+
   return (
     <div className='flex flex-1'>
-      <DashboardSidebar
-        user={user}
-        activeMenuId={activeTab}
-        menuItems={sidebarItems}
-        isCollapsed={isSidebarCollapsed}
-        toggleSidebar={handleToggleSidebar}
-      />
+      <div className='hidden lg:block'>
+        <DashboardSidebar
+          user={user}
+          activeMenuId={activeTab}
+          menuItems={sidebarItems}
+          isCollapsed={isSidebarCollapsed}
+          toggleSidebar={handleToggleSidebar}
+        />
+      </div>
 
+      <div className='lg:hidden'>
+        {isMobileSidebarOpen && (
+          <div
+            className='fixed inset-0 bg-black/70 z-30'
+            onClick={() => setIsMobileSidebarOpen(false)}
+          />
+        )}
+        <div
+          className={clsx(
+            'fixed top-0 left-0 h-full z-50 transform transition-all duration-300 flex',
+            isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          )}
+        >
+          <DashboardSidebar
+            user={user}
+            activeMenuId={activeTab}
+            menuItems={sidebarItems}
+            isCollapsed={true}
+            toggleSidebar={() => setIsMobileSidebarOpen(false)}
+          />
+          <button
+            title={isMobileSidebarOpen ? 'Collapse Sidebar' : 'Expand Sidebar'}
+            aria-label={
+              isMobileSidebarOpen ? 'Collapse Sidebar' : 'Expand Sidebar'
+            }
+            onClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
+            className='absolute bottom-11 right-[-41px] p-2 bg-[#001b03] border border-[#6c6c6c] rounded-tr-lg rounded-br-lg z-50'
+          >
+            <span>
+              {isMobileSidebarOpen ? <ChevronLeftIcon /> : <MenuIcon />}
+            </span>
+          </button>
+        </div>
+      </div>
       <section className='flex-1 overflow-y-auto'>
         <div className='pt-10 w-[95%] m-auto space-y-8'>
           {currentTab ? (
             <>
-              <div className='border-b border-[#555555] w-[50%] pb-3 space-y-3'>
+              <div className='border-b border-[#555555] max-w-5xl pb-3 space-y-3'>
                 <Breadcrumbs
                   secondaryBreadcrumbs={
                     currentTab.breadcrumbs.secondaryBreadcrumbs
