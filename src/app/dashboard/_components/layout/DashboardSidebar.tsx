@@ -41,7 +41,7 @@ export default function DashboardSidebar({
   toggleSidebar,
 }: DashboardSidebarProps) {
   const mainContainerClassName = clsx(
-    'border-r border-[#6c6c6c] h-full transition-all duration-300 ease-in-out overflow-hidden flex-shrink-0',
+    'border-r border-[#6c6c6c] h-full transition-all duration-300 ease-in-out overflow-hidden flex-shrink-0 bg-[#001b03]',
     isCollapsed ? 'min-w-20 w-20' : 'min-w-72 w-72'
   );
 
@@ -128,7 +128,7 @@ export default function DashboardSidebar({
           </ul>
           <div>
             <button
-              className='w-full flex gap-2 items-center justify-center p-3 cursor-pointer bg-gray-900/80 border-t border-gray-400 hover:bg-gray-800'
+              className='hidden lg:flex w-full gap-2 items-center justify-center p-3 cursor-pointer bg-gray-900/80 border-t border-gray-400 hover:bg-gray-800'
               type='button'
               onClick={toggleSidebar}
               title={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}

@@ -73,7 +73,7 @@ export default function DashboardWishlist({ user }: DashboardWishlistProps) {
                     >
                       <div className='max-w-28 h-full rounded-xl overflow-hidden relative'>
                         {item.isOnSale && (
-                          <div className='absolute select-none bg-red-700 h-6 grid place-items-center w-40 top-[20px] right-[-40px] rotate-45 z-50 will-change-transform text-sm'>
+                          <div className='absolute select-none bg-red-700 h-6 grid place-items-center w-40 top-[20px] right-[-40px] rotate-45 z-10 will-change-transform text-sm'>
                             On Sale
                           </div>
                         )}

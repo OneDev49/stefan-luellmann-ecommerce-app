@@ -76,7 +76,7 @@ export default function HeaderLayout({ variant = 'full' }: HeaderLayoutProps) {
   );
 
   return (
-    <header className='sticky top-0 z-[999] left-0 right-0 bg-black'>
+    <header className='sticky top-0 z-20 left-0 right-0 bg-black'>
       <div className={topHeaderClassNames}>
         <Link href='/'>
           <Image
