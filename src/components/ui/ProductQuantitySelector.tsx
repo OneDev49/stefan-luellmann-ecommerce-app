@@ -60,7 +60,7 @@ export default function QuantitySelector({
   };
 
   const buttonClassNames = clsx(
-    'bg-green-700 py-2 px-3 cursor-pointer hover:bg-green-800 transition-all'
+    'bg-green-700 py-1 px-2 cursor-pointer hover:bg-green-800 transition-all'
   );
 
   return (
@@ -72,13 +72,13 @@ export default function QuantitySelector({
         aria-label='Decrease Quantity'
         className={`${buttonClassNames} rounded-l-xl`}
       >
-        <MinusIcon height={20} width={20} />
+        <MinusIcon height={15} width={15} />
       </button>
       <input
         name='current_quantity'
         type='text'
         inputMode='numeric'
-        className='text-center bg-green-900 text-xl max-w-16'
+        className='text-center bg-green-900 text-lg max-w-12'
         value={inputValue}
         onChange={handleInputChange}
         onBlur={handleInputBlur}
@@ -92,7 +92,7 @@ export default function QuantitySelector({
         aria-label='Increase Quantity'
         className={`${buttonClassNames} rounded-r-xl`}
       >
-        <PlusIcon height={20} width={20} />
+        <PlusIcon height={15} width={15} />
       </button>
     </div>
   );
