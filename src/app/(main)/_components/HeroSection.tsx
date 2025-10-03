@@ -44,7 +44,7 @@ export default function HeroSection() {
   }, [emblaApi]);
 
   const emblaContainerClassNames = clsx(
-    'relative h-[85svh] w-full grid place-items-center flex-grow-0 flex-shrink-0'
+    'relative h-[80svh] w-full grid place-items-center flex-grow-0 flex-shrink-0'
   );
 
   const contentClassNames = clsx(
@@ -82,15 +82,21 @@ export default function HeroSection() {
               <div className='flex flex-col items-center gap-3'>
                 <Button
                   href='/search?category=components'
-                  className='p-[12px_18px] rounded-2xl'
-                  position='section'
+                  className='py-2 px-3 rounded-lg'
+                  position='standalone'
+                  variant='primary'
                 >
                   <>
                     <span>Explore our Catalouge</span>
                     <AnglesRightIcon />
                   </>
                 </Button>
-                <Button href='/search' variant='tertiary' position='section'>
+                <Button
+                  href='/search'
+                  variant='tertiary'
+                  position='standalone'
+                  className='py-2 px-3 rounded-lg'
+                >
                   <>
                     <span>Browse All Components</span>
                     <SearchIcon />
@@ -126,15 +132,20 @@ export default function HeroSection() {
               <div className='flex flex-col items-center gap-3'>
                 <Button
                   href='/search?category=gpu'
-                  className='p-[12px_18px] rounded-2xl'
-                  position='section'
+                  position='standalone'
+                  className='py-2 px-3 rounded-lg'
                 >
                   <>
                     <span>Discover all GPUs</span>
                     <AnglesRightIcon />
                   </>
                 </Button>
-                <Button href='/search' variant='tertiary' position='section'>
+                <Button
+                  href='/search'
+                  variant='tertiary'
+                  position='standalone'
+                  className='py-2 px-3 rounded-lg'
+                >
                   <>
                     <span>Browse All Components</span>
                     <SearchIcon />
@@ -162,26 +173,21 @@ export default function HeroSection() {
                 Build Your New Computer
               </h2>
               <p className='text-lg'>
-                Build your next Gaming Tower with our PC Builder with built in
-                Component Check.
+                Build your next Gaming Tower with our Premium Component
+                selection.
                 <br />
                 Building your own Computer was never easier!
               </p>
               <div className='flex flex-col items-center gap-3'>
                 <Button
-                  href='/pc-builder'
-                  className='p-[12px_18px] rounded-2xl'
-                  position='section'
+                  href='/search'
+                  className='py-2 px-3 rounded-lg'
+                  position='standalone'
+                  variant='primary'
                 >
                   <>
-                    <span>Discover all GPUs</span>
+                    <span>Discover our Components</span>
                     <AnglesRightIcon />
-                  </>
-                </Button>
-                <Button href='/search' variant='tertiary' position='section'>
-                  <>
-                    <span>Browse All Components</span>
-                    <SearchIcon />
                   </>
                 </Button>
               </div>
