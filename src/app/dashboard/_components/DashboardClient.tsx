@@ -91,9 +91,14 @@ export default function DashboardClient({
 
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
+  const contentClassName = clsx(
+    'flex-1 transition-all duration-300',
+    isSidebarCollapsed ? 'ml-[79px]' : 'ml-[288px]'
+  );
+
   return (
     <div className='flex flex-1'>
-      <div className='hidden lg:block'>
+      <div className='hidden lg:block fixed h-[calc(100vh-53.42px)]'>
         <DashboardSidebar
           user={user}
           activeMenuId={activeTab}
@@ -137,11 +142,11 @@ export default function DashboardClient({
           </button>
         </div>
       </div>
-      <section className='flex-1 overflow-y-auto'>
+      <section className={contentClassName}>
         <div className='pt-10 w-[95%] m-auto space-y-8'>
           {currentTab ? (
             <>
-              <div className='border-b border-[#555555] max-w-5xl pb-3 space-y-3'>
+              <div className='border-b border-[#555555] pb-3 space-y-3'>
                 <Breadcrumbs
                   secondaryBreadcrumbs={
                     currentTab.breadcrumbs.secondaryBreadcrumbs

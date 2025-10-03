@@ -60,7 +60,7 @@ export default function DashboardAccountHome({
   );
 
   return (
-    <ul className='list-none px-0 py-4 m-0 grid-cols-2 grid max-w-4xl w-[95%] gap-12'>
+    <ul className='list-none px-0 pt-4 pb-16 m-0 md:grid-cols-2 grid max-w-4xl gap-6 md:gap-12'>
       {listItems.map((item, index) => (
         <li key={index} className={listItem}>
           <div className={listItemClassName}>

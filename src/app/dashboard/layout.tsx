@@ -15,9 +15,9 @@ export default async function RootLayout({
   }
 
   return (
-    <div className='h-screen flex flex-col'>
+    <div className='flex flex-col'>
       <HeaderLayout variant='simple' />
-      <main className='flex-1 flex overflow-hidden'>{children}</main>
+      <main className='flex-1 flex overflow-y-auto'>{children}</main>
     </div>
   );
 }

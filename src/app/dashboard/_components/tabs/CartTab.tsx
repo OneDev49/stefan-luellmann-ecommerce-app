@@ -57,7 +57,7 @@ export default function DashboardCart({ user }: DashboardCartProps) {
   const listClassName = clsx('flex justify-between');
 
   return (
-    <div className='py-12 max-w-5xl w-[95%] space-y-6'>
+    <div className='py-12 max-w-5xl space-y-6'>
       {totalCartAmount > 0 && cartItems ? (
         <div className='grid grid-cols-[10fr_4fr] items-start gap-6'>
           <div>

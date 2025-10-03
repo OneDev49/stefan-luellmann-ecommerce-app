@@ -41,7 +41,7 @@ export default function DashboardSidebar({
   toggleSidebar,
 }: DashboardSidebarProps) {
   const mainContainerClassName = clsx(
-    'border-r border-[#6c6c6c] h-full transition-all duration-300 ease-in-out overflow-hidden flex-shrink-0 bg-[#001b03]',
+    'border-r border-[#6c6c6c] h-full transition-all duration-300 ease-in-out overflow-hidden flex-shrink-0 bg-[#001b03] overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-green-500',
     isCollapsed ? 'min-w-20 w-20' : 'min-w-72 w-72'
   );
 
@@ -80,7 +80,7 @@ export default function DashboardSidebar({
             <span className='text-sm text-gray-400'>{user.email}</span>
           </div>
         </div>
-        <nav className='flex justify-between flex-col flex-1'>
+        <nav className='flex justify-between flex-col flex-1 gap-5'>
           <ul
             className={clsx(
               'list-none py-4 space-y-4 m-0',

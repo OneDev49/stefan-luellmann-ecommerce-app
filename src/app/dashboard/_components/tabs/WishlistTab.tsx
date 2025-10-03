@@ -36,7 +36,7 @@ export default function DashboardWishlist({ user }: DashboardWishlistProps) {
   };
 
   return (
-    <div className='py-12 max-w-5xl w-[95%] space-y-6'>
+    <div className='py-12 max-w-5xl space-y-6'>
       {wishlistItems.length > 0 ? (
         <>
           <div>
