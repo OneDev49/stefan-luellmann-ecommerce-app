@@ -45,7 +45,7 @@ export default function PurchaseControls({ product }: PurchaseControlsProps) {
   };
 
   return (
-    <div className='flex flex-col gap-4 items-center sm:items-start'>
+    <div className='flex flex-col gap-4 items-start'>
       <div className='flex flex-col sm:flex-row gap-4'>
         <QuantitySelector
           maxQuantity={DEFAULT_MAX_QUANTITY}
@@ -56,7 +56,8 @@ export default function PurchaseControls({ product }: PurchaseControlsProps) {
           type='button'
           onClick={handleAddToCart}
           variant='primary'
-          className='text-lg'
+          className='text-lg py-1 px-2 rounded-lg'
+          position='standalone'
           children={
             <>
               <CartIcon />
@@ -71,7 +72,8 @@ export default function PurchaseControls({ product }: PurchaseControlsProps) {
         type='button'
         onClick={handleAddToWishlist}
         variant='tertiary'
-        className='text-lg'
+        className='text-lg py-1 px-2 rounded-lg'
+        position='standalone'
         children={
           <>
             {isInWishlist ? (

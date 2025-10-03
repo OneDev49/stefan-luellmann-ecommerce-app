@@ -65,13 +65,6 @@ export default function MainSection({ product }: mainSectionProps) {
             loading='eager'
           />
         </div>
-        <div className='hidden grid-cols-5 gap-2 place-items-center lg:grid'>
-          <div className={imageGridClassName}></div>
-          <div className={imageGridClassName}></div>
-          <div className={imageGridClassName}></div>
-          <div className={imageGridClassName}></div>
-          <div className={imageGridClassName}></div>
-        </div>
       </div>
       <div className='flex-[50%] flex flex-col gap-8 max-w-[650px]'>
         <h1 className='text-5xl font-bold underline'>{product.name}</h1>
