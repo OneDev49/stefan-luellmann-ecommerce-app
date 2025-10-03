@@ -35,7 +35,7 @@ export default function DashboardPayment({
   );
 
   return (
-    <div className='py-12 max-w-4xl w-[95%] space-y-24'>
+    <div className='py-12 max-w-4xl space-y-24'>
       {paymentMethods.length > 0 ? (
         <>
           <div className='grid grid-cols-2 gap-12'>

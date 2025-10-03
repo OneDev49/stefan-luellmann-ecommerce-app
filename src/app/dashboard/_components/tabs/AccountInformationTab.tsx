@@ -15,7 +15,7 @@ export default function DashboardAccountInformation({
   );
 
   return (
-    <div className='pb-12 pt-4 max-w-3xl w-[95%]'>
+    <div className='pb-12 pt-4 max-w-3xl'>
       <form className='space-y-20'>
         <div className='space-y-4'>
           <h2 className='text-2xl font-bold'>Personal Info</h2>
