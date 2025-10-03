@@ -42,7 +42,7 @@ export default function Button<C extends React.ElementType = typeof Link>({
     },
     {
       ['p-[12px_18px] rounded-2xl']: position === 'section',
-      ['p-[8px_12px] rounded-lg']: position === 'card',
+      ['py-1 px-2 rounded-lg']: position === 'card',
       ['']: position === 'standalone',
     }
   );
