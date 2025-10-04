@@ -3,6 +3,7 @@ import Image from 'next/image';
 import GitHubIcon from '../icons/brands/GitHubIcon';
 import LinkedInIcon from '../icons/brands/LinkedInIcon';
 import clsx from 'clsx';
+import GlobeIcon from '../icons/ecommerce/GlobeIcon';
 
 export default function FooterLayout() {
   const hoverClassNames = clsx('hover:text-[#53ff5f] transition-all');
@@ -21,6 +22,7 @@ export default function FooterLayout() {
             <a
               className='underline text-white'
               href='https://github.com/onedev49'
+              target='_blank'
               rel='noreferrer noopener'
             >
               GitHub Page
@@ -29,6 +31,7 @@ export default function FooterLayout() {
             <a
               className='underline text-white'
               href='https://linkedin.com/in/stefan-lüllmann/'
+              target='_blank'
               rel='noreferrer noopener'
             >
               LinkedIn Page
@@ -69,25 +72,10 @@ export default function FooterLayout() {
                     Privacy Policy
                   </Link>
                 </li>
-                <li>
-                  <Link className={hoverClassNames} href='/about-us'>
-                    About us
-                  </Link>
-                </li>
-                <li>
-                  <Link className={hoverClassNames} href='/help-center'>
-                    Help Center
-                  </Link>
-                </li>
-                <li>
-                  <Link className={hoverClassNames} href='/career'>
-                    Career
-                  </Link>
-                </li>
               </ul>
             </div>
           </div>
-          <div className='flex flex-col items-center gap-8 text-center md:text-left sm:grid sm:grid-cols-2 sm:items-start'>
+          <div className='flex flex-col items-center gap-8 text-center md:text-left'>
             <div>
               <strong className='underline text-lg'>Quick Navigation</strong>
               <ul className='list-none p-0 m-0 underline text-white pt-1 flex flex-col gap-1'>
@@ -107,83 +95,51 @@ export default function FooterLayout() {
                   </Link>
                 </li>
                 <li>
-                  <Link className={hoverClassNames} href='/pc-builder'>
-                    PC-Builder
-                  </Link>
-                </li>
-                <li>
                   <Link className={hoverClassNames} href='/search'>
                     Search Page
                   </Link>
                 </li>
               </ul>
             </div>
-            <div>
-              <strong className='underline text-lg'>Categories</strong>
-              <ul className='list-none p-0 m-0 underline text-white pt-1 flex flex-col gap-1'>
-                <li>
-                  <Link className={hoverClassNames} href='/search?category=cpu'>
-                    CPU
-                  </Link>
-                </li>
-                <li>
-                  <Link className={hoverClassNames} href='/search?category=gpu'>
-                    GPU
-                  </Link>
-                </li>
-                <li>
-                  <Link className={hoverClassNames} href='/search?category=ram'>
-                    RAM
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className={hoverClassNames}
-                    href='/search?category=storage'
-                  >
-                    Storage
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className={hoverClassNames}
-                    href='/search?category=motherboard'
-                  >
-                    Motherboard
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className={hoverClassNames}
-                    href='/search?category=power'
-                  >
-                    Power Supply
-                  </Link>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
-
         <div>
           <div className='flex flex-col gap-1 items-center md:items-start'>
             <strong className='underline text-lg'>Get to Know us:</strong>
             <div className='flex gap-2 items-center'>
-              <Link
+              <a
                 className={hoverClassNames}
                 href='https://github.com/onedev49'
+                rel='noreferrer noopener'
+                target='_blank'
+                aria-label='Go To Official Developer GitHub'
+                title='Go To Official Developer GitHub'
               >
                 <GitHubIcon height={25} width={25} />
-              </Link>
-              <Link
+              </a>
+              <a
                 className={hoverClassNames}
                 href='https://linkedin.com/in/stefan-lüllmann'
+                rel='noreferrer noopener'
+                target='_blank'
+                aria-label='Go To Official Developer LinkedIn'
+                title='Go To Official Developer LinkedIn'
               >
                 <LinkedInIcon height={25} width={25} />
-              </Link>
+              </a>
+              <a
+                className={hoverClassNames}
+                href='https://stefan-luellmann.com/'
+                rel='noreferrer noopener'
+                target='_blank'
+                aria-label='Go To Official Developer Website'
+                title='Go To Official Developer Website'
+              >
+                <GlobeIcon height={25} width={25} />
+              </a>
             </div>
           </div>
-          <div className='border-t-2 border-white font-bold flex justify-center text-sm mt-2 pt-2 text-center'>
+          <div className='border-t-2 border-white font-bold flex justify-center text-sm mt-8 pt-4 text-center'>
             <p>
               Complete Concept, Design and Code made and written by Stefan
               Lüllmann
