@@ -169,27 +169,19 @@ export default function HeaderLayout({ variant = 'full' }: HeaderLayoutProps) {
         </div>
       </div>
       {variant === 'full' && (
-        <div className='border-white border-t border-b flex items-center whitespace-nowrap text-lg py-1'>
+        <div className='border-gray-400 border-t border-b flex items-center whitespace-nowrap'>
           <div
-            className='border-r sm:border-0'
+            className='border-r border-r-gray-400 py-1 px-2'
             onClick={() => handleOpenSidenav('left')}
           >
             <MenuIcon
               height='100%'
-              width={40}
+              width={35}
               className={`mx-1 cursor-pointer hover:bg-gray-700 ${bottomLinksClassNames}`}
             />
           </div>
-          <div className='border-x'>
-            <Link
-              className={`hidden sm:block mx-1 hover:bg-gray-700 hover:text-white ${bottomLinksClassNames}`}
-              href='/pc-builder'
-            >
-              PC Builder
-            </Link>
-          </div>
           <nav
-            className='overflow-hidden w-full select-none mx-1'
+            className='overflow-hidden w-full select-none mx-2'
             ref={emblaRef}
           >
             <div className='flex gap-2'>
