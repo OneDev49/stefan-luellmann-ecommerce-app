@@ -3,6 +3,7 @@
 import UserIcon from '@/components/icons/ecommerce/UserIcon';
 import ArrowLeftIcon from '@/components/icons/ui/ArrowLeftIcon';
 import ChevronRightIcon from '@/components/icons/ui/ChevronRightIcon';
+import { ComponentNames, ComponentSlugNames } from '@/types/components';
 import clsx from 'clsx';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -20,8 +21,8 @@ type SideMenu = {
 };
 
 type Categories = {
-  name: string;
-  slug: string;
+  name: ComponentNames;
+  slug: ComponentSlugNames;
   brands: string[];
 };
 
@@ -222,11 +223,22 @@ export default function LeftSidenav({
                 <ul className='list-none p-0 m-0 space-y-1'>
                   <li>
                     <a
-                      href='https://stefan-luellmann.com/projects/entro-online-shop'
+                      href='https://stefan-luellmann.com/case-studies/entro-ecommerce-store'
                       className={linksClassNames}
                       rel='noreferrer noopener'
+                      target='_blank'
                     >
                       <span>Case Study on Entro</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href='https://stefan-luellmann.com/'
+                      className={linksClassNames}
+                      rel='noreferrer noopener'
+                      target='_blank'
+                    >
+                      <span>Website of Stefan Lüllmann</span>
                     </a>
                   </li>
                   <li>
@@ -234,8 +246,9 @@ export default function LeftSidenav({
                       href='https://github.com/OneDev49'
                       className={linksClassNames}
                       rel='noreferrer noopener'
+                      target='_blank'
                     >
-                      <span>Stefan Lüllmann GitHub</span>
+                      <span>Stefan Lüllmann on GitHub</span>
                     </a>
                   </li>
                   <li>
@@ -243,8 +256,9 @@ export default function LeftSidenav({
                       href='https://linkedin.com/in/stefan-lüllmann'
                       className={linksClassNames}
                       rel='noreferrer noopener'
+                      target='_blank'
                     >
-                      <span>Stefan Lüllmann LinkedIn</span>
+                      <span>Stefan Lüllmann on LinkedIn</span>
                     </a>
                   </li>
                 </ul>
