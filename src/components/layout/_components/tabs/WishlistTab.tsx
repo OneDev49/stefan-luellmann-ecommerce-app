@@ -1,4 +1,5 @@
 import TrashIcon from '@/components/icons/ecommerce/TrashIcon';
+import AnglesRightIcon from '@/components/icons/ui/AnglesRightIcon';
 import CloseIcon from '@/components/icons/ui/CloseIcon';
 import Button from '@/components/ui/Button';
 import {
@@ -6,6 +7,7 @@ import {
   useWishlistStore,
 } from '@/store/wishlistStore';
 import clsx from 'clsx';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -31,6 +33,9 @@ export default function HeaderWishlist({
     removeFromWishlist(productId);
   };
 
+  /* NextAuth Session */
+  const { data: session, status } = useSession();
+
   return (
     <>
       {wishlistItems.length > 0 ? (
@@ -42,17 +47,54 @@ export default function HeaderWishlist({
                 <span className='underline text-lg'>{totalWishlistAmount}</span>
               </strong>
             </div>
-            <div className='flex justify-end my-4'>
-              <Button
-                as='button'
-                type='button'
-                onClick={clearWishlist}
-                variant='danger'
-                position='card'
-              >
-                <TrashIcon height={20} width={20} />
-                Clear Cart
-              </Button>
+            <div className='my-4 space-y-4'>
+              <div>
+                {status === 'loading' ? (
+                  <div className='h-8 animate-pulse bg-green-700 rounded-md'></div>
+                ) : (
+                  <>
+                    {session && session.user ? (
+                      <Link href='/dashboard?tab=wishlist' onClick={onClose}>
+                        <Button
+                          as='button'
+                          type='button'
+                          variant='secondary'
+                          position='card'
+                          className='w-full justify-center'
+                        >
+                          Go To your Wishlist
+                          <AnglesRightIcon />
+                        </Button>
+                      </Link>
+                    ) : (
+                      <Link href='/register' onClick={onClose}>
+                        <Button
+                          as='button'
+                          type='button'
+                          variant='secondary'
+                          position='card'
+                          className='w-full justify-center'
+                        >
+                          Create a Account to save your Wishlist
+                          <AnglesRightIcon />
+                        </Button>
+                      </Link>
+                    )}
+                  </>
+                )}
+              </div>
+              <div className='flex justify-end'>
+                <Button
+                  as='button'
+                  type='button'
+                  onClick={clearWishlist}
+                  variant='danger'
+                  position='card'
+                >
+                  <TrashIcon height={20} width={20} />
+                  Clear Wishlist
+                </Button>
+              </div>
             </div>
           </div>
           <ul className='list-none m-0 p-0 space-y-3'>
