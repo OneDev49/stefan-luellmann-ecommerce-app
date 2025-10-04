@@ -1,5 +1,6 @@
 import CartIcon from '@/components/icons/ecommerce/CartIcon';
 import TrashIcon from '@/components/icons/ecommerce/TrashIcon';
+import AnglesRightIcon from '@/components/icons/ui/AnglesRightIcon';
 import CloseIcon from '@/components/icons/ui/CloseIcon';
 import Button from '@/components/ui/Button';
 import {
@@ -7,6 +8,7 @@ import {
   selectTotalItems,
   useCartStore,
 } from '@/store/cartStore';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -29,6 +31,9 @@ export default function HeaderCart({ onClose, className }: HeaderCartProps) {
     removeFromCart(productId);
   };
 
+  /* NextAuth Session */
+  const { data: session, status } = useSession();
+
   return (
     <>
       {cartItems.length > 0 ? (
@@ -46,26 +51,63 @@ export default function HeaderCart({ onClose, className }: HeaderCartProps) {
                 </span>
               </strong>
             </div>
-            <div className='flex justify-between my-4'>
-              <Button
-                href='/checkout'
-                onClick={onClose}
-                variant='primary'
-                position='card'
-              >
-                <CartIcon height={20} width={20} />
-                To Checkout
-              </Button>
-              <Button
-                as='button'
-                type='button'
-                onClick={clearCart}
-                variant='danger'
-                position='card'
-              >
-                <TrashIcon height={20} width={20} />
-                Clear Cart
-              </Button>
+            <div className='my-4 space-y-4'>
+              <div>
+                {status === 'loading' ? (
+                  <div className='h-8 animate-pulse bg-green-700 rounded-md'></div>
+                ) : (
+                  <>
+                    {session && session.user ? (
+                      <Link href='/dashboard?tab=cart' onClick={onClose}>
+                        <Button
+                          as='button'
+                          type='button'
+                          variant='secondary'
+                          position='card'
+                          className='w-full justify-center'
+                        >
+                          Go To your Cart
+                          <AnglesRightIcon />
+                        </Button>
+                      </Link>
+                    ) : (
+                      <Link href='/register' onClick={onClose}>
+                        <Button
+                          as='button'
+                          type='button'
+                          variant='secondary'
+                          position='card'
+                          className='w-full justify-center'
+                        >
+                          Create a Account to save your Cart
+                          <AnglesRightIcon />
+                        </Button>
+                      </Link>
+                    )}
+                  </>
+                )}
+              </div>
+              <div className='flex justify-between'>
+                <Button
+                  href='/checkout'
+                  onClick={onClose}
+                  variant='primary'
+                  position='card'
+                >
+                  <CartIcon height={20} width={20} />
+                  To Checkout
+                </Button>
+                <Button
+                  as='button'
+                  type='button'
+                  onClick={clearCart}
+                  variant='danger'
+                  position='card'
+                >
+                  <TrashIcon height={20} width={20} />
+                  Clear Cart
+                </Button>
+              </div>
             </div>
           </div>
           <ul className='list-none m-0 p-0 space-y-3'>

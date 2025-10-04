@@ -39,7 +39,7 @@ export default function RightSidenav({
     >
       <div
         className={clsx(
-          'absolute top-0 right-0 h-full w-full max-w-sm bg-[#00210b] shadow-xl flex flex-col',
+          'absolute top-0 right-0 h-full w-full max-w-sm bg-[#00210b] border-l border-[#004810] shadow-xl flex flex-col',
           isClosing ? 'animate-slideOutToRight' : 'animate-slideInFromRight'
         )}
       >
