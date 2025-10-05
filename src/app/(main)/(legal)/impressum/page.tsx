@@ -1,5 +1,21 @@
+import { Metadata } from 'next';
 import LegalContent from '../_components/LegalContent';
 import clsx from 'clsx';
+
+export const metadata: Metadata = {
+  title: 'Legal Notice',
+  description: 'Our official Legal Notice',
+
+  openGraph: {
+    title: 'Legal Notice',
+    description: 'Our official Legal Notice',
+  },
+
+  twitter: {
+    title: 'Legal Notice',
+    description: 'Our official Legal Notice',
+  },
+};
 
 export default function Impressum() {
   /* CSS ClassNames */
