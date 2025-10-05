@@ -1,82 +1,71 @@
+import { cache } from 'react';
 import { prisma } from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
-
 import { mapToProductCard } from '@/lib/mappers/product';
 
 import SearchPageClient from './_components/SearchPageClient';
 
+// Cache categories for better optimization on Project since Products never change
+const getAllCategories = cache(async () => {
+  return prisma.category.findMany({
+    select: { name: true, slug: true },
+    orderBy: { name: 'asc' },
+  });
+});
+
+type SearchParams = {
+  q?: string;
+};
+
+const MAXIMUM_AMOUNT_OF_DEMO_PRODUCTS = 200;
+
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: SearchParams;
 }) {
-  const selectedBrands = Array.isArray(searchParams.brand)
-    ? searchParams.brand
-    : typeof searchParams.brand === 'string'
-    ? [searchParams.brand]
-    : [];
+  const searchTerm = searchParams.q;
 
-  const categorySlug =
-    typeof searchParams.category === 'string'
-      ? searchParams.category
-      : undefined;
-  const searchTerm =
-    typeof searchParams.q === 'string' ? searchParams.q : undefined;
-
-  /* Construct the where object */
+  // Minimal where clause only for search term
   const where: Prisma.ProductWhereInput = {};
+
   if (searchTerm) {
-    where.name = {
-      contains: searchTerm,
-      mode: 'insensitive',
-    };
+    where.OR = [
+      { name: { contains: searchTerm, mode: 'insensitive' } },
+      { brand: { contains: searchTerm, mode: 'insensitive' } },
+      { shortDescription: { contains: searchTerm, mode: 'insensitive' } },
+    ];
   }
-  if (categorySlug) {
-    where.categories = {
-      some: {
-        slug: {
-          equals: categorySlug,
-          mode: 'insensitive',
+
+  // Single DB Query to fetch all matching products at once
+  const [allProductsDB, allCategories] = await Promise.all([
+    prisma.product.findMany({
+      where,
+      take: MAXIMUM_AMOUNT_OF_DEMO_PRODUCTS,
+      include: {
+        categories: {
+          select: {
+            slug: true,
+            name: true,
+          },
         },
       },
-    };
-  }
-  if (selectedBrands.length > 0) {
-    where.brand = {
-      in: selectedBrands,
-      mode: 'insensitive',
-    };
-  }
+    }),
+    getAllCategories(),
+  ]);
 
-  const baseWhereClause = { ...where };
-  delete baseWhereClause.brand;
+  const allProducts = allProductsDB.map(mapToProductCard);
 
-  const [initialProductsDB, availableBrands, allCategories] = await Promise.all(
-    [
-      prisma.product.findMany({
-        where,
-        take: 50,
-      }),
-
-      prisma.product.findMany({
-        where: baseWhereClause,
-        select: {
-          brand: true,
-        },
-        distinct: ['brand'],
-      }),
-
-      prisma.category.findMany({ select: { name: true, slug: true } }),
-    ]
-  );
-
-  const initialProducts = initialProductsDB.map(mapToProductCard);
+  const uniqueBrands = Array.from(
+    new Set(allProductsDB.map((p) => p.brand))
+  ).sort();
 
   return (
     <SearchPageClient
-      initialProducts={initialProducts}
-      brands={availableBrands.map((b) => b.brand).sort()}
+      allProducts={allProducts}
+      brands={uniqueBrands}
       categories={allCategories}
+      searchTerm={searchTerm}
     />
   );
 }

@@ -21,27 +21,13 @@ function normalizeSpecs(input: Prisma.JsonValue): ProductSpecs {
   return out;
 }
 
-export function mapToProductPage(product: Product): ProductPageType {
-  const averageRating = calculateAverageRating('averageRating', product);
-  const totalRatingCount = calculateAverageRating('totalRatingCount', product);
+type ProductWithCategories = Product & {
+  categories?: Array<{ slug: string; name: string }>;
+};
 
-  return {
-    ...mapToProductCard(product),
-    brand: product.brand,
-    productType: product.productType,
-    shortDescription: product.shortDescription,
-    longDescription: product.longDescription,
-    stockCount: product.stockCount,
-    oneStarReviews: product.oneStarReviews,
-    twoStarReviews: product.twoStarReviews,
-    threeStarReviews: product.threeStarReviews,
-    fourStarReviews: product.fourStarReviews,
-    fiveStarReviews: product.fiveStarReviews,
-    specs: normalizeSpecs(product.specs),
-  };
-}
-
-export function mapToProductCard(product: Product): ProductCardType {
+export function mapToProductPage(
+  product: ProductWithCategories
+): ProductPageType {
   const averageRating = calculateAverageRating('averageRating', product);
   const totalRatingCount = calculateAverageRating('totalRatingCount', product);
 
@@ -49,6 +35,39 @@ export function mapToProductCard(product: Product): ProductCardType {
     id: product.id,
     name: product.name,
     slug: product.slug,
+    brand: product.brand,
+    imageUrl: product.imageUrl,
+    productType: product.productType,
+    shortDescription: product.shortDescription,
+    longDescription: product.longDescription,
+    price: product.price,
+    stockCount: product.stockCount,
+    isOnSale: product.isOnSale,
+    reducedPrice: product.reducedPrice,
+    oneStarReviews: product.oneStarReviews,
+    twoStarReviews: product.twoStarReviews,
+    threeStarReviews: product.threeStarReviews,
+    fourStarReviews: product.fourStarReviews,
+    fiveStarReviews: product.fiveStarReviews,
+    averageRating,
+    totalRatingCount,
+    specs: normalizeSpecs(product.specs),
+    createdAt: product.createdAt,
+    categories: product.categories,
+  };
+}
+
+export function mapToProductCard(
+  product: ProductWithCategories
+): ProductCardType {
+  const averageRating = calculateAverageRating('averageRating', product);
+  const totalRatingCount = calculateAverageRating('totalRatingCount', product);
+
+  return {
+    id: product.id,
+    name: product.name,
+    slug: product.slug,
+    brand: product.brand,
     imageUrl: product.imageUrl,
     price: product.price,
     stockCount: product.stockCount,
@@ -56,6 +75,8 @@ export function mapToProductCard(product: Product): ProductCardType {
     reducedPrice: product.reducedPrice,
     averageRating,
     totalRatingCount,
+    createdAt: product.createdAt,
+    categories: product.categories,
   };
 }
 
