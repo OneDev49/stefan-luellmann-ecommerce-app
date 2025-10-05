@@ -23,11 +23,24 @@ export interface ProductPageType {
   averageRating: number;
   totalRatingCount: number;
   specs: ProductSpecs;
+  createdAt: Date;
+  categories?: Array<{ slug: string; name: string }>;
 }
 
-export interface ProductCardType extends ProductCartWishlistType {
+export interface ProductCardType {
+  id: string;
+  name: string;
+  slug: string;
+  brand: string;
+  imageUrl: string;
+  price: number;
+  stockCount: number;
+  isOnSale: boolean;
+  reducedPrice: number | null;
   averageRating: number;
   totalRatingCount: number;
+  createdAt: Date;
+  categories?: Array<{ slug: string; name: string }>;
 }
 
 export interface ProductCartWishlistType {
