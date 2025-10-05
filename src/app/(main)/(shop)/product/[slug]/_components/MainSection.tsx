@@ -2,7 +2,6 @@ import { ProductPageType } from '@/types/product';
 
 import Image from 'next/image';
 import clsx from 'clsx';
-
 import Rating from '@/components/ui/Rating';
 import PurchaseControls from './PurchaseControls';
 
@@ -24,7 +23,7 @@ interface mainSectionProps {
 }
 
 export default function MainSection({ product }: mainSectionProps) {
-  /* Determine Stock Text */
+  /* Determine Stock Text for Stock Indicator */
   const stockText =
     product.stockCount === 0
       ? `Out of Stock`
@@ -32,10 +31,6 @@ export default function MainSection({ product }: mainSectionProps) {
       ? `Limited Stock`
       : `In Stock`;
 
-  /* CSS Classes */
-  const transparentCardClassName = clsx(
-    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl p-8 max-w-2xl lg:max-w-7xl m-auto items-center lg:items-start flex flex-col lg:flex-row justify-between w-full gap-8'
-  );
   const stockClassName = clsx(
     {
       ['text-[#00ff55]']: product.stockCount >= 100,
@@ -44,10 +39,9 @@ export default function MainSection({ product }: mainSectionProps) {
     },
     'text-2xl'
   );
-  const imageGridClassName = clsx('h-[75px] w-[75px] bg-white rounded-2xl');
 
   return (
-    <section className={transparentCardClassName}>
+    <section className='bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl p-8 max-w-2xl lg:max-w-7xl m-auto items-center lg:items-start flex flex-col lg:flex-row justify-between w-full gap-8'>
       <div className='w-full lg:flex-[50%] flex flex-col gap-5 lg:max-w-[475px]'>
         <div className='lg:max-h-[475px] lg:max-w-[475px] bg-white grid place-items-center rounded-3xl overflow-hidden relative'>
           {product.isOnSale && (
@@ -69,7 +63,6 @@ export default function MainSection({ product }: mainSectionProps) {
       <div className='flex-[50%] flex flex-col gap-8 max-w-[650px]'>
         <h1 className='text-5xl font-bold underline'>{product.name}</h1>
         <div className='flex flex-col gap-4'>
-          {/* Rating */}
           <div className='flex items-center gap-2'>
             <Rating rating={product.averageRating} size='large' />
             <span>({product.totalRatingCount})</span>

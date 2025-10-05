@@ -3,7 +3,6 @@
 import { ProductPageType } from '@/types/product';
 
 import Rating from '@/components/ui/Rating';
-import clsx from 'clsx';
 
 interface RatingSummaryProps {
   product: Pick<
@@ -28,17 +27,8 @@ export default function RatingSummary({ product }: RatingSummaryProps) {
     { stars: 1, count: product.oneStarReviews },
   ];
 
-  /* CSS Classnames */
-  const transparentCardClassName = clsx(
-    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl p-8 flex flex-col gap-6'
-  );
-
-  const barClassName = clsx(
-    'w-full lg:w-auto lg:min-w-48 bg-[#414141] h-4 relative overflow-hidden rounded-md'
-  );
-
   return (
-    <section className={transparentCardClassName}>
+    <section className='bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl p-8 flex flex-col gap-6'>
       <h2 className='text-4xl font-bold'>Product Rating</h2>
       <div className='flex flex-col gap-2'>
         <p className='font-bold text-xl'>
@@ -64,7 +54,7 @@ export default function RatingSummary({ product }: RatingSummaryProps) {
                 {stars} {starText}
               </span>
               <div className='flex w-full items-center gap-3'>
-                <div className={barClassName}>
+                <div className='w-full lg:w-auto lg:min-w-48 bg-[#414141] h-4 relative overflow-hidden rounded-md'>
                   <div
                     className='absolute bg-[#1eff00] top-0 bottom-0'
                     style={{ width: `${percentage}%` }}

@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { useCartStore } from '@/store/cartStore';
 import { useWishlistStore } from '@/store/wishlistStore';
-
 import { ProductCardType } from '@/types/product';
 
 import QuantitySelector from '@/components/ui/ProductQuantitySelector';

@@ -10,7 +10,7 @@ interface BreadcrumbsSectionProps {
 export default function BreadcrumbsSection({
   product,
 }: BreadcrumbsSectionProps) {
-  /* Adjust font of ProductType */
+  // Change font case for a uniform display across the website
   const ADJUSTED_NAME =
     product.productType === 'GPU' ||
     product.productType === 'CPU' ||
@@ -19,30 +19,24 @@ export default function BreadcrumbsSection({
       : product.productType.charAt(0).toUpperCase() +
         product.productType.slice(1).toLowerCase();
 
-  /* CSS Classnames */
-  const transparentCardClassName = clsx(
-    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-lg px-4 py-2'
-  );
-  const textClassNames = clsx('hover:text-white');
+  const textClassName = clsx('hover:text-white');
 
   return (
     <div className='px-4'>
       <div className='flex justify-start max-w-2xl lg:max-w-7xl m-auto'>
-        <section
-          className={`${transparentCardClassName} text-sm text-gray-300 `}
-        >
-          <Link href='/' className={textClassNames}>
+        <section className='bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-lg px-4 py-2 text-sm text-gray-300'>
+          <Link href='/' className={textClassName}>
             Homepage
           </Link>{' '}
           {' / '}
           <Link
             href={`/search?category=${product.productType.toLowerCase()}`}
-            className={textClassNames}
+            className={textClassName}
           >
             {ADJUSTED_NAME}
           </Link>{' '}
           {' / '}
-          <span className={`${textClassNames} cursor-pointer`}>
+          <span className={`${textClassName} cursor-pointer`}>
             {product.name}
           </span>
         </section>

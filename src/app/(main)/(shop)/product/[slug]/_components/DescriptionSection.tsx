@@ -9,7 +9,6 @@ interface DescriptionSectionProps {
 export default function DescriptionSection({
   product,
 }: DescriptionSectionProps) {
-  /* CSS Classnames */
   const transparentCardClassName = clsx(
     'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl max-w-2xl lg:max-w-7xl m-auto'
   );
