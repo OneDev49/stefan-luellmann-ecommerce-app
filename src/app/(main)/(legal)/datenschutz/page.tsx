@@ -1,5 +1,21 @@
+import { Metadata } from 'next';
 import LegalContent from '../_components/LegalContent';
 import clsx from 'clsx';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description: 'Our Privacy Policy.',
+
+  openGraph: {
+    title: 'Privacy Policy',
+    description: 'Our Privacy Policy',
+  },
+
+  twitter: {
+    title: 'Privacy Policy',
+    description: 'Our Privacy Policy',
+  },
+};
 
 export default function Datenschutz() {
   /* CSS ClassNames */
