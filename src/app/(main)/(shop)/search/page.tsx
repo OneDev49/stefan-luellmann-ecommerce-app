@@ -4,6 +4,25 @@ import { Prisma } from '@prisma/client';
 import { mapToProductCard } from '@/lib/mappers/product';
 
 import SearchPageClient from './_components/SearchPageClient';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Search',
+  description:
+    'Find the Computer Components you are looking for among hundrets of premium components. From GPU to CPU and even Case Fans, we have everything for your Computer.',
+
+  openGraph: {
+    title: 'Search',
+    description:
+      'Find the Computer Components you are looking for among hundrets of premium components. From GPU to CPU and even Case Fans, we have everything for your Computer.',
+  },
+
+  twitter: {
+    title: 'Search',
+    description:
+      'Find the Computer Components you are looking for among hundrets of premium components. From GPU to CPU and even Case Fans, we have everything for your Computer.',
+  },
+};
 
 // Cache categories for better optimization on Project since Products never change
 const getAllCategories = cache(async () => {
