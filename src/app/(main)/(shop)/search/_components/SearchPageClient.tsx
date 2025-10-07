@@ -6,6 +6,7 @@ import { ProductCardType } from '@/types/product';
 
 import ProductCard from '@/components/ui/ProductCard';
 import SearchFilters from './SearchFilters';
+import MobileFilterSidebar from './MobileFilterSidebar';
 
 export interface CategoryFilterItem {
   name: string;
@@ -50,17 +51,17 @@ export default function SearchPageClient({
     }
   );
 
-  const [minPrice, setMinPrice] = useState(() => {
+  const [minPrice, setMinPrice] = useState<number>(() => {
     const price = searchParams.get('minPrice');
     return price ? parseFloat(price) : 0;
   });
 
-  const [maxPrice, setMaxPrice] = useState(() => {
+  const [maxPrice, setMaxPrice] = useState<number>(() => {
     const price = searchParams.get('maxPrice');
     return price ? parseFloat(price) : Infinity;
   });
 
-  const [minRating, setMinRating] = useState(() => {
+  const [minRating, setMinRating] = useState<number>(() => {
     const rating = searchParams.get('minRating');
     return rating ? parseInt(rating) : 0;
   });
@@ -74,8 +75,26 @@ export default function SearchPageClient({
     return (sort as SortOptions) || 'newest';
   });
 
-  const [displayCount, setDisplayCount] = useState(PRODUCTS_PER_PAGE);
+  const [displayCount, setDisplayCount] = useState<number>(PRODUCTS_PER_PAGE);
   const observerTarget = useRef<HTMLDivElement>(null);
+
+  // Calculate active filter count
+  const activeFiltersCount = useMemo(() => {
+    let count = 0;
+    if (selectedBrands.size > 0) count += selectedBrands.size;
+    if (selectedCategory) count += 1;
+    if (minPrice > 0 || maxPrice < Infinity) count += 1;
+    if (minRating > 0) count += 1;
+    if (showOnSaleOnly) count += 1;
+    return count;
+  }, [
+    selectedBrands,
+    selectedCategory,
+    minPrice,
+    maxPrice,
+    minRating,
+    showOnSaleOnly,
+  ]);
 
   // Sync state to Url on filter change
   useEffect(() => {
@@ -301,8 +320,8 @@ export default function SearchPageClient({
         </p>
       </div>
       <section className='pt-12 pb-24'>
-        <div className='grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-6'>
-          <aside className='hidden lg:block border-r-2 border-gray-700 pr-4 lg:col-span-1'>
+        <div className='flex gap-x-8 gap-y-10'>
+          <aside className='hidden lg:block flex-[0_0_270px] border-r-2 border-gray-700 pr-4'>
             <div>
               <h2 className='text-3xl font-bold'>Search Filters</h2>
               <p className='text-gray-400'>
@@ -323,18 +342,46 @@ export default function SearchPageClient({
               onPriceChange={handlePriceChange}
               onRatingChange={setMinRating}
               onSaleToggle={setShowOnSaleOnly}
+              activeFiltersCount={activeFiltersCount}
             />
           </aside>
-          <div className='lg:col-span-5'>
+          <div className='flex-auto'>
             <div className='flex items-center justify-between border-b-2 border-gray-700 pb-4'>
-              <p className='text-gray-400'>
-                {filteredAndSortedProducts.length} Results found
-                {displayedProducts.length < filteredAndSortedProducts.length &&
-                  ` (showing ${displayedProducts.length})`}
-              </p>
-              <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
+              <div className='sm:flex items-center gap-4'>
+                <div className='flex gap-4 sm:block lg:hidden'>
+                  <MobileFilterSidebar
+                    brands={availableBrands}
+                    categories={categories}
+                    selectedBrands={selectedBrands}
+                    selectedCategory={selectedCategory}
+                    minPrice={minPrice}
+                    maxPrice={maxPrice}
+                    minRating={minRating}
+                    showOnSaleOnly={showOnSaleOnly}
+                    onBrandChange={setSelectedBrands}
+                    onCategoryChange={setSelectedCategory}
+                    onPriceChange={handlePriceChange}
+                    onRatingChange={setMinRating}
+                    onSaleToggle={setShowOnSaleOnly}
+                    activeFiltersCount={activeFiltersCount}
+                  />
+                  <div className='sm:hidden'>
+                    <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
+                  </div>
+                </div>
+
+                <p className='text-gray-400 pt-2 sm:pt-0'>
+                  {filteredAndSortedProducts.length} Results found
+                  {displayedProducts.length <
+                    filteredAndSortedProducts.length &&
+                    ` (showing ${displayedProducts.length})`}
+                </p>
+              </div>
+              <div className='hidden sm:block'>
+                <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
+              </div>
             </div>
-            <div className='mt-6 flex flex-wrap gap-8'>
+            <div className='mt-6 flex flex-wrap lg:justify-start justify-center gap-4 sm:gap-8'>
               {displayedProducts.length > 0 ? (
                 displayedProducts.map((product) => (
                   <ProductCard

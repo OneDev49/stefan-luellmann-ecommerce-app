@@ -23,6 +23,7 @@ interface SearchFiltersProps {
   onPriceChange: (min: number, max: number) => void;
   onRatingChange: (rating: number) => void;
   onSaleToggle: (showOnSale: boolean) => void;
+  activeFiltersCount?: number;
 }
 
 export default function SearchFilters({
@@ -39,6 +40,7 @@ export default function SearchFilters({
   onPriceChange,
   onRatingChange,
   onSaleToggle,
+  activeFiltersCount,
 }: SearchFiltersProps) {
   const [priceMin, setPriceMin] = useState(
     minPrice > 0 ? minPrice.toString() : ''
@@ -107,6 +109,7 @@ export default function SearchFilters({
         >
           <TrashIcon height={20} width={20} />
           Clear All Filters
+          {activeFiltersCount && ` ( ${activeFiltersCount} )`}
         </Button>
       ) : (
         <div className='text-center border-b border-t border-gray-500 text-gray-400 py-1'>
