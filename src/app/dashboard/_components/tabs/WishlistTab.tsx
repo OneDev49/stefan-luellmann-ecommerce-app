@@ -79,7 +79,7 @@ export default function DashboardWishlist({ user }: DashboardWishlistProps) {
                         )}
                         <Image
                           className='object-contain w-full group-hover:scale-105 transition-all'
-                          src={`https://utfs.io/a/5sfnefg5kv/${item.imageUrl}`}
+                          src={`${process.env.NEXT_PUBLIC_UPLOADTHING_URL}/${item.imageUrl}`}
                           height={115}
                           width={115}
                           alt={item.name}

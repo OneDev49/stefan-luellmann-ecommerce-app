@@ -19,6 +19,8 @@ interface mainSectionProps {
     | 'reducedPrice'
     | 'price'
     | 'shortDescription'
+    | 'createdAt'
+    | 'brand'
   >;
 }
 
@@ -51,7 +53,7 @@ export default function MainSection({ product }: mainSectionProps) {
           )}
           <Image
             className='object-contain lg:w-full'
-            src={`https://utfs.io/a/5sfnefg5kv/${product.imageUrl}`}
+            src={`${process.env.NEXT_PUBLIC_UPLOADTHING_URL}/${product.imageUrl}`}
             height={280}
             width={480}
             alt={product.name}

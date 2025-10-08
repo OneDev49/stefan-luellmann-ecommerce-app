@@ -29,7 +29,7 @@ export default function CheckoutCard({ product, quantity }: CheckoutCardProps) {
         )}
         <Image
           className='object-contain w-full group-hover:scale-105 transition-all'
-          src={`https://utfs.io/a/5sfnefg5kv/${product.imageUrl}`}
+          src={`${process.env.NEXT_PUBLIC_UPLOADTHING_URL}/${product.imageUrl}`}
           height={200}
           width={200}
           alt={product.name}

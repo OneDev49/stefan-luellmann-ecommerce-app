@@ -108,7 +108,7 @@ export default function HeroSection() {
               <div className='absolute inset-0 shadow-[inset_0_-20px_20px_20px_rgba(0,0,0,1)]'></div>
               <Image
                 className={imageClassNames}
-                src='https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfpnlJ3PehAocXYNJl1sLa6BqD0tKCE7b5PTh3'
+                src={`${process.env.NEXT_PUBLIC_UPLOADTHING_URL}/HdnlnX9Cx4ZfpnlJ3PehAocXYNJl1sLa6BqD0tKCE7b5PTh3`}
                 alt='PC-Background'
                 width={1400}
                 height={800}
@@ -157,7 +157,7 @@ export default function HeroSection() {
               <div className='absolute inset-0 shadow-[inset_0_-20px_20px_20px_rgba(0,0,0,1)]'></div>
               <Image
                 className={imageClassNames}
-                src='https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfNGobDd5PoZEjAaYiQV4nfc7zg5LWUFuDvqkX'
+                src={`${process.env.NEXT_PUBLIC_UPLOADTHING_URL}/HdnlnX9Cx4ZfNGobDd5PoZEjAaYiQV4nfc7zg5LWUFuDvqkX`}
                 alt='Many different Graphic Card Brands'
                 width={1400}
                 height={800}
@@ -196,7 +196,7 @@ export default function HeroSection() {
               <div className='absolute inset-0 shadow-[inset_0_-20px_20px_20px_rgba(0,0,0,1)]'></div>
               <Image
                 className={imageClassNames}
-                src='https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfhaidLgIOzIZRH5v9FUaxABgXNueVni4QoDr0'
+                src={`${process.env.NEXT_PUBLIC_UPLOADTHING_URL}/HdnlnX9Cx4ZfhaidLgIOzIZRH5v9FUaxABgXNueVni4QoDr0`}
                 alt='Many different Graphic Card Brands'
                 width={1400}
                 height={800}

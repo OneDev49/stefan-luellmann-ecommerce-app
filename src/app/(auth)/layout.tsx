@@ -24,7 +24,7 @@ export default function RootLayout({
         <div className='absolute inset-0'>
           <Image
             loading='eager'
-            src='https://utfs.io/a/5sfnefg5kv/HdnlnX9Cx4ZfaNAv4z4ZxnLotzESQ2y5AmUp34e1XGNvVbTj'
+            src={`${process.env.NEXT_PUBLIC_UPLOADTHING_URL}/HdnlnX9Cx4ZfaNAv4z4ZxnLotzESQ2y5AmUp34e1XGNvVbTj`}
             height={996}
             width={1826}
             alt='A Entro RAM Stick'

@@ -49,7 +49,7 @@ export async function generateMetadata({
   }
 
   const product = mapToProductPage(productDb);
-  const imageUrl = `https://utfs.io/a/5sfnefg5kv/${product.imageUrl}`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_UPLOADTHING_URL}/${product.imageUrl}`;
 
   return {
     title: `${product.name} - ${product.brand}`,

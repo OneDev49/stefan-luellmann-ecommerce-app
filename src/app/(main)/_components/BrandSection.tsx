@@ -43,7 +43,7 @@ export default function BrandCarousel({ brands }: BrandCarouselProps) {
                   <Image
                     height={600}
                     width={600}
-                    src={`https://utfs.io/a/5sfnefg5kv/${brand.src}`}
+                    src={`${process.env.NEXT_PUBLIC_UPLOADTHING_URL}/${brand.src}`}
                     alt={brand.alt}
                     className='h-full w-full object-cover hover:scale-110 transition-all'
                   />

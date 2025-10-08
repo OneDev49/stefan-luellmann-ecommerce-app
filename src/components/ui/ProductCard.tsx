@@ -87,7 +87,7 @@ export default function ProductCard({
           )}
           <Image
             className={imageClassNames}
-            src={`https://utfs.io/a/5sfnefg5kv/${product.imageUrl}`}
+            src={`${process.env.NEXT_PUBLIC_UPLOADTHING_URL}/${product.imageUrl}`}
             alt={product.name}
             height={239}
             width={239}
@@ -165,7 +165,7 @@ export default function ProductCard({
           )}
           <Image
             className={imageClassNames}
-            src={`https://utfs.io/a/5sfnefg5kv/${product.imageUrl}`}
+            src={`${process.env.NEXT_PUBLIC_UPLOADTHING_URL}/${product.imageUrl}`}
             alt={product.name}
             height={239}
             width={239}
@@ -208,7 +208,7 @@ export default function ProductCard({
             )}
             <Image
               className={imageClassNames}
-              src={`https://utfs.io/a/5sfnefg5kv/${product.imageUrl}`}
+              src={`${process.env.NEXT_PUBLIC_UPLOADTHING_URL}/${product.imageUrl}`}
               alt={product.name}
               height={150}
               width={150}
