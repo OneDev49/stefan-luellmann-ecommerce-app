@@ -127,7 +127,7 @@ export default function HeaderCart({ onClose, className }: HeaderCartProps) {
                       )}
                       <Image
                         className='object-contain w-full'
-                        src={`https://utfs.io/a/5sfnefg5kv/${item.imageUrl}`}
+                        src={`${process.env.NEXT_PUBLIC_UPLOADTHING_URL}/${item.imageUrl}`}
                         height={90}
                         width={90}
                         alt={item.name}
