@@ -24,12 +24,7 @@ export default function Button<C extends React.ElementType = typeof Link>({
   const Component = as || Link;
 
   const buttonClassNames = clsx(
-    'transition-all',
-    'hover:scale-[1.02]',
-    'flex',
-    'flex-row',
-    'gap-2',
-    'items-center',
+    'transition-all hover:scale-[1.02] flex flex-row gap-2 items-center',
     {
       [`bg-[linear-gradient(90deg,#fe9043,#ff6c06)] text-black hover:bg-[linear-gradient(90deg,#ffa769,#ff7a1d)]`]:
         variant === 'primary',
