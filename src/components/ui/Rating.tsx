@@ -16,53 +16,27 @@ export default function Rating({
 }: RatingProps) {
   const percentage = Math.max(0, Math.min((rating / maxRating) * 100, 100));
 
-  const ratingContainerClassNames = clsx(
-    'relative',
-    'inline-flex',
-    'items-center'
-  );
-
-  const starsForegroundClassNames = clsx(
-    'absolute',
-    'top-[0]',
-    'left-[0]',
-    'flex',
-    'whitespace-nowrap',
-    'overflow-hidden'
-  );
-
-  const starsClassNames = clsx(
-    {
-      ['w-5 h-5']: size === 'small',
-      ['w-6 h-6']: size === 'medium',
-      ['w-8 h-8']: size === 'large',
-    },
-    'shrink-0'
-  );
-
-  const starsFilledClassNames = clsx('text-[#1eff00]');
-
-  const starsEmptyClassNames = clsx('text-[#4a5568]');
+  const starsSize: number = size === 'small' ? 5 : size === 'medium' ? 6 : 8;
 
   return (
-    <div className={`${ratingContainerClassNames} ${className || ''}`}>
+    <div className={`relative inline-flex items-center ${className || ''}`}>
       <div className='flex'>
         {Array.from({ length: maxRating }).map((_, index) => (
           <StarIcon
             key={index}
-            className={`${starsClassNames} ${starsEmptyClassNames}`}
+            className={`text-[#4a5568] shrink-0 w-${starsSize} h-${starsSize}`}
           />
         ))}
       </div>
 
       <div
-        className={starsForegroundClassNames}
+        className='absolute top-[0] left-[0] flex whitespace-nowrap overflow-hidden'
         style={{ width: `${percentage}%` }}
       >
         {Array.from({ length: maxRating }).map((_, index) => (
           <StarIcon
             key={index}
-            className={`${starsClassNames} ${starsFilledClassNames}`}
+            className={`text-[#1eff00] shrink-0 w-${starsSize} h-${starsSize}`}
           />
         ))}
       </div>

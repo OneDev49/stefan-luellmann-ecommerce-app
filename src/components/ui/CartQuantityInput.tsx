@@ -1,6 +1,7 @@
 'use client';
 
 import { useCartStore } from '@/store/cartStore';
+
 import toast from 'react-hot-toast';
 import CaretDownIcon from '../icons/ui/CaretDownIcon';
 import CaretUpIcon from '../icons/ui/CaretUpIcon';

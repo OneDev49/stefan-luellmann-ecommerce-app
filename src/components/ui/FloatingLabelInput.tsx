@@ -23,19 +23,8 @@ export default function FloatingLabelInput({
     throw new Error('FloatingLabelInput UI Component requires a "id" prop.');
   }
 
-  const inputClassNames = clsx(
-    'peer block w-full rounded-md border border-[#0c6600] bg-[#002f00] p-4 text-white shadow-sm placeholder-transparent focus-visible:outline-[#00b700] focus-visible:outline-1 focus-visible:outline',
-    {
-      ['pr-10']: type === 'password',
-    }
-  );
-
-  const labelClassNames = clsx(
-    'absolute left-3 -top-2.5 origin-0 bg-[#002f00] rounded-lg border border-transparent px-3 text-sm text-gray-400 transition-all duration-300 ease-in-out peer-placeholder-shown:top-3.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-base peer-focus:-top-2.5 peer-focus:scale-90 peer-focus:border-[#0c6600] cursor-text'
-  );
-
-  const [value, setValue] = useState(initialValue);
-  const [showPassword, setShowPassword] = useState(false);
+  const [value, setValue] = useState<string>(initialValue);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   useEffect(() => {
     setValue(initialValue);
@@ -63,11 +52,19 @@ export default function FloatingLabelInput({
         id={id}
         type={inputType}
         placeholder={label}
-        className={inputClassNames}
+        className={clsx(
+          'peer block w-full rounded-md border border-[#0c6600] bg-[#002f00] p-4 text-white shadow-sm placeholder-transparent focus-visible:outline-[#00b700] focus-visible:outline-1 focus-visible:outline',
+          {
+            ['pr-10']: type === 'password',
+          }
+        )}
         {...restProps}
         onChange={handleChange}
       />
-      <label htmlFor={id} className={labelClassNames}>
+      <label
+        htmlFor={id}
+        className='absolute left-3 -top-2.5 origin-0 bg-[#002f00] rounded-lg border border-transparent px-3 text-sm text-gray-400 transition-all duration-300 ease-in-out peer-placeholder-shown:top-3.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-base peer-focus:-top-2.5 peer-focus:scale-90 peer-focus:border-[#0c6600] cursor-text'
+      >
         {label}
       </label>
 
