@@ -29,7 +29,7 @@ export default async function HeaderLayout({ variant }: HeaderLayoutProps) {
   ]);
 
   return (
-    <header className='sticky top-0 z-20 left-0 right-0 bg-black'>
+    <header className='sticky top-0 z-[99] left-0 right-0 bg-black'>
       <HeaderContent
         headerVariant={variant}
         categories={categories}

@@ -101,7 +101,7 @@ export default function MobileFilterSidebar({
           <div
             onClick={handleCloseSidebar}
             className={clsx(
-              'fixed inset-0 bg-black/60 z-40 lg:hidden',
+              'fixed inset-0 bg-black/60 z-[99] lg:hidden',
               isClosing ? 'animate-fadeOut' : 'animate-fadeIn'
             )}
             aria-hidden='true'
@@ -109,7 +109,7 @@ export default function MobileFilterSidebar({
           <div
             onClick={(e) => e.stopPropagation()}
             className={clsx(
-              'fixed top-0 left-0 bottom-0 w-80 max-w-[85vw] bg-[#001a00] z-50 overflow-y-auto shadow-2xl transition-transform duration-300 ease-in-out lg:hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-green-500 border-r border-[#004810]',
+              'fixed top-0 left-0 bottom-0 w-80 max-w-[85vw] bg-[#001a00] z-[99] overflow-y-auto shadow-2xl transition-transform duration-300 ease-in-out lg:hidden scrollbar-thin scrollbar-track-transparent scrollbar-thumb-green-500 border-r border-[#004810]',
               isClosing ? 'animate-slideOutToLeft' : 'animate-slideInFromLeft'
             )}
           >
