@@ -1,8 +1,12 @@
-import { cache } from 'react';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { prisma } from '@/lib/prisma';
 import { mapToProductCard, mapToProductPage } from '@/lib/mappers/product';
+import {
+  getAllProductSlugs,
+  getBrandProducts,
+  getProductBySlug,
+  getSimilarProducts,
+} from '@/lib/data/products';
 
 import MainSection from './_components/MainSection';
 import DescriptionSection from './_components/DescriptionSection';
@@ -11,27 +15,13 @@ import RatingSummary from './_components/RatingSummarySection';
 import CustomerReviewSection from './_components/CustomerReviewSection';
 import BreadcrumbsSection from './_components/BreadcrumbsSection';
 
-const CAROUSEL_PRODUCT_LIMIT = 8;
-
-// Deduplicate product queries between generateMetadata and page component
-const getProduct = cache(async (slug: string) => {
-  return prisma.product.findUnique({
-    where: { slug },
-  });
-});
-
 // Static generation for unchanging product page
 export const dynamic = 'force-static';
 export const revalidate = false;
 
 export async function generateStaticParams() {
-  const products = await prisma.product.findMany({
-    select: { slug: true },
-  });
-
-  return products.map((product) => ({
-    slug: product.slug,
-  }));
+  const products = await getAllProductSlugs();
+  return products.map((product) => ({ slug: product.slug }));
 }
 
 export async function generateMetadata({
@@ -39,7 +29,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const productDb = await getProduct(params.slug);
+  const productDb = await getProductBySlug(params.slug);
 
   if (!productDb) {
     return {
@@ -80,7 +70,7 @@ export default async function ProductPage({
 }: {
   params: { slug: string };
 }) {
-  const productDb = await getProduct(params.slug);
+  const productDb = await getProductBySlug(params.slug);
 
   if (!productDb) notFound();
 
@@ -88,17 +78,8 @@ export default async function ProductPage({
 
   // Fetch related products for recommendations
   const [brandProductsDb, similarProductsDb] = await Promise.all([
-    prisma.product.findMany({
-      where: { brand: product.brand, id: { not: product.id } },
-      take: CAROUSEL_PRODUCT_LIMIT,
-    }),
-    prisma.product.findMany({
-      where: {
-        productType: product.productType,
-        brand: { not: product.brand },
-      },
-      take: CAROUSEL_PRODUCT_LIMIT,
-    }),
+    getBrandProducts(product.brand, product.id),
+    getSimilarProducts(product.productType, product.brand, product.id),
   ]);
 
   const brandProducts = brandProductsDb.map(mapToProductCard);
