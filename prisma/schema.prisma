@@ -16,41 +16,52 @@ datasource db {
  */
 enum ProductType {
   CPU
-  MOTHERBOARD
+  GPU
   RAM
   STORAGE
-  GPU
+  MOTHERBOARD
+  POWER_SUPPLY
+  SOUND_CARD
+  COOLING
+  CASE_FAN
   CASE
-  PSU
-  CPU_COOLER
-  MONITOR
-  KEYBOARD
   MOUSE
+  KEYBOARD
+  HEADSET
+  MICROPHONE
+  WEBCAM
+  MONITOR
+  OPTICAL_DRIVE
+  CABLE
+  LAPTOP
+  PRINTER
 }
 
 model Product {
-  id               String      @id @default(cuid())
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
-  name             String      @unique
-  slug             String      @unique
+  id               String         @id @default(cuid())
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  name             String         @unique
+  slug             String         @unique
   imageUrl         String
   brand            String
   price            Float
-  stockCount       Int         @default(0)
+  stockCount       Int            @default(0)
   productType      ProductType
   specs            Json
   shortDescription String
   longDescription  String
-  isOnSale         Boolean     @default(false)
+  isOnSale         Boolean        @default(false)
   reducedPrice     Float?
-  isFeatured       Boolean     @default(false)
-  categories       Category[]  @relation("ProductCategories")
-  oneStarReviews   Int         @default(0)
-  twoStarReviews   Int         @default(0)
-  threeStarReviews Int         @default(0)
-  fourStarReviews  Int         @default(0)
-  fiveStarReviews  Int         @default(0)
+  isFeatured       Boolean        @default(false)
+  categories       Category[]     @relation("ProductCategories")
+  oneStarReviews   Int            @default(0)
+  twoStarReviews   Int            @default(0)
+  threeStarReviews Int            @default(0)
+  fourStarReviews  Int            @default(0)
+  fiveStarReviews  Int            @default(0)
+  cartItems        CartItem[]
+  wishlistItems    WishlistItem[]
 }
 
 model Category {
@@ -92,14 +103,46 @@ model Session {
 }
 
 model User {
-  id             String    @id @default(cuid())
+  id             String         @id @default(cuid())
   name           String?
-  email          String?   @unique
+  email          String?        @unique
   emailVerified  DateTime?
   image          String?
   hashedPassword String?
   accounts       Account[]
   sessions       Session[]
+  cartItems      CartItem[]
+  wishlistItems  WishlistItem[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@index([userId])
+}
+
+model WishlistItem {
+  id        String   @id @default(cuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+  @@index([userId])
 }
 
 model VerificationToken {
