@@ -1,14 +1,12 @@
+import { useCart } from '@/hooks/useCart';
+import { useSession } from 'next-auth/react';
+import { useMemo } from 'react';
+
 import CartIcon from '@/components/icons/ecommerce/CartIcon';
 import TrashIcon from '@/components/icons/ecommerce/TrashIcon';
 import AnglesRightIcon from '@/components/icons/ui/AnglesRightIcon';
 import CloseIcon from '@/components/icons/ui/CloseIcon';
 import Button from '@/components/ui/Button';
-import {
-  selectCartTotal,
-  selectTotalItems,
-  useCartStore,
-} from '@/store/cartStore';
-import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -18,25 +16,48 @@ interface HeaderCartProps {
 }
 
 export default function HeaderCart({ onClose, className }: HeaderCartProps) {
-  /* Zustand Cart Store */
-  const cartItems = useCartStore((state) => state.items);
-  const removeFromCart = useCartStore((state) => state.removeFromCart);
-  const clearCart = useCartStore((state) => state.clearCart);
-  const totalCartValue = useCartStore(selectCartTotal);
-  const totalCartAmount = useCartStore(selectTotalItems);
+  /* Use ONLY the wrapper hook - it handles everything */
+  const { data: session, status } = useSession();
+  const { items, removeFromCart, clearCart, isLoading } = useCart();
 
-  const handleRemoveFromCart = (e: React.MouseEvent, productId: string) => {
+  // Calculate totals from items
+  const totalCartValue = useMemo(() => {
+    return items.reduce((total, item) => {
+      const price = item.reducedPrice || item.price;
+      return total + price * item.quantity;
+    }, 0);
+  }, [items]);
+
+  const totalCartAmount = useMemo(() => {
+    return items.reduce((total, item) => total + item.quantity, 0);
+  }, [items]);
+
+  const handleRemoveFromCart = async (
+    e: React.MouseEvent,
+    productId: string
+  ) => {
     e.stopPropagation();
     e.preventDefault();
     removeFromCart(productId);
   };
 
-  /* NextAuth Session */
-  const { data: session, status } = useSession();
+  const handleClearCart = async () => {
+    clearCart();
+  };
+
+  if (isLoading) {
+    return (
+      <div className='space-y-4'>
+        <div className='h-8 animate-pulse bg-green-700 rounded-md'></div>
+        <div className='h-8 animate-pulse bg-green-700 rounded-md'></div>
+        <div className='h-8 animate-pulse bg-green-700 rounded-md'></div>
+      </div>
+    );
+  }
 
   return (
     <>
-      {cartItems.length > 0 ? (
+      {items.length > 0 ? (
         <div className='space-y-5'>
           <div className='border-b border-gray-400'>
             <div className='space-y-1 border-b border-gray-400 pb-6'>
@@ -53,38 +74,32 @@ export default function HeaderCart({ onClose, className }: HeaderCartProps) {
             </div>
             <div className='my-4 space-y-4'>
               <div>
-                {status === 'loading' ? (
-                  <div className='h-8 animate-pulse bg-green-700 rounded-md'></div>
+                {session && session.user ? (
+                  <Link href='/dashboard?tab=cart' onClick={onClose}>
+                    <Button
+                      as='button'
+                      type='button'
+                      variant='secondary'
+                      position='card'
+                      className='w-full justify-center'
+                    >
+                      Go To your Cart
+                      <AnglesRightIcon />
+                    </Button>
+                  </Link>
                 ) : (
-                  <>
-                    {session && session.user ? (
-                      <Link href='/dashboard?tab=cart' onClick={onClose}>
-                        <Button
-                          as='button'
-                          type='button'
-                          variant='secondary'
-                          position='card'
-                          className='w-full justify-center'
-                        >
-                          Go To your Cart
-                          <AnglesRightIcon />
-                        </Button>
-                      </Link>
-                    ) : (
-                      <Link href='/register' onClick={onClose}>
-                        <Button
-                          as='button'
-                          type='button'
-                          variant='secondary'
-                          position='card'
-                          className='w-full justify-center'
-                        >
-                          Create a Account to save your Cart
-                          <AnglesRightIcon />
-                        </Button>
-                      </Link>
-                    )}
-                  </>
+                  <Link href='/register' onClick={onClose}>
+                    <Button
+                      as='button'
+                      type='button'
+                      variant='secondary'
+                      position='card'
+                      className='w-full justify-center'
+                    >
+                      Create a Account to save your Cart
+                      <AnglesRightIcon />
+                    </Button>
+                  </Link>
                 )}
               </div>
               <div className='flex justify-between'>
@@ -100,7 +115,7 @@ export default function HeaderCart({ onClose, className }: HeaderCartProps) {
                 <Button
                   as='button'
                   type='button'
-                  onClick={clearCart}
+                  onClick={handleClearCart}
                   variant='danger'
                   position='card'
                 >
@@ -111,7 +126,7 @@ export default function HeaderCart({ onClose, className }: HeaderCartProps) {
             </div>
           </div>
           <ul className='list-none m-0 p-0 space-y-3'>
-            {cartItems.map((item) => (
+            {items.map((item) => (
               <li key={item.id}>
                 <Link
                   href={`/product/${item.slug}`}

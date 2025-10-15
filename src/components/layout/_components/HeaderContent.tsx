@@ -20,6 +20,7 @@ import { quickNavCategories, sideNavMenu } from './config/headerConfig';
 import RightSidenav from './RightSidenav';
 import LeftSidenav from './LeftSidenav';
 import HeaderSearchBar from './HeaderSearchBar';
+import { LogoutButton } from '@/components/ui/LogoutButton';
 
 interface HeaderContentProps {
   headerVariant: HeaderVariant;
@@ -143,12 +144,11 @@ export default function HeaderContent({
                     >
                       Your Account
                     </Link>
-                    <button
+                    <LogoutButton
                       className={`${linkTransitionClassNames} underline`}
-                      onClick={() => signOut()}
                     >
-                      Log Out
-                    </button>
+                      Logout
+                    </LogoutButton>
                   </div>
                 </>
               ) : (

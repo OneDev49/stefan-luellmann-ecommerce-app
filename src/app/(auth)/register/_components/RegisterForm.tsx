@@ -1,13 +1,16 @@
 'use client';
 
+import { useCartStore } from '@/store/cartStore';
+import { useWishlistStore } from '@/store/wishlistStore';
+import { useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+
 import Link from 'next/link';
 import clsx from 'clsx';
 import FloatingLabelInput from '@/components/ui/FloatingLabelInput';
 import Button from '@/components/ui/Button';
 import ArrowRightIcon from '@/components/icons/ui/ArrowRightIcon';
-import { useState } from 'react';
-import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import z from 'zod';
 
 const registerSchema = z.object({
@@ -20,17 +23,19 @@ const registerSchema = z.object({
   password: z
     .string()
     .min(8, { message: 'Password must be at least 8 characters long.' })
-    .max(32, { message: 'Password can not be longer than 32 character long' }),
+    .max(32, { message: 'Password can not be longer than 32 characters.' }),
   confirmPassword: z
     .string()
     .min(8, { message: 'Confirm Password must be at least 8 characters long.' })
     .max(32, {
-      message: 'Confirm Password can not be longer than 32 character long',
+      message: 'Confirm Password can not be longer than 32 characters',
     }),
 });
 
 export default function RegisterForm() {
   const router = useRouter();
+  const cartStore = useCartStore.getState();
+  const wishlistStore = useWishlistStore.getState();
 
   const [form, setForm] = useState({
     name: '',
@@ -39,7 +44,7 @@ export default function RegisterForm() {
     confirmPassword: '',
   });
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -83,6 +88,15 @@ export default function RegisterForm() {
     }
 
     try {
+      // Get localStorage cart/wishlist to sync
+      const localCart = cartStore.items.map((item) => ({
+        productId: item.id,
+        quantity: item.quantity,
+      }));
+
+      const localWishlist = wishlistStore.items.map((item) => item.id);
+
+      // Register with cart/wishlist data
       const response = await fetch('/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -90,25 +104,43 @@ export default function RegisterForm() {
           name: form.name,
           email: form.email,
           password: form.password,
+          cart: localCart,
+          wishlist: localWishlist,
         }),
       });
+
       const data = await response.json();
+
       if (!response.ok) {
         setError(data.message || 'Something went wrong.');
         setIsLoading(false);
         return;
       }
 
+      // Clear localStorage after successful registration
+      cartStore._reset();
+      wishlistStore._reset();
+
+      // Auto-login after registration
       const loginResult = await signIn('credentials', {
         redirect: false,
         email: form.email,
         password: form.password,
       });
 
-      if (loginResult?.ok) router.replace('/dashboard');
-      else setError('Account created, but automatic login failed.');
+      if (loginResult?.ok) {
+        // Redirect to homepage
+        router.push('/');
+        router.refresh();
+      } else {
+        setError(
+          'Account created, but automatic login failed. Please log in manually.'
+        );
+        router.push('/login');
+      }
     } catch (err: any) {
-      setError('An unexpected error occured. Please try again.');
+      setError('An unexpected error occurred. Please try again.');
+      console.error('Registration error:', err);
     } finally {
       setIsLoading(false);
     }
