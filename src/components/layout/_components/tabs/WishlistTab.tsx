@@ -1,13 +1,11 @@
+import { useSession } from 'next-auth/react';
+import { useWishlist } from '@/hooks/useWishlist';
+
 import TrashIcon from '@/components/icons/ecommerce/TrashIcon';
 import AnglesRightIcon from '@/components/icons/ui/AnglesRightIcon';
 import CloseIcon from '@/components/icons/ui/CloseIcon';
 import Button from '@/components/ui/Button';
-import {
-  selectWishlistTotalItems,
-  useWishlistStore,
-} from '@/store/wishlistStore';
 import clsx from 'clsx';
-import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -20,12 +18,14 @@ export default function HeaderWishlist({
   onClose,
   className,
 }: HeaderWishlistProps) {
-  const wishlistItems = useWishlistStore((state) => state.items);
-  const removeFromWishlist = useWishlistStore(
-    (state) => state.removeFromWishlist
-  );
-  const clearWishlist = useWishlistStore((state) => state.clearWishlist);
-  const totalWishlistAmount = useWishlistStore(selectWishlistTotalItems);
+  const { data: session } = useSession();
+  const {
+    items: wishlistItems,
+    removeFromWishlist,
+    clearWishlist,
+    isLoading,
+  } = useWishlist();
+  const totalWishlistAmount = wishlistItems.length;
 
   const handleRemoveFromWishlist = (e: React.MouseEvent, productId: string) => {
     e.stopPropagation();
@@ -33,8 +33,19 @@ export default function HeaderWishlist({
     removeFromWishlist(productId);
   };
 
-  /* NextAuth Session */
-  const { data: session, status } = useSession();
+  const handleClearWishlist = () => {
+    clearWishlist();
+  };
+
+  if (isLoading) {
+    return (
+      <div className='space-y-4'>
+        <div className='h-8 animate-pulse bg-green-700 rounded-md'></div>
+        <div className='h-8 animate-pulse bg-green-700 rounded-md'></div>
+        <div className='h-8 animate-pulse bg-green-700 rounded-md'></div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -87,7 +98,7 @@ export default function HeaderWishlist({
                 <Button
                   as='button'
                   type='button'
-                  onClick={clearWishlist}
+                  onClick={handleClearWishlist}
                   variant='danger'
                   position='card'
                 >
