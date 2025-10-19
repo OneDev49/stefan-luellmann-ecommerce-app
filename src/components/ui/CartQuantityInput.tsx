@@ -1,6 +1,6 @@
 'use client';
 
-import { useCartStore } from '@/store/cartStore';
+import { useCart } from '@/hooks/useCart';
 
 import toast from 'react-hot-toast';
 import CaretDownIcon from '../icons/ui/CaretDownIcon';
@@ -17,7 +17,7 @@ export default function CartQuantityInput({
   productName,
   quantity,
 }: CartQuantityInputProps) {
-  const updateQuantity = useCartStore((state) => state.updateQuantity);
+  const { updateQuantity } = useCart();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value, 10);
@@ -29,11 +29,9 @@ export default function CartQuantityInput({
 
   const increaseQuantity = () => {
     updateQuantity(productId, productName, quantity + 1);
-    quantity < 100 && toast.success(`1 ${productName} added to your Cart.`);
   };
   const decreaseQuantity = () => {
     updateQuantity(productId, productName, Math.max(1, quantity - 1));
-    quantity > 1 && toast.error(`1 ${productName} removed from your Cart.`);
   };
 
   return (

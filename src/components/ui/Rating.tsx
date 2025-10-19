@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import StarIcon from '../icons/ecommerce/StarIcon';
 
 interface RatingProps {
@@ -14,9 +13,13 @@ export default function Rating({
   className,
   size = 'medium',
 }: RatingProps) {
-  const percentage = Math.max(0, Math.min((rating / maxRating) * 100, 100));
+  const percentage: number = Math.max(
+    0,
+    Math.min((rating / maxRating) * 100, 100)
+  );
 
-  const starsSize: number = size === 'small' ? 5 : size === 'medium' ? 6 : 8;
+  const starSizes: string =
+    size === 'small' ? 'w-5 h-5' : size === 'medium' ? 'w-6 h-6' : 'w-8 h-8';
 
   return (
     <div className={`relative inline-flex items-center ${className || ''}`}>
@@ -24,7 +27,7 @@ export default function Rating({
         {Array.from({ length: maxRating }).map((_, index) => (
           <StarIcon
             key={index}
-            className={`text-[#4a5568] shrink-0 w-${starsSize} h-${starsSize}`}
+            className={`text-[#4a5568] shrink-0 ${starSizes}`}
           />
         ))}
       </div>
@@ -36,7 +39,7 @@ export default function Rating({
         {Array.from({ length: maxRating }).map((_, index) => (
           <StarIcon
             key={index}
-            className={`text-[#1eff00] shrink-0 w-${starsSize} h-${starsSize}`}
+            className={`text-[#1eff00] shrink-0 ${starSizes}`}
           />
         ))}
       </div>

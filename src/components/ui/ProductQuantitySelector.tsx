@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+
 import PlusIcon from '../icons/ui/PlusIcon';
 import MinusIcon from '../icons/ui/MinusIcon';
-import clsx from 'clsx';
 
 interface QuantitySelectorProps {
   initialQuantity?: number;
@@ -16,8 +16,8 @@ export default function QuantitySelector({
   maxQuantity = 10,
   onQuantityChange,
 }: QuantitySelectorProps) {
-  const [quantity, setQuantity] = useState(initialQuantity);
-  const [inputValue, setInputValue] = useState(String(initialQuantity));
+  const [quantity, setQuantity] = useState<number>(initialQuantity);
+  const [inputValue, setInputValue] = useState<string>(String(initialQuantity));
 
   useEffect(() => {
     setQuantity(initialQuantity);
@@ -59,9 +59,8 @@ export default function QuantitySelector({
     }
   };
 
-  const buttonClassNames = clsx(
-    'bg-green-700 py-1 px-2 cursor-pointer hover:bg-green-800 transition-all'
-  );
+  const buttonClassNames =
+    'bg-green-700 py-1 px-2 cursor-pointer hover:bg-green-800 transition-all';
 
   return (
     <div className='flex justify-start'>

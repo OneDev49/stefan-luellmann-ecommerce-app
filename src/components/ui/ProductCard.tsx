@@ -1,17 +1,16 @@
 'use client';
 
 import { ProductCardType } from '@/types/product';
-import { useCartStore } from '@/store/cartStore';
-import { useWishlistStore } from '@/store/wishlistStore';
+import { useCart } from '@/hooks/useCart';
+import { useWishlist } from '@/hooks/useWishlist';
 
-import clsx from 'clsx';
 import Link from 'next/link';
 import Image from 'next/image';
-
 import Rating from './Rating';
 import Button from './Button';
 import CartIcon from '../icons/ecommerce/CartIcon';
 import HeartIcon from '../icons/ecommerce/HeartIcon';
+import Spinner from './Spinner';
 
 interface ProductCardProps {
   variant?: 'standard' | 'compact';
@@ -24,15 +23,12 @@ export default function ProductCard({
   product,
   buttonClassName,
 }: ProductCardProps) {
-  const addToCart = useCartStore((state) => state.addToCart);
+  const { addToCart, isAdding } = useCart();
+  const { addToWishlist, removeFromWishlist, isProductInWishlist } =
+    useWishlist();
 
-  const addToWishlist = useWishlistStore((state) => state.addToWishlist);
-  const removeFromWishlist = useWishlistStore(
-    (state) => state.removeFromWishlist
-  );
-  const isInWishlist = useWishlistStore((state) =>
-    state.isProductInWishlist(product.id)
-  );
+  const isCurrentlyAddingToCart = isAdding.has(product.id);
+  const isInWishlist = isProductInWishlist(product.id);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -50,16 +46,13 @@ export default function ProductCard({
     }
   };
 
-  const wrapperClassNames = clsx(
-    'group flex flex-col gap-3 p-4 bg-[linear-gradient(45deg,#051500,#0d3a00)] items-start rounded-2xl border-[#005103] border shadow-[0_4px_15px_3px_rgba(23,113,0,1)]',
-    {
-      'w-[275px]': variant === 'compact' || variant === 'standard',
-    }
-  );
-  const priceClassNames = clsx('text-3xl font-headings font-bold');
+  const priceClassNames = 'text-3xl font-headings font-bold';
 
   return (
-    <Link className={wrapperClassNames} href={`/product/${product.slug}`}>
+    <Link
+      className='group flex flex-col gap-3 p-4 bg-[linear-gradient(45deg,#051500,#0d3a00)] items-start rounded-2xl border-[#005103] border shadow-[0_4px_15px_3px_rgba(23,113,0,1)] w-[275px]'
+      href={`/product/${product.slug}`}
+    >
       <div className='border border-white rounded-2xl overflow-hidden relative'>
         {product.isOnSale && (
           <div className='absolute bg-red-700 h-8 grid place-items-center w-32 top-[8px] right-[-40px] rotate-45 z-50 will-change-transform'>
@@ -107,16 +100,15 @@ export default function ProductCard({
         <div className='flex items-center gap-2'>
           <Button
             onClick={handleAddToCart}
+            disabled={isCurrentlyAddingToCart}
             as='button'
             position='card'
             type='button'
             title={`Add ${product.name} to Cart`}
             className={buttonClassName || undefined}
           >
-            <>
-              <CartIcon />
-              Add to Cart
-            </>
+            {isCurrentlyAddingToCart ? <Spinner /> : <CartIcon />}
+            Add to Cart
           </Button>
           <Button
             onClick={handleAddToWishlist}
