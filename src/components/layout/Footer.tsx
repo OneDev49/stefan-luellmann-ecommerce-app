@@ -2,11 +2,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import GitHubIcon from '../icons/brands/GitHubIcon';
 import LinkedInIcon from '../icons/brands/LinkedInIcon';
-import clsx from 'clsx';
 import GlobeIcon from '../icons/ecommerce/GlobeIcon';
 
 export default function FooterLayout() {
-  const hoverClassNames = clsx('hover:text-[#53ff5f] transition-all');
+  const hoverClassNames = 'hover:text-[#53ff5f] transition-all';
 
   return (
     <footer className='bg-[linear-gradient(180deg,rgb(2,47,0,0)_0%,#022800_10%)] pt-32 pb-4 px-4'>

@@ -1,6 +1,12 @@
+'use client';
+
 import { useCart } from '@/hooks/useCart';
 import { useSession } from 'next-auth/react';
-import { useMemo } from 'react';
+import {
+  selectCartTotal,
+  selectTotalItems,
+  useCartStore,
+} from '@/store/cartStore';
 
 import CartIcon from '@/components/icons/ecommerce/CartIcon';
 import TrashIcon from '@/components/icons/ecommerce/TrashIcon';
@@ -16,21 +22,11 @@ interface HeaderCartProps {
 }
 
 export default function HeaderCart({ onClose, className }: HeaderCartProps) {
-  /* Use ONLY the wrapper hook - it handles everything */
   const { data: session, status } = useSession();
   const { items, removeFromCart, clearCart, isLoading } = useCart();
 
-  // Calculate totals from items
-  const totalCartValue = useMemo(() => {
-    return items.reduce((total, item) => {
-      const price = item.reducedPrice || item.price;
-      return total + price * item.quantity;
-    }, 0);
-  }, [items]);
-
-  const totalCartAmount = useMemo(() => {
-    return items.reduce((total, item) => total + item.quantity, 0);
-  }, [items]);
+  const totalCartValue = useCartStore(selectCartTotal);
+  const totalCartAmount = useCartStore(selectTotalItems);
 
   const handleRemoveFromCart = async (
     e: React.MouseEvent,
@@ -74,32 +70,38 @@ export default function HeaderCart({ onClose, className }: HeaderCartProps) {
             </div>
             <div className='my-4 space-y-4'>
               <div>
-                {session && session.user ? (
-                  <Link href='/dashboard?tab=cart' onClick={onClose}>
-                    <Button
-                      as='button'
-                      type='button'
-                      variant='secondary'
-                      position='card'
-                      className='w-full justify-center'
-                    >
-                      Go To your Cart
-                      <AnglesRightIcon />
-                    </Button>
-                  </Link>
+                {status === 'loading' ? (
+                  <div className='h-8 animate-pulse bg-green-700 rounded-md'></div>
                 ) : (
-                  <Link href='/register' onClick={onClose}>
-                    <Button
-                      as='button'
-                      type='button'
-                      variant='secondary'
-                      position='card'
-                      className='w-full justify-center'
-                    >
-                      Create a Account to save your Cart
-                      <AnglesRightIcon />
-                    </Button>
-                  </Link>
+                  <>
+                    {session && session.user ? (
+                      <Link href='/dashboard?tab=cart' onClick={onClose}>
+                        <Button
+                          as='button'
+                          type='button'
+                          variant='secondary'
+                          position='card'
+                          className='w-full justify-center'
+                        >
+                          Go To your Cart
+                          <AnglesRightIcon />
+                        </Button>
+                      </Link>
+                    ) : (
+                      <Link href='/register' onClick={onClose}>
+                        <Button
+                          as='button'
+                          type='button'
+                          variant='secondary'
+                          position='card'
+                          className='w-full justify-center'
+                        >
+                          Create a Account to save your Cart
+                          <AnglesRightIcon />
+                        </Button>
+                      </Link>
+                    )}
+                  </>
                 )}
               </div>
               <div className='flex justify-between'>

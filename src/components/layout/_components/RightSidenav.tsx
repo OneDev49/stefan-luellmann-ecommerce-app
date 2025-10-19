@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+
 import CloseIcon from '@/components/icons/ui/CloseIcon';
 import CartIcon from '@/components/icons/ecommerce/CartIcon';
 import HeartIcon from '@/components/icons/ecommerce/HeartIcon';
@@ -19,16 +20,14 @@ export default function RightSidenav({
   isClosing,
   activeTab,
 }: RightSidenavProps) {
-  /* Active Tab Management */
-  const [currentActiveTab, setCurrentActiveTab] = useState(activeTab);
+  const [currentActiveTab, setCurrentActiveTab] = useState<'wishlist' | 'cart'>(
+    activeTab
+  );
 
-  /* Tab CSS Tailwind Classes */
-  const tabClassNames = clsx(
-    'flex gap-2 bg-[#075d0c] py-1 px-3 rounded-3xl transition-colors border border-[#0ca816] hover:bg-[#1f702a]'
-  );
-  const tabAnnouncerClassNames = clsx(
-    'p-2 bg-[#2d2d2d] border border-gray-500 shadow-[0_4px_15px_0_rgb(140,140,140,0.25)] rounded-md text-center'
-  );
+  const tabClassName =
+    'flex gap-2 bg-[#075d0c] py-1 px-3 rounded-3xl transition-colors border border-[#0ca816] hover:bg-[#1f702a]';
+  const tabAnnouncerClassName =
+    'p-2 bg-[#2d2d2d] border border-gray-500 shadow-[0_4px_15px_0_rgb(140,140,140,0.25)] rounded-md text-center';
 
   return (
     <div
@@ -61,7 +60,7 @@ export default function RightSidenav({
             <button
               type='button'
               onClick={() => setCurrentActiveTab('cart')}
-              className={clsx(tabClassNames, {
+              className={clsx(tabClassName, {
                 ['bg-[#0ca816] border-[#075d0c] hover:bg-[#0ca816]']:
                   currentActiveTab === 'cart',
               })}
@@ -72,7 +71,7 @@ export default function RightSidenav({
             <button
               type='button'
               onClick={() => setCurrentActiveTab('wishlist')}
-              className={clsx(tabClassNames, {
+              className={clsx(tabClassName, {
                 ['bg-[#0ca816] border-[#075d0c] hover:bg-[#0ca816]']:
                   currentActiveTab === 'wishlist',
               })}
@@ -85,12 +84,12 @@ export default function RightSidenav({
 
         <div className='relative flex-1 px-4 py-6 overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-green-500'>
           {currentActiveTab === 'cart' && (
-            <HeaderCart onClose={onClose} className={tabAnnouncerClassNames} />
+            <HeaderCart onClose={onClose} className={tabAnnouncerClassName} />
           )}
           {currentActiveTab === 'wishlist' && (
             <HeaderWishlist
               onClose={onClose}
-              className={tabAnnouncerClassNames}
+              className={tabAnnouncerClassName}
             />
           )}
         </div>

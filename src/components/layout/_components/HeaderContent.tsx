@@ -1,26 +1,27 @@
 'use client';
 
-import CartIcon from '@/components/icons/ecommerce/CartIcon';
-import HeartIcon from '@/components/icons/ecommerce/HeartIcon';
-import UserIcon from '@/components/icons/ecommerce/UserIcon';
-import MenuIcon from '@/components/icons/ui/MenuIcon';
 import { selectTotalItems, useCartStore } from '@/store/cartStore';
 import {
   selectWishlistTotalItems,
   useWishlistStore,
 } from '@/store/wishlistStore';
-import clsx from 'clsx';
-import useEmblaCarousel from 'embla-carousel-react';
-import { signOut, useSession } from 'next-auth/react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { quickNavCategories, sideNavMenu } from './config/headerConfig';
+import { LogoutButton } from '@/components/ui/LogoutButton';
+
+import CartIcon from '@/components/icons/ecommerce/CartIcon';
+import HeartIcon from '@/components/icons/ecommerce/HeartIcon';
+import UserIcon from '@/components/icons/ecommerce/UserIcon';
+import MenuIcon from '@/components/icons/ui/MenuIcon';
+import clsx from 'clsx';
+import useEmblaCarousel from 'embla-carousel-react';
+import Image from 'next/image';
+import Link from 'next/link';
 import RightSidenav from './RightSidenav';
 import LeftSidenav from './LeftSidenav';
 import HeaderSearchBar from './HeaderSearchBar';
-import { LogoutButton } from '@/components/ui/LogoutButton';
 
 interface HeaderContentProps {
   headerVariant: HeaderVariant;
@@ -38,9 +39,8 @@ export default function HeaderContent({
   popularBrands,
 }: HeaderContentProps) {
   const [openSidenav, setOpenSidenav] = useState<SidenavView | null>(null);
-  const [isClosing, setIsClosing] = useState(false);
+  const [isClosing, setIsClosing] = useState<boolean>(false);
 
-  /* NextAuth Session */
   const { data: session, status } = useSession();
 
   const totalCartItems = useCartStore(selectTotalItems);
@@ -68,8 +68,8 @@ export default function HeaderContent({
     }, 300);
   };
 
-  const linkTransitionClassNames = clsx('hover:text-[#53ff5f] transition-all');
-  const bottomLinksClassNames = clsx('py-1 px-2 rounded-md transition-colors');
+  const linkTransitionClassNames = 'hover:text-[#53ff5f] transition-all';
+  const bottomLinksClassNames = 'py-1 px-2 rounded-md transition-colors';
 
   return (
     <>
