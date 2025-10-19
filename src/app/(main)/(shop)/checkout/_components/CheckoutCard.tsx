@@ -1,9 +1,11 @@
-import Image from 'next/image';
-import Link from 'next/link';
+'use client';
 
 import { ProductCardType } from '@/types/product';
+import { useCart } from '@/hooks/useCart';
+
+import Image from 'next/image';
+import Link from 'next/link';
 import CloseIcon from '@/components/icons/ui/CloseIcon';
-import { useCartStore } from '@/store/cartStore';
 
 interface CheckoutCardProps {
   product: ProductCardType;
@@ -11,7 +13,7 @@ interface CheckoutCardProps {
 }
 
 export default function CheckoutCard({ product, quantity }: CheckoutCardProps) {
-  const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const { removeFromCart } = useCart();
 
   const handleRemoveFromCart = (e: React.MouseEvent, productId: string) => {
     e.stopPropagation();

@@ -1,26 +1,21 @@
+'use client';
+
+import { selectCartTotal, useCartStore } from '@/store/cartStore';
+
 import CartIcon from '@/components/icons/ecommerce/CartIcon';
 import AnglesRightIcon from '@/components/icons/ui/AnglesRightIcon';
 import Button from '@/components/ui/Button';
-import { selectCartTotal, useCartStore } from '@/store/cartStore';
-import clsx from 'clsx';
 
 export default function CheckoutTotal() {
-  /* Zustand Cart Store */
   const totalCartValue = useCartStore(selectCartTotal);
 
   /* Calculate Tax and TotalAmount with Tax */
   const taxAmount = totalCartValue * 0.19;
   const taxedTotal = totalCartValue + taxAmount;
 
-  /* CSS Classnames */
-  const headingClassNames = clsx('text-3xl font-bold p-4');
-  const headingMobileClassNames = clsx(
-    'bg-[rgb(87,87,87,0.2)] shadow-[0_4px_15px_0_rgb(0,0,0,1)]'
-  );
-
   return (
     <>
-      <h2 className={`${headingClassNames} ${headingMobileClassNames}`}>
+      <h2 className='text-3xl font-bold p-4 bg-[rgb(87,87,87,0.2)] shadow-[0_4px_15px_0_rgb(0,0,0,1)]'>
         Checkout
       </h2>
       <div className='px-3 space-y-2'>

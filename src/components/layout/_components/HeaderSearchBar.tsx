@@ -24,8 +24,8 @@ export default function HeaderSearchBar({
   categories = [],
   popularBrands = [],
 }: HeaderSearchBarProps) {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
   const [suggestions, setSuggestions] = useState<SearchSuggestion[]>([]);
   const router = useRouter();
   const wrapperRef = useRef<HTMLDivElement>(null);

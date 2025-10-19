@@ -1,7 +1,6 @@
 import { ProductPageType } from '@/types/product';
 
 import Link from 'next/link';
-import clsx from 'clsx';
 
 interface BreadcrumbsSectionProps {
   product: Pick<ProductPageType, 'name' | 'productType'>;
@@ -19,7 +18,7 @@ export default function BreadcrumbsSection({
       : product.productType.charAt(0).toUpperCase() +
         product.productType.slice(1).toLowerCase();
 
-  const textClassName = clsx('hover:text-white');
+  const textClassName = 'hover:text-white';
 
   return (
     <div className='px-4'>

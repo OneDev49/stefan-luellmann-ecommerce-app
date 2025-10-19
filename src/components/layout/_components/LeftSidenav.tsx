@@ -1,13 +1,14 @@
 'use client';
 
+import { ComponentNames, ComponentSlugNames } from '@/types/components';
+import { useState } from 'react';
+import { useSession } from 'next-auth/react';
+
 import UserIcon from '@/components/icons/ecommerce/UserIcon';
 import ArrowLeftIcon from '@/components/icons/ui/ArrowLeftIcon';
 import ChevronRightIcon from '@/components/icons/ui/ChevronRightIcon';
-import { ComponentNames, ComponentSlugNames } from '@/types/components';
 import clsx from 'clsx';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useState } from 'react';
 
 interface LeftSidenavProps {
   onClose: () => void;
@@ -42,7 +43,6 @@ export default function LeftSidenav({
     null
   );
 
-  /* NextAuth Session */
   const { data: session, status } = useSession();
 
   const openSubmenu = (category: Categories) => {
@@ -63,12 +63,11 @@ export default function LeftSidenav({
     setActiveSubmenu(null);
   };
 
-  const headingTwoClassNames = clsx('font-bold text-2xl px-4 py-3');
-  const linkBlockClassNames = clsx('py-4');
-  const linksClassNames = clsx(
-    'flex justify-between items-center w-full px-4 py-3 text-left hover:bg-green-800 transition-colors'
-  );
-  const hrClassNames = clsx('border-gray-500');
+  const headingTwoClassName = 'font-bold text-2xl px-4 py-3';
+  const linkBlockClassName = 'py-4';
+  const linksClassName =
+    'flex justify-between items-center w-full px-4 py-3 text-left hover:bg-green-800 transition-colors';
+  const hrClassName = 'border-gray-500';
 
   return (
     <div
@@ -111,22 +110,18 @@ export default function LeftSidenav({
         >
           <div className='overflow-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-green-500'>
             <nav className='flex-1 overflow-y-auto'>
-              <div className={linkBlockClassNames}>
-                <h2 className={headingTwoClassNames}>Entro - Online Shop</h2>
+              <div className={linkBlockClassName}>
+                <h2 className={headingTwoClassName}>Entro - Online Shop</h2>
                 <ul className='list-none p-0 m-0'>
                   <li>
-                    <Link
-                      href='/'
-                      className={linksClassNames}
-                      onClick={onClose}
-                    >
+                    <Link href='/' className={linksClassName} onClick={onClose}>
                       <span>Homepage</span>
                     </Link>
                   </li>
                   <li>
                     <Link
                       href='/search'
-                      className={linksClassNames}
+                      className={linksClassName}
                       onClick={onClose}
                     >
                       <span>Browse all Products</span>
@@ -134,18 +129,18 @@ export default function LeftSidenav({
                   </li>
                 </ul>
               </div>
-              <hr className={hrClassNames} />
+              <hr className={hrClassName} />
               {sideMenus.map((sideMenu) => (
                 <>
-                  <div key={sideMenu.heading} className={linkBlockClassNames}>
-                    <h2 className={headingTwoClassNames}>{sideMenu.heading}</h2>
+                  <div key={sideMenu.heading} className={linkBlockClassName}>
+                    <h2 className={headingTwoClassName}>{sideMenu.heading}</h2>
                     <ul className='list-none p-0 m-0 space-y-1'>
                       {sideMenu.categories.map((category) => (
                         <li key={category.slug} className='group'>
                           <button
                             type='button'
                             onClick={() => openSubmenu(category)}
-                            className={linksClassNames}
+                            className={linksClassName}
                           >
                             <span>{category.name}</span>
                             <ChevronRightIcon
@@ -158,18 +153,18 @@ export default function LeftSidenav({
                       ))}
                     </ul>
                   </div>
-                  <hr className={hrClassNames} />
+                  <hr className={hrClassName} />
                 </>
               ))}
-              <hr className={hrClassNames} />
-              <div className={linkBlockClassNames}>
-                <h2 className={headingTwoClassNames}>Help & Support</h2>
+              <hr className={hrClassName} />
+              <div className={linkBlockClassName}>
+                <h2 className={headingTwoClassName}>Help & Support</h2>
                 <ul className='list-none p-0 m-0 space-y-1'>
                   {session ? (
                     <li>
                       <Link
                         href='/dashboard?tab=home'
-                        className={linksClassNames}
+                        className={linksClassName}
                         onClick={onClose}
                       >
                         <span>Your Account</span>
@@ -180,7 +175,7 @@ export default function LeftSidenav({
                       <li>
                         <Link
                           href='/login'
-                          className={linksClassNames}
+                          className={linksClassName}
                           onClick={onClose}
                         >
                           <span>Sign In</span>
@@ -189,7 +184,7 @@ export default function LeftSidenav({
                       <li>
                         <Link
                           href='/register'
-                          className={linksClassNames}
+                          className={linksClassName}
                           onClick={onClose}
                         >
                           <span>Register</span>
@@ -200,7 +195,7 @@ export default function LeftSidenav({
                   <li>
                     <Link
                       href='/impressum'
-                      className={linksClassNames}
+                      className={linksClassName}
                       onClick={onClose}
                     >
                       <span>Legal Notice</span>
@@ -209,7 +204,7 @@ export default function LeftSidenav({
                   <li>
                     <Link
                       href='/datenschutz'
-                      className={linksClassNames}
+                      className={linksClassName}
                       onClick={onClose}
                     >
                       <span>Privacy Policy</span>
@@ -217,14 +212,14 @@ export default function LeftSidenav({
                   </li>
                 </ul>
               </div>
-              <hr className={hrClassNames} />
-              <div className={linkBlockClassNames}>
-                <h2 className={headingTwoClassNames}>About the Project</h2>
+              <hr className={hrClassName} />
+              <div className={linkBlockClassName}>
+                <h2 className={headingTwoClassName}>About the Project</h2>
                 <ul className='list-none p-0 m-0 space-y-1'>
                   <li>
                     <a
                       href='https://stefan-luellmann.com/case-studies/entro-ecommerce-store'
-                      className={linksClassNames}
+                      className={linksClassName}
                       rel='noreferrer noopener'
                       target='_blank'
                     >
@@ -234,7 +229,7 @@ export default function LeftSidenav({
                   <li>
                     <a
                       href='https://stefan-luellmann.com/'
-                      className={linksClassNames}
+                      className={linksClassName}
                       rel='noreferrer noopener'
                       target='_blank'
                     >
@@ -244,7 +239,7 @@ export default function LeftSidenav({
                   <li>
                     <a
                       href='https://github.com/OneDev49'
-                      className={linksClassNames}
+                      className={linksClassName}
                       rel='noreferrer noopener'
                       target='_blank'
                     >
@@ -254,7 +249,7 @@ export default function LeftSidenav({
                   <li>
                     <a
                       href='https://linkedin.com/in/stefan-lüllmann'
-                      className={linksClassNames}
+                      className={linksClassName}
                       rel='noreferrer noopener'
                       target='_blank'
                     >
@@ -287,7 +282,7 @@ export default function LeftSidenav({
           </div>
 
           <nav className='flex-1 overflow-y-auto'>
-            <h3 className={`${headingTwoClassNames} underline`}>
+            <h3 className={`${headingTwoClassName} underline`}>
               {activeSubmenu?.titleText}
             </h3>
             <ul className='list-none p-0 m-0'>
@@ -296,7 +291,7 @@ export default function LeftSidenav({
                   <Link
                     href={`search?category=${activeSubmenu.brandSlug}`}
                     onClick={onClose}
-                    className={`${linksClassNames} font-bold`}
+                    className={`${linksClassName} font-bold`}
                   >
                     <span>To {activeSubmenu.titleName} Category</span>
                   </Link>
@@ -307,7 +302,7 @@ export default function LeftSidenav({
                   <Link
                     href={item.href}
                     onClick={onClose}
-                    className={linksClassNames}
+                    className={linksClassName}
                   >
                     {item.name}
                   </Link>

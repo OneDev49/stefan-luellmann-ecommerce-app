@@ -1,5 +1,11 @@
+'use client';
+
 import { useSession } from 'next-auth/react';
 import { useWishlist } from '@/hooks/useWishlist';
+import {
+  selectWishlistTotalItems,
+  useWishlistStore,
+} from '@/store/wishlistStore';
 
 import TrashIcon from '@/components/icons/ecommerce/TrashIcon';
 import AnglesRightIcon from '@/components/icons/ui/AnglesRightIcon';
@@ -18,14 +24,14 @@ export default function HeaderWishlist({
   onClose,
   className,
 }: HeaderWishlistProps) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const {
     items: wishlistItems,
     removeFromWishlist,
     clearWishlist,
     isLoading,
   } = useWishlist();
-  const totalWishlistAmount = wishlistItems.length;
+  const totalWishlistAmount = useWishlistStore(selectWishlistTotalItems);
 
   const handleRemoveFromWishlist = (e: React.MouseEvent, productId: string) => {
     e.stopPropagation();

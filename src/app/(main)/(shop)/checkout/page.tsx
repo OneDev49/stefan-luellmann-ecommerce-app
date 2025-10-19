@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+
 import CheckoutContent from './_components/CheckoutContent';
 
 export const metadata: Metadata = {
