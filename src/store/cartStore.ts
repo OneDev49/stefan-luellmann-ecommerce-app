@@ -86,59 +86,77 @@ export const useCartStore = create<CartState>()(
 
         set((state) => ({ isAdding: new Set(state.isAdding).add(productId) }));
 
-        try {
-          const cart = get();
-          const existingItem = cart.items.find(
-            (item) => item.id === product.id
-          );
-          // Calculate new quantity
-          const newQuantity = existingItem
-            ? existingItem.quantity + quantity
-            : quantity;
+        const minimumSpinnerTime = new Promise((resolve) =>
+          setTimeout(resolve, 400)
+        );
 
-          // Enforce max limit
-          if (newQuantity > MAX_QUANTITY) {
-            toast.error(
-              `Maximum order amount for ${product.name} is ${MAX_QUANTITY}`
+        const addToCartPromise = new Promise(async (resolve, reject) => {
+          try {
+            const cart = get();
+            const existingItem = cart.items.find(
+              (item) => item.id === product.id
             );
-            return;
-          }
+            // Calculate new quantity
+            const newQuantity = existingItem
+              ? existingItem.quantity + quantity
+              : quantity;
 
-          // If user is authenticated, add to DB, else add to localStorage
-          if (isAuthenticated) {
-            const response = await fetch('/api/user/cart', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                productId: product.id,
-                quantity: quantity,
-              }),
-            });
-
-            if (!response.ok) throw new Error('Failed to add to Cart');
-
-            const data = await response.json();
-
-            set({ items: data.items });
-            toast.success(`${quantity} x ${product.name} added to Cart!`);
-          } else {
-            if (existingItem) {
-              const updatedItems = cart.items.map((item) =>
-                item.id === product.id
-                  ? { ...item, quantity: newQuantity }
-                  : item
+            // Enforce max limit
+            if (newQuantity > MAX_QUANTITY) {
+              reject(
+                new Error(
+                  `Maximum order amount for ${product.name} is ${MAX_QUANTITY}`
+                )
               );
-              set({ items: updatedItems });
-            } else {
-              set((state) => ({
-                items: [...state.items, { ...product, quantity }],
-              }));
+              return;
             }
-            toast.success(`${quantity} x ${product.name} added to Cart!`);
+
+            // If user is authenticated, add to DB, else add to localStorage
+            if (isAuthenticated) {
+              const response = await fetch('/api/user/cart', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  productId: product.id,
+                  quantity: quantity,
+                }),
+              });
+
+              if (!response.ok) throw new Error('Failed to add to Cart');
+
+              const data = await response.json();
+
+              set({ items: data.items });
+            } else {
+              if (existingItem) {
+                const updatedItems = cart.items.map((item) =>
+                  item.id === product.id
+                    ? { ...item, quantity: newQuantity }
+                    : item
+                );
+                set({ items: updatedItems });
+              } else {
+                set((state) => ({
+                  items: [...state.items, { ...product, quantity }],
+                }));
+              }
+            }
+
+            resolve(true);
+          } catch (error) {
+            reject(error);
           }
-        } catch (error) {
+        });
+
+        try {
+          await Promise.all([addToCartPromise, minimumSpinnerTime]);
+
+          toast.success(`${quantity} x ${product.name} added to Cart!`);
+        } catch (error: any) {
           console.error('Failed to add to Cart:', error);
-          toast.error('Failed to add to Cart');
+          toast.error(
+            error.message || 'Failed to add to Cart. Please try again.'
+          );
         } finally {
           // Set state to remove spinner animation
           set((state) => {
