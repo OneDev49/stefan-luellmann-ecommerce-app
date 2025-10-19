@@ -1,7 +1,5 @@
 import { ProductPageType } from '@/types/product';
 
-import clsx from 'clsx';
-
 interface DescriptionSectionProps {
   product: Pick<ProductPageType, 'specs' | 'longDescription'>;
 }
@@ -9,13 +7,11 @@ interface DescriptionSectionProps {
 export default function DescriptionSection({
   product,
 }: DescriptionSectionProps) {
-  const transparentCardClassName = clsx(
-    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl max-w-2xl lg:max-w-7xl m-auto'
-  );
-  const headingClassNames = clsx('text-3xl font-bold p-8');
-  const headingMobileClassNames = clsx(
-    'bg-[rgb(87,87,87,0.2)] shadow-[0_4px_15px_0_rgb(0,0,0,1)] border-t border-[#6c6c6c]'
-  );
+  const transparentCardClassName =
+    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl max-w-2xl lg:max-w-7xl m-auto';
+  const headingClassNames = 'text-3xl font-bold p-8';
+  const headingMobileClassNames =
+    'bg-[rgb(87,87,87,0.2)] shadow-[0_4px_15px_0_rgb(0,0,0,1)] border-t border-[#6c6c6c]';
 
   return (
     <>
