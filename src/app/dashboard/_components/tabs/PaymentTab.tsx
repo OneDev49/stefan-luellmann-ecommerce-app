@@ -1,183 +1,245 @@
-'use client';
+import { useState } from 'react';
+import { PaymentMethod } from '@prisma/client';
+import { DashboardUser } from '../../page';
+import useSWR, { useSWRConfig } from 'swr';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  addPaymentMethodSchema,
+  TAddPaymentMethodSchema,
+} from '@/lib/validations/payment';
 
-import { useEffect, useRef, useState } from 'react';
-import { TabPaymentMethod, TabUser } from '../config/tabConfig';
-import PayPalIcon from '@/components/icons/brands/PayPalIcon';
-import MasterCardIcon from '@/components/icons/brands/MasterCardIcon';
-import EllipsisVerticalIcon from '@/components/icons/ui/EllipsisVerticalIcon';
 import PlusIcon from '@/components/icons/ui/PlusIcon';
-import clsx from 'clsx';
 import Button from '@/components/ui/Button';
+import toast from 'react-hot-toast';
+import PaymentMethodCard from '../PaymentMethodCard';
 
 interface DashboardPaymentProps {
-  user: TabUser;
-  paymentMethods: TabPaymentMethod[];
+  user: DashboardUser;
+  initialPaymentMethods: PaymentMethod[];
 }
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export default function DashboardPayment({
   user,
-  paymentMethods,
+  initialPaymentMethods,
 }: DashboardPaymentProps) {
-  const [addMethod, setAddMethod] = useState(false);
-  const [selectedMethod, setSelectedMethod] = useState<string | null>(
-    paymentMethods[0]?.method ?? null
-  );
-  const formRef = useRef<HTMLFormElement | null>(null);
+  const [isAddingNew, setIsAddingNew] = useState<boolean>(false);
+  const { mutate } = useSWRConfig();
 
-  useEffect(() => {
-    if (addMethod && formRef.current) {
-      formRef.current.scrollIntoView({ behavior: 'smooth' });
+  const {
+    data: paymentMethods,
+    error,
+    isLoading,
+  } = useSWR<PaymentMethod[]>('/api/user/payment', fetcher, {
+    fallbackData: initialPaymentMethods,
+  });
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<TAddPaymentMethodSchema>({
+    resolver: zodResolver(addPaymentMethodSchema),
+  });
+
+  // Add payment method
+  const handleAddMethod = async (formData: TAddPaymentMethodSchema) => {
+    const [expiryMonth, expiryYearSuffix] = formData.expiryDate.split('/');
+    const expiryYear = parseInt(`20${expiryYearSuffix}`, 10);
+
+    try {
+      const response = await fetch('/api/user/payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          expiryMonth: parseInt(expiryMonth, 10),
+          expiryYear,
+        }),
+      });
+
+      if (!response.ok) throw new Error('Failed to add payment method.');
+
+      toast.success('Payment method added!');
+      reset();
+      setIsAddingNew(false);
+      mutate('/api/user/payment');
+    } catch (error) {
+      toast.error('Could not add payment method.');
     }
-  }, [addMethod]);
+  };
 
-  const inputClassNames = clsx(
-    'peer block w-full rounded-lg border border-[#606060] bg-transparent p-2 text-white shadow-sm focus-visible:outline-[#00b700] focus-visible:outline-1 focus-visible:outline'
-  );
+  // Delete payment method
+  const handleDeleteMethod = async (methodId: string) => {
+    if (!confirm('Are you sure you want to delete this payment method?'))
+      return;
+
+    try {
+      const response = await fetch(`/api/user/payment/${methodId}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) throw new Error('Failed to delete.');
+
+      toast.success('Payment method deleted.');
+      mutate('/api/user/payment');
+    } catch (error) {
+      toast.error('Could not delete payment method.');
+    }
+  };
+
+  // Set default payment method
+  const handleSetDefault = async (methodId: string) => {
+    try {
+      const response = await fetch(`/api/user/payment/${methodId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isDefault: true }),
+      });
+      if (!response.ok) throw new Error('Failed to set default.');
+
+      toast.success('Default payment method updated.');
+      mutate('/api/user/payment');
+    } catch (error) {
+      toast.error('Could not set default method.');
+    }
+  };
+
+  // Wait for fetcher to finish or show error
+  if (isLoading) return <div>Loading payment methods...</div>;
+  if (error || !paymentMethods)
+    return <div>Failed to load payment methods.</div>;
+
+  const inputClassNames =
+    'peer block w-full rounded-lg border border-[#606060] bg-[#001b03] p-2 text-white shadow-sm focus-visible:outline-[#00b700] focus-visible:outline-1 focus-visible:outline';
 
   return (
-    <div className='py-12 max-w-4xl space-y-24'>
-      {paymentMethods.length > 0 ? (
-        <>
-          <div className='grid grid-cols-2 gap-12'>
-            {paymentMethods.map((method, index) => {
-              const isSelected = selectedMethod === method.method;
+    <div className='py-12 max-w-4xl space-y-12'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
+        {paymentMethods.map((method) => (
+          <PaymentMethodCard
+            key={method.id}
+            method={method}
+            onDelete={() => handleDeleteMethod(method.id)}
+            onSetDefault={() => handleSetDefault(method.id)}
+          />
+        ))}
+        <div
+          className='border-[#4a4a4a] border-2 rounded-xl p-6 flex items-center justify-center hover:border-[#a7a7a7] transition-colors cursor-pointer group'
+          onClick={() => setIsAddingNew(true)}
+        >
+          <div className='flex items-center flex-col gap-3'>
+            <div className='bg-[#2d2d2d] w-16 h-16 grid place-items-center rounded-full'>
+              <PlusIcon className='group-hover:text-[#fff] text-[#707070] transition-colors' />
+            </div>
+            <strong>Add new Card</strong>
+          </div>
+        </div>
+      </div>
 
-              return (
-                <div
-                  key={index}
-                  onClick={() => setSelectedMethod(method.method)}
-                  className={clsx(
-                    ' border-2 rounded-xl p-6  transition-colors',
-                    selectedMethod === method.method
-                      ? 'border-[#00b700]'
-                      : 'border-[#4a4a4a] hover:border-[#a7a7a7]'
-                  )}
-                >
-                  <div className='flex justify-between'>
-                    <div className='flex items-center gap-3'>
-                      <input
-                        type='radio'
-                        id={method.method}
-                        name='payment-method'
-                        value={method.method}
-                        checked={isSelected}
-                        onChange={() => setSelectedMethod(method.method)}
-                        className='appearance-none rounded-full border border-[#4a4a4a] w-4 h-4 relative grid place-items-center before:absolute before:bg-white before:rounded-full before:h-0 before:w-0 transition-all before:border-0 checked:before:border-4 before:border-white'
-                      />
-                      <label htmlFor={method.method}>
-                        {method.method.charAt(0).toUpperCase() +
-                          method.method.slice(1)}
-                      </label>
-                    </div>
-                    <div className='flex items-center gap-6'>
-                      <div className='italic text-[#999999] font-bold flex items-center text-lg gap-2'>
-                        {method.method === 'paypal' ? (
-                          <>
-                            <PayPalIcon height={28} width={23} />
-                            PayPal
-                          </>
-                        ) : (
-                          <MasterCardIcon height={28} width={36} />
-                        )}
-                      </div>
-                      <div>
-                        <EllipsisVerticalIcon className='cursor-pointer' />
-                      </div>
-                    </div>
-                  </div>
-                  <div className='tracking-widest mt-4 mb-10'>
-                    <strong>{method.cardNumber}</strong>
-                  </div>
-
-                  <div className='grid grid-cols-[2fr_1fr] leading-tight'>
-                    <div className='flex flex-col'>
-                      <span className='text-gray-400 text-sm'>
-                        Card Holder Name
-                      </span>
-                      <span>{method.cardHolder}</span>
-                    </div>
-                    <div className='flex flex-col'>
-                      <span className='text-gray-400 text-sm'>Expiry Date</span>
-                      <span>{method.expiryDate}</span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-            <div
-              className='border-[#4a4a4a] border-2 rounded-xl p-6 hover:border-[#a7a7a7] transition-colors cursor-pointer group'
-              onClick={() => setAddMethod(true)}
-            >
-              <div className='flex items-center flex-col gap-3'>
-                <div className='bg-[#2d2d2d] w-16 h-16 grid place-items-center rounded-full'>
-                  <PlusIcon className='group-hover:text-[#fff] text-[#707070] transition-colors' />
-                </div>
-                <strong>Add New Card</strong>
-              </div>
+      {isAddingNew && (
+        <form onSubmit={handleSubmit(handleAddMethod)} className='space-y-8'>
+          <h2 className='text-2xl font-bold'>Add new Payment Method</h2>
+          <div className='grid grid-cols-2 gap-8'>
+            <div>
+              <label htmlFor='cardHolderName' className='text-lg font-bold'>
+                Card Holder Name
+              </label>
+              <input
+                id='cardHolderName'
+                type='text'
+                className={inputClassNames}
+                {...register('cardHolderName')}
+              />
+              {errors.cardHolderName && (
+                <p className='text-red-500'>{errors.cardHolderName.message}</p>
+              )}
+            </div>
+            <div>
+              <label htmlFor='expiryDate' className='text-lg font-bold'>
+                Expiry Date
+              </label>
+              <input
+                id='expiryDate'
+                type='text'
+                placeholder='MM/YY'
+                className={inputClassNames}
+                {...register('expiryDate')}
+              />
+              {errors.expiryDate && (
+                <p className='text-red-500'>{errors.expiryDate.message}</p>
+              )}
+            </div>
+            <div>
+              <label htmlFor='last4' className='text-lg font-bold'>
+                Last 4 Digits
+              </label>
+              <input
+                id='last4'
+                type='text'
+                inputMode='numeric'
+                pattern='\d{4}'
+                maxLength={4}
+                className={inputClassNames}
+                {...register('last4')}
+              />
+              {errors.last4 && (
+                <p className='text-red-500'>{errors.last4.message}</p>
+              )}
+            </div>
+            <div>
+              <label htmlFor='provider' className='text-lg font-bold'>
+                Payment Provider
+              </label>
+              <input
+                id='provider'
+                type='text'
+                className={inputClassNames}
+                {...register('provider')}
+              />
+              {errors.provider && (
+                <p className='text-red-500'>{errors.provider.message}</p>
+              )}
+            </div>
+            <div>
+              <label htmlFor='type' className='text-lg font-bold'>
+                Payment Type
+              </label>
+              <select
+                id='type'
+                className={inputClassNames}
+                {...register('type')}
+              >
+                <option selected>Select Type...</option>
+                <option value='CREDIT_CARD'>Credit Card</option>
+                <option value='PAYPAL'>PayPal</option>
+              </select>
+              {errors.type && (
+                <p className='text-red-500'>{errors.type.message}</p>
+              )}
             </div>
           </div>
-          {addMethod && (
-            <form ref={formRef} className='space-y-16'>
-              <div className='grid grid-cols-2 gap-8'>
-                <div>
-                  <label htmlFor='cardnumber' className='text-lg font-bold'>
-                    Card Number
-                  </label>
-                  <input
-                    id='cardnumber'
-                    type='text'
-                    className={inputClassNames}
-                    placeholder='12345 6789 0987 6543'
-                  />
-                </div>
-                <div>
-                  <label htmlFor='cardholdername' className='text-lg font-bold'>
-                    Card Holder Name
-                  </label>
-                  <input
-                    id='cardholdername'
-                    type='text'
-                    className={inputClassNames}
-                    placeholder='Stefan Lüllmann'
-                  />
-                </div>
-                <div>
-                  <label htmlFor='expirydate' className='text-lg font-bold'>
-                    Expiry Date
-                  </label>
-                  <input
-                    id='expirydate'
-                    type='month'
-                    className={inputClassNames}
-                    placeholder='MM/YY'
-                  />
-                </div>
-                <div>
-                  <label htmlFor='cvc' className='text-lg font-bold'>
-                    CVC/CVV
-                  </label>
-                  <input
-                    id='cvc'
-                    type='number'
-                    className={inputClassNames}
-                    placeholder='1234'
-                  />
-                </div>
-              </div>
-
-              <Button
-                as='button'
-                variant='secondary'
-                className='w-full justify-center'
-              >
-                <PlusIcon />
-                Apply Changes
-              </Button>
-            </form>
-          )}
-        </>
-      ) : (
-        <div>Nothing</div>
+          <div className='flex gap-4'>
+            <Button
+              as='button'
+              type='submit'
+              variant='primary'
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Saving...' : 'Save Payment Method'}
+            </Button>
+            <Button
+              as='button'
+              type='button'
+              variant='secondary'
+              onClick={() => setIsAddingNew(false)}
+            >
+              Cancel
+            </Button>
+          </div>
+        </form>
       )}
     </div>
   );
