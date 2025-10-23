@@ -1,10 +1,11 @@
 'use client';
 
+import { useState } from 'react';
+import { TabOrder } from '../config/tabConfig';
+
 import ChevronLeftIcon from '@/components/icons/ui/ChevronLeftIcon';
 import Button from '@/components/ui/Button';
 import clsx from 'clsx';
-import { useState } from 'react';
-import { TabOrder, TabUser } from '../config/tabConfig';
 import ChevronUpIcon from '@/components/icons/ui/ChevronUpIcon';
 import ChevronDownIcon from '@/components/icons/ui/ChevronDownIcon';
 import MapPinIcon from '@/components/icons/ecommerce/MapPinIcon';
@@ -14,12 +15,10 @@ import Link from 'next/link';
 type filterOption = 'all' | 'delivered' | 'processing' | 'canceled';
 
 interface DashboardOrderHistoryProps {
-  user: TabUser;
   orders: TabOrder[];
 }
 
 export default function DashboardOrderHistory({
-  user,
   orders,
 }: DashboardOrderHistoryProps) {
   const [filter, setFilter] = useState<filterOption>('all');

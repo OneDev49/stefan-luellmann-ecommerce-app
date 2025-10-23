@@ -1,39 +1,20 @@
+import { TabId } from '../DashboardClient';
+
 import DashboardAccountHome from '../tabs/AccountHomeTab';
 import DashboardOrderHistory from '../tabs/OrderHistoryTab';
 import DashboardAccountInformation from '../tabs/AccountInformationTab';
 import DashboardWishlist from '../tabs/WishlistTab';
 import DashboardCart from '../tabs/CartTab';
 import DashboardPayment from '../tabs/PaymentTab';
+import { DashboardPageData } from '../../page';
 
-import { TabId } from '../DashboardClient';
-
-export interface TabUser {
-  id: string;
-  name: string | null;
-  email: string | null;
-  image: string | null;
-}
-
-export interface TabPageData {
-  orders?: TabOrder[] | null;
-  paymentMethods?: TabPaymentMethod[] | null;
-  wishlistItems?: any[];
-}
-
+// Mock Interface for TabOrder
 export interface TabOrder {
   id: string;
   products: { id: string; name: string; quantity: number; price: number }[];
   deliveryDate: string;
   status: 'delivered' | 'processing' | 'canceled';
   address: { street: string; zip: string; city: string; country: string };
-}
-
-export interface TabPaymentMethod {
-  method: 'paypal' | 'mastercard';
-  cardNumber: string;
-  cardHolder: string;
-  expiryDate: string;
-  cvc: number;
 }
 
 interface TabItem<P = {}> {
@@ -61,16 +42,17 @@ const baseCrumbs = [
 export function createTabItems(
   cartSentence: string,
   wishlistSentence: string,
-  user?: TabUser,
-  pageData?: TabPageData
+  dashboardPageData: DashboardPageData
 ): TabItem<any>[] {
   return [
     {
       id: 'home',
-      heading: user ? `Welcome ${user.name}` : `Welcome!`,
+      heading: dashboardPageData.user
+        ? `Welcome ${dashboardPageData.user.name}`
+        : `Welcome!`,
       text: 'This is your Entro Account Dashboard. You can manage your Account from here.',
       Component: DashboardAccountHome,
-      props: { user: user },
+      props: { user: dashboardPageData.user },
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Account',
@@ -81,7 +63,7 @@ export function createTabItems(
       heading: 'Orders',
       text: 'You are currently viewing all of your Orders.',
       Component: DashboardOrderHistory,
-      props: { orders: pageData?.orders },
+      props: { orders: dashboardPageData.orders },
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Order History',
@@ -92,7 +74,7 @@ export function createTabItems(
       heading: 'Account',
       text: 'You are viewing your Account Information.',
       Component: DashboardAccountInformation,
-      props: {},
+      props: { userProfile: dashboardPageData.profile },
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Account Information',
@@ -125,7 +107,10 @@ export function createTabItems(
       heading: 'Payment Information',
       text: 'Update, Edit or Remove your current Payment Information.',
       Component: DashboardPayment,
-      props: { paymentMethods: pageData?.paymentMethods },
+      props: {
+        user: dashboardPageData.user,
+        paymentMethods: dashboardPageData.paymentMethods,
+      },
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Payment',

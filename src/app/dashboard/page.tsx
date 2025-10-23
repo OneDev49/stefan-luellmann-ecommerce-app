@@ -1,9 +1,11 @@
 import { getServerSession } from 'next-auth';
 import { prisma } from '@/lib/prisma';
-import DashboardClient from './_components/DashboardClient';
 import { authOptions } from '../api/auth/[...nextauth]/route';
 import { redirect } from 'next/navigation';
-import { TabOrder, TabPaymentMethod } from './_components/config/tabConfig';
+import { TabOrder } from './_components/config/tabConfig';
+import { PaymentMethod, UserProfile } from '@prisma/client';
+
+import DashboardClient from './_components/DashboardClient';
 
 function getDemoOrders(): TabOrder[] {
   return [
@@ -54,58 +56,56 @@ function getDemoOrders(): TabOrder[] {
   ];
 }
 
-function getDemoPaymentMethods(): TabPaymentMethod[] {
-  return [
-    {
-      method: 'paypal',
-      cardNumber: '2444 2901 3141 3241',
-      cardHolder: 'Stefan Lüllmann',
-      expiryDate: '06-2025',
-      cvc: 3415,
-    },
-    {
-      method: 'mastercard',
-      cardNumber: '1342 3314 3215 3123',
-      cardHolder: 'Stefan Lüllmann',
-      expiryDate: '12-2026',
-      cvc: 5122,
-    },
-  ];
+export interface DashboardUser {
+  id: string;
+  name: string | null;
+  email: string | null;
+  image: string | null;
 }
 
-export default async function DashboardPage({
-  searchParams,
-}: {
-  searchParams: { tab?: string };
-}) {
-  const session = await getServerSession(authOptions);
+export interface DashboardPageData {
+  user: DashboardUser;
+  profile: UserProfile | null;
+  paymentMethods: PaymentMethod[];
+  orders?: TabOrder[] | null;
+}
 
+export default async function DashboardPage() {
+  const session = await getServerSession(authOptions);
   if (!session?.user?.id) redirect('/login');
 
   const userId = session.user.id;
 
-  let user;
   try {
-    user = await prisma.user.findUnique({
-      where: { id: userId },
-      select: { id: true, name: true, email: true, image: true },
-    });
-  } catch (err) {
-    console.error('Prisma fetch error:', err);
+    const [user, profile, paymentMethods, orders] = await Promise.all([
+      prisma.user.findUnique({
+        where: { id: userId },
+        select: { id: true, name: true, email: true, image: true },
+      }),
+      prisma.userProfile.findUnique({
+        where: { userId: userId },
+      }),
+      prisma.paymentMethod.findMany({
+        where: { userId: userId },
+        orderBy: { createdAt: 'desc' },
+      }),
+      Promise.resolve(getDemoOrders()),
+    ]);
+
+    if (!user) {
+      redirect('/login');
+    }
+
+    const pageData: DashboardPageData = {
+      user,
+      profile,
+      paymentMethods,
+      orders,
+    };
+
+    return <DashboardClient pageData={pageData} />;
+  } catch (error) {
+    console.error('Failed to fetch dashboard data:', error);
     redirect('/login');
   }
-
-  if (!user) {
-    redirect('/login');
-  }
-
-  const demoOrders: TabOrder[] = getDemoOrders();
-  const demoPaymentMethods: TabPaymentMethod[] = getDemoPaymentMethods();
-
-  return (
-    <DashboardClient
-      user={user!}
-      pageData={{ orders: demoOrders, paymentMethods: demoPaymentMethods }}
-    />
-  );
 }

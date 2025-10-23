@@ -102,6 +102,18 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+/**
+ * Prisma Models for User, User Cart, User Wishlist, User Profile and User Payment Methods
+ */
+
 model User {
   id             String         @id @default(cuid())
   name           String?
@@ -115,6 +127,9 @@ model User {
   wishlistItems  WishlistItem[]
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
+
+  profile        UserProfile?
+  paymentMethods PaymentMethod[]
 }
 
 model CartItem {
@@ -145,10 +160,43 @@ model WishlistItem {
   @@index([userId])
 }
 
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
+model UserProfile {
+  id          String    @id @default(cuid())
+  userId      String    @unique
+  firstName   String?
+  lastName    String?
+  phoneNumber String?
+  birthDate   DateTime?
+  gender      String?
+  street      String?
+  zipCode     String?
+  city        String?
+  country     String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
-  @@unique([identifier, token])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum PaymentMethodType {
+  CREDIT_CARD
+  PAYPAL
+}
+
+model PaymentMethod {
+  id             String            @id @default(cuid())
+  userId         String
+  type           PaymentMethodType
+  provider       String
+  cardHolderName String
+  last4          String
+  expiryMonth    Int
+  expiryYear     Int
+  isDefault      Boolean           @default(false)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }

@@ -1,33 +1,26 @@
-import Button from '@/components/ui/Button';
+'use client';
+
 import {
   selectWishlistValue,
   selectWishlistTotalItems,
   useWishlistStore,
 } from '@/store/wishlistStore';
-import { TabUser } from '../config/tabConfig';
+import { useCart } from '@/hooks/useCart';
+import { useWishlist } from '@/hooks/useWishlist';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import ChevronLeftIcon from '@/components/icons/ui/ChevronLeftIcon';
 import CloseIcon from '@/components/icons/ui/CloseIcon';
 import Rating from '@/components/ui/Rating';
-import { useCartStore } from '@/store/cartStore';
+import Button from '@/components/ui/Button';
 import CartIcon from '@/components/icons/ecommerce/CartIcon';
 
-interface DashboardWishlistProps {
-  user: TabUser;
-}
-
-export default function DashboardWishlist({ user }: DashboardWishlistProps) {
-  /* Zustand Cart Store */
-  const addToCart = useCartStore((state) => state.addToCart);
-
-  /* Zustand Wishlist Store */
-  const wishlistItems = useWishlistStore((state) => state.items);
+export default function DashboardWishlist() {
+  const { addToCart } = useCart();
+  const { items, removeFromWishlist } = useWishlist();
   const totalWishlistValue = useWishlistStore(selectWishlistValue);
   const totalWishlistAmount = useWishlistStore(selectWishlistTotalItems);
-  const removeFromWishlist = useWishlistStore(
-    (state) => state.removeFromWishlist
-  );
 
   const handleRemoveFromWishlist = (e: React.MouseEvent, productId: string) => {
     e.stopPropagation();
@@ -37,7 +30,7 @@ export default function DashboardWishlist({ user }: DashboardWishlistProps) {
 
   return (
     <div className='py-12 max-w-5xl space-y-6'>
-      {wishlistItems.length > 0 ? (
+      {items.length > 0 ? (
         <>
           <div>
             <div className='grid grid-cols-[1fr_16fr_4fr_2fr] px-4 gap-4'>
@@ -47,7 +40,7 @@ export default function DashboardWishlist({ user }: DashboardWishlistProps) {
               <div></div>
             </div>
             <ol className='p-0 m-0 list-none border-y border-[#3a3a3a]'>
-              {wishlistItems.map((item, index) => {
+              {items.map((item, index) => {
                 return (
                   <li
                     key={index}
@@ -152,7 +145,7 @@ export default function DashboardWishlist({ user }: DashboardWishlistProps) {
           <ChevronLeftIcon height={20} />
           {totalWishlistAmount > 0 ? 'Continue Shopping' : 'Browse our Store'}
         </Button>
-        {wishlistItems.length > 0 && (
+        {items.length > 0 && (
           <div className='space-y-6'>
             <p className='space-x-20'>
               <span>Subtotal:</span>
@@ -164,7 +157,7 @@ export default function DashboardWishlist({ user }: DashboardWishlistProps) {
               variant='primary'
               className='w-full justify-center'
               onClick={() => {
-                wishlistItems.forEach((item) => {
+                items.forEach((item) => {
                   addToCart(item, 1);
                   removeFromWishlist(item.id);
                 });
