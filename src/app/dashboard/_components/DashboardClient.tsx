@@ -1,25 +1,25 @@
 'use client';
+
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
-
-import DashboardSidebar from './layout/DashboardSidebar';
-
-import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import { selectTotalItems, useCartStore } from '@/store/cartStore';
 import {
   selectWishlistTotalItems,
   useWishlistStore,
 } from '@/store/wishlistStore';
-import NotFound from '@/components/ui/NotFound';
-import { createTabItems, TabPageData, TabUser } from './config/tabConfig';
+import { createTabItems } from './config/tabConfig';
 import { sidebarItems } from './config/sidebarConfig';
+import { DashboardPageData } from '../page';
+
+import DashboardSidebar from './layout/DashboardSidebar';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import NotFound from '@/components/ui/NotFound';
 import MenuIcon from '@/components/icons/ui/MenuIcon';
 import clsx from 'clsx';
 import ChevronLeftIcon from '@/components/icons/ui/ChevronLeftIcon';
 
 interface DashboardClientProps {
-  user: TabUser;
-  pageData?: TabPageData;
+  pageData: DashboardPageData;
 }
 
 export type TabId =
@@ -32,10 +32,7 @@ export type TabId =
 
 const SIDEBAR_STATE_KEY = 'dashboard-sidebar-collapsed';
 
-export default function DashboardClient({
-  pageData,
-  user,
-}: DashboardClientProps) {
+export default function DashboardClient({ pageData }: DashboardClientProps) {
   /* SearchParams */
   const searchParams = useSearchParams();
   const rawTab = searchParams.get('tab');
@@ -51,14 +48,12 @@ export default function DashboardClient({
     ? (rawTab as TabId)
     : 'home';
 
-  /* Zustand Cart */
+  // Cart/Wishlist Stores
   const totalCartAmount = useCartStore(selectTotalItems);
-
-  /* Zustand Wishlist */
   const totalWishlistAmount = useWishlistStore(selectWishlistTotalItems);
 
   /* Sidebar Management */
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(false);
   useLayoutEffect(() => {
     const savedState =
       typeof window !== 'undefined'
@@ -84,8 +79,8 @@ export default function DashboardClient({
         ? `${totalWishlistAmount} Product`
         : `${totalWishlistAmount} Products`;
 
-    return createTabItems(cartSentence, wishlistSentence, user, pageData);
-  }, [user, totalCartAmount, totalWishlistAmount, pageData]);
+    return createTabItems(cartSentence, wishlistSentence, pageData);
+  }, [totalCartAmount, totalWishlistAmount, pageData]);
 
   const currentTab = tabItems.find((item) => item.id === activeTab);
 
@@ -93,14 +88,14 @@ export default function DashboardClient({
 
   const contentClassName = clsx(
     'flex-1 transition-all duration-300',
-    isSidebarCollapsed ? 'ml-[79px]' : 'ml-[288px]'
+    isSidebarCollapsed ? 'lg:ml-[79px]' : 'lg:ml-[288px]'
   );
 
   return (
     <div className='flex flex-1'>
       <div className='hidden lg:block fixed h-[calc(100vh-53.42px)]'>
         <DashboardSidebar
-          user={user}
+          user={pageData.user}
           activeMenuId={activeTab}
           menuItems={sidebarItems}
           isCollapsed={isSidebarCollapsed}
@@ -122,7 +117,7 @@ export default function DashboardClient({
           )}
         >
           <DashboardSidebar
-            user={user}
+            user={pageData.user}
             activeMenuId={activeTab}
             menuItems={sidebarItems}
             isCollapsed={true}
