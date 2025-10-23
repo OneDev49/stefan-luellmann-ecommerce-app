@@ -1,28 +1,22 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import clsx from 'clsx';
+'use client';
 
-import { TabUser } from '../config/tabConfig';
 import {
   selectCartTotal,
   selectTotalItems,
   useCartStore,
 } from '@/store/cartStore';
+import { useCart } from '@/hooks/useCart';
 
+import Image from 'next/image';
+import Link from 'next/link';
 import CartIcon from '@/components/icons/ecommerce/CartIcon';
 import ChevronLeftIcon from '@/components/icons/ui/ChevronLeftIcon';
 import CloseIcon from '@/components/icons/ui/CloseIcon';
 import CartQuantityInput from '@/components/ui/CartQuantityInput';
 import Button from '@/components/ui/Button';
 
-interface DashboardCartProps {
-  user: TabUser;
-}
-
-export default function DashboardCart({ user }: DashboardCartProps) {
-  /* Zustand Cart Store */
-  const cartItems = useCartStore((state) => state.items);
-  const removeFromCart = useCartStore((state) => state.removeFromCart);
+export default function DashboardCart() {
+  const { items, removeFromCart } = useCart();
   const totalCartValue = useCartStore(selectCartTotal);
   const totalCartAmount = useCartStore(selectTotalItems);
 
@@ -47,18 +41,11 @@ export default function DashboardCart({ user }: DashboardCartProps) {
     SHIPPING_COSTS +
     totalTaxAmount;
 
-  const transparentCardClassName = clsx(
-    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-2xl'
-  );
-  const headingClassNames = clsx('text-3xl font-bold p-4');
-  const headingMobileClassNames = clsx(
-    'bg-[rgb(87,87,87,0.2)] shadow-[0_4px_15px_0_rgb(0,0,0,1)]'
-  );
-  const listClassName = clsx('flex justify-between');
+  const listClassName = 'flex justify-between';
 
   return (
     <div className='py-12 max-w-5xl space-y-6'>
-      {totalCartAmount > 0 && cartItems ? (
+      {totalCartAmount > 0 && items ? (
         <div className='grid grid-cols-[10fr_4fr] items-start gap-6'>
           <div>
             <div className='grid grid-cols-[4fr_1fr_2fr_auto] px-4 gap-4'>
@@ -68,7 +55,7 @@ export default function DashboardCart({ user }: DashboardCartProps) {
               <div className='w-[25px]'></div>
             </div>
             <ol className='p-0 m-0 list-none border-y border-[#3a3a3a]'>
-              {cartItems.map((item, index) => {
+              {items.map((item, index) => {
                 return (
                   <li
                     key={index}
@@ -145,11 +132,9 @@ export default function DashboardCart({ user }: DashboardCartProps) {
               })}
             </ol>
           </div>
-          <div
-            className={`${transparentCardClassName} flex flex-col overflow-hidden sticky top-20`}
-          >
+          <div className='bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-2xl flex flex-col overflow-hidden sticky top-20'>
             <div className='flex-1 relative overflow-hidden'>
-              <h2 className={`${headingClassNames} ${headingMobileClassNames}`}>
+              <h2 className='text-3xl font-bold p-4 bg-[rgb(87,87,87,0.2)] shadow-[0_4px_15px_0_rgb(0,0,0,1)]'>
                 Summary
               </h2>
               <div className='p-4'>
