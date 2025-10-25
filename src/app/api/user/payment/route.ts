@@ -8,8 +8,7 @@ import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]/route';
 import { NextResponse } from 'next/server';
-
-import z from 'zod';
+import { createPaymentMethodApiSchema } from '@/lib/validations/payment';
 
 // GET - fetch all payment methods from user in DB
 export async function GET(req: Request) {
@@ -35,23 +34,6 @@ export async function GET(req: Request) {
   }
 }
 
-const createPaymentMethodSchema = z
-  .object({
-    type: z.enum(['CREDIT_CARD', 'PAYPAL']),
-    provider: z.string().min(1, 'Provider is required').max(48),
-    cardHolderName: z.string().min(1, 'Card holder name is required').max(48),
-    last4: z.string().length(4, 'Last 4 digits must be exactly 4 characters'),
-    expiryDate: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/),
-  })
-  .transform((data) => {
-    const [month, yearSuffix] = data.expiryDate.split('/');
-    return {
-      ...data,
-      expiryMonth: parseInt(month, 10),
-      expiryYear: parseInt(`20${yearSuffix}`, 20),
-    };
-  });
-
 // POST - Add new Payment method to user account in DB
 export async function POST(req: Request) {
   try {
@@ -61,7 +43,7 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const validation = createPaymentMethodSchema.safeParse(body);
+    const validation = createPaymentMethodApiSchema.safeParse(body);
 
     if (!validation.success) {
       return NextResponse.json(

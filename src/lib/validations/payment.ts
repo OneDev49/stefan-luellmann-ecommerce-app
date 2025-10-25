@@ -9,8 +9,14 @@ import z from 'zod';
 export const addPaymentMethodSchema = z
   .object({
     type: z.enum(['CREDIT_CARD', 'PAYPAL'], 'Payment type is required.'),
-    provider: z.string().min(1, 'Provider is required'),
-    cardHolderName: z.string().min(1, 'Card holder name is required'),
+    provider: z
+      .string()
+      .min(1, 'Provider is required')
+      .max(48, 'Provider Name too long.'),
+    cardHolderName: z
+      .string()
+      .min(1, 'Card holder name is required')
+      .max(48, 'Card holder name too long.'),
     last4: z
       .string()
       .regex(/^\d{4}$/, 'Please enter the last 4 digits of the card.'),
@@ -39,3 +45,17 @@ export const addPaymentMethodSchema = z
   );
 
 export type TAddPaymentMethodSchema = z.infer<typeof addPaymentMethodSchema>;
+
+export const createPaymentMethodApiSchema = addPaymentMethodSchema.transform(
+  (data) => {
+    const [month, yearSuffix] = data.expiryDate.split('/');
+    return {
+      type: data.type,
+      provider: data.provider,
+      cardHolderName: data.cardHolderName,
+      last4: data.last4,
+      expiryMonth: parseInt(month, 10),
+      expiryYear: parseInt(`20${yearSuffix}`, 10),
+    };
+  }
+);
