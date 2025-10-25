@@ -74,7 +74,10 @@ export function createTabItems(
       heading: 'Account',
       text: 'You are viewing your Account Information.',
       Component: DashboardAccountInformation,
-      props: { userProfile: dashboardPageData.profile },
+      props: {
+        user: dashboardPageData.user,
+        initialUserProfile: dashboardPageData.profile,
+      },
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Account Information',
