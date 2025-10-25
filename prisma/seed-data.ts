@@ -1,6 +1,7 @@
 import { ProductType } from '@prisma/client';
 
 type databaseProduct = {
+  id: string;
   name: string;
   slug: string;
   brand: string;
@@ -37,6 +38,7 @@ export const categories = [
 
 const cpuProducts: databaseProduct[] = [
   {
+    id: 'zentheon-x9-9950k',
     name: 'Zentheon X9 9950K',
     slug: 'zentheon-x9-9950k',
     brand: 'Zentheon',
@@ -70,6 +72,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'zentheon-x7-9700k',
     name: 'Zentheon X7 9700K',
     slug: 'zentheon-x7-9700k',
     brand: 'Zentheon',
@@ -103,6 +106,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'zentheon-x5-9600',
     name: 'Zentheon X5 9600',
     slug: 'zentheon-x5-9600',
     brand: 'Zentheon',
@@ -136,6 +140,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'axion-pro-w9-3990x',
     name: 'Axion Pro W9-3990X',
     slug: 'axion-pro-w9-3990x',
     brand: 'Axion',
@@ -169,6 +174,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'axion-pro-w7-3770x',
     name: 'Axion Pro W7-3770X',
     slug: 'axion-pro-w7-3770x',
     brand: 'Axion',
@@ -202,6 +208,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'axion-s1-64',
     name: 'Axion S1-64',
     slug: 'axion-s1-64',
     brand: 'Axion',
@@ -235,6 +242,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'coreforge-c7-7700',
     name: 'CoreForge C7-7700',
     slug: 'coreforge-c7-7700',
     brand: 'CoreForge',
@@ -268,6 +276,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'coreforge-c5-7500f',
     name: 'CoreForge C5-7500F',
     slug: 'coreforge-c5-7500f',
     brand: 'CoreForge',
@@ -301,6 +310,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'coreforge-c3-7300g',
     name: 'CoreForge C3-7300G',
     slug: 'coreforge-c3-7300g',
     brand: 'CoreForge',
@@ -334,6 +344,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'coreforge-c1-7100',
     name: 'CoreForge C1-7100',
     slug: 'coreforge-c1-7100',
     brand: 'CoreForge',
@@ -367,6 +378,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'quantum-leap-effix-e2',
     name: 'Quantum Leap Effix E2',
     slug: 'quantum-leap-effix-e2',
     brand: 'QuantumLeap',
@@ -400,6 +412,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'quantum-leap-vision-v7g',
     name: 'Quantum Leap Vision V7G',
     slug: 'quantum-leap-vision-v7g',
     brand: 'QuantumLeap',
@@ -433,6 +446,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'helion-h9-8900x',
     name: 'Helion H9-8900X',
     slug: 'helion-h9-8900x',
     brand: 'Helion',
@@ -466,6 +480,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'helion-h7-8700',
     name: 'Helion H7-8700',
     slug: 'helion-h7-8700',
     brand: 'Helion',
@@ -499,6 +514,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'zentheon-x3-9300f',
     name: 'Zentheon X3 9300F',
     slug: 'zentheon-x3-9300f',
     brand: 'Zentheon',
@@ -532,6 +548,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'zentheon-x9-9990x3d',
     name: 'Zentheon X9 9990X3D',
     slug: 'zentheon-x9-9990x3d',
     brand: 'Zentheon',
@@ -565,6 +582,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'axion-pro-w5-3550x',
     name: 'Axion Pro W5-3550X',
     slug: 'axion-pro-w5-3550x',
     brand: 'Axion',
@@ -598,6 +616,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'coreforge-c5-7600x',
     name: 'CoreForge C5-7600X',
     slug: 'coreforge-c5-7600x',
     brand: 'CoreForge',
@@ -631,6 +650,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'quantum-leap-atomos-a1',
     name: 'Quantum Leap Atomos A1',
     slug: 'quantum-leap-atomos-a1',
     brand: 'QuantumLeap',
@@ -664,6 +684,7 @@ const cpuProducts: databaseProduct[] = [
     categorySlugs: ['cpu', 'components'],
   },
   {
+    id: 'zentheon-x12-9998w',
     name: 'Zentheon X12 9998W',
     slug: 'zentheon-x12-9998w',
     brand: 'Zentheon',
@@ -700,6 +721,7 @@ const cpuProducts: databaseProduct[] = [
 
 const gpuProducts: databaseProduct[] = [
   {
+    id: 'aetherflux-9000',
     name: 'AetherFlux 9000',
     slug: 'aetherflux-9000',
     brand: 'AetherFlux',
@@ -734,6 +756,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'novecore-n102c',
     name: 'NovaCore N102C',
     slug: 'novecore-n102c',
     brand: 'NovaCore',
@@ -768,6 +791,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'pixelis-tritan-ac1',
     name: 'Pixelis Tritan AC1',
     slug: 'pixelis-tritan-ac1',
     brand: 'Pixelis',
@@ -802,6 +826,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'vexel-vectr-n',
     name: 'Vexel Vectr N',
     slug: 'vexel-vectr-n',
     brand: 'Vexel',
@@ -836,6 +861,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'vexel-vectr-n-ti',
     name: 'Vexel Vectr N Ti',
     slug: 'vexel-vectr-n-ti',
     brand: 'Vexel',
@@ -870,6 +896,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'aetherflux-7500-xt',
     name: 'AetherFlux 7500 XT',
     slug: 'aetherflux-7500-xt',
     brand: 'AetherFlux',
@@ -904,6 +931,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'aetherflux-8200',
     name: 'AetherFlux 8200',
     slug: 'aetherflux-8200',
     brand: 'AetherFlux',
@@ -938,6 +966,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'novacore-n205w',
     name: 'NovaCore N205W',
     slug: 'novacore-n205w',
     brand: 'NovaCore',
@@ -972,6 +1001,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'novacore-n50c',
     name: 'NovaCore N50C',
     slug: 'novacore-n50c',
     brand: 'NovaCore',
@@ -1006,6 +1036,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'pixelis-mono-m1',
     name: 'Pixelis Mono M1',
     slug: 'pixelis-mono-m1',
     brand: 'Pixelis',
@@ -1040,6 +1071,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'pixelis-flow-p2',
     name: 'Pixelis Flow P2',
     slug: 'pixelis-flow-p2',
     brand: 'Pixelis',
@@ -1074,6 +1106,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'vexel-spark-s1',
     name: 'Vexel Spark S1',
     slug: 'vexel-spark-s1',
     brand: 'Vexel',
@@ -1108,6 +1141,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'vexel-rift-r5',
     name: 'Vexel Rift R5',
     slug: 'vexel-rift-r5',
     brand: 'Vexel',
@@ -1142,6 +1176,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'vexel-vectr-x',
     name: 'Vexel Vectr X',
     slug: 'vexel-vectr-x',
     brand: 'Vexel',
@@ -1176,6 +1211,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'chronoshift-temporal-t1',
     name: 'ChronoShift Temporal T1',
     slug: 'chronoshift-temporal-t1',
     brand: 'ChronoShift',
@@ -1210,6 +1246,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'chronoshift-temporal-t2-x',
     name: 'ChronoShift Temporal T2-X',
     slug: 'chronoshift-temporal-t2-x',
     brand: 'ChronoShift',
@@ -1244,6 +1281,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'geode-g-100',
     name: 'Geode G-100',
     slug: 'geode-g-100',
     brand: 'Geode',
@@ -1278,6 +1316,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'geode-g-400x',
     name: 'Geode G-400X',
     slug: 'geode-g-400x',
     brand: 'Geode',
@@ -1312,6 +1351,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'singularity-matrix-s',
     name: 'Singularity Matrix-S',
     slug: 'singularity-matrix-s',
     brand: 'Singularity',
@@ -1346,6 +1386,7 @@ const gpuProducts: databaseProduct[] = [
     categorySlugs: ['gpu', 'components'],
   },
   {
+    id: 'pixelis-tritan-ac2',
     name: 'Pixelis Tritan AC2',
     slug: 'pixelis-tritan-ac2',
     brand: 'Pixelis',
@@ -1382,6 +1423,7 @@ const gpuProducts: databaseProduct[] = [
 
 const ramProducts: databaseProduct[] = [
   {
+    id: 'hypercore-apex-rgb',
     name: 'Hypercore Apex RGB',
     slug: 'hypercore-apex-rgb',
     brand: 'Hypercore',
@@ -1413,6 +1455,7 @@ const ramProducts: databaseProduct[] = [
     categorySlugs: ['ram', 'components'],
   },
   {
+    id: 'synapse-memory-flux',
     name: 'Synapse Memory Flux',
     slug: 'synapse-memory-flux',
     brand: 'Synapse Memory',
@@ -1444,6 +1487,7 @@ const ramProducts: databaseProduct[] = [
     categorySlugs: ['ram', 'components'],
   },
   {
+    id: 'veritas-digital-aegis-shield',
     name: 'Veritas Digital Aegis Shield',
     slug: 'veritas-digital-aegis-shield',
     brand: 'Veritas Digital',
@@ -1475,6 +1519,7 @@ const ramProducts: databaseProduct[] = [
     categorySlugs: ['ram', 'components'],
   },
   {
+    id: 'momentum-storage-value-series',
     name: 'Momentum Storage Value Series',
     slug: 'momentum-storage-value-series',
     brand: 'Momentum Storage',
@@ -1506,6 +1551,7 @@ const ramProducts: databaseProduct[] = [
     categorySlugs: ['ram', 'components'],
   },
   {
+    id: 'hypercore-lpx-v',
     name: 'Hypercore LPX-V',
     slug: 'hypercore-lpx-v',
     brand: 'Hypercore',
@@ -1537,6 +1583,7 @@ const ramProducts: databaseProduct[] = [
     categorySlugs: ['ram', 'components'],
   },
   {
+    id: 'aethelred-glacial-pro-rgb',
     name: 'Aethelred Glacial Pro RGB',
     slug: 'aethelred-glacial-pro-rgb',
     brand: 'Aethelred',
@@ -1568,6 +1615,7 @@ const ramProducts: databaseProduct[] = [
     categorySlugs: ['ram', 'components'],
   },
   {
+    id: 'synapse-memory-server-ecc-rdimm',
     name: 'Synapse Memory Server ECC RDIMM',
     slug: 'synapse-memory-server-ecc-rdimm',
     brand: 'Synapse Memory',
@@ -1599,6 +1647,7 @@ const ramProducts: databaseProduct[] = [
     categorySlugs: ['ram', 'components'],
   },
   {
+    id: 'momentum-storage-solid',
     name: 'Momentum Storage Solid',
     slug: 'momentum-storage-solid',
     brand: 'Momentum Storage',
@@ -1630,6 +1679,7 @@ const ramProducts: databaseProduct[] = [
     categorySlugs: ['ram', 'components'],
   },
   {
+    id: 'veritas-digital-so-dimm',
     name: 'Veritas Digital SO-DIMM',
     slug: 'veritas-digital-so-dimm',
     brand: 'Veritas Digital',
@@ -1661,6 +1711,7 @@ const ramProducts: databaseProduct[] = [
     categorySlugs: ['ram', 'components'],
   },
   {
+    id: 'hypercore-titan-class',
     name: 'Hypercore Titan-Class',
     slug: 'hypercore-titan-class',
     brand: 'Hypercore',
@@ -1695,6 +1746,7 @@ const ramProducts: databaseProduct[] = [
 
 const hddStorageProducts: databaseProduct[] = [
   {
+    id: 'momentum-storage-powerdrive',
     name: 'Momentum Storage PowerDrive',
     slug: 'momentum-storage-powerdrive',
     brand: 'Momentum Storage',
@@ -1723,6 +1775,7 @@ const hddStorageProducts: databaseProduct[] = [
     categorySlugs: ['hdd', 'storage', 'components'],
   },
   {
+    id: 'terravault-guardian-nas',
     name: 'TerraVault Guardian NAS',
     slug: 'terravault-guardian-nas',
     brand: 'TerraVault',
@@ -1751,6 +1804,7 @@ const hddStorageProducts: databaseProduct[] = [
     categorySlugs: ['hdd', 'storage', 'components'],
   },
   {
+    id: 'veritas-digital-v-black',
     name: 'Veritas Digital V-Black',
     slug: 'veritas-digital-v-black',
     brand: 'Veritas Digital',
@@ -1779,6 +1833,7 @@ const hddStorageProducts: databaseProduct[] = [
     categorySlugs: ['hdd', 'storage', 'components'],
   },
   {
+    id: 'momentum-storage-ecovault',
     name: 'Momentum Storage EcoVault',
     slug: 'momentum-storage-ecovault',
     brand: 'Momentum Storage',
@@ -1807,6 +1862,7 @@ const hddStorageProducts: databaseProduct[] = [
     categorySlugs: ['hdd', 'storage', 'components'],
   },
   {
+    id: 'terravault-archive-pro',
     name: 'TerraVault Archive Pro',
     slug: 'terravault-archive-pro',
     brand: 'TerraVault',
@@ -1835,6 +1891,7 @@ const hddStorageProducts: databaseProduct[] = [
     categorySlugs: ['hdd', 'storage', 'components'],
   },
   {
+    id: 'veritas-digital-sentinel-sv',
     name: 'Veritas Digital Sentinel SV',
     slug: 'veritas-digital-sentinel-sv',
     brand: 'Veritas Digital',
@@ -1863,6 +1920,7 @@ const hddStorageProducts: databaseProduct[] = [
     categorySlugs: ['hdd', 'storage', 'components'],
   },
   {
+    id: 'momentum-storage-mobiledrive',
     name: 'Momentum Storage MobileDrive',
     slug: 'momentum-storage-mobiledrive',
     brand: 'Momentum Storage',
@@ -1891,6 +1949,7 @@ const hddStorageProducts: databaseProduct[] = [
     categorySlugs: ['hdd', 'storage', 'components'],
   },
   {
+    id: 'terravault-glacis',
     name: 'TerraVault Glacis',
     slug: 'terravault-glacis',
     brand: 'TerraVault',
@@ -1919,6 +1978,7 @@ const hddStorageProducts: databaseProduct[] = [
     categorySlugs: ['hdd', 'storage', 'components'],
   },
   {
+    id: 'veritas-digital-raptorx',
     name: 'Veritas Digital RaptorX',
     slug: 'veritas-digital-raptorx',
     brand: 'Veritas Digital',
@@ -1947,6 +2007,7 @@ const hddStorageProducts: databaseProduct[] = [
     categorySlugs: ['hdd', 'storage', 'components'],
   },
   {
+    id: 'momentum-storage-powerdrive-pro',
     name: 'Momentum Storage PowerDrive Pro',
     slug: 'momentum-storage-powerdrive-pro',
     brand: 'Momentum Storage',
@@ -1978,6 +2039,7 @@ const hddStorageProducts: databaseProduct[] = [
 
 const ssdStorageProducts: databaseProduct[] = [
   {
+    id: 'quicksilicon-qs500',
     name: 'Quicksilicon QS500',
     slug: 'quicksilicon-qs500',
     brand: 'Quicksilicon',
@@ -2008,6 +2070,7 @@ const ssdStorageProducts: databaseProduct[] = [
     categorySlugs: ['ssd', 'storage', 'components'],
   },
   {
+    id: 'synapse-memory-spark-m3',
     name: 'Synapse Memory Spark M3',
     slug: 'synapse-memory-spark-m3',
     brand: 'Synapse Memory',
@@ -2038,6 +2101,7 @@ const ssdStorageProducts: databaseProduct[] = [
     categorySlugs: ['ssd', 'storage', 'components'],
   },
   {
+    id: 'momentum-storage-jetstream-4',
     name: 'Momentum Storage JetStream 4',
     slug: 'momentum-storage-jetstream-4',
     brand: 'Momentum Storage',
@@ -2068,6 +2132,7 @@ const ssdStorageProducts: databaseProduct[] = [
     categorySlugs: ['ssd', 'storage', 'components'],
   },
   {
+    id: 'hypercore-apex-5',
     name: 'Hypercore Apex 5',
     slug: 'hypercore-apex-5',
     brand: 'Hypercore',
@@ -2098,6 +2163,7 @@ const ssdStorageProducts: databaseProduct[] = [
     categorySlugs: ['ssd', 'storage', 'components'],
   },
   {
+    id: 'veritas-digital-forge-pro',
     name: 'Veritas Digital Forge Pro',
     slug: 'veritas-digital-forge-pro',
     brand: 'Veritas Digital',
@@ -2128,6 +2194,7 @@ const ssdStorageProducts: databaseProduct[] = [
     categorySlugs: ['ssd', 'storage', 'components'],
   },
   {
+    id: 'quicksilicon-massif-q4',
     name: 'Quicksilicon Massif Q4',
     slug: 'quicksilicon-massif-q4',
     brand: 'Quicksilicon',
@@ -2158,6 +2225,7 @@ const ssdStorageProducts: databaseProduct[] = [
     categorySlugs: ['ssd', 'storage', 'components'],
   },
   {
+    id: 'hypercore-apex-5-pro',
     name: 'Hypercore Apex 5 Pro',
     slug: 'hypercore-apex-5-pro',
     brand: 'Hypercore',
@@ -2188,6 +2256,7 @@ const ssdStorageProducts: databaseProduct[] = [
     categorySlugs: ['ssd', 'storage', 'components'],
   },
   {
+    id: 'synapse-memory-ignite-dl',
     name: 'Synapse Memory Ignite DL',
     slug: 'synapse-memory-ignite-dl',
     brand: 'Synapse Memory',
@@ -2218,6 +2287,7 @@ const ssdStorageProducts: databaseProduct[] = [
     categorySlugs: ['ssd', 'storage', 'components'],
   },
   {
+    id: 'momentum-storage-terrasata',
     name: 'Momentum Storage TerraSATA',
     slug: 'momentum-storage-terrasata',
     brand: 'Momentum Storage',
@@ -2248,6 +2318,7 @@ const ssdStorageProducts: databaseProduct[] = [
     categorySlugs: ['ssd', 'storage', 'components'],
   },
   {
+    id: 'veritas-digital-catalyst',
     name: 'Veritas Digital Catalyst',
     slug: 'veritas-digital-catalyst',
     brand: 'Veritas Digital',
@@ -2281,6 +2352,7 @@ const ssdStorageProducts: databaseProduct[] = [
 
 const motherboardProducts: databaseProduct[] = [
   {
+    id: 'apex-boards-godslayer-zt990e',
     name: 'Apex Boards Godslayer ZT990E',
     slug: 'apex-boards-godslayer-zt990e',
     brand: 'Apex Boards',
@@ -2316,6 +2388,7 @@ const motherboardProducts: databaseProduct[] = [
     categorySlugs: ['motherboard', 'components'],
   },
   {
+    id: 'tectonic-systems-magna-hl870',
     name: 'Tectonic Systems Magna HL870',
     slug: 'tectonic-systems-magna-hl870',
     brand: 'Tectonic Systems',
@@ -2352,6 +2425,7 @@ const motherboardProducts: databaseProduct[] = [
     categorySlugs: ['motherboard', 'components'],
   },
   {
+    id: 'foundation-logic-bz950-pro',
     name: 'Foundation Logic BZ950-Pro',
     slug: 'foundation-logic-bz950-pro',
     brand: 'Foundation Logic',
@@ -2387,6 +2461,7 @@ const motherboardProducts: databaseProduct[] = [
     categorySlugs: ['motherboard', 'components'],
   },
   {
+    id: 'aegis-prime-creator-ax400-w',
     name: 'Aegis Prime Creator AX400-W',
     slug: 'aegis-prime-creator-ax400-w',
     brand: 'Aegis Prime',
@@ -2421,6 +2496,7 @@ const motherboardProducts: databaseProduct[] = [
     categorySlugs: ['motherboard', 'components'],
   },
   {
+    id: 'foundation-logic-mortar-cf760m-d4',
     name: 'Foundation Logic Mortar CF760M-D4',
     slug: 'foundation-logic-mortar-cf760m-d4',
     brand: 'Foundation Logic',
@@ -2456,6 +2532,7 @@ const motherboardProducts: databaseProduct[] = [
     categorySlugs: ['motherboard', 'components'],
   },
   {
+    id: 'tectonic-systems-forge-i-hl860',
     name: 'Tectonic Systems Forge I-HL860',
     slug: 'tectonic-systems-forge-i-hl860',
     brand: 'Tectonic Systems',
@@ -2490,6 +2567,7 @@ const motherboardProducts: databaseProduct[] = [
     categorySlugs: ['motherboard', 'components'],
   },
   {
+    id: 'apex-boards-element-cf750',
     name: 'Apex Boards Element CF750',
     slug: 'apex-boards-element-cf750',
     brand: 'Apex Boards',
@@ -2524,6 +2602,7 @@ const motherboardProducts: databaseProduct[] = [
     categorySlugs: ['motherboard', 'components'],
   },
   {
+    id: 'aegis-prime-ion-zt990i',
     name: 'Aegis Prime Ion ZT990I',
     slug: 'aegis-prime-ion-zt990i',
     brand: 'Aegis Prime',
@@ -2558,6 +2637,7 @@ const motherboardProducts: databaseProduct[] = [
     categorySlugs: ['motherboard', 'components'],
   },
   {
+    id: 'foundation-logic-node-i-bz930',
     name: 'Foundation Logic Node I-BZ930',
     slug: 'foundation-logic-node-i-bz930',
     brand: 'Foundation Logic',
@@ -2593,6 +2673,7 @@ const motherboardProducts: databaseProduct[] = [
     categorySlugs: ['motherboard', 'components'],
   },
   {
+    id: 'tectonic-systems-quake-zt990-x',
     name: 'Tectonic Systems Quake ZT990-X',
     slug: 'tectonic-systems-quake-zt990-x',
     brand: 'Tectonic Systems',
