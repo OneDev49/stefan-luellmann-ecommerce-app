@@ -3,10 +3,13 @@
  * @description This file provides the registration API for user to create an account.
  * @see /app/(auth)/register/_component/RegisterForm.tsx - The client-side form that consumes this endpoint.
  */
+
+import { isDemoMode } from '@/config/site';
 import { prisma } from '@/lib/prisma';
-import bcrypt from 'bcrypt';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
+
+import bcrypt from 'bcrypt';
 
 const userRegisterSchema = z.object({
   name: z
@@ -31,6 +34,15 @@ const userRegisterSchema = z.object({
 });
 
 export async function POST(req: Request) {
+  // DEMO MODE - Disable API endpoint
+  if (isDemoMode) {
+    return NextResponse.json(
+      { message: 'User Registration is disabled in demo mode.' },
+      { status: 403 }
+    );
+  }
+
+  // REAL MODE
   try {
     const body = await req.json();
 
