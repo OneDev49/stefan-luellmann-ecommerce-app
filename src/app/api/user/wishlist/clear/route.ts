@@ -5,11 +5,21 @@
  */
 
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { isDemoMode } from '@/config/site';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 
 export async function DELETE(req: Request) {
+  // DEMO MODE - Disable API endpoint
+  if (isDemoMode) {
+    return NextResponse.json(
+      { message: 'Wishlist API is disabled in demo mode.' },
+      { status: 403 }
+    );
+  }
+
+  // REAL MODE
   try {
     const session = await getServerSession(authOptions);
 

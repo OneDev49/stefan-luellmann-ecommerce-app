@@ -9,8 +9,18 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]/route';
 import { NextResponse } from 'next/server';
 import { profileApiSchema } from '@/lib/validations/profile';
+import { isDemoMode } from '@/config/site';
 
 export async function GET(req: Request) {
+  // DEMO MODE - Disable API endpoint
+  if (isDemoMode) {
+    return NextResponse.json(
+      { message: 'User API is disabled in demo mode.' },
+      { status: 403 }
+    );
+  }
+
+  // REAL MODE
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
@@ -55,6 +65,15 @@ export async function GET(req: Request) {
 }
 
 export async function PATCH(req: Request) {
+  // DEMO MODE - Disable API endpoint
+  if (isDemoMode) {
+    return NextResponse.json(
+      { message: 'User API is disabled in demo mode.' },
+      { status: 403 }
+    );
+  }
+
+  // REAL MODE
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
