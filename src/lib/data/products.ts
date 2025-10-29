@@ -1,17 +1,15 @@
 /**
- * Centralized Data Fetching Layer
- *
- * This File is used to hold all Prisma queries
- * and for those queries to be cached using React's cache() function.
- * This is done so that the resource usage is minimal due to this being
- * a portfolio project.
- *
  * @file lib/data/products.ts
+ * @description This File is used to hold all product queries across the project (both for REAL MODE and DEMO MODE).
+ * In REAL MODE the prisma queries get cached using React's cache() function.
+ * This is done so that the resource usage is minimal in REAL MODE.
  */
 
 import { cache } from 'react';
 import { prisma } from '@/lib/prisma';
 import { Prisma, ProductType } from '@prisma/client';
+import { isDemoMode } from '@/config/site';
+import { mockDB } from './mockProductData';
 
 const MAXIMUM_SEARCH_PAGE_LIMIT_UPPER_BOUND = 200;
 const CAROUSEL_PRODUCT_LIMIT = 8;
@@ -20,6 +18,10 @@ const CAROUSEL_PRODUCT_LIMIT = 8;
  * Categories
  */
 export const getAllCategories = cache(async () => {
+  // DEMO MODE
+  if (isDemoMode) return mockDB.getAllCategories();
+
+  // REAL MODE
   return prisma.category.findMany({
     select: { name: true, slug: true },
     orderBy: { name: 'asc' },
@@ -27,6 +29,10 @@ export const getAllCategories = cache(async () => {
 });
 
 export const getCategoryBySlug = cache(async (slug: string) => {
+  // DEMO MODE
+  if (isDemoMode) return mockDB.getCategoryBySlug(slug);
+
+  // REAL MODE
   return prisma.category.findUnique({
     where: { slug },
     include: {
@@ -41,6 +47,10 @@ export const getCategoryBySlug = cache(async (slug: string) => {
  * Single Product
  */
 export const getProductBySlug = cache(async (slug: string) => {
+  // DEMO MODE
+  if (isDemoMode) return mockDB.getProductBySlug(slug);
+
+  // REAL MODE
   return prisma.product.findUnique({
     where: { slug },
     include: {
@@ -55,12 +65,20 @@ export const getProductBySlug = cache(async (slug: string) => {
 });
 
 export const getProductById = cache(async (id: string) => {
+  // DEMO MODE
+  if (isDemoMode) return mockDB.getProductById(id);
+
+  // REAL MODE
   return prisma.product.findUnique({
     where: { id },
   });
 });
 
 export const getAllProductSlugs = cache(async () => {
+  // DEMO MODE
+  if (isDemoMode) return mockDB.getAllProductSlugs();
+
+  // REAL MODE
   return prisma.product.findMany({
     select: { slug: true },
   });
@@ -70,6 +88,10 @@ export const getAllProductSlugs = cache(async () => {
  * Product Collections
  */
 export const getOnSaleProducts = cache(async (limit: number = 10) => {
+  // DEMO MODE
+  if (isDemoMode) return mockDB.getOnSaleProducts(limit);
+
+  // REAL MODE
   return prisma.product.findMany({
     where: { isOnSale: true },
     orderBy: { createdAt: 'desc' },
@@ -79,12 +101,12 @@ export const getOnSaleProducts = cache(async (limit: number = 10) => {
 
 export const getFeaturedProducts = cache(
   async (productType?: ProductType, limit: number = 10) => {
+    // DEMO MODE
+    if (isDemoMode) return mockDB.getFeaturedProducts(productType, limit);
+
+    // REAL MODE
     const where: Prisma.ProductWhereInput = { isFeatured: true };
-
-    if (productType) {
-      where.productType = productType;
-    }
-
+    if (productType) where.productType = productType;
     return prisma.product.findMany({
       where,
       orderBy: { createdAt: 'desc' },
@@ -94,6 +116,10 @@ export const getFeaturedProducts = cache(
 );
 
 export const getNewArrivals = cache(async (limit: number = 10) => {
+  // DEMO MODE
+  if (isDemoMode) return mockDB.getNewArrivals(limit);
+
+  // REAL MODE
   return prisma.product.findMany({
     orderBy: { createdAt: 'desc' },
     take: limit,
@@ -102,6 +128,10 @@ export const getNewArrivals = cache(async (limit: number = 10) => {
 
 export const getProductsByBrand = cache(
   async (brand: string, limit: number = 10) => {
+    // DEMO MODE
+    if (isDemoMode) return mockDB.getProductsByBrand(brand, limit);
+
+    // REAL MODE
     return prisma.product.findMany({
       where: { brand },
       orderBy: { createdAt: 'desc' },
@@ -112,6 +142,10 @@ export const getProductsByBrand = cache(
 
 export const getProductsByType = cache(
   async (productType: ProductType, limit: number = 10) => {
+    // DEMO MODE
+    if (isDemoMode) return mockDB.getProductsByType(productType, limit);
+
+    // REAL MODE
     return prisma.product.findMany({
       where: { productType: productType },
       orderBy: { createdAt: 'desc' },
@@ -127,6 +161,16 @@ export const getSimilarProducts = cache(
     currentId: string,
     limit: number = CAROUSEL_PRODUCT_LIMIT
   ) => {
+    // DEMO MODE
+    if (isDemoMode)
+      return mockDB.getSimilarProducts(
+        productType,
+        currentBrand,
+        currentId,
+        limit
+      );
+
+    // REAL MODE
     return prisma.product.findMany({
       where: {
         productType: productType,
@@ -144,6 +188,10 @@ export const getBrandProducts = cache(
     currentId: string,
     limit: number = CAROUSEL_PRODUCT_LIMIT
   ) => {
+    // DEMO MODE
+    if (isDemoMode) return mockDB.getBrandProducts(brand, currentId, limit);
+
+    // REAL MODE
     return prisma.product.findMany({
       where: {
         brand,
@@ -163,8 +211,11 @@ export const getAllProductsForSearch = cache(
     searchTerm?: string,
     limit: number = MAXIMUM_SEARCH_PAGE_LIMIT_UPPER_BOUND
   ) => {
-    const where: Prisma.ProductWhereInput = {};
+    // DEMO MODE
+    if (isDemoMode) return mockDB.getAllProductsForSearch(searchTerm, limit);
 
+    // REAL MODE
+    const where: Prisma.ProductWhereInput = {};
     if (searchTerm) {
       where.OR = [
         { name: { contains: searchTerm, mode: 'insensitive' } },
@@ -190,16 +241,23 @@ export const getAllProductsForSearch = cache(
 );
 
 export const getAllBrands = cache(async () => {
+  // DEMO MODE
+  if (isDemoMode) return mockDB.getAllBrands();
+
+  // REAL MODE
   const products = await prisma.product.findMany({
     select: { brand: true },
     distinct: ['brand'],
     orderBy: { brand: 'asc' },
   });
-
   return products.map((p) => p.brand);
 });
 
 export const getBrandsByCategory = cache(async (categorySlug: string) => {
+  // DEMO MODE
+  if (isDemoMode) return mockDB.getBrandsByCategory(categorySlug);
+
+  // REAL MODE
   const products = await prisma.product.findMany({
     where: {
       categories: {
@@ -212,7 +270,6 @@ export const getBrandsByCategory = cache(async (categorySlug: string) => {
     distinct: ['brand'],
     orderBy: { brand: 'asc' },
   });
-
   return products.map((p) => p.brand);
 });
 
@@ -220,6 +277,10 @@ export const getBrandsByCategory = cache(async (categorySlug: string) => {
  * Misc for new Features
  */
 export const getProductsCountsByCategory = cache(async () => {
+  // DEMO MODE
+  if (isDemoMode) return mockDB.getProductsCountsByCategory();
+
+  // REAL MODE
   const categories = await getAllCategories();
 
   const counts = await Promise.all(
@@ -246,6 +307,10 @@ export const getProductsCountsByCategory = cache(async () => {
 });
 
 export const getTotalProductCount = cache(async () => {
+  // DEMO MODE
+  if (isDemoMode) return mockDB.getTotalProductCount();
+
+  // REAL MODE
   return prisma.product.count();
 });
 
@@ -253,6 +318,10 @@ export const getTotalProductCount = cache(async () => {
  * Helper Batch Operations
  */
 export const getProductsByIds = cache(async (ids: string[]) => {
+  // DEMO MODE
+  if (isDemoMode) return mockDB.getProductsByIds(ids);
+
+  // REAL MODE
   return prisma.product.findMany({
     where: {
       id: {
