@@ -1,14 +1,16 @@
 'use client';
 
 import { UserProfile } from '@prisma/client';
-import { DashboardUser } from '../../page';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   profileFormSchema,
   TProfileFormSchema,
 } from '@/lib/validations/profile';
+import { DEMO_SENTENCE_PREFIX, isDemoMode } from '@/config/site';
+import { mockDashboardDB } from '@/lib/data/mockDashboardDB';
+import { DashboardUser } from '@/hooks/useDashboardData';
 
 import useSWR from 'swr';
 import toast from 'react-hot-toast';
@@ -22,17 +24,27 @@ interface DashboardAccountInformationProps {
   initialUserProfile: ProfileData;
 }
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+// Fetcher Definitions
+const realFetcher = (url: string) => fetch(url).then((res) => res.json());
+const demoFetcher = ([url, userEmail]: [string, string]) => {
+  console.log(
+    `%c${DEMO_SENTENCE_PREFIX} Fetching profile from localStorage.`,
+    'color: #7c3aed'
+  );
+  return { ...mockDashboardDB.profile.get(), email: userEmail };
+};
 
 export default function DashboardAccountInformation({
   user,
   initialUserProfile,
 }: DashboardAccountInformationProps) {
+  const swrKey = user.email ? ['/api/user/profile'] : null;
+
   const {
     data: userProfile,
     isLoading: isDataLoading,
     mutate,
-  } = useSWR('/api/user/profile', fetcher, {
+  } = useSWR(swrKey, isDemoMode ? demoFetcher : realFetcher, {
     fallbackData: initialUserProfile,
   });
 
@@ -65,6 +77,29 @@ export default function DashboardAccountInformation({
   }, [userProfile, reset]);
 
   const onSubmit: SubmitHandler<TProfileFormSchema> = async (formData) => {
+    // DEMO MODE
+    if (isDemoMode) {
+      console.log(
+        `%c${DEMO_SENTENCE_PREFIX} "Updating" profile in localStorage.`,
+        'color: #7c3aed'
+      );
+      const currentProfile = mockDashboardDB.profile.get();
+
+      const updatedProfile = {
+        ...currentProfile,
+        ...formData,
+        birthDate: formData.birthDate ? new Date(formData.birthDate) : null,
+      };
+
+      mockDashboardDB.profile.set(updatedProfile);
+
+      mutate();
+      reset(formData);
+      toast.success(`${DEMO_SENTENCE_PREFIX} Profile updated!`);
+      return;
+    }
+
+    // REAL MODE
     toast.promise(
       fetch('/api/user/profile', {
         method: 'PATCH',

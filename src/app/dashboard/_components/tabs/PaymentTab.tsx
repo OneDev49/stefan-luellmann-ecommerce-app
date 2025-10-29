@@ -1,40 +1,54 @@
 import { useState } from 'react';
 import { PaymentMethod } from '@prisma/client';
-import { DashboardUser } from '../../page';
-import useSWR, { useSWRConfig } from 'swr';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   addPaymentMethodSchema,
   TAddPaymentMethodSchema,
 } from '@/lib/validations/payment';
+import { mockDashboardDB } from '@/lib/data/mockDashboardDB';
+import { DEMO_SENTENCE_PREFIX, isDemoMode } from '@/config/site';
+import { DashboardUser } from '@/hooks/useDashboardData';
 
 import PlusIcon from '@/components/icons/ui/PlusIcon';
 import Button from '@/components/ui/Button';
 import toast from 'react-hot-toast';
 import PaymentMethodCard from '../PaymentMethodCard';
+import useSWR from 'swr';
 
 interface DashboardPaymentProps {
   user: DashboardUser;
   initialPaymentMethods: PaymentMethod[];
 }
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+// Fetcher Definitions
+const realFetcher = (url: string) => fetch(url).then((res) => res.json());
+const demoFetcher = (key: string) => {
+  console.log(
+    `%c${DEMO_SENTENCE_PREFIX} Fetching profile from localStorage.`,
+    'color: #7c3aed'
+  );
+  return mockDashboardDB.paymentMethods.get();
+};
 
 export default function DashboardPayment({
   user,
   initialPaymentMethods,
 }: DashboardPaymentProps) {
   const [isAddingNew, setIsAddingNew] = useState<boolean>(false);
-  const { mutate } = useSWRConfig();
 
   const {
     data: paymentMethods,
     error,
     isLoading,
-  } = useSWR<PaymentMethod[]>('/api/user/payment', fetcher, {
-    fallbackData: initialPaymentMethods,
-  });
+    mutate,
+  } = useSWR<PaymentMethod[]>(
+    '/api/user/payment',
+    isDemoMode ? demoFetcher : realFetcher,
+    {
+      fallbackData: initialPaymentMethods,
+    }
+  );
 
   const {
     register,
@@ -50,6 +64,39 @@ export default function DashboardPayment({
     const [expiryMonth, expiryYearSuffix] = formData.expiryDate.split('/');
     const expiryYear = parseInt(`20${expiryYearSuffix}`, 10);
 
+    // DEMO MODE
+    if (isDemoMode) {
+      console.log(
+        `%c${DEMO_SENTENCE_PREFIX} "Adding" payment method to localStorage.`,
+        'color: #7c3aed'
+      );
+      const currentMethods = mockDashboardDB.paymentMethods.get();
+
+      const newMethod: PaymentMethod = {
+        id: `pm-demo-${Date.now()}`,
+        userId: user.id,
+        isDefault: currentMethods.length === 0,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        type: formData.type,
+        provider: formData.provider,
+        cardHolderName: formData.cardHolderName,
+        last4: formData.last4,
+        expiryMonth: parseInt(expiryMonth, 10),
+        expiryYear: expiryYear,
+      };
+
+      const updatedMethods = [...currentMethods, newMethod];
+      mockDashboardDB.paymentMethods.set(updatedMethods);
+
+      mutate(updatedMethods, false);
+      toast.success(`${DEMO_SENTENCE_PREFIX} Payment method added!`);
+      reset();
+      setIsAddingNew(false);
+      return;
+    }
+
+    // REAL MODE
     try {
       const response = await fetch('/api/user/payment', {
         method: 'POST',
@@ -66,7 +113,7 @@ export default function DashboardPayment({
       toast.success('Payment method added!');
       reset();
       setIsAddingNew(false);
-      mutate('/api/user/payment');
+      mutate();
     } catch (error) {
       toast.error('Could not add payment method.');
     }
@@ -77,6 +124,27 @@ export default function DashboardPayment({
     if (!confirm('Are you sure you want to delete this payment method?'))
       return;
 
+    // DEMO MODE
+    if (isDemoMode) {
+      console.log(
+        `%c${DEMO_SENTENCE_PREFIX} "Deleting" payment method ${methodId} from localStorage.`,
+        'color: #7c3aed'
+      );
+      const currentMethods = mockDashboardDB.paymentMethods.get();
+      const updatedMethods = currentMethods.filter((m) => m.id !== methodId);
+
+      const deletedMethod = currentMethods.find((m) => m.id === methodId);
+      if (deletedMethod?.isDefault && updatedMethods.length > 0) {
+        updatedMethods[0].isDefault = true;
+      }
+
+      mockDashboardDB.paymentMethods.set(updatedMethods);
+      mutate(updatedMethods, false);
+      toast.success(`${DEMO_SENTENCE_PREFIX} Payment method deleted!`);
+      return;
+    }
+
+    // REAL MODE
     try {
       const response = await fetch(`/api/user/payment/${methodId}`, {
         method: 'DELETE',
@@ -84,7 +152,7 @@ export default function DashboardPayment({
       if (!response.ok) throw new Error('Failed to delete.');
 
       toast.success('Payment method deleted.');
-      mutate('/api/user/payment');
+      mutate();
     } catch (error) {
       toast.error('Could not delete payment method.');
     }
@@ -92,6 +160,25 @@ export default function DashboardPayment({
 
   // Set default payment method
   const handleSetDefault = async (methodId: string) => {
+    // DEMO MODE
+    if (isDemoMode) {
+      console.log(
+        `%c${DEMO_SENTENCE_PREFIX} Setting default payment method ${methodId} in localStorage.`,
+        'color: #7c3aed'
+      );
+      const currentMethods = mockDashboardDB.paymentMethods.get();
+      const updatedMethods = currentMethods.map((method) => ({
+        ...method,
+        isDefault: method.id === methodId,
+      }));
+
+      mockDashboardDB.paymentMethods.set(updatedMethods);
+      mutate(updatedMethods, false);
+      toast.success(`${DEMO_SENTENCE_PREFIX} Default payment method updated!`);
+      return;
+    }
+
+    // REAL MODE
     try {
       const response = await fetch(`/api/user/payment/${methodId}`, {
         method: 'PATCH',
@@ -101,7 +188,7 @@ export default function DashboardPayment({
       if (!response.ok) throw new Error('Failed to set default.');
 
       toast.success('Default payment method updated.');
-      mutate('/api/user/payment');
+      mutate();
     } catch (error) {
       toast.error('Could not set default method.');
     }
