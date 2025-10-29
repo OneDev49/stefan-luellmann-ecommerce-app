@@ -5,6 +5,7 @@
  */
 
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { isDemoMode } from '@/config/site';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
@@ -31,6 +32,15 @@ export async function PATCH(
   req: Request,
   { params }: { params: { methodId: string } }
 ) {
+  // DEMO MODE - Disable API endpoint
+  if (isDemoMode) {
+    return NextResponse.json(
+      { message: 'Payment API is disabled in demo mode.' },
+      { status: 403 }
+    );
+  }
+
+  // REAL MODE
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
@@ -90,6 +100,15 @@ export async function DELETE(
   req: Request,
   { params }: { params: { methodId: string } }
 ) {
+  // DEMO MODE - Disable API endpoint
+  if (isDemoMode) {
+    return NextResponse.json(
+      { message: 'Payment API is disabled in demo mode.' },
+      { status: 403 }
+    );
+  }
+
+  // REAL MODE
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {

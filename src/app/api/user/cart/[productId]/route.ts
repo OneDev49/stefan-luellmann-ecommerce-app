@@ -9,11 +9,21 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 import { mapToProductCard } from '@/lib/mappers/product';
+import { isDemoMode } from '@/config/site';
 
 export async function DELETE(
   req: Request,
   { params }: { params: { productId: string } }
 ) {
+  // DEMO MODE - Disable API endpoint
+  if (isDemoMode) {
+    return NextResponse.json(
+      { message: 'Cart API is disabled in demo mode.' },
+      { status: 403 }
+    );
+  }
+
+  // REAL MODE
   try {
     const session = await getServerSession(authOptions);
 

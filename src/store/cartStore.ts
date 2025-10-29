@@ -8,6 +8,8 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { ProductCardType } from '@/types/product';
+import { DEMO_SENTENCE_PREFIX, isDemoMode } from '@/config/site';
+
 import toast from 'react-hot-toast';
 
 const MAX_QUANTITY = 100;
@@ -111,8 +113,8 @@ export const useCartStore = create<CartState>()(
               return;
             }
 
-            // If user is authenticated, add to DB, else add to localStorage
-            if (isAuthenticated) {
+            // If user is authenticated and demo mode is false, add to DB, else add to localStorage
+            if (isAuthenticated && !isDemoMode) {
               const response = await fetch('/api/user/cart', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -128,6 +130,14 @@ export const useCartStore = create<CartState>()(
 
               set({ items: data.items });
             } else {
+              // DEMO MODE NOTIFICATION
+              if (isAuthenticated && isDemoMode) {
+                console.log(
+                  `%c${DEMO_SENTENCE_PREFIX} Using local storage for authenticated user.\nAdd product to Cart`,
+                  'color: #7c3aed'
+                );
+              }
+
               if (existingItem) {
                 const updatedItems = cart.items.map((item) =>
                   item.id === product.id
@@ -151,7 +161,10 @@ export const useCartStore = create<CartState>()(
         try {
           await Promise.all([addToCartPromise, minimumSpinnerTime]);
 
-          toast.success(`${quantity} x ${product.name} added to Cart!`);
+          // DEMO MODE NOTIFICATION
+          toast.success(
+            `${DEMO_SENTENCE_PREFIX} ${quantity} x ${product.name} added to Cart!`
+          );
         } catch (error: any) {
           console.error('Failed to add to Cart:', error);
           toast.error(
@@ -171,8 +184,8 @@ export const useCartStore = create<CartState>()(
       removeFromCart: async (productId: string, isAuthenticated = false) => {
         const itemToRemove = get().items.find((item) => item.id === productId);
 
-        // If user is authenticated, remove from DB, else from localStorage
-        if (isAuthenticated) {
+        // If user is authenticated and demo mode is false, remove from DB, else from localStorage
+        if (isAuthenticated && !isDemoMode) {
           try {
             const response = await fetch(`/api/user/cart/${productId}`, {
               method: 'DELETE',
@@ -191,12 +204,22 @@ export const useCartStore = create<CartState>()(
             toast.error('Failed to remove from Cart. Please try again.');
           }
         } else {
+          // DEMO MODE NOTIFICATION
+          if (isAuthenticated && isDemoMode) {
+            console.log(
+              `%c${DEMO_SENTENCE_PREFIX} Using local storage for authenticated user.\nRemove product from Cart.`,
+              'color: #7c3aed'
+            );
+          }
+
           set((state) => ({
             items: state.items.filter((item) => item.id !== productId),
           }));
 
           if (itemToRemove)
-            toast.error(`${itemToRemove.name} removed from Cart.`);
+            toast.error(
+              `${DEMO_SENTENCE_PREFIX} ${itemToRemove.name} removed from Cart.`
+            );
         }
       },
 
@@ -227,8 +250,8 @@ export const useCartStore = create<CartState>()(
             return;
           }
 
-          // If user is authenticated, update DB, else update localStorage
-          if (isAuthenticated) {
+          // If user is authenticated and demo mode is false, update DB, else update localStorage
+          if (isAuthenticated && !isDemoMode) {
             const response = await fetch('/api/user/cart', {
               method: 'PATCH',
               headers: { 'Content-Type': 'application/json' },
@@ -243,6 +266,14 @@ export const useCartStore = create<CartState>()(
             const data = await response.json();
             set({ items: data.items });
           } else {
+            // DEMO MODE NOTIFICATION
+            if (isAuthenticated && isDemoMode) {
+              console.log(
+                `%c${DEMO_SENTENCE_PREFIX} Using local storage for authenticated user.\nUpdated Quantity of Product.`,
+                'color: #7c3aed'
+              );
+            }
+
             set((state) => ({
               items: state.items.map((item) =>
                 item.id === productId ? { ...item, quantity } : item
@@ -250,7 +281,9 @@ export const useCartStore = create<CartState>()(
             }));
           }
 
-          toast.success(`Updated ${productName} quantity.`);
+          toast.success(
+            `${DEMO_SENTENCE_PREFIX} Updated ${productName} quantity.`
+          );
         } catch (error) {
           console.error(`Failed to update ${productName} quantity:`, error);
           toast.error('Failed to update quantity. Please try again.');
@@ -263,9 +296,9 @@ export const useCartStore = create<CartState>()(
         }
       },
 
-      // LOUD RESET: If user is authenticated, clear DB, else clear localStorage
+      // LOUD RESET: If user is authenticated and demo mode is false, clear DB, else clear localStorage
       clearCart: async (isAuthenticated: boolean) => {
-        if (isAuthenticated) {
+        if (isAuthenticated && !isDemoMode) {
           try {
             const response = await fetch('/api/user/cart/clear', {
               method: 'DELETE',
@@ -280,6 +313,14 @@ export const useCartStore = create<CartState>()(
             toast.error('Failed to clear Cart. Please try again.');
           }
         } else {
+          // DEMO MODE NOTIFICATION
+          if (isAuthenticated && isDemoMode) {
+            console.log(
+              `%c${DEMO_SENTENCE_PREFIX} Using local storage for authenticated user.\nClear complete Cart.`,
+              'color: #7c3aed'
+            );
+          }
+
           set({ items: [] });
           toast.error('Removed all products from Cart.');
         }

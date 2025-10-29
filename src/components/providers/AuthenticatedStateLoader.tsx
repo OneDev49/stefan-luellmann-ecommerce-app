@@ -8,6 +8,7 @@
 
 'use client';
 
+import { DEMO_SENTENCE_PREFIX, isDemoMode } from '@/config/site';
 import { useCartStore } from '@/store/cartStore';
 import { useWishlistStore } from '@/store/wishlistStore';
 import { useSession } from 'next-auth/react';
@@ -22,6 +23,15 @@ export function AuthenticatedStateLoader() {
   const hasLoadedDbState = useRef(false);
 
   useEffect(() => {
+    // DEMO MODE
+    if (isDemoMode) {
+      console.log(
+        `%c${DEMO_SENTENCE_PREFIX} Skipping AuthenticatedStateLoader.`,
+        'color: #7c3aed'
+      );
+      return;
+    }
+
     if (
       status === 'authenticated' &&
       isCartHydrated &&
@@ -41,7 +51,14 @@ export function AuthenticatedStateLoader() {
     } else if (status === 'unauthenticated') {
       hasLoadedDbState.current = false;
     }
-  }, [status, session, isCartHydrated, isWishlistHydrated]);
+  }, [
+    status,
+    session,
+    isCartHydrated,
+    isWishlistHydrated,
+    loadCart,
+    loadWishlist,
+  ]);
 
   return null;
 }

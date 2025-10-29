@@ -10,6 +10,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { mapToProductCard } from '@/lib/mappers/product';
+import { isDemoMode } from '@/config/site';
 
 const syncSchema = z.object({
   cart: z.array(
@@ -22,6 +23,15 @@ const syncSchema = z.object({
 });
 
 export async function POST(req: Request) {
+  // DEMO MODE - Disable API endpoint
+  if (isDemoMode) {
+    return NextResponse.json(
+      { message: 'Sync API is disabled in demo mode.' },
+      { status: 403 }
+    );
+  }
+
+  // REAL MODE
   try {
     const session = await getServerSession(authOptions);
 

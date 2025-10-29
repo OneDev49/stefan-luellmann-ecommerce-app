@@ -9,9 +9,19 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]/route';
 import { NextResponse } from 'next/server';
 import { createPaymentMethodApiSchema } from '@/lib/validations/payment';
+import { isDemoMode } from '@/config/site';
 
 // GET - fetch all payment methods from user in DB
 export async function GET(req: Request) {
+  // DEMO MODE - Disable API endpoint
+  if (isDemoMode) {
+    return NextResponse.json(
+      { message: 'Payment API is disabled in demo mode.' },
+      { status: 403 }
+    );
+  }
+
+  // REAL MODE
   try {
     const session = await getServerSession(authOptions);
 
@@ -36,6 +46,15 @@ export async function GET(req: Request) {
 
 // POST - Add new Payment method to user account in DB
 export async function POST(req: Request) {
+  // DEMO MODE - Disable API endpoint
+  if (isDemoMode) {
+    return NextResponse.json(
+      { message: 'Payment API is disabled in demo mode.' },
+      { status: 403 }
+    );
+  }
+
+  // REAL MODE
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {

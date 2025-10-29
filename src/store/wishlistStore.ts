@@ -9,6 +9,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import { ProductCardType } from '@/types/product';
 import toast from 'react-hot-toast';
+import { DEMO_SENTENCE_PREFIX, isDemoMode } from '@/config/site';
 
 interface WishlistState {
   items: ProductCardType[];
@@ -77,8 +78,8 @@ export const useWishlistStore = create<WishlistState>()(
             return;
           }
 
-          // If user is authenticated, add to DB, else add to localStorage
-          if (isAuthenticated) {
+          // If user is authenticated and demo mode is false, add to DB, else add to localStorage
+          if (isAuthenticated && !isDemoMode) {
             const response = await fetch('/api/user/wishlist', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -91,9 +92,19 @@ export const useWishlistStore = create<WishlistState>()(
 
             set({ items: data.items });
           } else {
+            // DEMO MODE NOTIFICATION
+            if (isAuthenticated && isDemoMode) {
+              console.log(
+                `%c${DEMO_SENTENCE_PREFIX} Using local storage for authenticated user.\nAdd product to Wishlist.`,
+                'color: #7c3aed'
+              );
+            }
+
             set((state) => ({ items: [...state.items, product] }));
           }
-          toast.success(`${product.name} added to Wishlist`);
+          toast.success(
+            `${DEMO_SENTENCE_PREFIX} ${product.name} added to Wishlist`
+          );
         } catch (error) {
           console.error('Failed to add to Wishlist:', error);
           toast.error('Failed to add to Wishlist, Please try again.');
@@ -118,9 +129,9 @@ export const useWishlistStore = create<WishlistState>()(
           isToggling: new Set(state.isToggling).add(productId),
         }));
 
-        // If user is authenticated, remove from DB, else from localStorage
+        // If user is authenticated and demo mode is false, remove from DB, else from localStorage
         try {
-          if (isAuthenticated) {
+          if (isAuthenticated && !isDemoMode) {
             const response = await fetch(`/api/user/wishlist/${productId}`, {
               method: 'DELETE',
             });
@@ -128,11 +139,21 @@ export const useWishlistStore = create<WishlistState>()(
             const data = await response.json();
             set({ items: data.items });
           } else {
+            // DEMO MODE NOTIFICATION
+            if (isAuthenticated && isDemoMode) {
+              console.log(
+                `%c${DEMO_SENTENCE_PREFIX} Using local storage for authenticated user.\nRemove product from Wishlist.`,
+                'color: #7c3aed'
+              );
+            }
+
             set((state) => ({
               items: state.items.filter((item) => item.id !== productId),
             }));
           }
-          toast.error('Item removed from your Wishlist.');
+          toast.error(
+            `${DEMO_SENTENCE_PREFIX} Item removed from your Wishlist.`
+          );
         } catch (error) {
           console.error('Failed to remove from Wishlist:', error);
           toast.error('Failed to remove from Wishlist. Please try again.');
@@ -151,9 +172,9 @@ export const useWishlistStore = create<WishlistState>()(
         return get().items.some((item) => item.id === productId);
       },
 
-      // LOUD RESET: If user is authenticated, clear DB, else clear localStorage
+      // LOUD RESET: If user is authenticated and demo mode is false, clear DB, else clear localStorage
       clearWishlist: async (isAuthenticated: boolean) => {
-        if (isAuthenticated) {
+        if (isAuthenticated && !isDemoMode) {
           try {
             const response = await fetch('/api/user/wishlist/clear', {
               method: 'DELETE',
@@ -168,6 +189,14 @@ export const useWishlistStore = create<WishlistState>()(
             toast.error('Failed to clear Wishlist. Please try again.');
           }
         } else {
+          // DEMO MODE NOTIFICATION
+          if (isAuthenticated && isDemoMode) {
+            console.log(
+              `%c${DEMO_SENTENCE_PREFIX} Using local storage for authenticated user.\nRemove all Products from Wishlist.`,
+              'color: #7c3aed'
+            );
+          }
+
           set({ items: [] });
           toast.error('Removed all products from wishlist.');
         }

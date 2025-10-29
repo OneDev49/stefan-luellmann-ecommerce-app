@@ -10,11 +10,21 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { mapToProductCard } from '@/lib/mappers/product';
+import { isDemoMode } from '@/config/site';
 
 const MAX_QUANTITY = 100;
 
 // GET - Fetch users cart WITH full product data
 export async function GET(req: Request) {
+  // DEMO MODE - Disable API endpoint
+  if (isDemoMode) {
+    return NextResponse.json(
+      { message: 'Cart API is disabled in demo mode.' },
+      { status: 403 }
+    );
+  }
+
+  // REAL MODE
   try {
     const session = await getServerSession(authOptions);
 
@@ -53,6 +63,15 @@ const addToCartSchema = z.object({
 });
 
 export async function POST(req: Request) {
+  // DEMO MODE - Disable API endpoint
+  if (isDemoMode) {
+    return NextResponse.json(
+      { message: 'Cart API is disabled in demo mode.' },
+      { status: 403 }
+    );
+  }
+
+  // REAL MODE
   try {
     const session = await getServerSession(authOptions);
 
@@ -146,6 +165,15 @@ const updateQuantitySchema = z.object({
 });
 
 export async function PATCH(req: Request) {
+  // DEMO MODE - Disable API endpoint
+  if (isDemoMode) {
+    return NextResponse.json(
+      { message: 'Cart API is disabled in demo mode.' },
+      { status: 403 }
+    );
+  }
+
+  // REAL MODE
   try {
     const session = await getServerSession(authOptions);
 

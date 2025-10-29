@@ -13,6 +13,7 @@ import { useEffect, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 import { useCartStore } from '@/store/cartStore';
 import { useWishlistStore } from '@/store/wishlistStore';
+import { DEMO_SENTENCE_PREFIX, isDemoMode } from '@/config/site';
 
 export function CartWishlistSyncProvider({
   children,
@@ -26,6 +27,15 @@ export function CartWishlistSyncProvider({
   const isWishlistHydrated = useWishlistStore((state) => state.isHydrated);
 
   useEffect(() => {
+    // DEMO MODE
+    if (isDemoMode) {
+      console.log(
+        `%c${DEMO_SENTENCE_PREFIX} Skipping CartWishlistSyncProvider.`,
+        'color: #7c3aed'
+      );
+      return;
+    }
+
     if (status === 'authenticated') {
       if (isCartHydrated && isWishlistHydrated) {
         if (!hasSyncedThisSession.current) {

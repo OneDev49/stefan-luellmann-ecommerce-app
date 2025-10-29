@@ -1,5 +1,6 @@
 'use client';
 
+import { DEMO_SENTENCE_PREFIX, isDemoMode } from '@/config/site';
 import { useCartStore } from '@/store/cartStore';
 import { useWishlistStore } from '@/store/wishlistStore';
 import { signOut } from 'next-auth/react';
@@ -16,6 +17,12 @@ export const LogoutButton = ({ className, children }: LogoutButtonProps) => {
   const resetWishlist = useWishlistStore.getState()._reset;
 
   const handleLogout = async () => {
+    // DEMO MODE
+    if (isDemoMode) {
+      toast.success(`${DEMO_SENTENCE_PREFIX} You've been logged out.`);
+      await signOut({ callbackUrl: '/' });
+    }
+
     resetCart();
     resetWishlist();
 

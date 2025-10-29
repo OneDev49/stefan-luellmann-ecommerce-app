@@ -1,6 +1,6 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { selectTotalItems, useCartStore } from '@/store/cartStore';
 import {
@@ -9,7 +9,8 @@ import {
 } from '@/store/wishlistStore';
 import { createTabItems } from './config/tabConfig';
 import { sidebarItems } from './config/sidebarConfig';
-import { DashboardPageData } from '../page';
+import { DEMO_SENTENCE_PREFIX, isDemoMode } from '@/config/site';
+import { useDashboardData } from '@/hooks/useDashboardData';
 
 import DashboardSidebar from './layout/DashboardSidebar';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
@@ -17,10 +18,6 @@ import NotFound from '@/components/ui/NotFound';
 import MenuIcon from '@/components/icons/ui/MenuIcon';
 import clsx from 'clsx';
 import ChevronLeftIcon from '@/components/icons/ui/ChevronLeftIcon';
-
-interface DashboardClientProps {
-  pageData: DashboardPageData;
-}
 
 export type TabId =
   | 'home'
@@ -32,27 +29,59 @@ export type TabId =
 
 const SIDEBAR_STATE_KEY = 'dashboard-sidebar-collapsed';
 
-export default function DashboardClient({ pageData }: DashboardClientProps) {
-  /* SearchParams */
+export default function DashboardClient() {
+  const pathname = usePathname();
   const searchParams = useSearchParams();
-  const rawTab = searchParams.get('tab');
-  const validTabs: TabId[] = [
-    'home',
-    'history',
-    'information',
-    'wishlist',
-    'cart',
-    'payment',
-  ];
-  const activeTab: TabId = validTabs.includes(rawTab as TabId)
-    ? (rawTab as TabId)
-    : 'home';
+  const { isLoading, pageData } = useDashboardData();
+
+  const [activeTab, setActiveTab] = useState<TabId>(() => {
+    const initialTab = searchParams.get('tab') as TabId;
+    const validTabs: TabId[] = [
+      'home',
+      'history',
+      'information',
+      'wishlist',
+      'cart',
+      'payment',
+    ];
+    return validTabs.includes(initialTab) ? initialTab : 'home';
+  });
+
+  useEffect(() => {
+    const newCurrentTab = (searchParams.get('tab') as TabId) || 'home';
+    setActiveTab(newCurrentTab);
+  }, [searchParams]);
+
+  const handleTabChange = (tabId: TabId) => {
+    if (!isDemoMode) return;
+    if (tabId === activeTab) return;
+
+    console.log(
+      `%c${DEMO_SENTENCE_PREFIX} Switching User Dashboard Tab.`,
+      'color: #7c3aed'
+    );
+    setActiveTab(tabId);
+    const newUrl = `${pathname}?tab=${tabId}`;
+    window.history.pushState({}, '', newUrl);
+  };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const newSearchParams = new URLSearchParams(window.location.search);
+      const newUrlTab = (newSearchParams.get('tab') as TabId) || 'home';
+      setActiveTab(newUrlTab);
+    };
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   // Cart/Wishlist Stores
   const totalCartAmount = useCartStore(selectTotalItems);
   const totalWishlistAmount = useWishlistStore(selectWishlistTotalItems);
 
-  /* Sidebar Management */
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(false);
   useLayoutEffect(() => {
     const savedState =
@@ -69,6 +98,8 @@ export default function DashboardClient({ pageData }: DashboardClientProps) {
   };
 
   const tabItems = useMemo(() => {
+    if (!pageData) return [];
+
     const cartSentence =
       totalCartAmount === 1
         ? `${totalCartAmount} Product`
@@ -79,17 +110,25 @@ export default function DashboardClient({ pageData }: DashboardClientProps) {
         ? `${totalWishlistAmount} Product`
         : `${totalWishlistAmount} Products`;
 
-    return createTabItems(cartSentence, wishlistSentence, pageData);
+    return createTabItems(
+      cartSentence,
+      wishlistSentence,
+      pageData,
+      handleTabChange
+    );
   }, [totalCartAmount, totalWishlistAmount, pageData]);
-
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] =
+    useState<boolean>(false);
   const currentTab = tabItems.find((item) => item.id === activeTab);
-
-  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   const contentClassName = clsx(
     'flex-1 transition-all duration-300',
     isSidebarCollapsed ? 'lg:ml-[79px]' : 'lg:ml-[288px]'
   );
+
+  if (isLoading || !pageData) {
+    return <div>Loading your Dashboard...</div>;
+  }
 
   return (
     <div className='flex flex-1'>
@@ -100,6 +139,7 @@ export default function DashboardClient({ pageData }: DashboardClientProps) {
           menuItems={sidebarItems}
           isCollapsed={isSidebarCollapsed}
           toggleSidebar={handleToggleSidebar}
+          onTabChange={handleTabChange}
         />
       </div>
 
@@ -122,6 +162,7 @@ export default function DashboardClient({ pageData }: DashboardClientProps) {
             menuItems={sidebarItems}
             isCollapsed={true}
             toggleSidebar={() => setIsMobileSidebarOpen(false)}
+            onTabChange={handleTabChange}
           />
           <button
             title={isMobileSidebarOpen ? 'Collapse Sidebar' : 'Expand Sidebar'}
