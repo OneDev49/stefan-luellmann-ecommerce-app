@@ -5,6 +5,7 @@ import { useWishlistStore } from '@/store/wishlistStore';
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { isDemoMode } from '@/config/site';
 
 import Link from 'next/link';
 import clsx from 'clsx';
@@ -148,11 +149,42 @@ export default function RegisterForm() {
 
   /* CSS ClassNames */
   const transparentCardClassName = clsx(
-    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl max-w-7xl m-auto flex flex-col justify-between overflow-hidden'
+    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl max-w-md m-auto flex flex-col justify-between overflow-hidden'
   );
   const linkHoverClassName = clsx(
     'underline hover:text-[#00ff1e] transition-all'
   );
+
+  if (isDemoMode) {
+    return (
+      <section className={transparentCardClassName}>
+        <div>
+          <h1 className='p-8 bg-[rgb(87,87,87,0.2)] shadow-[0_4px_15px_0_rgb(0,0,0,1)] text-3xl font-bold'>
+            Registration Disabled
+          </h1>
+        </div>
+        <div className='p-8 space-y-4 text-center'>
+          <p className='text-lg text-red-500 underline'>
+            User Registration is disabled for this public demo.
+          </p>
+          <p>
+            Please use the provided demo account to explore the application's
+            features.
+          </p>
+          <div className='pt-4'>
+            <Button
+              href={'/login'}
+              variant='primary'
+              className='justify-center font-bold'
+            >
+              Go to Login Page
+              <ArrowRightIcon />
+            </Button>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className={transparentCardClassName}>
