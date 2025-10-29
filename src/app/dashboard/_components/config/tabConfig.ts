@@ -1,4 +1,5 @@
 import { TabId } from '../DashboardClient';
+import { DashboardPageData } from '@/hooks/useDashboardData';
 
 import DashboardAccountHome from '../tabs/AccountHomeTab';
 import DashboardOrderHistory from '../tabs/OrderHistoryTab';
@@ -6,7 +7,6 @@ import DashboardAccountInformation from '../tabs/AccountInformationTab';
 import DashboardWishlist from '../tabs/WishlistTab';
 import DashboardCart from '../tabs/CartTab';
 import DashboardPayment from '../tabs/PaymentTab';
-import { DashboardPageData } from '../../page';
 
 // Mock Interface for TabOrder
 export interface TabOrder {
@@ -42,7 +42,8 @@ const baseCrumbs = [
 export function createTabItems(
   cartSentence: string,
   wishlistSentence: string,
-  dashboardPageData: DashboardPageData
+  dashboardPageData: DashboardPageData,
+  onTabChange: (tabId: TabId) => void
 ): TabItem<any>[] {
   return [
     {
@@ -52,7 +53,7 @@ export function createTabItems(
         : `Welcome!`,
       text: 'This is your Entro Account Dashboard. You can manage your Account from here.',
       Component: DashboardAccountHome,
-      props: { user: dashboardPageData.user },
+      props: { user: dashboardPageData.user, onTabChange },
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Account',

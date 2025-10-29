@@ -11,6 +11,8 @@ import ChevronRightIcon from '@/components/icons/ui/ChevronRightIcon';
 import LogoutIcon from '@/components/icons/ui/LogoutIcon';
 import UserIcon from '@/components/icons/ecommerce/UserIcon';
 import toast from 'react-hot-toast';
+import { TabId } from '../DashboardClient';
+import { isDemoMode } from '@/config/site';
 
 type IconComponent = React.FC<React.SVGProps<SVGSVGElement>>;
 
@@ -34,6 +36,7 @@ interface DashboardSidebarProps {
   menuItems: MenuItem[];
   isCollapsed: boolean;
   toggleSidebar: () => void;
+  onTabChange: (tabId: TabId) => void;
 }
 
 export default function DashboardSidebar({
@@ -43,6 +46,7 @@ export default function DashboardSidebar({
   menuItems,
   isCollapsed,
   toggleSidebar,
+  onTabChange,
 }: DashboardSidebarProps) {
   const resetCart = useCartStore.getState()._reset;
   const resetWishlist = useWishlistStore.getState()._reset;
@@ -61,31 +65,40 @@ export default function DashboardSidebar({
     isCollapsed ? 'min-w-20 w-20' : 'min-w-72 w-72'
   );
 
+  const userProfileIconClassName = clsx(
+    'rounded-full bg-gray-700 grid place-items-center',
+    isCollapsed ? 'h-12 w-12' : 'h-16 w-16'
+  );
+
   const userIconDimensions = isCollapsed ? 20 : 30;
 
   return (
     <div className={mainContainerClassName}>
       <div className='h-full flex flex-col'>
         <div className='flex items-center flex-col gap-1 py-4 border-b border-gray-400 mx-4'>
-          <Link
-            href='/dashboard?tab=home'
-            className={clsx(
-              'rounded-full bg-gray-700 grid place-items-center',
-              isCollapsed ? 'h-12 w-12' : 'h-16 w-16'
-            )}
-          >
-            {user.image ? (
+          {isDemoMode ? (
+            <button
+              type='button'
+              onClick={() => onTabChange('home' as TabId)}
+              className={userProfileIconClassName}
+            >
               <UserIcon
                 height={userIconDimensions}
                 width={userIconDimensions}
               />
-            ) : (
+            </button>
+          ) : (
+            <Link
+              href='/dashboard?tab=home'
+              className={userProfileIconClassName}
+            >
               <UserIcon
                 height={userIconDimensions}
                 width={userIconDimensions}
               />
-            )}
-          </Link>
+            </Link>
+          )}
+
           <div
             className={clsx(
               'flex flex-col text-center whitespace-nowrap',
@@ -105,6 +118,23 @@ export default function DashboardSidebar({
           >
             {menuItems.map((item) => {
               const Icon = item.icon;
+
+              const itemContent = (
+                <>
+                  {Icon && (
+                    <Icon height={20} width={20} className='flex-shrink-0' />
+                  )}
+                  <span
+                    className={clsx(
+                      'transition-opacity duration-300 ease-in-out whitespace-nowrap',
+                      isCollapsed ? 'sr-only' : 'opacity-100'
+                    )}
+                  >
+                    {item.label}
+                  </span>
+                </>
+              );
+
               return (
                 <li
                   key={item.id}
@@ -120,24 +150,25 @@ export default function DashboardSidebar({
                     }
                   )}
                 >
-                  <Link
-                    href={`/dashboard?tab=${item.id}`}
-                    className='p-3 w-full text-left flex gap-2 items-center'
-                    scroll={false}
-                    title={`Navigate to ${item.label}`}
-                  >
-                    {Icon && (
-                      <Icon height={20} width={20} className='flex-shrink-0' />
-                    )}
-                    <span
-                      className={clsx(
-                        'transition-opacity duration-300 ease-in-out whitespace-nowrap',
-                        isCollapsed ? 'sr-only' : 'opacity-100'
-                      )}
+                  {isDemoMode ? (
+                    <button
+                      type='button'
+                      onClick={() => onTabChange(item.id as TabId)}
+                      className='p-3 w-full text-left flex gap-2 items-center'
+                      title={`Navigate to ${item.label}`}
                     >
-                      {item.label}
-                    </span>
-                  </Link>
+                      {itemContent}
+                    </button>
+                  ) : (
+                    <Link
+                      href={`/dashboard?tab=${item.id}`}
+                      className='p-3 w-full text-left flex gap-2 items-center'
+                      scroll={false}
+                      title={`Navigate to ${item.label}`}
+                    >
+                      {itemContent}
+                    </Link>
+                  )}
                 </li>
               );
             })}
