@@ -102,13 +102,17 @@ export default function HeaderSearchBar({
       className='relative w-full max-w-3xl border border-[#009605] rounded-lg bg-[#054000]'
     >
       <form onSubmit={handleSubmit} className='relative'>
-        <div className='absolute left-0 top-0 bottom-0 h-full grid place-items-center  border-r border-[#009605]'>
+        <div className='absolute left-0 top-0 bottom-0 h-full grid place-items-center border-r border-[#009605]'>
           <button
             type='submit'
             aria-label='Search'
-            className='bg-black block h-full w-full px-4 hover:bg-[#374151] transition-colors rounded-tl-lg rounded-bl-lg'
+            className='bg-black block h-full w-full px-3 md:px-4 hover:bg-[#374151] transition-colors rounded-tl-lg rounded-bl-lg'
           >
-            <SearchIcon height={24} width={24} />
+            <SearchIcon
+              className='h-5 w-5 md:h-6 md:w-6'
+              height={24}
+              width={24}
+            />
           </button>
         </div>
 
@@ -121,7 +125,7 @@ export default function HeaderSearchBar({
           }}
           onFocus={() => setShowSuggestions(true)}
           placeholder='Search Products, Categories, Brands and more!'
-          className='w-full pl-16 py-2 pr-12 bg-[#054000] rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#00ff11] transition-colors'
+          className='w-full pl-14 sm:pl-16 py-1 md:py-2 pr-4 sm:pr-12 bg-[#054000] rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-[#00ff11] transition-colors'
         />
       </form>
 

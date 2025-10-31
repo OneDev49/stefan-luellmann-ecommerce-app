@@ -9,6 +9,7 @@ import ArrowLeftIcon from '@/components/icons/ui/ArrowLeftIcon';
 import ChevronRightIcon from '@/components/icons/ui/ChevronRightIcon';
 import clsx from 'clsx';
 import Link from 'next/link';
+import CloseIcon from '@/components/icons/ui/CloseIcon';
 
 interface LeftSidenavProps {
   onClose: () => void;
@@ -78,26 +79,33 @@ export default function LeftSidenav({
     >
       <div
         className={clsx(
-          'absolute top-0 left-0 h-full w-full max-w-sm bg-[#002107] border-r border-[#004810] shadow-xl flex flex-col overflow-hidden',
+          'absolute top-0 left-0 h-full w-10/12 max-w-sm bg-[#002107] border-r border-[#004810] shadow-xl flex flex-col overflow-hidden',
           isClosing ? 'animate-slideOutToLeft' : 'animate-slideInFromLeft'
         )}
       >
-        <div className='flex items-center text-xl bg-green-900 p-4 gap-2 font-bold'>
-          <UserIcon />
-          <div className='flex gap-2'>
-            Hello,
-            {status === 'loading' ? (
-              <div className='h-8 w-24 animate-pulse bg-green-700 rounded-md'></div>
-            ) : (
-              <>
-                {session && session.user ? (
-                  <Link href='/dashboard?tab=home'>{session.user.name}</Link>
-                ) : (
-                  <Link href='/login'>Sign In</Link>
-                )}
-              </>
-            )}
+        <div className='flex items-center justify-between text-xl bg-green-900 p-4 gap-2 font-bold'>
+          <div className='flex items-center gap-2'>
+            <UserIcon />
+            <div className='line-clamp-1'>
+              Hello,{' '}
+              {status === 'loading' ? (
+                <div className='h-8 w-24 animate-pulse bg-green-700 rounded-md'></div>
+              ) : (
+                <>
+                  {session && session.user ? (
+                    <Link href='/dashboard?tab=home'>{session.user.name}</Link>
+                  ) : (
+                    <Link href='/login'>Sign In</Link>
+                  )}
+                </>
+              )}
+            </div>
           </div>
+
+          <button onClick={onClose} className='text-gray-400 hover:text-white'>
+            <span className='sr-only'>Close panel</span>
+            <CloseIcon width={30} height={25} />
+          </button>
         </div>
         <div
           className={clsx(
@@ -130,13 +138,13 @@ export default function LeftSidenav({
                 </ul>
               </div>
               <hr className={hrClassName} />
-              {sideMenus.map((sideMenu) => (
-                <>
-                  <div key={sideMenu.heading} className={linkBlockClassName}>
+              {sideMenus.map((sideMenu, index) => (
+                <div key={index}>
+                  <div className={linkBlockClassName}>
                     <h2 className={headingTwoClassName}>{sideMenu.heading}</h2>
                     <ul className='list-none p-0 m-0 space-y-1'>
-                      {sideMenu.categories.map((category) => (
-                        <li key={category.slug} className='group'>
+                      {sideMenu.categories.map((category, index) => (
+                        <li key={index} className='group'>
                           <button
                             type='button'
                             onClick={() => openSubmenu(category)}
@@ -154,7 +162,7 @@ export default function LeftSidenav({
                     </ul>
                   </div>
                   <hr className={hrClassName} />
-                </>
+                </div>
               ))}
               <hr className={hrClassName} />
               <div className={linkBlockClassName}>
@@ -297,8 +305,8 @@ export default function LeftSidenav({
                   </Link>
                 </li>
               )}
-              {activeSubmenu?.items.map((item) => (
-                <li key={item.name} className='group'>
+              {activeSubmenu?.items.map((item, index) => (
+                <li key={index} className='group'>
                   <Link
                     href={item.href}
                     onClick={onClose}

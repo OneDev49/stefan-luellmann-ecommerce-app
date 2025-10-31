@@ -68,7 +68,7 @@ export default function HeaderContent({
     }, 300);
   };
 
-  const linkTransitionClassNames = 'hover:text-[#53ff5f] transition-all';
+  const linkTransitionClassNames = 'hover:text-[#53ff5f] transition-colors';
   const bottomLinksClassNames = 'py-1 px-2 rounded-md transition-colors';
 
   return (
@@ -78,22 +78,23 @@ export default function HeaderContent({
           'border-b border-[#6c6c6c]': headerVariant === 'simple',
         })}
       >
-        <Link href='/' className='flex-[0_1_220px]'>
+        <Link href='/' className='flex-[0_1_200px]'>
           <Image
+            unoptimized
             src='/images/entro_logo.webp'
             alt='Entro Logo'
             width={125}
             height={50}
           />
         </Link>
-        <div className='flex-1 flex justify-center'>
+        <div className='md:flex flex-1 hidden justify-center'>
           <HeaderSearchBar
             categories={categories}
             popularBrands={popularBrands}
           />
         </div>
 
-        <div className='flex flex-[0_1_220px] gap-4'>
+        <div className='flex flex-[0_1_200px] gap-4'>
           <div
             className='relative cursor-pointer'
             onClick={() => handleOpenSidenav('right-cart')}
@@ -137,15 +138,15 @@ export default function HeaderContent({
                       className={linkTransitionClassNames}
                     />
                   </Link>
-                  <div className='flex flex-col items-start text-sm'>
+                  <div className='flex flex-col items-start text-xs sm:text-sm'>
                     <Link
-                      className={`${linkTransitionClassNames} underline`}
+                      className={`${linkTransitionClassNames} underline text-[#00ff00]`}
                       href='/dashboard'
                     >
-                      Your Account
+                      Account
                     </Link>
                     <LogoutButton
-                      className={`${linkTransitionClassNames} underline`}
+                      className={`${linkTransitionClassNames} underline text-[#00ff00]`}
                     >
                       Logout
                     </LogoutButton>
@@ -160,11 +161,17 @@ export default function HeaderContent({
                       className={linkTransitionClassNames}
                     />
                   </Link>
-                  <div className='underline flex flex-col text-sm'>
-                    <Link className={linkTransitionClassNames} href='/login'>
-                      Login
+                  <div className='underline flex flex-col text-xs sm:text-sm'>
+                    <Link
+                      className={`${linkTransitionClassNames} text-[#00ff00]`}
+                      href='/login'
+                    >
+                      Sign In
                     </Link>
-                    <Link className={linkTransitionClassNames} href='/register'>
+                    <Link
+                      className={`${linkTransitionClassNames} text-[#00ff00]`}
+                      href='/register'
+                    >
                       Register
                     </Link>
                   </div>
@@ -174,42 +181,53 @@ export default function HeaderContent({
           )}
         </div>
       </div>
+
       {headerVariant === 'full' && (
-        <div className='border-gray-400 border-t border-b flex items-center whitespace-nowrap'>
-          <div
-            className='border-r border-r-gray-400 py-1 px-2'
-            onClick={() => handleOpenSidenav('left')}
-          >
-            <MenuIcon
-              height='100%'
-              width={35}
-              className={`mx-1 cursor-pointer hover:bg-gray-700 ${bottomLinksClassNames}`}
-            />
-          </div>
-          <nav
-            className='overflow-hidden w-full select-none mx-2'
-            ref={emblaRef}
-          >
-            <div className='flex gap-2'>
-              {quickNavCategories.map((category) => (
-                <Link
-                  className={clsx(
-                    `block whitespace-nowrap ${bottomLinksClassNames}`,
-                    {
-                      'bg-[#1f7414] text-white':
-                        activeCategory === category.slug,
-                      'hover:bg-gray-700': activeCategory !== category.slug,
-                    }
-                  )}
-                  href={`/search?category=${category.slug}`}
-                  key={category.slug}
-                >
-                  {category.name}
-                </Link>
-              ))}
+        <>
+          <div className='block md:hidden px-4 py-2'>
+            <div className='md:hidden flex-1 flex justify-center'>
+              <HeaderSearchBar
+                categories={categories}
+                popularBrands={popularBrands}
+              />
             </div>
-          </nav>
-        </div>
+          </div>
+          <div className='border-gray-400 border-t border-b flex items-center whitespace-nowrap'>
+            <div
+              className='border-r border-r-gray-400 py-0.5 mdpy-1 px-2'
+              onClick={() => handleOpenSidenav('left')}
+            >
+              <MenuIcon
+                height='100%'
+                width={35}
+                className={`mx-1 cursor-pointer hover:bg-gray-700 ${bottomLinksClassNames}`}
+              />
+            </div>
+            <nav
+              className='overflow-hidden w-full select-none mx-2'
+              ref={emblaRef}
+            >
+              <div className='flex gap-2'>
+                {quickNavCategories.map((category) => (
+                  <Link
+                    className={clsx(
+                      `block whitespace-nowrap ${bottomLinksClassNames}`,
+                      {
+                        'bg-[#1f7414] text-white':
+                          activeCategory === category.slug,
+                        'hover:bg-gray-700': activeCategory !== category.slug,
+                      }
+                    )}
+                    href={`/search?category=${category.slug}`}
+                    key={category.slug}
+                  >
+                    {category.name}
+                  </Link>
+                ))}
+              </div>
+            </nav>
+          </div>
+        </>
       )}
 
       {openSidenav === 'right-cart' && (
