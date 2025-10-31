@@ -39,29 +39,21 @@ export default function CustomerReviewSection() {
 
   const transparentCardClassName = clsx(
     {
-      ['pl-8 py-8']: selectedReviews.length > 4,
-      ['p-8']: selectedReviews.length <= 4,
+      ['pl-4 py-4 sm:pl-8 sm:py-8']: selectedReviews.length > 4,
+      ['p-4 sm:p-8']: selectedReviews.length <= 4,
     },
-    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl flex-1'
-  );
-
-  const listClassNames = clsx(
-    {
-      ['pr-8 overflow-y-scroll scrollbar scrollbar-track-transparent scrollbar-thumb-green-500']:
-        selectedReviews.length > 4,
-    },
-    'list-none p-0 m-0 flex flex-col gap-8 max-h-[600px]'
+    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-xl flex-1'
   );
 
   return (
-    <section className={`${transparentCardClassName} `}>
+    <section className={`${transparentCardClassName}`}>
       <h2 className='text-4xl font-bold mb-4'>Customer Reviews</h2>
-      <ul className={listClassNames}>
+      <ul className='list-none p-0 m-0 flex flex-col gap-8 max-h-[600px] pr-8 overflow-y-auto scrollbar scrollbar-track-transparent scrollbar-thumb-green-500'>
         {selectedReviews.map((review, index) => (
           <li key={index} className='border-b border-gray-700 pb-4'>
-            <div className='flex items-center mb-2'>
+            <div className='flex flex-col sm:flex-row items-start sm:items-center mb-2 space-y-2 sm:space-y-0'>
               <Rating rating={review.rating} size='small' />
-              <p className='ml-4 font-bold text-lg'>{review.title}</p>
+              <p className='sm:ml-4 font-bold text-lg'>{review.title}</p>
             </div>
             <p className='text-gray-300 mb-2'>{review.review}</p>
             <p className='text-sm text-gray-500'>

@@ -25,7 +25,7 @@ export default function RightSidenav({
   );
 
   const tabClassName =
-    'flex gap-2 bg-[#075d0c] py-1 px-3 rounded-3xl transition-colors border border-[#0ca816] hover:bg-[#1f702a]';
+    'flex items-center gap-2 bg-[#075d0c] py-1 px-2 md:px-3 rounded-xl transition-colors border border-[#0ca816] hover:bg-[#1f702a]';
   const tabAnnouncerClassName =
     'p-2 bg-[#2d2d2d] border border-gray-500 shadow-[0_4px_15px_0_rgb(140,140,140,0.25)] rounded-md text-center';
 
@@ -44,7 +44,7 @@ export default function RightSidenav({
       >
         <div className='p-4 bg-[rgb(87,87,87,0.2)] shadow-[0_4px_15px_0_rgb(0,0,0,1)] space-y-5 border-b border-green-500'>
           <div className='flex items-center justify-between'>
-            <h2 className='font-bold text-xl'>
+            <h2 className='font-bold text-lg md:text-xl'>
               Your Shopping Cart and Wishlist
             </h2>
             <button
@@ -65,7 +65,7 @@ export default function RightSidenav({
                   currentActiveTab === 'cart',
               })}
             >
-              <CartIcon width={20} height='100%' />
+              <CartIcon width={20} height={20} />
               <span>Shopping Cart</span>
             </button>
             <button

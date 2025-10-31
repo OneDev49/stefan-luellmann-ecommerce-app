@@ -38,7 +38,7 @@ export default function PurchaseControls({ product }: PurchaseControlsProps) {
 
   return (
     <div className='flex flex-col gap-4 items-start'>
-      <div className='flex flex-col sm:flex-row gap-4'>
+      <div className='flex gap-4'>
         <QuantitySelector
           maxQuantity={DEFAULT_MAX_QUANTITY}
           onQuantityChange={(newQuantity) => setQuantity(newQuantity)}

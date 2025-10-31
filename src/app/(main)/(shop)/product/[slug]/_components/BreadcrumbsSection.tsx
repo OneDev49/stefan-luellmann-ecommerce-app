@@ -21,7 +21,7 @@ export default function BreadcrumbsSection({
   const textClassName = 'hover:text-white';
 
   return (
-    <div className='px-4'>
+    <div>
       <div className='flex justify-start max-w-2xl lg:max-w-7xl m-auto'>
         <section className='bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-lg px-4 py-2 text-sm text-gray-300'>
           <Link href='/' className={textClassName}>

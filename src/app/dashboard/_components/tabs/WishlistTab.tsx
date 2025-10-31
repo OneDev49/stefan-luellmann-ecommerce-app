@@ -29,7 +29,7 @@ export default function DashboardWishlist() {
   };
 
   return (
-    <div className='py-12 max-w-5xl space-y-6'>
+    <div className='pt-12 pb-32 max-w-5xl space-y-6'>
       {items.length > 0 ? (
         <>
           <div>
@@ -44,7 +44,7 @@ export default function DashboardWishlist() {
                 return (
                   <li
                     key={index}
-                    className='grid grid-cols-[1fr_16fr_4fr_2fr] gap-4 px-4 py-4 items-center hover:bg-green-950 transition-colors rounded-md select-none'
+                    className='grid grid-cols-[1fr_16fr_4fr_2fr] gap-4 px-2 sm:px-4 py-4 items-center hover:bg-green-950 transition-colors border-b border-green-900 last:border-0 select-none '
                   >
                     <div>
                       <Button
@@ -53,6 +53,7 @@ export default function DashboardWishlist() {
                         onClick={(e) => handleRemoveFromWishlist(e, item.id)}
                         className='bg-red-500 rounded-sm'
                         title={`Remove ${item.name} from your Cart`}
+                        aria-label={`Remove ${item.name} from your Cart`}
                         variant='danger'
                         position='standalone'
                       >
@@ -62,15 +63,16 @@ export default function DashboardWishlist() {
 
                     <Link
                       href={`/product/${item.slug}`}
-                      className='flex gap-4 group'
+                      className='flex flex-col sm:flex-row gap-4 group'
                     >
                       <div className='max-w-28 h-full rounded-xl overflow-hidden relative'>
                         {item.isOnSale && (
-                          <div className='absolute select-none bg-red-700 h-6 grid place-items-center w-40 top-[20px] right-[-40px] rotate-45 z-10 will-change-transform text-sm'>
+                          <div className='absolute select-none bg-red-700 h-4 md:h-6 grid place-items-center w-32 md:w-40 top-3 md:top-5 -right-10 rotate-45 z-10 will-change-transform text-xs md:text-sm'>
                             On Sale
                           </div>
                         )}
                         <Image
+                          unoptimized
                           className='object-contain w-full group-hover:scale-105 transition-all'
                           src={`${process.env.NEXT_PUBLIC_UPLOADTHING_URL}/${item.imageUrl}`}
                           height={115}
@@ -80,7 +82,7 @@ export default function DashboardWishlist() {
                           loading='eager'
                         />
                       </div>
-                      <div className='flex flex-col justify-center gap-2'>
+                      <div className='flex flex-col justify-center gap-0 sm:gap-2'>
                         <h3 className='flex items-center gap-3'>
                           <span className='text-lg font-bold line-clamp-1 group-hover:underline'>
                             {item.name}
@@ -140,33 +142,44 @@ export default function DashboardWishlist() {
       ) : (
         <div>Your Wishlist is empty</div>
       )}
-      <div className='flex justify-between items-start'>
-        <Button variant='secondary' href='/search'>
-          <ChevronLeftIcon height={20} />
-          {totalWishlistAmount > 0 ? 'Continue Shopping' : 'Browse our Store'}
-        </Button>
+      <div className='flex flex-col space-y-8'>
         {items.length > 0 && (
-          <div className='space-y-6'>
-            <p className='space-x-20'>
-              <span>Subtotal:</span>
-              <strong>{totalWishlistValue.toFixed(2)}€</strong>
-            </p>
-            <Button
-              as='button'
-              type='button'
-              variant='primary'
-              className='w-full justify-center'
-              onClick={() => {
-                items.forEach((item) => {
-                  addToCart(item, 1);
-                  removeFromWishlist(item.id);
-                });
-              }}
-            >
-              Add all to Cart
-            </Button>
+          <div className='space-y-6 flex justify-end items-end'>
+            <div className='space-y-6'>
+              <p className='space-x-5 sm:space-x-20'>
+                <span>Subtotal:</span>
+                <strong>{totalWishlistValue.toFixed(2)}€</strong>
+              </p>
+              <Button
+                as='button'
+                type='button'
+                variant='primary'
+                position='standalone'
+                className='w-full justify-center px-4 py-2 rounded-md'
+                onClick={() => {
+                  items.forEach((item) => {
+                    addToCart(item, 1);
+                    removeFromWishlist(item.id);
+                  });
+                }}
+              >
+                <CartIcon />
+                Add all to Cart
+              </Button>
+            </div>
           </div>
         )}
+        <div className='flex'>
+          <Button
+            variant='secondary'
+            href='/search'
+            position='standalone'
+            className='py-2 px-4 rounded-md'
+          >
+            <ChevronLeftIcon height={20} />
+            {totalWishlistAmount > 0 ? 'Continue Shopping' : 'Browse our Store'}
+          </Button>
+        </div>
       </div>
     </div>
   );

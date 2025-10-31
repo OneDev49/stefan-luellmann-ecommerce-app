@@ -8,10 +8,10 @@ export default function DescriptionSection({
   product,
 }: DescriptionSectionProps) {
   const transparentCardClassName =
-    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl max-w-2xl lg:max-w-7xl m-auto';
-  const headingClassNames = 'text-3xl font-bold p-8';
+    'bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-xl max-w-2xl lg:max-w-7xl m-auto';
+  const headingClassNames = 'text-3xl font-bold p-4 sm:p-8';
   const headingMobileClassNames =
-    'bg-[rgb(87,87,87,0.2)] shadow-[0_4px_15px_0_rgb(0,0,0,1)] border-t border-[#6c6c6c]';
+    'bg-[rgb(87,87,87,0.2)] shadow-[0_4px_15px_0_rgb(0,0,0,1)]';
 
   return (
     <>
@@ -41,7 +41,9 @@ export default function DescriptionSection({
           </table>
         </div>
         <div className='flex-1 relative overflow-hidden'>
-          <h2 className={`${headingClassNames} ${headingMobileClassNames}`}>
+          <h2
+            className={`${headingClassNames} ${headingMobileClassNames} border-t border-[#6c6c6c]`}
+          >
             Product Description
           </h2>
           <div className='p-8 leading-7'>{product.longDescription}</div>

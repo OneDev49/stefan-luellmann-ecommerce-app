@@ -15,6 +15,8 @@ import Button from '@/components/ui/Button';
 import toast from 'react-hot-toast';
 import PaymentMethodCard from '../PaymentMethodCard';
 import useSWR from 'swr';
+import FloppyDiskIcon from '@/components/icons/ecommerce/FloppyDiskIcon';
+import LogoutIcon from '@/components/icons/ui/LogoutIcon';
 
 interface DashboardPaymentProps {
   user: DashboardUser;
@@ -199,11 +201,13 @@ export default function DashboardPayment({
   if (error || !paymentMethods)
     return <div>Failed to load payment methods.</div>;
 
-  const inputClassNames =
+  const inputClassName =
     'peer block w-full rounded-lg border border-[#606060] bg-[#001b03] p-2 text-white shadow-sm focus-visible:outline-[#00b700] focus-visible:outline-1 focus-visible:outline';
 
+  const labelClassName = 'font-bold';
+
   return (
-    <div className='py-12 max-w-4xl space-y-12'>
+    <div className='pt-12 pb-32 max-w-4xl space-y-12'>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
         {paymentMethods.map((method) => (
           <PaymentMethodCard
@@ -229,15 +233,15 @@ export default function DashboardPayment({
       {isAddingNew && (
         <form onSubmit={handleSubmit(handleAddMethod)} className='space-y-8'>
           <h2 className='text-2xl font-bold'>Add new Payment Method</h2>
-          <div className='grid grid-cols-2 gap-8'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8'>
             <div>
-              <label htmlFor='cardHolderName' className='text-lg font-bold'>
+              <label htmlFor='cardHolderName' className={labelClassName}>
                 Card Holder Name
               </label>
               <input
                 id='cardHolderName'
                 type='text'
-                className={inputClassNames}
+                className={inputClassName}
                 {...register('cardHolderName')}
               />
               {errors.cardHolderName && (
@@ -245,14 +249,14 @@ export default function DashboardPayment({
               )}
             </div>
             <div>
-              <label htmlFor='expiryDate' className='text-lg font-bold'>
+              <label htmlFor='expiryDate' className={labelClassName}>
                 Expiry Date
               </label>
               <input
                 id='expiryDate'
                 type='text'
                 placeholder='MM/YY'
-                className={inputClassNames}
+                className={inputClassName}
                 {...register('expiryDate')}
               />
               {errors.expiryDate && (
@@ -260,7 +264,7 @@ export default function DashboardPayment({
               )}
             </div>
             <div>
-              <label htmlFor='last4' className='text-lg font-bold'>
+              <label htmlFor='last4' className={labelClassName}>
                 Last 4 Digits
               </label>
               <input
@@ -269,7 +273,7 @@ export default function DashboardPayment({
                 inputMode='numeric'
                 pattern='\d{4}'
                 maxLength={4}
-                className={inputClassNames}
+                className={inputClassName}
                 {...register('last4')}
               />
               {errors.last4 && (
@@ -277,13 +281,13 @@ export default function DashboardPayment({
               )}
             </div>
             <div>
-              <label htmlFor='provider' className='text-lg font-bold'>
+              <label htmlFor='provider' className={labelClassName}>
                 Payment Provider
               </label>
               <input
                 id='provider'
                 type='text'
-                className={inputClassNames}
+                className={inputClassName}
                 {...register('provider')}
               />
               {errors.provider && (
@@ -291,12 +295,12 @@ export default function DashboardPayment({
               )}
             </div>
             <div>
-              <label htmlFor='type' className='text-lg font-bold'>
+              <label htmlFor='type' className={labelClassName}>
                 Payment Type
               </label>
               <select
                 id='type'
-                className={inputClassNames}
+                className={inputClassName}
                 {...register('type')}
               >
                 <option selected>Select Type...</option>
@@ -308,21 +312,27 @@ export default function DashboardPayment({
               )}
             </div>
           </div>
-          <div className='flex gap-4'>
+          <div className='flex gap-4 justify-between'>
             <Button
               as='button'
               type='submit'
               variant='primary'
+              position='standalone'
+              className='py-2 px-4 rounded-md'
               disabled={isSubmitting}
             >
+              <FloppyDiskIcon />
               {isSubmitting ? 'Saving...' : 'Save Payment Method'}
             </Button>
             <Button
               as='button'
               type='button'
-              variant='secondary'
+              variant='danger'
+              position='standalone'
+              className='py-2 px-4 rounded-md'
               onClick={() => setIsAddingNew(false)}
             >
+              <LogoutIcon />
               Cancel
             </Button>
           </div>

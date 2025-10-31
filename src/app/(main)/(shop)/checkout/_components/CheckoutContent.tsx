@@ -21,7 +21,7 @@ export default function CheckoutContent() {
   });
 
   return (
-    <section className='max-w-7xl min-h-screen mx-auto my-6 flex flex-col-reverse md:flex-row gap-4 lg:gap-12 items-start w-[98%] lg:w-[95%]'>
+    <section className='max-w-7xl mx-auto my-6 flex flex-col-reverse md:flex-row gap-12 items-start w-[98%] lg:w-[95%]'>
       <h1 className='sr-only'>Checkout</h1>
       <div
         className={`${checkoutContentClassName} ${transparentCardClassName}`}

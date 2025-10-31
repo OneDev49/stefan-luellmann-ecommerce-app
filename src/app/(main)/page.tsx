@@ -24,21 +24,23 @@ export default async function Home() {
     <main>
       <HeroSection />
       <BrandCarousel />
-      <ProductCarousel
-        heading='Deals of the Week'
-        productCardVariant='standard'
-        products={onSaleProducts}
-      />
-      <ProductCarousel
-        heading='Best Selling Graphics Cards'
-        productCardVariant='standard'
-        products={featuredGPUs}
-      />
-      <ProductCarousel
-        heading='New Arrivals'
-        productCardVariant='standard'
-        products={newArrivals}
-      />
+      <div className='space-y-16'>
+        <ProductCarousel
+          heading='Deals of the Week'
+          productCardVariant='standard'
+          products={onSaleProducts}
+        />
+        <ProductCarousel
+          heading='Best Selling Graphics Cards'
+          productCardVariant='standard'
+          products={featuredGPUs}
+        />
+        <ProductCarousel
+          heading='New Arrivals'
+          productCardVariant='standard'
+          products={newArrivals}
+        />
+      </div>
     </main>
   );
 }

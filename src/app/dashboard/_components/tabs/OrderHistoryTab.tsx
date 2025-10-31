@@ -35,7 +35,7 @@ export default function DashboardOrderHistory({
     filter === 'all' ? orders : orders.filter((o) => o.status === filter);
 
   return (
-    <div className='py-12'>
+    <div className='pt-12 pb-32'>
       {orders.length > 0 && filteredOrders ? (
         <>
           <div className='mb-4'>
@@ -232,7 +232,12 @@ export default function DashboardOrderHistory({
       ) : (
         <div className='flex flex-col items-start gap-3'>
           <span>Your Order History is currently empty.</span>
-          <Button variant='secondary' href='/search'>
+          <Button
+            variant='secondary'
+            position='standalone'
+            className='px-4 py-2 rounded-md'
+            href='/search'
+          >
             <ChevronLeftIcon height={20} />
             Browse our Store
           </Button>

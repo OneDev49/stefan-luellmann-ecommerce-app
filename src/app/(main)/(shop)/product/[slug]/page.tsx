@@ -87,25 +87,27 @@ export default async function ProductPage({
 
   return (
     <main className='bg-[linear-gradient(180deg,#004505,#000)] pt-4'>
-      <BreadcrumbsSection product={product} />
-      <div className='pt-8 pb-16 flex flex-col gap-16'>
-        <MainSection product={product} />
-        <DescriptionSection product={product} />
-        <div className='flex flex-col max-w-2xl lg:flex-row lg:max-w-7xl w-full m-auto gap-16 lg:gap-6 lg:items-start'>
-          <RatingSummary product={product} />
-          <CustomerReviewSection />
+      <div className='px-4'>
+        <BreadcrumbsSection product={product} />
+        <div className='pt-8 pb-8 md:pb-16 flex flex-col gap-8 md:gap-16'>
+          <MainSection product={product} />
+          <DescriptionSection product={product} />
+          <div className='flex flex-col max-w-2xl lg:flex-row lg:max-w-7xl w-full m-auto gap-8 md:gap-16 lg:gap-6 lg:items-start'>
+            <RatingSummary product={product} />
+            <CustomerReviewSection />
+          </div>
         </div>
+      </div>
+      <div className='pt-8 pb-16 flex flex-col gap-8 md:gap-16'>
         <ProductCarousel
           heading={`More from ${product.brand}`}
           productCardVariant='standard'
           products={brandProducts}
-          position='productpage'
         />
         <ProductCarousel
           heading={`Similar Products`}
           productCardVariant='standard'
           products={similarProducts}
-          position='productpage'
         />
       </div>
     </main>
