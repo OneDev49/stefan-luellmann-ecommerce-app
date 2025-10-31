@@ -3,6 +3,8 @@
 import { useCartStore } from '@/store/cartStore';
 import { useWishlistStore } from '@/store/wishlistStore';
 import { signOut } from 'next-auth/react';
+import { TabId } from '../DashboardClient';
+import { isDemoMode } from '@/config/site';
 
 import ChevronLeftIcon from '@/components/icons/ui/ChevronLeftIcon';
 import clsx from 'clsx';
@@ -11,8 +13,6 @@ import ChevronRightIcon from '@/components/icons/ui/ChevronRightIcon';
 import LogoutIcon from '@/components/icons/ui/LogoutIcon';
 import UserIcon from '@/components/icons/ecommerce/UserIcon';
 import toast from 'react-hot-toast';
-import { TabId } from '../DashboardClient';
-import { isDemoMode } from '@/config/site';
 
 type IconComponent = React.FC<React.SVGProps<SVGSVGElement>>;
 
@@ -62,7 +62,8 @@ export default function DashboardSidebar({
 
   const mainContainerClassName = clsx(
     'border-r border-[#6c6c6c] h-full transition-all duration-300 ease-in-out overflow-hidden flex-shrink-0 bg-[#001b03] overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-green-500',
-    isCollapsed ? 'min-w-20 w-20' : 'min-w-72 w-72'
+    isCollapsed ? 'min-w-20 w-20' : 'min-w-72 w-72',
+    className
   );
 
   const userProfileIconClassName = clsx(
@@ -113,7 +114,7 @@ export default function DashboardSidebar({
           <ul
             className={clsx(
               'list-none py-4 space-y-4 m-0',
-              isCollapsed ? 'px-4' : 'pl-4'
+              isCollapsed ? 'px-2' : 'pl-4'
             )}
           >
             {menuItems.map((item) => {
@@ -154,7 +155,7 @@ export default function DashboardSidebar({
                     <button
                       type='button'
                       onClick={() => onTabChange(item.id as TabId)}
-                      className='p-3 w-full text-left flex gap-2 items-center'
+                      className='p-3 w-full text-left flex gap-2 items-center justify-center lg:justify-start'
                       title={`Navigate to ${item.label}`}
                     >
                       {itemContent}

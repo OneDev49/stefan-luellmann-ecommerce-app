@@ -132,7 +132,7 @@ export default function DashboardClient() {
 
   return (
     <div className='flex flex-1'>
-      <div className='hidden lg:block fixed h-[calc(100vh-53.42px)]'>
+      <div className='hidden lg:block fixed top-0 bottom-0'>
         <DashboardSidebar
           user={pageData.user}
           activeMenuId={activeTab}
@@ -140,6 +140,7 @@ export default function DashboardClient() {
           isCollapsed={isSidebarCollapsed}
           toggleSidebar={handleToggleSidebar}
           onTabChange={handleTabChange}
+          className={`pt-[53.42px]`}
         />
       </div>
 
@@ -152,7 +153,7 @@ export default function DashboardClient() {
         )}
         <div
           className={clsx(
-            'fixed top-0 left-0 h-full z-50 transform transition-all duration-300 flex',
+            'fixed bottom-0 top-0 left-0 z-50 transform transition-all duration-300 flex',
             isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'
           )}
         >
@@ -163,6 +164,7 @@ export default function DashboardClient() {
             isCollapsed={true}
             toggleSidebar={() => setIsMobileSidebarOpen(false)}
             onTabChange={handleTabChange}
+            className={`pt-[53.53px]`}
           />
           <button
             title={isMobileSidebarOpen ? 'Collapse Sidebar' : 'Expand Sidebar'}

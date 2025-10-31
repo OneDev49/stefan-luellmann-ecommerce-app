@@ -53,7 +53,7 @@ export default function DashboardAccountHome({
   onTabChange,
 }: DashboardAccountHomeProps) {
   return (
-    <ul className='list-none px-0 pt-4 pb-16 m-0 md:grid-cols-2 grid max-w-4xl gap-6 md:gap-12'>
+    <ul className='list-none px-0 pt-12 pb-32 m-0 md:grid-cols-2 grid max-w-4xl gap-6 md:gap-12'>
       {listItems.map((item, index) => {
         const tabTitleSentence = `Navigate to Dashboard ${
           item.id.charAt(0).toUpperCase() + item.id.slice(1)
@@ -64,12 +64,14 @@ export default function DashboardAccountHome({
             key={index}
             className='rounded-2xl hover:shadow-[0_4px_15px_3px_rgba(23,113,0,1)] transition-all'
           >
-            <div className='relative bg-[linear-gradient(210deg,#002104_24%,#003606_37%,#002104_61%)] pt-4 px-6 pb-6 border border-[#006103] rounded-2xl flex flex-col gap-4 overflow-hidden items-start'>
+            <div className='relative bg-[linear-gradient(210deg,#002104_24%,#003606_37%,#002104_61%)] pt-4 px-6 pb-6 border border-[#006103] rounded-2xl flex flex-col gap-2 sm:gap-4 overflow-hidden items-start'>
               <div className='-top-2 -right-2 w-16 h-16 absolute rounded-full border-[#006103] border shadow-[0_4px_15px_3px_rgba(23,113,0,1)] grid place-items-center'>
                 {item.image}
               </div>
-              <h2 className='text-3xl font-bold'>{item.heading}</h2>
-              <p>{item.text}</p>
+              <h2 className='text-2xl sm:text-3xl font-bold pr-12'>
+                {item.heading}
+              </h2>
+              <p className='pr-12'>{item.text}</p>
               {isDemoMode ? (
                 <button
                   type='button'
