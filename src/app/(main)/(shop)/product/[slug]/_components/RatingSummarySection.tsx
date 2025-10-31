@@ -1,5 +1,3 @@
-'use client';
-
 import { ProductPageType } from '@/types/product';
 
 import Rating from '@/components/ui/Rating';
@@ -28,7 +26,7 @@ export default function RatingSummary({ product }: RatingSummaryProps) {
   ];
 
   return (
-    <section className='bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl p-8 flex flex-col gap-6'>
+    <section className='bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-xl p-4 sm:p-8 flex flex-col gap-6'>
       <h2 className='text-4xl font-bold'>Product Rating</h2>
       <div className='flex flex-col gap-2'>
         <p className='font-bold text-xl'>

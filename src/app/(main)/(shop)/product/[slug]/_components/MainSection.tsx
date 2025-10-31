@@ -39,11 +39,11 @@ export default function MainSection({ product }: mainSectionProps) {
       ['text-[#ffe100]']: product.stockCount < 100,
       ['text-[#ff0000]']: product.stockCount === 0,
     },
-    'text-2xl'
+    'text-xl'
   );
 
   return (
-    <section className='bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-3xl p-8 max-w-2xl lg:max-w-7xl m-auto items-center lg:items-start flex flex-col lg:flex-row justify-between w-full gap-8'>
+    <section className='bg-[rgb(33,33,33,0.5)] border border-[#6c6c6c] rounded-xl p-4 sm:p-8 max-w-2xl lg:max-w-7xl m-auto items-center lg:items-start flex flex-col lg:flex-row justify-between w-full gap-8'>
       <div className='w-full lg:flex-[50%] flex flex-col gap-5 lg:max-w-[475px]'>
         <div className='lg:max-h-[475px] lg:max-w-[475px] bg-white grid place-items-center rounded-3xl overflow-hidden relative'>
           {product.isOnSale && (
@@ -62,8 +62,10 @@ export default function MainSection({ product }: mainSectionProps) {
           />
         </div>
       </div>
-      <div className='flex-[50%] flex flex-col gap-8 max-w-[650px]'>
-        <h1 className='text-5xl font-bold underline'>{product.name}</h1>
+      <div className='flex-[50%] flex flex-col gap-6 md:gap-8 max-w-[650px]'>
+        <h1 className='text-4xl lg:text-5xl font-bold underline'>
+          {product.name}
+        </h1>
         <div className='flex flex-col gap-4'>
           <div className='flex items-center gap-2'>
             <Rating rating={product.averageRating} size='large' />
@@ -80,12 +82,14 @@ export default function MainSection({ product }: mainSectionProps) {
         {product.isOnSale && product.reducedPrice !== null ? (
           <div className='flex items-center gap-2'>
             <div className='flex flex-col gap-1'>
-              <span className='text-2xl font-headings line-through font-normal'>
+              <span className='text-xl sm:text-2xl font-headings line-through font-normal'>
                 {product.price}€
               </span>
-              <div className='flex items-start gap-4 text-[#ff4545] font-bold font-headings'>
-                <h2 className='text-4xl'>{product.reducedPrice}€*</h2>
-                <span className='text-xl'>
+              <div className='flex items-start gap-2 text-[#ff4545] font-bold font-headings'>
+                <h2 className='text-3xl sm:text-4xl'>
+                  {product.reducedPrice}€*
+                </h2>
+                <span className='text-md sm:text-xl'>
                   (
                   {((product.reducedPrice / product.price - 1) * 100).toFixed(
                     0
@@ -100,7 +104,9 @@ export default function MainSection({ product }: mainSectionProps) {
           </div>
         ) : (
           <div className='flex flex-col gap-2'>
-            <h2 className='text-4xl font-bold'>{product.price}€*</h2>
+            <h2 className='text-3xl sm:text-4xl font-bold'>
+              {product.price}€*
+            </h2>
             <span className='text-sm'>* +19% VAT and Delivery Costs</span>
           </div>
         )}
