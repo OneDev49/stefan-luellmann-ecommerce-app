@@ -6,7 +6,7 @@
 
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/authOptions';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { mapToProductCard } from '@/lib/mappers/product';
@@ -15,7 +15,7 @@ import { isDemoMode } from '@/config/site';
 const MAX_QUANTITY = 100;
 
 // GET - Fetch users cart WITH full product data
-export async function GET(req: Request) {
+export async function GET() {
   // DEMO MODE - Disable API endpoint
   if (isDemoMode) {
     return NextResponse.json(
