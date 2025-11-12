@@ -1,8 +1,9 @@
-import RegisterForm from './_components/RegisterForm';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/authOptions';
 import { Metadata } from 'next';
+
+import RegisterForm from './_components/RegisterForm';
 
 export const metadata: Metadata = {
   title: 'Register',
