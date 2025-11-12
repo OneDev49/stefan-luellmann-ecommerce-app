@@ -17,7 +17,7 @@ interface Review {
 const REVIEW_LOWER_LIMIT = 3;
 
 /* Shuffle the Fake Review Array to make it more realistic */
-const shuffleArray = (array: any[]) => {
+const shuffleArray = (array: Review[]) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
