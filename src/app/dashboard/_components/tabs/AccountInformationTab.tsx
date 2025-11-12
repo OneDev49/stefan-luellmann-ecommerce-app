@@ -19,7 +19,7 @@ import FloppyDiskIcon from '@/components/icons/ecommerce/FloppyDiskIcon';
 import LogoutIcon from '@/components/icons/ui/LogoutIcon';
 import PenIcon from '@/components/icons/ui/PenIcon';
 
-type ProfileData = (UserProfile & { email?: string }) | null;
+export type ProfileData = (UserProfile & { email?: string }) | null;
 
 interface DashboardAccountInformationProps {
   user: DashboardUser;
@@ -28,7 +28,7 @@ interface DashboardAccountInformationProps {
 
 // Fetcher Definitions
 const realFetcher = (url: string) => fetch(url).then((res) => res.json());
-const demoFetcher = ([url, userEmail]: [string, string]) => {
+const demoFetcher = ([userEmail]: [string, string]) => {
   console.log(
     `%c${DEMO_SENTENCE_PREFIX} Fetching profile from localStorage.`,
     'color: #7c3aed'
@@ -239,7 +239,6 @@ export default function DashboardAccountInformation({
           </div>
           <div>
             <Button
-              as='button'
               type='button'
               position='standalone'
               className='px-4 py-2 rounded-md'
@@ -422,7 +421,6 @@ export default function DashboardAccountInformation({
 
           <div className='flex gap-4 justify-between'>
             <Button
-              as='button'
               type='submit'
               variant='secondary'
               position='standalone'
@@ -433,7 +431,6 @@ export default function DashboardAccountInformation({
               {isSubmitting ? 'Saving...' : 'Apply Changes'}
             </Button>
             <Button
-              as='button'
               type='button'
               position='standalone'
               className='px-4 py-2 rounded-md justify-center'

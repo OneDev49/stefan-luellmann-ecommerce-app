@@ -1,7 +1,13 @@
 'use client';
 
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { selectTotalItems, useCartStore } from '@/store/cartStore';
 import {
   selectWishlistTotalItems,
@@ -52,18 +58,21 @@ export default function DashboardClient() {
     setActiveTab(newCurrentTab);
   }, [searchParams]);
 
-  const handleTabChange = (tabId: TabId) => {
-    if (!isDemoMode) return;
-    if (tabId === activeTab) return;
+  const handleTabChange = useCallback(
+    (tabId: TabId) => {
+      if (!isDemoMode) return;
+      if (tabId === activeTab) return;
 
-    console.log(
-      `%c${DEMO_SENTENCE_PREFIX} Switching User Dashboard Tab.`,
-      'color: #7c3aed'
-    );
-    setActiveTab(tabId);
-    const newUrl = `${pathname}?tab=${tabId}`;
-    window.history.pushState({}, '', newUrl);
-  };
+      console.log(
+        `%c${DEMO_SENTENCE_PREFIX} Switching User Dashboard Tab.`,
+        'color: #7c3aed'
+      );
+      setActiveTab(tabId);
+      const newUrl = `${pathname}?tab=${tabId}`;
+      window.history.pushState({}, '', newUrl);
+    },
+    [activeTab, pathname]
+  );
 
   useEffect(() => {
     const handlePopState = () => {
@@ -116,10 +125,35 @@ export default function DashboardClient() {
       pageData,
       handleTabChange
     );
-  }, [totalCartAmount, totalWishlistAmount, pageData]);
+  }, [totalCartAmount, totalWishlistAmount, pageData, handleTabChange]);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] =
     useState<boolean>(false);
   const currentTab = tabItems.find((item) => item.id === activeTab);
+  const renderTabContent = () => {
+    if (!currentTab)
+      return <NotFound message='This dashboard Tab does not exist.' />;
+
+    switch (currentTab.id) {
+      case 'home':
+        return <currentTab.Component {...currentTab.props} />;
+
+      case 'history':
+        return <currentTab.Component {...currentTab.props} />;
+
+      case 'information':
+        return <currentTab.Component {...currentTab.props} />;
+
+      case 'payment':
+        return <currentTab.Component {...currentTab.props} />;
+
+      case 'wishlist':
+      case 'cart':
+        return <currentTab.Component />;
+
+      default:
+        return <NotFound message='This dashboard Tab does not exist.' />;
+    }
+  };
 
   const contentClassName = clsx(
     'flex-1 transition-all duration-300',
@@ -194,7 +228,7 @@ export default function DashboardClient() {
                 <h1 className='text-4xl font-bold'>{currentTab.heading}</h1>
                 <p>{currentTab.text}</p>
               </div>
-              {<currentTab.Component {...(currentTab.props ?? {})} />}
+              {renderTabContent()}
             </>
           ) : (
             <>

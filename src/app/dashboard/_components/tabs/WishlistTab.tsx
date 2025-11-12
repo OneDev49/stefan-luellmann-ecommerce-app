@@ -48,7 +48,6 @@ export default function DashboardWishlist() {
                   >
                     <div>
                       <Button
-                        as='button'
                         type='button'
                         onClick={(e) => handleRemoveFromWishlist(e, item.id)}
                         className='bg-red-500 rounded-sm'
@@ -118,7 +117,6 @@ export default function DashboardWishlist() {
                     </div>
                     <div className='flex justify-center'>
                       <Button
-                        as='button'
                         type='button'
                         onClick={(e) => {
                           e.stopPropagation();
@@ -151,7 +149,6 @@ export default function DashboardWishlist() {
                 <strong>{totalWishlistValue.toFixed(2)}€</strong>
               </p>
               <Button
-                as='button'
                 type='button'
                 variant='primary'
                 position='standalone'
@@ -171,6 +168,7 @@ export default function DashboardWishlist() {
         )}
         <div className='flex'>
           <Button
+            as={Link}
             variant='secondary'
             href='/search'
             position='standalone'

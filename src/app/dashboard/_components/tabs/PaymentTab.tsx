@@ -25,7 +25,7 @@ interface DashboardPaymentProps {
 
 // Fetcher Definitions
 const realFetcher = (url: string) => fetch(url).then((res) => res.json());
-const demoFetcher = (key: string) => {
+const demoFetcher = () => {
   console.log(
     `%c${DEMO_SENTENCE_PREFIX} Fetching profile from localStorage.`,
     'color: #7c3aed'
@@ -117,6 +117,7 @@ export default function DashboardPayment({
       setIsAddingNew(false);
       mutate();
     } catch (error) {
+      console.error('ADD_PAYMENT_METHOD_ERROR:', error);
       toast.error('Could not add payment method.');
     }
   };
@@ -156,6 +157,7 @@ export default function DashboardPayment({
       toast.success('Payment method deleted.');
       mutate();
     } catch (error) {
+      console.error('DELETE_PAYMENT_METHOD_ERROR:', error);
       toast.error('Could not delete payment method.');
     }
   };
@@ -192,6 +194,7 @@ export default function DashboardPayment({
       toast.success('Default payment method updated.');
       mutate();
     } catch (error) {
+      console.error('SET_DEFAULT_PAYMENT_METHOD_ERROR:', error);
       toast.error('Could not set default method.');
     }
   };
@@ -314,7 +317,6 @@ export default function DashboardPayment({
           </div>
           <div className='flex gap-4 justify-between'>
             <Button
-              as='button'
               type='submit'
               variant='primary'
               position='standalone'
@@ -325,7 +327,6 @@ export default function DashboardPayment({
               {isSubmitting ? 'Saving...' : 'Save Payment Method'}
             </Button>
             <Button
-              as='button'
               type='button'
               variant='danger'
               position='standalone'
