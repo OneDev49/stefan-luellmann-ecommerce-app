@@ -139,9 +139,9 @@ export default function RegisterForm() {
         );
         router.push('/login');
       }
-    } catch (err: any) {
+    } catch (error) {
       setError('An unexpected error occurred. Please try again.');
-      console.error('Registration error:', err);
+      console.error('Registration error:', error);
     } finally {
       setIsLoading(false);
     }
@@ -168,11 +168,12 @@ export default function RegisterForm() {
             User Registration is disabled for this public demo.
           </p>
           <p>
-            Please use the provided demo account to explore the application's
-            features.
+            Please use the provided demo account to explore the
+            application&apos;s features.
           </p>
           <div className='pt-4'>
             <Button
+              as={Link}
               href={'/login'}
               variant='primary'
               className='justify-center font-bold'
@@ -252,7 +253,6 @@ export default function RegisterForm() {
         </div>
         <div>
           <Button
-            as='button'
             type='submit'
             variant='primary'
             disabled={isLoading}

@@ -77,7 +77,6 @@ export default function HeaderCart({ onClose, className }: HeaderCartProps) {
                     {session && session.user ? (
                       <Link href='/dashboard?tab=cart' onClick={onClose}>
                         <Button
-                          as='button'
                           type='button'
                           variant='secondary'
                           position='card'
@@ -90,7 +89,6 @@ export default function HeaderCart({ onClose, className }: HeaderCartProps) {
                     ) : (
                       <Link href='/register' onClick={onClose}>
                         <Button
-                          as='button'
                           type='button'
                           variant='secondary'
                           position='card'
@@ -106,6 +104,7 @@ export default function HeaderCart({ onClose, className }: HeaderCartProps) {
               </div>
               <div className='flex justify-between'>
                 <Button
+                  as={Link}
                   href='/checkout'
                   onClick={onClose}
                   variant='primary'
@@ -115,7 +114,6 @@ export default function HeaderCart({ onClose, className }: HeaderCartProps) {
                   To Checkout
                 </Button>
                 <Button
-                  as='button'
                   type='button'
                   onClick={handleClearCart}
                   variant='danger'
@@ -183,7 +181,7 @@ export default function HeaderCart({ onClose, className }: HeaderCartProps) {
                   </div>
                   <div className='min-w-4'>
                     <Button
-                      as='button'
+                      type='button'
                       variant='danger'
                       position='standalone'
                       onClick={(e) => handleRemoveFromCart(e, item.id)}

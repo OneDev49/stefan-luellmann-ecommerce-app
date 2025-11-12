@@ -5,6 +5,7 @@ import { selectCartTotal, useCartStore } from '@/store/cartStore';
 import CartIcon from '@/components/icons/ecommerce/CartIcon';
 import AnglesRightIcon from '@/components/icons/ui/AnglesRightIcon';
 import Button from '@/components/ui/Button';
+import Link from 'next/link';
 
 export default function CheckoutTotal() {
   const totalCartValue = useCartStore(selectCartTotal);
@@ -26,11 +27,6 @@ export default function CheckoutTotal() {
     (totalCartValue - totalCartValue * DISCOUNT_AMOUNT + SHIPPING_COSTS) *
     TAX_AMOUNT;
 
-  const totalAmount: number =
-    totalCartValue -
-    totalCartValue * DISCOUNT_AMOUNT +
-    SHIPPING_COSTS +
-    totalTaxAmount;
   return (
     <>
       <h2 className='text-3xl font-bold p-4 bg-[rgb(87,87,87,0.2)] shadow-[0_4px_15px_0_rgb(0,0,0,1)]'>
@@ -80,6 +76,7 @@ export default function CheckoutTotal() {
       </div>
       <div className='p-3 flex justify-between gap-2 flex-row md:flex-col items-start'>
         <Button
+          as={Link}
           href='/'
           variant='primary'
           position='standalone'
@@ -91,6 +88,7 @@ export default function CheckoutTotal() {
           </>
         </Button>
         <Button
+          as={Link}
           href='/search'
           variant='secondary'
           position='standalone'

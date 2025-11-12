@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import AnglesRightIcon from '@/components/icons/ui/AnglesRightIcon';
 import SearchIcon from '@/components/icons/ui/SearchIcon';
 import Button from '@/components/ui/Button';
+import Link from 'next/link';
 
 export interface HeroSlide {
   heading: string;
@@ -33,6 +34,7 @@ export const heroSlides: HeroSlide[] = [
     buttons: (
       <>
         <Button
+          as={Link}
           href='/search?category=components'
           className={buttonClassName}
           position='standalone'
@@ -44,6 +46,7 @@ export const heroSlides: HeroSlide[] = [
           </>
         </Button>
         <Button
+          as={Link}
           href='/search'
           className={buttonClassName}
           position='standalone'
@@ -74,6 +77,7 @@ export const heroSlides: HeroSlide[] = [
     buttons: (
       <>
         <Button
+          as={Link}
           href='/search?category=gpu'
           position='standalone'
           className={buttonClassName}
@@ -84,6 +88,7 @@ export const heroSlides: HeroSlide[] = [
           </>
         </Button>
         <Button
+          as={Link}
           href='/search'
           variant='tertiary'
           position='standalone'
@@ -113,6 +118,7 @@ export const heroSlides: HeroSlide[] = [
     buttons: (
       <>
         <Button
+          as={Link}
           href='/search'
           className={buttonClassName}
           position='standalone'

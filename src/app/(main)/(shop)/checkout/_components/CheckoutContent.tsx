@@ -8,6 +8,7 @@ import Button from '@/components/ui/Button';
 import clsx from 'clsx';
 import CheckoutCard from './CheckoutCard';
 import CheckoutTotal from './CheckoutTotal';
+import Link from 'next/link';
 
 export default function CheckoutContent() {
   const { items } = useCart();
@@ -48,7 +49,12 @@ export default function CheckoutContent() {
             <div className='py-6 flex items-start flex-col space-y-4'>
               <strong className='text-2xl'>Your Cart is currently empty</strong>
               <div>
-                <Button href='/search' variant='secondary' position='card'>
+                <Button
+                  as={Link}
+                  href='/search'
+                  variant='secondary'
+                  position='card'
+                >
                   <>
                     <span>Start Shopping Now!</span>
                     <AnglesRightIcon />

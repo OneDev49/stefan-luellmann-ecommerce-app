@@ -73,7 +73,6 @@ export default function HeaderWishlist({
                     {session && session.user ? (
                       <Link href='/dashboard?tab=wishlist' onClick={onClose}>
                         <Button
-                          as='button'
                           type='button'
                           variant='secondary'
                           position='card'
@@ -86,7 +85,6 @@ export default function HeaderWishlist({
                     ) : (
                       <Link href='/register' onClick={onClose}>
                         <Button
-                          as='button'
                           type='button'
                           variant='secondary'
                           position='card'
@@ -102,7 +100,6 @@ export default function HeaderWishlist({
               </div>
               <div className='flex justify-end'>
                 <Button
-                  as='button'
                   type='button'
                   onClick={handleClearWishlist}
                   variant='danger'
@@ -186,7 +183,6 @@ export default function HeaderWishlist({
                   </div>
                   <div className='min-w-4'>
                     <Button
-                      as='button'
                       type='button'
                       variant='danger'
                       position='standalone'

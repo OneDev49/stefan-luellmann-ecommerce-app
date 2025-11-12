@@ -97,10 +97,8 @@ export default function SearchFilters({
 
   return (
     <div className='space-y-8 my-6'>
-      {/* Clear button for all filters */}
       {hasActiveFilters ? (
         <Button
-          as='button'
           type='button'
           onClick={clearAllFilters}
           position='card'
