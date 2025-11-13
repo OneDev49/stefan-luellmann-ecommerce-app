@@ -1,9 +1,9 @@
 'use client';
 
 import { ProductCardType } from '@/types/product';
+
 import ProductCard from '../ui/ProductCard';
 import useEmblaCarousel from 'embla-carousel-react';
-import clsx from 'clsx';
 
 interface ProductCarouselProps {
   bgColor?: string;
