@@ -23,8 +23,13 @@ export const profileFormSchema = z.object({
 
 export type TProfileFormSchema = z.infer<typeof profileFormSchema>;
 
+type TProfileApiData = Omit<TProfileFormSchema, 'birthDate'> & {
+  birthDate?: Date | null;
+};
+
 export const profileApiSchema = profileFormSchema.transform((data) => {
-  const processedData: Record<string, any> = {};
+  const processedData: Record<string, string | Date | null | undefined> = {};
+
   for (const key in data) {
     const typedKey = key as keyof typeof data;
     processedData[typedKey] = data[typedKey] === '' ? null : data[typedKey];
@@ -34,5 +39,5 @@ export const profileApiSchema = profileFormSchema.transform((data) => {
     processedData.birthDate = new Date(processedData.birthDate);
   }
 
-  return processedData;
+  return processedData as TProfileApiData;
 });
