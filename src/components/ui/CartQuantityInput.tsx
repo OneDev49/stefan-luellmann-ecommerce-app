@@ -23,7 +23,9 @@ export default function CartQuantityInput({
     const value = parseInt(e.target.value, 10);
     if (!isNaN(value) && value > 0) {
       updateQuantity(productId, productName, value);
-      value <= 100 && toast.success(`Updated ${productName} quantity.`);
+      if (value <= 100) {
+        toast.success(`Updated ${productName} quantity.`);
+      }
     }
   };
 

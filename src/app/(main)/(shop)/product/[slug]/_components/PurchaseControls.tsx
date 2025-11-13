@@ -31,7 +31,11 @@ export default function PurchaseControls({ product }: PurchaseControlsProps) {
     addToCart(product, quantity);
   };
   const handleAddToWishlist = () => {
-    isInWishlist ? removeFromWishlist(product.id) : addToWishlist(product);
+    if (isInWishlist) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(product);
+    }
   };
 
   const buttonClassName = 'text-lg py-1 px-2 rounded-lg';
@@ -44,38 +48,30 @@ export default function PurchaseControls({ product }: PurchaseControlsProps) {
           onQuantityChange={(newQuantity) => setQuantity(newQuantity)}
         />
         <Button
-          as='button'
           type='button'
           onClick={handleAddToCart}
           variant='primary'
           className={buttonClassName}
           position='standalone'
-          children={
-            <>
-              {isCurrentlyAddingToCart ? <Spinner /> : <CartIcon />}
-              <span>Add to Cart</span>
-            </>
-          }
-        />
+        >
+          {isCurrentlyAddingToCart ? <Spinner /> : <CartIcon />}
+          <span>Add to Cart</span>
+        </Button>
       </div>
       <Button
-        as='button'
         type='button'
         onClick={handleAddToWishlist}
         variant='tertiary'
         className={buttonClassName}
         position='standalone'
-        children={
-          <>
-            {isInWishlist ? (
-              <HeartIcon variant='solid' />
-            ) : (
-              <HeartIcon variant='regular' />
-            )}
-            <span>Add to Wishlist</span>
-          </>
-        }
-      />
+      >
+        {isInWishlist ? (
+          <HeartIcon variant='solid' />
+        ) : (
+          <HeartIcon variant='regular' />
+        )}
+        <span>Add to Wishlist</span>
+      </Button>
     </div>
   );
 }
