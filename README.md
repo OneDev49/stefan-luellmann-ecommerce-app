@@ -1,11 +1,11 @@
 # Entro - A Full-Stack E-Commerce Platform
 
-Live Demo Link - (Coming Soon)
-
 ![Entro Homepage Screenshot](https://qnr34aa1vn.ufs.sh/f/x81VdwhEWe9YvDguviATbYJwVamzLQPW9CSMXylhpfZUndOF)
 
 A feature-rich, Full-Stack E-Commerce Application built with Next.js, TypeScript and Prisma.
 The Project showcases a complete shopping experience, from Product discovery to User Account Management and includes a sophisticated "Demo Mode" for a secure and cost-effective portfolio showcase.
+
+**Live Demo**: [https://ecommerce.stefan-luellmann.com/](https://ecommerce.stefan-luellmann.com/)
 
 ---
 
