@@ -74,11 +74,15 @@ export default function LoginForm() {
           <div className='flex flex-col'>
             <div className='space-x-2'>
               <span>E-Mail:</span>
-              <span className='font-bold'>demoX@stefan-luellmann.com</span>
+              <span className='font-bold'>
+                {process.env.NEXT_PUBLIC_DEMO_EMAIL}
+              </span>
             </div>
             <div className='space-x-2'>
               <span>Password:</span>
-              <span className='font-bold'>test12345</span>
+              <span className='font-bold'>
+                {process.env.NEXT_PUBLIC_DEMO_PASSWORD}
+              </span>
             </div>
           </div>
         </div>
