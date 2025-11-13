@@ -1,12 +1,15 @@
 import { TabId } from '../DashboardClient';
-import { DashboardPageData } from '@/hooks/useDashboardData';
+import { DashboardPageData, DashboardUser } from '@/hooks/useDashboardData';
 
 import DashboardAccountHome from '../tabs/AccountHomeTab';
 import DashboardOrderHistory from '../tabs/OrderHistoryTab';
-import DashboardAccountInformation from '../tabs/AccountInformationTab';
+import DashboardAccountInformation, {
+  ProfileData,
+} from '../tabs/AccountInformationTab';
 import DashboardWishlist from '../tabs/WishlistTab';
 import DashboardCart from '../tabs/CartTab';
 import DashboardPayment from '../tabs/PaymentTab';
+import { PaymentMethod } from '@prisma/client';
 
 // Mock Interface for TabOrder
 export interface TabOrder {
@@ -17,15 +20,6 @@ export interface TabOrder {
   address: { street: string; zip: string; city: string; country: string };
 }
 
-interface TabItem<P = {}> {
-  id: TabId;
-  heading: string;
-  text?: string;
-  Component: React.ComponentType<P>;
-  props: P;
-  breadcrumbs: BreadcrumbData;
-}
-
 interface BreadcrumbData {
   secondaryBreadcrumbs: {
     text: string;
@@ -33,6 +27,66 @@ interface BreadcrumbData {
   }[];
   mainBreadcrumb: string;
 }
+
+interface AccountHomeProps {
+  onTabChange: (tabId: TabId) => void;
+}
+interface OrderHistoryProps {
+  orders?: TabOrder[] | null;
+}
+interface AccountInfoProps {
+  user: DashboardUser;
+  initialUserProfile: ProfileData;
+}
+interface PaymentProps {
+  user: DashboardUser;
+  initialPaymentMethods: PaymentMethod[];
+}
+interface BaseTabItem {
+  id: TabId;
+  heading: string;
+  text?: string;
+  breadcrumbs: BreadcrumbData;
+}
+
+type HomeTabItem = BaseTabItem & {
+  id: 'home';
+  Component: React.ComponentType<AccountHomeProps>;
+  props: AccountHomeProps;
+};
+type HistoryTabItem = BaseTabItem & {
+  id: 'history';
+  Component: React.ComponentType<OrderHistoryProps>;
+  props: OrderHistoryProps;
+};
+type InfoTabItem = BaseTabItem & {
+  id: 'information';
+  Component: React.ComponentType<AccountInfoProps>;
+  props: AccountInfoProps;
+};
+type PaymentTabItem = BaseTabItem & {
+  id: 'payment';
+  Component: React.ComponentType<PaymentProps>;
+  props: PaymentProps;
+};
+type WishlistTabItem = BaseTabItem & {
+  id: 'wishlist';
+  Component: React.ComponentType;
+  props?: never;
+};
+type CartTabItem = BaseTabItem & {
+  id: 'cart';
+  Component: React.ComponentType;
+  props?: never;
+};
+
+type TabItem =
+  | HomeTabItem
+  | HistoryTabItem
+  | InfoTabItem
+  | PaymentTabItem
+  | WishlistTabItem
+  | CartTabItem;
 
 const baseCrumbs = [
   { text: 'Homepage', link: '/' },
@@ -44,7 +98,7 @@ export function createTabItems(
   wishlistSentence: string,
   dashboardPageData: DashboardPageData,
   onTabChange: (tabId: TabId) => void
-): TabItem<any>[] {
+): TabItem[] {
   return [
     {
       id: 'home',
@@ -53,7 +107,7 @@ export function createTabItems(
         : `Welcome!`,
       text: 'This is your Entro Account Dashboard. You can manage your Account from here.',
       Component: DashboardAccountHome,
-      props: { user: dashboardPageData.user, onTabChange },
+      props: { onTabChange },
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Account',
@@ -89,7 +143,6 @@ export function createTabItems(
       heading: 'Wishlist',
       text: `You currently have ${wishlistSentence} in your Wishlist.`,
       Component: DashboardWishlist,
-      props: {},
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Wishlist',
@@ -100,7 +153,6 @@ export function createTabItems(
       heading: 'Shopping Cart',
       text: `You currently have ${cartSentence} in your Shopping Cart.`,
       Component: DashboardCart,
-      props: {},
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,
         mainBreadcrumb: 'Shopping Cart',
@@ -113,7 +165,7 @@ export function createTabItems(
       Component: DashboardPayment,
       props: {
         user: dashboardPageData.user,
-        paymentMethods: dashboardPageData.paymentMethods,
+        initialPaymentMethods: dashboardPageData.paymentMethods,
       },
       breadcrumbs: {
         secondaryBreadcrumbs: baseCrumbs,

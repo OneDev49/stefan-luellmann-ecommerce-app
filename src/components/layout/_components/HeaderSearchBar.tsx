@@ -166,7 +166,7 @@ export default function HeaderSearchBar({
       {showSuggestions && searchQuery && suggestions.length === 0 && (
         <div className='absolute top-full left-0 right-0 mt-2 bg-[#054000] border border-[#007b08] rounded-lg shadow-lg z-50 p-4'>
           <p className='text-gray-400 text-sm'>
-            No suggestions found. Enter to search for "{searchQuery}"
+            No suggestions found. Enter to search for &quot;{searchQuery}&quot;
           </p>
         </div>
       )}

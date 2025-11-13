@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import HeaderLayout from '@/components/layout/Header';
 import FooterLayout from '@/components/layout/Footer';
 
@@ -8,7 +10,9 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <HeaderLayout variant='full' />
+      <Suspense>
+        <HeaderLayout variant='full' />
+      </Suspense>
       {children}
       <FooterLayout />
     </>

@@ -4,7 +4,7 @@
  * @see /dashboard/_components/tabs/PaymentTab.tsx - This file uses the provided HTTP methods of this file for the User Dashboard.
  */
 
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/authOptions';
 import { isDemoMode } from '@/config/site';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';

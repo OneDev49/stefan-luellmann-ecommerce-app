@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { CategoryFilterItem } from './SearchPageClient';
+
 import Button from '@/components/ui/Button';
 import clsx from 'clsx';
 import CloseIcon from '@/components/icons/ui/CloseIcon';
@@ -83,7 +84,6 @@ export default function MobileFilterSidebar({
   return (
     <>
       <Button
-        as='button'
         type='button'
         onClick={handleOpenSidebar}
         variant='free'
@@ -116,7 +116,6 @@ export default function MobileFilterSidebar({
             <div className='sticky top-0 bg-[#001a00] border-b border-gray-700 p-4 flex items-center justify-between z-10'>
               <h2 className='text-2xl font-bold text-white'>Filters</h2>
               <Button
-                as='button'
                 type='button'
                 onClick={handleCloseSidebar}
                 variant='danger'

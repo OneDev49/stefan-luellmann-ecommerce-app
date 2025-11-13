@@ -15,7 +15,7 @@ import Link from 'next/link';
 type filterOption = 'all' | 'delivered' | 'processing' | 'canceled';
 
 interface DashboardOrderHistoryProps {
-  orders: TabOrder[];
+  orders?: TabOrder[] | null;
 }
 
 export default function DashboardOrderHistory({
@@ -31,12 +31,15 @@ export default function DashboardOrderHistory({
     'canceled',
   ];
 
-  const filteredOrders =
-    filter === 'all' ? orders : orders.filter((o) => o.status === filter);
+  const filteredOrders = orders
+    ? filter === 'all'
+      ? orders
+      : orders.filter((o) => o.status === filter)
+    : '';
 
   return (
     <div className='pt-12 pb-32'>
-      {orders.length > 0 && filteredOrders ? (
+      {orders && orders.length > 0 && filteredOrders ? (
         <>
           <div className='mb-4'>
             {filterOptions.map((f, index) => (
@@ -233,6 +236,7 @@ export default function DashboardOrderHistory({
         <div className='flex flex-col items-start gap-3'>
           <span>Your Order History is currently empty.</span>
           <Button
+            as={Link}
             variant='secondary'
             position='standalone'
             className='px-4 py-2 rounded-md'

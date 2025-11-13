@@ -132,7 +132,6 @@ export default function DashboardCart() {
                         )}
                       </div>
                       <Button
-                        as='button'
                         type='button'
                         onClick={(e) => handleRemoveFromCart(e, item.id)}
                         className='bg-red-500 rounded-sm'
@@ -199,6 +198,7 @@ export default function DashboardCart() {
               </p>
               <div className='flex justify-between flex-col-reverse items-start gap-4 sm:flex-row '>
                 <Button
+                  as={Link}
                   variant='secondary'
                   href='/search'
                   position='standalone'
@@ -210,6 +210,7 @@ export default function DashboardCart() {
                     : 'Browse our Store'}
                 </Button>
                 <Button
+                  as={Link}
                   href='/checkout'
                   variant='primary'
                   position='standalone'
@@ -227,6 +228,7 @@ export default function DashboardCart() {
           <div>Your Shopping Cart is empty</div>
           <div className='flex px-4'>
             <Button
+              as={Link}
               variant='secondary'
               href='/search'
               position='standalone'

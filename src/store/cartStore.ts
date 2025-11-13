@@ -62,7 +62,7 @@ export const useCartStore = create<CartState>()(
       setItems: (items: CartItem[]) => set({ items }),
 
       // Load cart from database for logged-in users
-      loadFromDatabase: async (userId: string) => {
+      loadFromDatabase: async () => {
         try {
           const response = await fetch(`/api/user/cart`);
 
@@ -165,11 +165,9 @@ export const useCartStore = create<CartState>()(
           toast.success(
             `${DEMO_SENTENCE_PREFIX} ${quantity} x ${product.name} added to Cart!`
           );
-        } catch (error: any) {
+        } catch (error: unknown) {
           console.error('Failed to add to Cart:', error);
-          toast.error(
-            error.message || 'Failed to add to Cart. Please try again.'
-          );
+          toast.error('Failed to add to Cart. Please try again.');
         } finally {
           // Set state to remove spinner animation
           set((state) => {

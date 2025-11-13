@@ -5,7 +5,7 @@
  */
 
 import { prisma } from '@/lib/prisma';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/authOptions';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 import { mapToProductCard } from '@/lib/mappers/product';

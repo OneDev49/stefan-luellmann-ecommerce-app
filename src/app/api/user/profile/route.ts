@@ -6,12 +6,12 @@
 
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../../auth/[...nextauth]/route';
+import { authOptions } from '@/lib/authOptions';
 import { NextResponse } from 'next/server';
 import { profileApiSchema } from '@/lib/validations/profile';
 import { isDemoMode } from '@/config/site';
 
-export async function GET(req: Request) {
+export async function GET() {
   // DEMO MODE - Disable API endpoint
   if (isDemoMode) {
     return NextResponse.json(

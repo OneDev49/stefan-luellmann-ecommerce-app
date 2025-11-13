@@ -119,7 +119,6 @@ export default function LoginForm() {
           />
           <div>
             <Button
-              as='button'
               type='submit'
               variant='primary'
               disabled={isLoading}
@@ -137,7 +136,7 @@ export default function LoginForm() {
         </form>
         <div className='px-8 text-center py-4 space-y-2'>
           <p>
-            Don't have a Account?{' '}
+            Don&apos;t have a Account?{' '}
             <Link
               href='/register'
               className='underline hover:text-[#00ff1e] transition-all'

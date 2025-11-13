@@ -4,13 +4,13 @@
  * @see wishlistStore.ts - This file uses the DELETE HTTP methods for the wishlist
  */
 
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/authOptions';
 import { isDemoMode } from '@/config/site';
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 
-export async function DELETE(req: Request) {
+export async function DELETE() {
   // DEMO MODE - Disable API endpoint
   if (isDemoMode) {
     return NextResponse.json(

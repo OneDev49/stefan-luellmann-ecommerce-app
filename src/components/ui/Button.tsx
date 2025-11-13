@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React from 'react';
 import clsx from 'clsx';
 
@@ -13,7 +12,7 @@ type ButtonProps<C extends React.ElementType> = ButtonBaseProps & {
   as?: C;
 } & Omit<React.ComponentPropsWithoutRef<C>, keyof ButtonBaseProps>;
 
-export default function Button<C extends React.ElementType = typeof Link>({
+function Button<C extends React.ElementType = 'button'>({
   as,
   variant = 'primary',
   position = 'card',
@@ -21,7 +20,7 @@ export default function Button<C extends React.ElementType = typeof Link>({
   className,
   ...restProps
 }: ButtonProps<C>) {
-  const Component = as || Link;
+  const Component = (as || 'button') as React.ElementType;
 
   const buttonClassNames = clsx(
     'transition-all hover:scale-[1.02] flex flex-row gap-2 items-center',
@@ -42,16 +41,18 @@ export default function Button<C extends React.ElementType = typeof Link>({
     }
   );
 
-  return (
-    <Component
-      className={
-        variant === 'free'
-          ? `${className || ''}`
-          : `${buttonClassNames} ${className || ''}`
-      }
-      {...(restProps as any)}
-    >
-      {children}
-    </Component>
-  );
+  const finalClassName =
+    variant === 'free'
+      ? className || ''
+      : `${buttonClassNames} ${className || ''}`;
+
+  // Type assertion needed for polymorphic components
+  const props = {
+    className: finalClassName,
+    ...restProps,
+  } as React.ComponentPropsWithRef<C>;
+
+  return React.createElement(Component, props, children);
 }
+
+export default Button;

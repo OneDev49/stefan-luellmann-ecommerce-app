@@ -46,7 +46,7 @@ export const useWishlistStore = create<WishlistState>()(
       setItems: (items: ProductCardType[]) => set({ items }),
 
       // Load wishlist from database for logged-in users
-      loadFromDatabase: async (userId: string) => {
+      loadFromDatabase: async () => {
         try {
           const response = await fetch('/api/user/wishlist');
 

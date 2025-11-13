@@ -101,7 +101,6 @@ export default function ProductCard({
           <Button
             onClick={handleAddToCart}
             disabled={isCurrentlyAddingToCart}
-            as='button'
             position='card'
             type='button'
             title={`Add ${product.name} to Cart`}
@@ -112,7 +111,6 @@ export default function ProductCard({
           </Button>
           <Button
             onClick={handleAddToWishlist}
-            as='button'
             variant='tertiary'
             position='card'
             type='button'

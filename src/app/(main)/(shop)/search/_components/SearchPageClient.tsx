@@ -408,7 +408,7 @@ export default function SearchPageClient({
 
             {!hasMore && displayedProducts.length > 0 && (
               <p className='text-center text-gray-500 mt-8'>
-                You've reached the end of the results
+                You&apos;ve reached the end of the results
               </p>
             )}
           </div>

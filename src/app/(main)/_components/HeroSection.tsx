@@ -26,8 +26,13 @@ export default function HeroSection() {
 
     /* Callback */
     const resetAutoplay = () => {
-      const autoplayPlugin = emblaApi.plugins().autoplay as any;
-      if (autoplayPlugin) autoplayPlugin.reset();
+      const autoplayPlugin = emblaApi.plugins().autoplay;
+
+      if (!autoplayPlugin || !('reset' in autoplayPlugin)) {
+        return;
+      }
+
+      autoplayPlugin.reset();
     };
 
     /* Listeners */
@@ -71,6 +76,7 @@ export default function HeroSection() {
                   alt={slide.image.alt}
                   width={1400}
                   height={800}
+                  priority={index === 0}
                 />
               </div>
             </div>

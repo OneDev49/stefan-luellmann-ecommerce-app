@@ -6,13 +6,13 @@
 
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../../auth/[...nextauth]/route';
+import { authOptions } from '@/lib/authOptions';
 import { NextResponse } from 'next/server';
 import { createPaymentMethodApiSchema } from '@/lib/validations/payment';
 import { isDemoMode } from '@/config/site';
 
 // GET - fetch all payment methods from user in DB
-export async function GET(req: Request) {
+export async function GET() {
   // DEMO MODE - Disable API endpoint
   if (isDemoMode) {
     return NextResponse.json(
