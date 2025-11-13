@@ -9,7 +9,7 @@ import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 const userRegisterSchema = z.object({
   name: z
