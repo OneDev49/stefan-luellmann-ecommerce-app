@@ -91,11 +91,12 @@ async function DynamicSearchPage({
   );
 }
 
-export default async function SearchPage({
-  searchParams,
-}: {
-  searchParams: SearchParams;
-}) {
+export default async function SearchPage(
+  props: {
+    searchParams: Promise<SearchParams>;
+  }
+) {
+  const searchParams = await props.searchParams;
   return (
     <Suspense fallback={<SearchPageSkeleton />}>
       {isDemoMode ? (

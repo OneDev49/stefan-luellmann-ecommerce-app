@@ -11,10 +11,8 @@ import { NextResponse } from 'next/server';
 import { mapToProductCard } from '@/lib/mappers/product';
 import { isDemoMode } from '@/config/site';
 
-export async function DELETE(
-  req: Request,
-  { params }: { params: { productId: string } }
-) {
+export async function DELETE(req: Request, props: { params: Promise<{ productId: string }> }) {
+  const params = await props.params;
   // DEMO MODE - Disable API endpoint
   if (isDemoMode) {
     return NextResponse.json(

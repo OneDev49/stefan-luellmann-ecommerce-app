@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CategoryFilterItem } from './SearchPageClient';
 
 import clsx from 'clsx';
@@ -24,6 +24,7 @@ interface SearchFiltersProps {
   onRatingChange: (rating: number) => void;
   onSaleToggle: (showOnSale: boolean) => void;
   activeFiltersCount?: number;
+  onClearAll: () => void;
 }
 
 export default function SearchFilters({
@@ -41,6 +42,7 @@ export default function SearchFilters({
   onRatingChange,
   onSaleToggle,
   activeFiltersCount,
+  onClearAll,
 }: SearchFiltersProps) {
   const [priceMin, setPriceMin] = useState(
     minPrice > 0 ? minPrice.toString() : ''
@@ -74,14 +76,13 @@ export default function SearchFilters({
   };
 
   const clearAllFilters = () => {
-    onBrandChange(new Set());
-    onCategoryChange(null);
-    onPriceChange(0, Infinity);
-    onRatingChange(0);
-    onSaleToggle(false);
-    setPriceMin('');
-    setPriceMax('');
+    onClearAll();
   };
+
+  useEffect(() => {
+    setPriceMin(minPrice > 0 ? minPrice.toString() : '');
+    setPriceMax(maxPrice < Infinity ? maxPrice.toString() : '');
+  }, [minPrice, maxPrice]);
 
   const hasActiveFilters =
     selectedBrands.size > 0 ||
