@@ -24,6 +24,7 @@ interface MobileFilterSidebarProps {
   onRatingChange: (rating: number) => void;
   onSaleToggle: (showOnSale: boolean) => void;
   activeFiltersCount: number;
+  onClearAll: () => void;
 }
 
 export default function MobileFilterSidebar({
@@ -41,6 +42,7 @@ export default function MobileFilterSidebar({
   onRatingChange,
   onSaleToggle,
   activeFiltersCount,
+  onClearAll,
 }: MobileFilterSidebarProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isClosing, setIsClosing] = useState<boolean>(false);
@@ -140,6 +142,7 @@ export default function MobileFilterSidebar({
                 onRatingChange={onRatingChange}
                 onSaleToggle={onSaleToggle}
                 activeFiltersCount={activeFiltersCount}
+                onClearAll={onClearAll}
               />
             </div>
           </div>

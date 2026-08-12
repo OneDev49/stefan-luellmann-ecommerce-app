@@ -1,12 +1,20 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from 'react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { ProductCardType } from '@/types/product';
 
 import ProductCard from '@/components/ui/ProductCard';
 import SearchFilters from './SearchFilters';
 import MobileFilterSidebar from './MobileFilterSidebar';
+import clsx from 'clsx';
 
 export interface CategoryFilterItem {
   name: string;
@@ -40,45 +48,92 @@ export default function SearchPageClient({
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Initialize states from Url params
-  const [selectedBrands, setSelectedBrands] = useState<Set<string>>(() => {
-    return new Set(searchParams.getAll('brand'));
-  });
+  const [isPending, startTransition] = useTransition();
 
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(
-    () => {
-      return searchParams.get('category');
-    }
+  // Derived State (The URL is the Source of Truth)
+  const selectedBrands = useMemo(
+    () => new Set(searchParams.getAll('brand')),
+    [searchParams]
   );
-
-  const [minPrice, setMinPrice] = useState<number>(() => {
-    const price = searchParams.get('minPrice');
-    return price ? parseFloat(price) : 0;
-  });
-
-  const [maxPrice, setMaxPrice] = useState<number>(() => {
-    const price = searchParams.get('maxPrice');
-    return price ? parseFloat(price) : Infinity;
-  });
-
-  const [minRating, setMinRating] = useState<number>(() => {
-    const rating = searchParams.get('minRating');
-    return rating ? parseInt(rating) : 0;
-  });
-
-  const [showOnSaleOnly, setShowOnSaleOnly] = useState<boolean>(() => {
-    return searchParams.get('onSale') === 'true';
-  });
-
-  const [sortBy, setSortBy] = useState<SortOptions>(() => {
-    const sort = searchParams.get('sort');
-    return (sort as SortOptions) || 'newest';
-  });
+  const selectedCategory = searchParams.get('category');
+  const minPrice = parseFloat(searchParams.get('minPrice') || '0');
+  const maxPrice = parseFloat(searchParams.get('maxPrice') || 'Infinity');
+  const minRating = parseInt(searchParams.get('minRating') || '0');
+  const showOnSaleOnly = searchParams.get('onSale') === 'true';
+  const sortBy = (searchParams.get('sort') as SortOptions) || 'newest';
 
   const [displayCount, setDisplayCount] = useState<number>(PRODUCTS_PER_PAGE);
   const observerTarget = useRef<HTMLDivElement>(null);
 
-  // Calculate active filter count
+  // URL Update Logic
+  const updateUrl = useCallback(
+    (updates: Record<string, string | string[] | number | null | boolean>) => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      Object.entries(updates).forEach(([key, value]) => {
+        // If value is null, empty string, or false, delete the key
+        if (
+          value === null ||
+          value === undefined ||
+          value === '' ||
+          value === false
+        ) {
+          params.delete(key);
+        }
+        // If it's an array (brands), delete existing and append new ones
+        else if (Array.isArray(value)) {
+          params.delete(key);
+          value.forEach((v) => params.append(key, v.toString()));
+        }
+        // Otherwise set/update the value
+        else {
+          params.set(key, value.toString());
+        }
+      });
+
+      startTransition(() => {
+        router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+      });
+    },
+    [pathname, router, searchParams]
+  );
+
+  // Handlers passed to child components
+  const handleBrandChange = (newBrands: Set<string>) =>
+    updateUrl({ brand: newBrands.size > 0 ? Array.from(newBrands) : null });
+
+  const handleCategoryChange = (slug: string | null) =>
+    updateUrl({ category: slug });
+
+  const handlePriceChange = (min: number, max: number) =>
+    updateUrl({
+      minPrice: min > 0 ? min : null,
+      maxPrice: max < Infinity ? max : null,
+    });
+
+  const handleRatingChange = (rating: number) =>
+    updateUrl({ minRating: rating > 0 ? rating : null });
+
+  const handleSaleToggle = (on: boolean) => updateUrl({ onSale: on });
+
+  const handleSortChange = (sort: SortOptions) =>
+    updateUrl({ sort: sort === 'newest' ? null : sort });
+
+  // Reset Function
+  const handleClearAll = useCallback(() => {
+    setDisplayCount(PRODUCTS_PER_PAGE);
+    startTransition(() => {
+      const params = new URLSearchParams();
+      if (searchTerm) params.set('q', searchTerm);
+
+      const newUrl = params.toString()
+        ? `${pathname}?${params.toString()}`
+        : pathname;
+      router.replace(newUrl, { scroll: false });
+    });
+  }, [pathname, router, searchTerm]);
+
+  // Filtering & Sorting Logic
   const activeFiltersCount = useMemo(() => {
     let count = 0;
     if (selectedBrands.size > 0) count += selectedBrands.size;
@@ -96,124 +151,30 @@ export default function SearchPageClient({
     showOnSaleOnly,
   ]);
 
-  // Sync state to Url on filter change
-  useEffect(() => {
-    const params = new URLSearchParams();
-
-    // Preserving the base search term
-    if (searchTerm) {
-      params.set('q', searchTerm);
-    }
-
-    // Add specific Url params of filters
-    if (selectedCategory) {
-      params.set('category', selectedCategory);
-    }
-
-    selectedBrands.forEach((brand) => {
-      params.append('brand', brand);
-    });
-
-    if (minPrice > 0) {
-      params.set('minPrice', minPrice.toString());
-    }
-    if (maxPrice < Infinity) {
-      params.set('maxPrice', maxPrice.toString());
-    }
-
-    if (minRating > 0) {
-      params.set('minRating', minRating.toString());
-    }
-
-    if (showOnSaleOnly) {
-      params.set('onSale', 'true');
-    }
-
-    if (sortBy !== 'newest') {
-      params.set('sort', sortBy);
-    }
-
-    // Update Url without triggering navigation
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-  }, [
-    selectedBrands,
-    selectedCategory,
-    showOnSaleOnly,
-    minPrice,
-    maxPrice,
-    minRating,
-    sortBy,
-    searchTerm,
-    pathname,
-    router,
-  ]);
-
-  // Sync Url changes back to state to allow browser back/forward
-  useEffect(() => {
-    setSelectedBrands(new Set(searchParams.getAll('brand')));
-    setSelectedCategory(searchParams.get('category'));
-
-    const urlMinPrice = searchParams.get('minPrice');
-    setMinPrice(urlMinPrice ? parseFloat(urlMinPrice) : 0);
-
-    const urlMaxPrice = searchParams.get('maxPrice');
-    setMaxPrice(urlMaxPrice ? parseFloat(urlMaxPrice) : Infinity);
-
-    const urlMinRating = searchParams.get('minRating');
-    setMinRating(urlMinRating ? parseInt(urlMinRating) : 0);
-
-    setShowOnSaleOnly(searchParams.get('onSale') === 'true');
-
-    const urlSort = searchParams.get('sort');
-    setSortBy((urlSort as SortOptions) || 'newest');
-  }, [searchParams]);
-
-  const handlePriceChange = useCallback((min: number, max: number) => {
-    setMinPrice(min);
-    setMaxPrice(max);
-  }, []);
-
-  // Client-side filtering and sorting made to not use any Vercel/Supabase Resources for the Portfolio Project
   const filteredAndSortedProducts = useMemo(() => {
     let filtered = allProducts;
 
-    // Category Filter
     if (selectedCategory) {
-      filtered = filtered.filter((product) =>
-        product.categories?.some((cat) => cat.slug === selectedCategory)
+      filtered = filtered.filter((p) =>
+        p.categories?.some((cat) => cat.slug === selectedCategory)
       );
     }
-
-    // Brand Filter
     if (selectedBrands.size > 0) {
-      filtered = filtered.filter((product) =>
-        selectedBrands.has(product.brand)
+      filtered = filtered.filter((p) => selectedBrands.has(p.brand));
+    }
+    if (minPrice > 0 || maxPrice < Infinity) {
+      filtered = filtered.filter(
+        (p) => p.price >= minPrice && p.price <= maxPrice
       );
     }
-
-    // Price Filter
-    if (minPrice > 0 || maxPrice < Infinity) {
-      filtered = filtered.filter((product) => {
-        const price = product.price;
-        return price >= minPrice && price <= maxPrice;
-      });
-    }
-
-    // Rating Filter
     if (minRating > 0) {
-      filtered = filtered.filter((product) => {
-        const rating = product.averageRating || 0;
-        return rating >= minRating;
-      });
+      filtered = filtered.filter((p) => (p.averageRating || 0) >= minRating);
     }
-
-    // Sale Filter
     if (showOnSaleOnly) {
-      filtered = filtered.filter((product) => product.isOnSale);
+      filtered = filtered.filter((p) => p.isOnSale);
     }
 
-    // Product Sort
-    const sorted = [...filtered].sort((a, b) => {
+    return [...filtered].sort((a, b) => {
       switch (sortBy) {
         case 'newest':
           return (
@@ -237,8 +198,6 @@ export default function SearchPageClient({
           return 0;
       }
     });
-
-    return sorted;
   }, [
     allProducts,
     selectedBrands,
@@ -250,52 +209,33 @@ export default function SearchPageClient({
     sortBy,
   ]);
 
-  // Infinite Scroll Pagination
+  // Pagination & Infinite Scroll
   const displayedProducts = useMemo(
     () => filteredAndSortedProducts.slice(0, displayCount),
     [filteredAndSortedProducts, displayCount]
   );
-
   const hasMore = displayCount < filteredAndSortedProducts.length;
 
-  // Reset Display Count when Filters change
-  useEffect(() => {
-    setDisplayCount(PRODUCTS_PER_PAGE);
-  }, [selectedBrands, selectedCategory, minPrice, maxPrice, minRating, sortBy]);
-
-  // IntersectionObserver for Infinite scroll
   const loadMore = useCallback(() => {
-    if (hasMore) {
-      setDisplayCount((prev) => prev + PRODUCTS_PER_PAGE);
-    }
+    if (hasMore) setDisplayCount((prev) => prev + PRODUCTS_PER_PAGE);
   }, [hasMore]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          loadMore();
-        }
+        if (entries[0].isIntersecting && hasMore) loadMore();
       },
       { threshold: 0.1 }
     );
-
-    const currentTarget = observerTarget.current;
-    if (currentTarget) {
-      observer.observe(currentTarget);
-    }
-
+    const target = observerTarget.current;
+    if (target) observer.observe(target);
     return () => {
-      if (currentTarget) {
-        observer.unobserve(currentTarget);
-      }
+      if (target) observer.unobserve(target);
     };
   }, [hasMore, loadMore]);
 
-  // Available Brands for current Category (for Filter Display)
   const availableBrands = useMemo(() => {
     if (!selectedCategory) return brands;
-
     const brandsInCategory = new Set(
       allProducts
         .filter((p) =>
@@ -303,7 +243,6 @@ export default function SearchPageClient({
         )
         .map((p) => p.brand)
     );
-
     return brands.filter((b) => brandsInCategory.has(b));
   }, [brands, selectedCategory, allProducts]);
 
@@ -322,12 +261,7 @@ export default function SearchPageClient({
       <section className='pt-12 pb-24'>
         <div className='flex gap-x-8 gap-y-10'>
           <aside className='hidden lg:block flex-[0_0_270px] border-r-2 border-gray-700 pr-4'>
-            <div>
-              <h2 className='text-3xl font-bold'>Search Filters</h2>
-              <p className='text-gray-400'>
-                Find the Product you search using our Product Filters.
-              </p>
-            </div>
+            <h2 className='text-3xl font-bold'>Search Filters</h2>
             <SearchFilters
               brands={availableBrands}
               categories={categories}
@@ -337,15 +271,21 @@ export default function SearchPageClient({
               maxPrice={maxPrice}
               minRating={minRating}
               showOnSaleOnly={showOnSaleOnly}
-              onBrandChange={setSelectedBrands}
-              onCategoryChange={setSelectedCategory}
+              onBrandChange={handleBrandChange}
+              onCategoryChange={handleCategoryChange}
               onPriceChange={handlePriceChange}
-              onRatingChange={setMinRating}
-              onSaleToggle={setShowOnSaleOnly}
+              onRatingChange={handleRatingChange}
+              onSaleToggle={handleSaleToggle}
               activeFiltersCount={activeFiltersCount}
+              onClearAll={handleClearAll}
             />
           </aside>
-          <div className='flex-auto'>
+
+          <div
+            className={clsx('flex-auto transition-opacity duration-200', {
+              'opacity-50 pointer-events-none': isPending,
+            })}
+          >
             <div className='flex items-center justify-between border-b-2 border-gray-700 pb-4'>
               <div className='sm:flex items-center gap-4'>
                 <div className='flex gap-4 sm:block lg:hidden'>
@@ -358,29 +298,30 @@ export default function SearchPageClient({
                     maxPrice={maxPrice}
                     minRating={minRating}
                     showOnSaleOnly={showOnSaleOnly}
-                    onBrandChange={setSelectedBrands}
-                    onCategoryChange={setSelectedCategory}
+                    onBrandChange={handleBrandChange}
+                    onCategoryChange={handleCategoryChange}
                     onPriceChange={handlePriceChange}
-                    onRatingChange={setMinRating}
-                    onSaleToggle={setShowOnSaleOnly}
+                    onRatingChange={handleRatingChange}
+                    onSaleToggle={handleSaleToggle}
                     activeFiltersCount={activeFiltersCount}
+                    onClearAll={handleClearAll}
                   />
                   <div className='sm:hidden'>
-                    <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
+                    <SortDropdown
+                      sortBy={sortBy}
+                      setSortBy={handleSortChange}
+                    />
                   </div>
                 </div>
-
                 <p className='text-gray-400 pt-2 sm:pt-0'>
                   {filteredAndSortedProducts.length} Results found
-                  {displayedProducts.length <
-                    filteredAndSortedProducts.length &&
-                    ` (showing ${displayedProducts.length})`}
                 </p>
               </div>
               <div className='hidden sm:block'>
-                <SortDropdown sortBy={sortBy} setSortBy={setSortBy} />
+                <SortDropdown sortBy={sortBy} setSortBy={handleSortChange} />
               </div>
             </div>
+
             <div className='mt-6 flex flex-wrap lg:justify-start justify-center gap-4 sm:gap-8'>
               {displayedProducts.length > 0 ? (
                 displayedProducts.map((product) => (
@@ -405,12 +346,6 @@ export default function SearchPageClient({
                 <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-green-500' />
               </div>
             )}
-
-            {!hasMore && displayedProducts.length > 0 && (
-              <p className='text-center text-gray-500 mt-8'>
-                You&apos;ve reached the end of the results
-              </p>
-            )}
           </div>
         </div>
       </section>
@@ -434,7 +369,7 @@ function SortDropdown({
       <option value='newest'>Newest First</option>
       <option value='oldest'>Oldest First</option>
       <option value='price-asc'>Price: Low to High</option>
-      <option value='price-desc'>Prise: High to Low</option>
+      <option value='price-desc'>Price: High to Low</option>
       <option value='name-asc'>Name: A to Z</option>
       <option value='name-desc'>Name: Z to A</option>
     </select>
