@@ -28,10 +28,8 @@ const updatePaymentMethodSchema = z.object({
 });
 
 // PATCH - Update existing payment method
-export async function PATCH(
-  req: Request,
-  { params }: { params: { methodId: string } }
-) {
+export async function PATCH(req: Request, props: { params: Promise<{ methodId: string }> }) {
+  const params = await props.params;
   // DEMO MODE - Disable API endpoint
   if (isDemoMode) {
     return NextResponse.json(
@@ -96,10 +94,8 @@ export async function PATCH(
 }
 
 // DELETE - Remove PaymentMethod from User Account in DB
-export async function DELETE(
-  req: Request,
-  { params }: { params: { methodId: string } }
-) {
+export async function DELETE(req: Request, props: { params: Promise<{ methodId: string }> }) {
+  const params = await props.params;
   // DEMO MODE - Disable API endpoint
   if (isDemoMode) {
     return NextResponse.json(
