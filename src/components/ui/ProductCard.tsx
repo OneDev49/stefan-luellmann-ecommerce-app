@@ -11,6 +11,7 @@ import Button from './Button';
 import CartIcon from '../icons/ecommerce/CartIcon';
 import HeartIcon from '../icons/ecommerce/HeartIcon';
 import Spinner from './Spinner';
+import { useEffect, useState } from 'react';
 
 interface ProductCardProps {
   variant?: 'standard' | 'compact';
@@ -28,7 +29,13 @@ export default function ProductCard({
     useWishlist();
 
   const isCurrentlyAddingToCart = isAdding.has(product.id);
-  const isInWishlist = isProductInWishlist(product.id);
+
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const isInWishlist = isMounted ? isProductInWishlist(product.id) : false;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
